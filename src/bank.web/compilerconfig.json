@@ -1,0 +1,26 @@
+﻿[
+  {
+    "outputFile": "css/site.css",
+    "inputFile": "css/site.less"
+  },
+  {
+    "outputFile": "assets/css/site.css",
+    "inputFile": "assets/css/site.less"
+  },
+  {
+    "outputFile": "assets/css/stately/stately.css",
+    "inputFile": "assets/css/stately/stately.scss"
+  },
+  {
+    "outputFile": "assets/css/imagegen.css",
+    "inputFile": "assets/css/imagegen.less"
+  },
+  {
+    "outputFile": "assets/scripts/highcharts.es5.js",
+    "inputFile": "assets/scripts/highcharts.js"
+  },
+  {
+    "outputFile": "assets/scripts/site.es5.js",
+    "inputFile": "assets/scripts/site.js"
+  }
+]

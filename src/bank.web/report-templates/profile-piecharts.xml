@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<report>
+  <line>
+    <charts>
+      <chart title="Assets" type="combo" css-classes="pie-chart">
+        <series type="pie">
+          <concept name="UBPRE119"/>
+          <concept name="UBPRE122"/>
+          <concept name="UBPR0081"/>
+          <concept name="UBPRE130"/>
+          <concept name="UBPR2130"/>
+          <concept name="UBPRE124"/>
+        </series>
+      </chart>
+      <chart title="Loans" type="combo" css-classes="pie-chart">
+        <series type="pie">
+          <concept name="UBPR1410"/>
+          <concept name="UBPRE116"/>
+          <concept name="UBPRD665"/>
+          <concept name="UBPRE117"/>
+        </series>
+      </chart>
+      <chart title="Deposits" type="combo" css-classes="pie-chart">
+        <series type="pie">
+          <concept name="UBPRE125"/>
+          <concept name="RCON6810"/>
+          <concept name="RCON0352"/>
+          <concept name="UBPRK426"/>
+          <concept name="UBPR2366"/>
+          <concept name="UBPRK437"/>
+          <concept name="UBPRD078"/>
+        </series>
+      </chart>
+    </charts>
+  </line>
+</report>

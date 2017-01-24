@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<report>
+  <charts>
+    <chart title="Assets" type="combo">
+      <series concept="UBPRE119" type="pie" />
+      <series concept="UBPRE122" type="pie" />
+      <series concept="UBPR0081" type="pie" />
+      <series concept="UBPRE130" type="pie" />
+      <series concept="UBPR2130" type="pie" />
+      <series concept="UBPRE124" type="pie" />
+    </chart>
+  </charts>
+</report>

@@ -1,0 +1,37 @@
+﻿@model BankBasicsViewModel
+@{
+    var href = Model.Organization.ProfileUrl == Request.Url.AbsolutePath ? "" : string.Format("<a href='{0}'>", Model.Organization.ProfileUrl);
+    var endHref = href == "" ? "" : "</a>";
+    //var popoverUrl = Model.EnablePopover ? Url.EntityPopoverUrl(Model.Entity) : "";
+}
+
+<div class="media entity-basics">
+    <i class="media-left">
+        <a href="@Model.Organization.ProfileUrl"
+           class="preload avatar avatar-md media-object img-responsive"
+           style="background-image: url('@Model.Organization.Avatar')">
+
+        </a>
+    </i>
+    <div class="media-body">
+        <div>
+
+            @Html.Raw(href)
+            @Html.Raw(string.Format("<{0} class='preload media-heading'>", Model.NameHeaderTag))
+            @Model.Organization.Name
+            @Html.Raw(string.Format("</{0}>", Model.NameHeaderTag))
+            @Html.Raw(endHref)
+
+        </div>
+
+        @Model.Organization.City, @Model.Organization.State<br />
+        
+        @if (Model.ShowWebsite && !string.IsNullOrWhiteSpace(Model.Organization.Url))
+        {
+            <a href="@Model.Organization.Url">
+                <small>@Model.Organization.WebsiteDomainOnly</small>
+            </a>
+        }
+
+    </div>
+</div>

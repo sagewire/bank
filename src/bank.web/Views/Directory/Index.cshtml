@@ -1,0 +1,67 @@
+﻿@model BanksViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutSingle.cshtml";
+}
+
+
+@section Header {
+
+}
+
+
+<h1>Bank Directory</h1>
+
+@foreach (var bank in Model.Banks)
+{
+    <div class="card">
+        <div class="card-block profile-basic">
+            <h4>@bank.Name</h4>
+
+            <i class="media-left">
+
+                <a href="@bank.ProfileUrl">
+                    @if (bank.HasAvatar)
+                    {
+                        <img class="float:left;" style="max-height:100px;max-width:100px;" src="@bank.Avatar" />
+                    }
+                </a>
+            </i>
+            <div class="media-body">
+                <div class="row stats">
+                    <div class="col-md-2 text-xs-center">
+                        <h6>Assets</h6>
+                        @bank.TotalAssets.Value.ToString("C0")
+                    </div>
+                    <div class="col-md-2 text-xs-center">
+                        <h6>Deposits</h6>
+                        @bank.TotalDeposits.Value.ToString("C0")
+                    </div>
+                    <div class="col-md-2 text-xs-center">
+                        <h6>Equity</h6>
+                        @bank.TotalEquityCapital.Value.ToString("C0")
+                    </div>
+                    <div class="col-md-2 text-xs-center">
+                        <h6>Net Income</h6>
+                        @bank.NetIncome.Value.ToString("C0")
+                    </div>
+                    <div class="col-md-2 text-xs-center">
+                        <h6>R.O.A.</h6>
+                        @bank.ReturnOnAssets.Value.ToString("P0")
+                    </div>
+                    <div class="col-md-2 text-xs-center">
+                        <h6>R.O.E.</h6>
+                        @bank.ReturnOnEquity.Value.ToString("P0")
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}
+
+
+
+@section ScriptsProxy {
+
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<report>
+  <charts>
+    <chart type="combo" chart-override="primary" css-classes="main-chart">
+      <series type="areaspline">
+        <concept name="UBPR2170"/>
+      </series>
+    </chart>
+  </charts>
+</report>

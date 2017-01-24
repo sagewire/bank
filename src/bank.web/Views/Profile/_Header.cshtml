@@ -1,0 +1,24 @@
+﻿@using bank.reports
+@model OrganizationProfileViewModel
+
+<div class="container-fluid top-row">
+
+    <div class="col-lg-8 push-lg-4 highlights main-column">
+        <div class="highlight-item">
+
+            <h1>@Model.Organization.Name</h1>
+
+            <h4 class="chart-title">@Model.PrimaryChart.Title</h4>
+
+            @Html.Partial("_Report", new ReportViewModel { Report = Model.PrimaryChart })
+
+            @Html.Partial("_Report", new ReportViewModel { Report = Model.PieCharts})
+
+        </div>
+    </div>
+
+    <div class="col-lg-4 pull-lg-8 col-xs-12 summary sidebar-column">
+        @Html.Partial("_HeaderSidebar", Model)
+    </div>
+
+</div>

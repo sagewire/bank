@@ -1,0 +1,22 @@
+﻿@using bank.enums
+@model ReportNavigationViewModel
+
+@if (Model.NeedsNavigation)
+{
+    <div class="btn-group">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Navigate to...
+        </button>
+        <div class="dropdown-menu @Html.Raw(Model.Align == HorizontalAlignment.Right ? "dropdown-menu-right" : "")">
+
+            @foreach (var reportSection in Model.Report.Section)
+            {
+                if (!string.IsNullOrWhiteSpace(reportSection.Key))
+                {
+                    <a class="dropdown-item" href="@Url.Url(Model.Organization, Model.Period, Model.Report.Template, reportSection.Key, Model.IsCurrentPeriod)">@reportSection.Value.Label</a>
+
+                }
+            }
+        </div>
+    </div>
+}

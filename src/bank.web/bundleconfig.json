@@ -1,0 +1,20 @@
+[
+  {
+    "outputFileName": "assets/scripts/site.min.js",
+    "inputFiles": [
+      "assets/scripts/site.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/css/jquery.typeahead.min.css",
+    "inputFiles": [
+      "assets/css/jquery.typeahead.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/scripts/charts.min.js",
+    "inputFiles": [
+      "assets/scripts/charts.js"
+    ]
+  }
+]

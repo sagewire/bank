@@ -1,0 +1,60 @@
+﻿@using bank.reports
+@model ReportViewModel
+@{
+    var showHeader = true;
+    var closeTable = false;
+    var hasOpenHeader = false;
+}
+@foreach (var lineItem in Model.Report.CurrentSection.LineItems)
+{
+    if (lineItem.IsChart)
+    {
+        closeTable = true;
+        showHeader = false;
+    }
+
+    if (hasOpenHeader && (closeTable || showHeader))
+    {
+        @Html.Raw("</table>")
+    }
+
+    if (showHeader)
+    {
+        @Html.Raw("<table class='table table-responsive report-table'>")
+        @Html.Partial("_TableHead", Model)
+        showHeader = false;
+        hasOpenHeader = true;
+    }
+
+    if (lineItem.IsChart)
+    {
+        if (lineItem.LineItemType == LineItemTypes.Charts)
+        {
+            var col = string.Format("col-xs-{0}", 12 / lineItem.LineItems.Count);
+            <div class="row p-0 m-0">
+                @foreach (var chartItem in lineItem.LineItems)
+                {
+                    <div class="@col p-0">
+                        @Html.Partial("_Chart", new ChartItemViewModel { Report = Model.Report, ChartItem = chartItem as ChartItem })
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            @Html.Partial("_Chart", new ChartItemViewModel { Report = Model.Report, ChartItem = lineItem as ChartItem })
+        }
+
+        showHeader = true;
+        closeTable = false;
+    }
+    else
+    {
+        @Html.Partial("_LineItem", new LineItemViewModel { Report = Model.Report, LineItem = lineItem })
+    }
+}
+
+@if (hasOpenHeader)
+{
+    @Html.Raw("</table>")
+}

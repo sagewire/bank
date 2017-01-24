@@ -1,0 +1,134 @@
+﻿@{
+//var canonical = bank.Settings.WebBaseUrl + Request.Url.PathAndQuery;
+
+//if (ViewBag.Canonical == null)
+//{
+//    ViewBag.Canonical = canonical;
+//}
+//else
+//{
+//    ViewBag.Canonical = bank.Settings.WebBaseUrl + ViewBag.Canonical;
+//}
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    @if (ViewBag.Title != null)
+    {
+        <title>@ViewBag.Title</title>
+    }
+    <meta name="description" content="@ViewBag.MetaDescription" />
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/assets/css/site.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+    <link rel="stylesheet" href="~/assets/css/jquery.typeahead.min.css" />
+    <script src="https://use.fontawesome.com/40ec8562ca.js"></script>
+    <!-- /stylesheets -->
+
+    @RenderSection("Stylesheets", required: false)
+    @RenderSection("Meta", required: false)
+
+    @if (ViewBag.Canonical != null)
+    {
+        <link rel="canonical" href="@ViewBag.Canonical" />
+    }
+
+    @*<!-- icons -->
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+        <link rel="manifest" href="/manifest.json">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="theme-color" content="#ffffff">
+        <!-- /icons-->*@
+
+    @if (ViewBag.NoIndex != null && ViewBag.NoIndex)
+    {
+        <meta name="robots" content="noindex">
+    }
+
+</head>
+<body>
+
+    @if (ViewBag.NoNav == null)
+    {
+        <div class="top-nav">
+            <div class="collapse" id="navbar-header">
+                <div class="container-fluid p-a-1 p-3">
+                    <button class="navbar-toggler close hidden-sm-down" type="button" data-toggle="collapse" data-target="#navbar-header" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                    @Html.Partial("_GlobalNav")
+
+                </div>
+            </div>
+            <div class="navbar navbar-light bg-faded">
+                <div class="container-fluid align-middle">
+                    <a class="logo" href="/">
+                        <h1 class="logo">
+                            Bankjitsu
+                        </h1>
+                    </a>
+
+                    <button class="navbar-toggler event" type="button" data-toggle="collapse" data-target="#navbar-header" data-cat="Navigation" data-action="click" data-label="Main Menu">
+                        ☰
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+    @RenderBody()
+
+    @if (ViewBag.NoNav == null && ViewBag.NoFooter == null)
+    {
+        <footer>
+            <div class="container-fluid">
+                @Html.Partial("_GlobalNav")
+            </div>
+        </footer>
+
+        <div class="sub-footer text-xs-center p-1">
+            @*<a href="/privacy">Privacy Policy</a>
+                <a class="pl-1" href="https://www.facebook.com/RateYourLender/">
+                    <img src="~/assets/images/social/fb-29.png" />
+                </a>
+                <a class="pl-1" href="https://twitter.com/rateyourlender">
+                    <img src="~/assets/images/social/twitter-29.png" />
+                </a>*@
+        </div>
+
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body text-xs-center">
+                        <i class="text-xs-center fa fa-circle-o-notch fa-spin fa-fw fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+
+    <script src="~/assets/scripts/jquery.typeahead.min.js"></script>
+    <script src="~/assets/scripts/site.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="~/assets/scripts/charts.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+    @Html.Partial("_GoogleAnalytics")
+
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿@using bank.reports
+@model TableSectionViewModel
+
+
+@*@model TableSectionViewModel
+
+    @if (Model.TableLineItems.Any())
+    {
+    <table class="table table-sm table-responsive report-table">
+
+       <thead>
+            <tr>
+                <td class="table-header p-1">
+                    <h5>@Model.SubSection.Label</h5>
+                </td>
+
+                @foreach (var column in Model.Report.Columns)
+                {
+                    var company = column as CompanyFactColumn;
+
+                    <th align="center"
+                        class="fact-column" style="vertical-align:middle;"
+                        data-organization="@(company != null ? company.Organization.OrganizationId.ToString() : "")">
+                        @if (Model.Report.Columns.Count > 1)
+                        {
+                        @Html.Raw(string.Format("<a href=\"{0}\">", column.HeaderUrl))
+                        @column.Header
+                        @Html.Raw("</a>")
+                        }
+                    </th>
+                }
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var lineItem in Model.TableLineItems)
+            {
+                @Html.Partial("_LineItem", new LineItemViewModel { LineItem = lineItem, Report = Model.Report, Level = 0 })
+            }
+        </tbody>
+    </table>
+    }*@

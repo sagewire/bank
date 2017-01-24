@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<report partial="_SidebarReport">
+  <line>
+    <line name="" label="Total Assets" abstract="true">
+      <line name="UBPR2170" label="" abstract="false" />
+    </line>
+    <line name="" label="Total Liabilities" abstract="true">
+      <line name="UBPRD662" label="" abstract="false" />
+    </line>
+    <line name="" label="Total Net Loans" abstract="true">
+      <line name="UBPRE119" label="" abstract="false" />
+    </line>
+    <line name="" label="Total Deposits" abstract="true">
+      <line name="UBPR2200" label="" abstract="false" />
+    </line>
+    <line name="" label="Net Income" abstract="true">
+      <line name="UBPR4340" label="" abstract="false" />
+    </line>
+    <line name="" label="Total Capital" abstract="true">
+      <line name="UBPRG105" label="" abstract="false" />
+    </line>
+  </line>
+</report>

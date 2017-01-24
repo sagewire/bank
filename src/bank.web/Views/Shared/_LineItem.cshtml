@@ -1,0 +1,60 @@
+﻿@using bank.reports
+@using bank.reports.charts
+
+@model LineItemViewModel
+
+@if (Model.LineItem.LineItemType == bank.reports.LineItemTypes.SubSection)
+{
+    var subSection = Model.LineItem as SubSection;
+    <tr>
+        <td class="table-header p-1" colspan="@(Model.Report.Columns.Count + 1))">
+            <h5>@subSection.Label</h5>
+        </td>
+    </tr>
+
+}
+else
+{
+    <tr class="lineitem-row @Html.Raw(Model.LineItem.Concepts.First().Name != null ? "mdrm-row" : "")" data-url="/modals/concept/definition/@Model.LineItem.Concepts.First().Name">
+        <td class="pl-1">@Model.LineItem.Label</td>
+        @foreach (var column in Model.Report.Columns)
+        {
+            var fact = Report.GetCell(Model.LineItem, column);
+
+            var companyColumn = column as CompanyColumn;
+            <td align="right"
+                data-chart-type="sparkline"
+                data-series="@Model.GetSeriesData(column).ToJson()"
+                style="@Model.TrendingColor(fact)"
+                class="fact-column lineitem-cell px-1 pr-1 @General.TrendingClass(fact)">
+
+                @if (fact.TrendRatio.HasValue)
+                {
+                    <div class="float-xs-left trending-percent text-xs-center">
+                        @if (!fact.Trend.HasValue)
+                        {
+                            <div aria-hidden="true">&mdash;</div>
+                        }
+                        else if (fact.Trend.Value)
+                        {
+                            <div class="fa fa-arrow-up fa-fw" aria-hidden="true"></div>
+                        }
+                        else
+                        {
+                            <div class="fa fa-arrow-down fa-fw" aria-hidden="true"></div>
+                        }
+                        <div>@Math.Round(fact.TrendRatio.Value, 3).ToString("P1")</div>
+
+                    </div>
+                }
+
+                @Report.GetCell(Model.LineItem, column).ValueFormatted
+            </td>
+        }
+    </tr>
+}
+
+@foreach (var child in Model.LineItem.LineItems)
+{
+    @Html.Partial("_LineItem", new LineItemViewModel { Report = Model.Report, LineItem = child, Level = Model.Level + 1 })
+}

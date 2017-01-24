@@ -1,0 +1,50 @@
+﻿@model bank.crawl.Page
+@{
+    Layout = "~/Views/Shared/_LayoutSingle.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <td></td>
+        <td>@Model.ResponseUrl</td>
+    </tr>
+    <tr>
+        <td>Twitter</td>
+        <td>@Model.TwitterSite</td>
+    </tr>
+    <tr>
+        <td>Facebook</td>
+        <td>@Model.Facebook</td>
+    </tr>
+</table>
+
+
+@if (Model.Icons != null && Model.Icons.Any())
+{
+    <h3>icons</h3>
+    foreach (var icon in Model.Icons)
+    {
+        <img style="border:1px solid #000" src="@icon" /><br />
+    }
+}
+
+@if (Model.Images != null && Model.Images.Any())
+{
+    <h3>images</h3>
+    foreach (var img in Model.Images.Where(x => x.Contains("logo")))
+    {
+        <img style="border:1px solid #000" src="@img" /><br />
+    }
+}
+
+
+@if (Model.Media != null && Model.Media.Any())
+{
+    <h3>media</h3>
+    foreach (var media in Model.Media.Where(x => x.Url.ToLower().Contains("logo")))
+    {
+        @media.Type <br />
+        @media.Url<br />
+        <img  style="border:1px solid #000" src="@media.Url" /><br />
+    }
+}

@@ -1,0 +1,29 @@
+﻿@model HeaderViewModel
+@{ 
+
+}
+<div class="wash" style="background-image: url('@Model.HeaderImage')">
+    <div id="profile-header">
+
+        <div class="container">
+            <div class="surround big-text">
+                <h1 class="display-6" itemprop="name">@Model.HeaderTitle</h1>
+                @if (Model.HasSubTitle)
+                {
+                <h4>
+                    <i>
+                        @Model.SubTitle
+                    </i>
+                </h4>
+                }
+            </div>
+
+            @if (Model.SocialShare != null)
+            {
+                <div class="share">
+                    <small><b>Share</b></small> @Html.Partial("_SocialShare", Model.SocialShare)
+                </div>
+            }
+        </div>
+    </div>
+</div>

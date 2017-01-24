@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<report>
+	<line type="section" name="top" alias="top" label="Financial Highlights">
+		<!--
+		<charts>
+
+			<chart title="Assets - Pie" type="combo">
+				<series type="pie">
+					<concept name="UBPRE119" />
+					<concept name="UBPRE122" />
+					<concept name="UBPR0081" />
+					<concept name="UBPR2130" />
+					<concept name="UBPRE130" />
+				</series>
+			</chart>
+
+			
+			<chart title="Assets - Line" type="combo">
+			<series concept="UBPRE119+UBPR2170" type="line" />
+			<series concept="UBPRE122" type="line" />
+			<series concept="UBPR0081" type="line" />
+			<series concept="UBPRE130" type="line" />
+			<series concept="UBPR2130" type="line" />
+			<series concept="UBPRE124" type="line" />
+			</chart>
+		
+
+		</charts>
+-->
+		<line name="" label="Balance Sheet" abstract="true" type="subsection">
+			<line name="" label="Total Assets" abstract="true">
+				<line name="UBPR2170" label="" abstract="false" />
+			</line>
+			<line name="" label="Total Loans" abstract="true">
+				<line name="UBPRE119" label="" abstract="false" />
+			</line>
+			<line name="" label="Total Deposits" abstract="true">
+				<line name="UBPR2200" label="" abstract="false" />
+			</line>
+			<line name="" label="Total Equity" abstract="true">
+				<line name="UBPRG105" label="" abstract="false" />
+			</line>
+			<line name="" label="Other Loans &amp; Leases" abstract="true">
+				<line name="UBPRE117" label="" abstract="false" />
+			</line>
+			<line name="" label="Loans/Deposits" abstract="true">
+				<line name="UBPRE119/UBPR2200*100" label="" abstract="false" />
+			</line>
+			<line name="" label="Securities/Assets" abstract="true">
+				<line name="(UBPRE120+UBPR8636+UBPRD657+UBPRE121)/UBPR2170*100" label="" abstract="false" />
+			</line>
+			<line name="" label="Total Equity/Total Assets" abstract="true">
+				<line name="UBPRG105/UBPR2170*100" label="" abstract="false" />
+			</line>
+		</line>
+		<line type="subsection" label="Profitability" name="breakdown">
+			<line name="" label="Net Income" abstract="true">
+				<line name="UBPR4340" label="" abstract="false" />
+			</line>
+			<line name="" label="ROAA" abstract="true">
+				<line name="UBPRE010" label="" abstract="false" />
+			</line>
+			<line name="" label="ROAE" abstract="true">
+				<line name="UBPRE630" label="" abstract="false" />
+			</line>
+			<line name="" label="Net Interest Margin" abstract="true">
+				<line name="UBPR4074/UBPRE123*100" label="" abstract="false" />
+			</line>
+			<line name="" label="Efficiency Ratio" abstract="true">
+				<line name="UBPRE088" label="" abstract="false" />
+			</line>
+			<line name="" label="Noninterest Income/Revenue" abstract="true">
+				<line name="RIAD4079/(UBPR4107+RIAD4079)*100" label="" abstract="false" />
+			</line>
+		</line>
+		<line type="subsection" label="Asset Quality" name="capital-adequacy">
+			<line name="" label="NPAs/Assets" abstract="true">
+				<line name="(UBPR1400+UBPR2150)/UBPR2170*100" label="" abstract="false" />
+			</line>
+		</line>
+		<line type="subsection" label="Capital Adequacy" name="capital-adequacy">
+			<line name="" label="Tier 1 Common Capital" abstract="true">
+				<line name="UBPRP859" label="" abstract="false" />
+			</line>
+			<line name="" label="Tier 1 Capital" abstract="true">
+				<line name="UBPR8274" label="" abstract="false" />
+			</line>
+			<line name="" label="Tier 2 Capital" abstract="true">
+				<line name="UBPR8275" label="" abstract="false" />
+			</line>
+			<line name="" label="Total Capital" abstract="true">
+				<line name="UBPR3792" label="" abstract="false" />
+			</line>
+			<line name="" label="Total Risk Weighted Assets" abstract="true">
+				<line name="UBPRE660" label="" abstract="false" />
+			</line>
+			<line name="" label="Leverage Ratio" abstract="true">
+				<line name="UBPRD486" label="" abstract="false" />
+			</line>
+			<line name="" label="Common Equity Tier 1 Capital Ratio" abstract="true">
+				<line name="UBPRR029" label="" abstract="false" />
+			</line>
+			<line name="" label="Tier 1 Capital Ratio" abstract="true">
+				<line name="UBPRD487" label="" abstract="false" />
+			</line>
+			<line name="" label="Total Capital Ratio" abstract="true">
+				<line name="UBPRD488" label="" abstract="false" />
+			</line>
+		</line>
+	</line>
+</report>

@@ -1,0 +1,16 @@
+﻿@model SocialShareViewModel
+
+<a href="#" data-url="@Model.ShareUrl" class="facebook-share event"
+   data-cat="Social" data-action="Share" data-label="Facebook">
+    <img class="social-share" src="~/assets/images/social/fb-40.png" />
+</a>
+
+<a rel="nofollow" href="https://twitter.com/intent/tweet?text=@Model.TwitterText&url=@Model.ShareUrl" class="twitter-share event"
+   data-cat="Social" data-action="Share" data-label="Twitter">
+    <img class="social-share" src="~/assets/images/social/twitter-40.png" />
+</a>
+
+<a class="linkedin-share event" rel="nofollow" href="https://www.linkedin.com/shareArticle?url=@Model.ShareUrl&required=true&source=rateyourlender.com"
+   data-cat="Social" data-action="Share" data-label="LinkedIn">
+    <img class="social-share" src="~/assets/images/social/linkedin-40.png" />
+</a>

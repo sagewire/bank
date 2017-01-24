@@ -1,0 +1,26 @@
+﻿@using bank.reports
+@using bank.enums
+@model ReportViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutSingle.cshtml";
+}
+
+<main>
+    @if (Model.Organization != null)
+    {
+        <div class="card">
+            <div class="card-block">
+                @Html.Partial("_BankBasics", new BankBasicsViewModel { Organization = Model.Organization })
+                @Html.Partial("_ReportNavigation", new ReportNavigationViewModel { Report = Model.Report, Organization = Model.Organization, Period = Model.Report.MaxPeriod, IsCurrentPeriod = Model.Report.IsCurrentPeriod})
+            </div>
+        </div>
+    }
+    <div class="card">
+        <div class="card-block">
+            @Html.Partial("_Report", Model)
+        </div>
+    </div>
+</main>
+
+

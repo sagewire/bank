@@ -1,0 +1,74 @@
+﻿@model PagerViewModel
+
+@if (Model.PagerItems.Count() > 1)
+{
+    <nav aria-label="Page navigation" class="pager">
+        <div class="pagination @Model.ClassName"
+             data-item-id="@Model.ItemId"
+             data-item-type="@Model.ItemType"
+             data-rating="@Model.Rating">
+
+
+            <a class="page-item event @(Model.PrevPage.HasValue ? "" : "disabled")"
+               data-cat="Reviews" data-action="Pager" data-label="Previous"
+               href="@Model.GetUrl(Model.PrevPage)"
+               data-page="@Model.PrevPage">
+                <div class="page-link" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </div>
+            </a>
+
+            @foreach (var item in Model.PagerItems)
+            {
+                <a class="page-item event @(item.Active ? "active" : "")"
+                   data-cat="Reviews" data-action="Pager" data-label="@item.DisplayNumber"
+                   href="@Model.GetUrl(item.LinkNumber)"
+                   data-page="@item.LinkNumber">
+                    <span class="page-link">
+                        @item.DisplayNumber
+                    </span>
+                </a>
+            }
+
+            <a class="page-item event @(Model.NextPage.HasValue ? "" : "disabled")"
+               data-cat="Reviews" data-action="Pager" data-label="Next"
+               href="@Model.GetUrl(Model.NextPage)"
+               data-page="@Model.NextPage">
+                <span class="page-link" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </span>
+            </a>
+
+        </div>
+    </nav>
+}
+
+
+    @*<table>
+            <tr>
+                <th>Current Page</th>
+                <td>@Model.CurrentPage</td>
+            </tr>
+            <tr>
+                <th>Raw Current Page</th>
+                <td>@Model.RawCurrentPage</td>
+            </tr>
+            <tr>
+                <th>Skip</th>
+                <td>@Model.Skip</td>
+            </tr>
+            <tr>
+                <th>Take</th>
+                <td>@Model.Take</td>
+            </tr>
+            <tr>
+                <th>Total Items</th>
+                <td>@Model.TotalItems</td>
+            </tr>
+            <tr>
+                <th>Page Count</th>
+                <td>@Model.PageCount</td>
+            </tr>
+        </table>*@

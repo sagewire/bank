@@ -1,0 +1,32 @@
+42 Number of banks in Peer Group
+42.1 UBPAE877
+DESCRIPTION
+NUMBER OF BANKS IN PEER GROUP
+NARRATIVE
+FORMULA
+Updated Dec 02 2016 Page 13 of 53
+UBPR User's Guide Summary Ratios--Page 1
+Referenced Concepts
+UBPR0071
+DESCRIPTION
+Interest-Bearing Bank Balances
+NARRATIVE
+Interest-bearing balances due from depository institutions.
+FORMULA
+IF(uc:UBPRC752[P0] = 31,cc:RCFD0071[P0], IF(uc:UBPRC752[P0] = 41,cc:RCON0071[P0], NULL))
+UBPR1227
+DESCRIPTION
+Lease Financing Receivables - Past Due 90 Days or More and Still Accruing
+FORMULA
+IF(uc:UBPRC752[P0] = 31,cc:RCFD1227[P0],IF(uc:UBPRC752[P0] = 41,cc:RCON1227[P0], NULL))
+UBPR1228
+DESCRIPTION
+Lease Financing Receivables - Nonaccrual
+FORMULA
+IF(uc:UBPRC752[P0] = 31,cc:RCFD1228[P0],IF(uc:UBPRC752[P0] = 41,cc:RCON1228[P0], NULL))
+UBPR1255
+DESCRIPTION
+Commercial and Industrial Loans to Non-U.S. Addressees (Domicile) - Past Due 90 Days or More and Still Accruing
+FORMULA
+IF(uc:UBPRC752[P0] = 31,cc:RCFD1255[P0],IF(uc:UBPRC752[P0] = 41,cc:RCON1255[P0], NULL))
+EOF

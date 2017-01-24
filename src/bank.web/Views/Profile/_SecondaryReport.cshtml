@@ -1,0 +1,25 @@
+﻿@using bank.reports
+@model ReportViewModel
+@{ 
+    var charts = (Charts)Model.Report.CurrentSection.LineItems.First();
+}
+<div class="card">
+    <div class="highlights">
+        <div class="row mx-0">
+            @{
+                var isFirst = true;
+            }
+            @foreach (ChartItem chart in charts.LineItems)
+            {
+                <div class="col-sm-4 px-0">
+                    <div class="highlight-item @(isFirst ? "left" : "")">
+                        <h6>@chart.ChartConfig.Concepts.First().ShortLabel</h6>
+                        <h2>@Report.GetCell(chart, Model.Report.Columns.First()).ValueFormatted</h2>
+                        @Html.Partial("_Chart", new ChartItemViewModel { Report = Model.Report, ChartItem = chart })
+                    </div>
+                </div>
+                isFirst = false;
+            }
+        </div>
+    </div>
+</div>

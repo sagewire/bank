@@ -1,0 +1,27 @@
+﻿@using bank.reports
+@using bank.enums
+@model OrganizationProfileViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutSidebar.cshtml";
+}
+
+@section Header {
+
+    @Html.Partial("_Header", Model)
+
+}
+
+
+@section Sidebar {
+
+    @Html.Partial(Model.SidebarCharts.Partial, new ReportViewModel { Report = Model.SidebarCharts })
+
+}
+
+<div class="mb-2">
+    @Html.Partial(Model.SecondaryCharts.Partial, new ReportViewModel { Report = Model.SecondaryCharts })
+</div>
+
+@Html.Partial("_Report", new ReportViewModel { Report = Model.HighlightTable })
+

@@ -1,0 +1,66 @@
+﻿@model SearchViewModel
+@{
+    Layout = null;
+}
+
+<form id="form-search" name="form-search">
+    <div class="typeahead__container">
+        <span class="input-group">
+            <input id="search-box" autofocus class="js-typeahead-name form-control" name="country_v1[query]" type="search" placeholder="Search" autocomplete="off">
+
+            <span class="input-group-addon">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </span>
+        </span>
+    </div>
+</form>
+
+<script>
+
+    $(function () {
+
+
+        $.typeahead({
+            input: '.js-typeahead-name',
+            filter: false,
+            dynamic: true,
+            delay: 90,
+            //order: "desc",
+            template: function (query, item) {
+
+                return '{{html}}';
+            },
+            emptyTemplate: "No results for {{query}}",
+            href: "{{url}}",
+            source: {
+                lenders: {
+                    display: "name",
+                    ajax: function (query) {
+                        return {
+                            url: "/modals/search/data",
+                            path: "data.snippets",
+                            data: {
+                                q: "{{query}}"
+                            }
+                        }
+                    }
+                }
+            },
+            callback: {
+                onReady: function () {
+
+                    setTimeout(function () {
+                        $("#search-box").focus();
+                    }, 750);
+                },
+                onClick: function (node, a, item, event) {
+                    window.location = item.url;
+                },
+                onSubmit: function (node, form, item, event) {
+                    return false;
+                }
+            }
+        });
+    });
+
+</script>

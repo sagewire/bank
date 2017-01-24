@@ -1,0 +1,26 @@
+﻿@using bank.reports
+@model ReportViewModel
+
+<thead>
+    <tr>
+        <td style="width:100%;" class="pl-1 align-middle">
+            <h3>@Model.Report.Title</h3>
+        </td>
+
+        @foreach (var column in Model.Report.Columns)
+            {
+                var company = column as CompanyColumn;
+
+            <th align="center"
+                class="fact-column" style="vertical-align:middle;"
+                data-organization="@(company != null ? company.Organization.OrganizationId.ToString() : "")">
+                @if (Model.Report.Columns.Count > 1)
+                {
+                    //@Html.Raw(string.Format("<a href=\"{0}\">", column.HeaderUrl))
+                    @column.HeaderText
+                    //@Html.Raw("</a>")
+                }
+            </th>
+        }
+    </tr>
+</thead>

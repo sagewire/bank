@@ -1,0 +1,38 @@
+﻿@using bank.reports
+@model ReportViewModel
+
+
+<div class="summary">
+    <div class="row p-0 mx-2">
+
+        @foreach (var lineItem in Model.Report.CurrentSection.LineItems)
+        {
+            var fact = Report.GetCell(lineItem, Model.Report.Columns.First());
+
+            <div class="col-xs-6 summary-item-square p-1">
+                    <h3>
+                        @Report.GetCell(lineItem, Model.Report.Columns.First()).NumericValue.Value.ToAbbreviatedString()
+                        <small>
+                            @if (!fact.Trend.HasValue)
+                            {
+
+                            }
+                            else if (fact.Trend.Value)
+                            {
+                                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                            }
+                            else
+                            {
+                                <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                            }
+                        </small>
+
+                    </h3>
+                    <h6>@lineItem.Concepts.First().ShortLabel</h6>
+
+                </div>
+            
+        }
+
+    </div>
+</div>

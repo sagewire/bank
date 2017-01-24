@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<report partial="_SecondaryReport">
+  <line>
+    <charts>
+      <chart type="combo" css-classes="card-sparkline">
+        <series type="spline">
+          <concept name="UBPRE010" />
+        </series>
+      </chart>
+      <chart type="combo" css-classes="card-sparkline">
+        <series type="spline">
+          <concept name="UBPRE630" />
+        </series>
+      </chart>
+      <chart type="combo" css-classes="card-sparkline">
+        <series type="spline">
+          <concept name="UBPRE088" />
+        </series>
+      </chart>
+    </charts>
+  </line>
+  <!--
+  <line>
+    <line name="" label="ROAA" abstract="true">
+      <line name="UBPRE010" label="" abstract="false" />
+    </line>
+    <line name="" label="ROAE" abstract="true">
+      <line name="UBPRE630" label="" abstract="false" />
+    </line>
+    <line name="" label="Efficiency Ratio" abstract="true">
+      <line name="UBPRE088" label="" abstract="false" />
+    </line>
+  </line>
+  -->
+</report>

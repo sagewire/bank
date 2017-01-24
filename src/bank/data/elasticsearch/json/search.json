@@ -1,0 +1,25 @@
+﻿{
+    "query": {
+        "function_score": {
+            "query": {
+                "match": {
+                    "Name": {
+                        "query": "{{name}}",
+                        "boost": 4,
+                        "analyzer": "standard",
+                        "operator": "and",
+                        "fuzziness": "AUTO"
+                    }
+                }
+            },
+            "functions": [
+                {
+                    "field_value_factor": {
+                        "field": "TotalAssets",
+                        "missing": 0
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,20 @@
+Call Report
+1	Income Statement	RIAD4340
+2	Changes in Bank Equity Capital	RIAD3210
+3	Charge-offs and Recoveries on Loans and Leases
+3.a	Year-to-date Charge-offs	RIAD4635
+3.b	Year-to-date Recoveries	RIAD4605
+4	Changes in Allowance for Loan and Lease Losses	RIAD3123
+5	Disaggregated Data on the Allowance for Loan and Lease Losses
+5.a	Recorded Investment: Individually Evaluated for Impairment and Determined to be Impaired	RCONM746
+5.b	Allowance Balance: Individually Evaluated for Impairment and Determined to be Impaired	RCONM747
+5.c	Recorded Investment: Collectively Evaluated for Impairment	RCONM748
+5.d	Allowance Balance: Collectively Evaluated for Impairment	RCONM749
+5.e	Recorded Investment: Purchased Credit-Impaired Loans	RCONM750
+5.f	Recorded Allowance Balance: Purchased Credit-Impaired Loans	RCONM751
+6	Balance Sheet|form-41-rc
+6.a	Total assets	RCON2170
+6.b	Total deposits	RCON2200
+6.c	Total liabilities	RCON2948
+6.d	Total equity capital	RCONG105
+6.e	Total liabilities and equity capital	RCON3300

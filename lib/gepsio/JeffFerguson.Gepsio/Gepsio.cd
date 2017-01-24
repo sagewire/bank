@@ -1,0 +1,635 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="JeffFerguson.Gepsio.AnySimpleType" Collapsed="true">
+    <Position X="30.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAACAAAAEAACAAAAAAGkAEQAA=</HashCode>
+      <FileName>AnySimpleType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.AnyType" Collapsed="true">
+    <Position X="36.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAIAgAAEAgAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>AnyType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.AnyUri" Collapsed="true">
+    <Position X="26.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AnyUri.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.AssemblyResources" Collapsed="true">
+    <Position X="71.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>AssemblyResources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Base64Binary" Collapsed="true">
+    <Position X="35.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Base64Binary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Boolean" Collapsed="true">
+    <Position X="37.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Boolean.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.ComplexType" Collapsed="true">
+    <Position X="64.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAoAAQAAAAAAAAYAAAAEAAAAAA=</HashCode>
+      <FileName>ComplexType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Context" Collapsed="true">
+    <Position X="78.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FABaABIAASAAhQgQEAEQAGAAAAIEgEEgAKAAwAoAAiM=</HashCode>
+      <FileName>Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Date" Collapsed="true">
+    <Position X="44.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Date.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.DateTime" Collapsed="true">
+    <Position X="51" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DateTime.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Decimal" Collapsed="true">
+    <Position X="8.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAIAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Decimal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Double" Collapsed="true">
+    <Position X="19.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Double.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Duration" Collapsed="true">
+    <Position X="28.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Duration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Element" Collapsed="true">
+    <Position X="73.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACBAAEAAAIRAAIACAAAAQEAgAABBAAAAAAAAgAAAE=</HashCode>
+      <FileName>Element.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.EnumerationFacet" Collapsed="true">
+    <Position X="1" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EnumerationFacet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.EnumerationFacetDefinition" Collapsed="true">
+    <Position X="3.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EnumerationFacetDefinition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Facet" Collapsed="true">
+    <Position X="6.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAABAgAAAAEAAAAAAAAACEAA=</HashCode>
+      <FileName>Facet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.FacetDefinition" Collapsed="true">
+    <Position X="6.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAgAQCAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FacetDefinition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.FacetProperty" Collapsed="true">
+    <Position X="76.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAACAAAAAAAAAAAEAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>FacetProperty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.FacetPropertyDefinition" Collapsed="true">
+    <Position X="78.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAgCAAAAQAABBAAAAAgAAAAAAAQAA=</HashCode>
+      <FileName>FacetPropertyDefinition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Fact" Collapsed="true">
+    <Position X="80.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BCgigIAgCMCARgAIACCACMUYFBAAIgIAAQQgAggAEAA=</HashCode>
+      <FileName>Fact.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Float" Collapsed="true">
+    <Position X="21.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Float.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Footnote" Collapsed="true">
+    <Position X="71.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQECAAAEAAAgCACAAAAQAAAAAAAAACSAAAAAA=</HashCode>
+      <FileName>Footnote.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.FootnoteArc" Collapsed="true">
+    <Position X="73.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAIAAAAAAAEAAEgAAAAAAIBAIAAAAAAACQIAEAAA=</HashCode>
+      <FileName>FootnoteArc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.FootnoteLink" Collapsed="true">
+    <Position X="75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAARABAAAAAAABABAAIAAAAEAQAAAAAAA=</HashCode>
+      <FileName>FootnoteLink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.FootnoteLocator" Collapsed="true">
+    <Position X="76.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQEAAAAAAAAAAAAAAAAAAAAABAAAACQAACQAA=</HashCode>
+      <FileName>FootnoteLocator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Gepsio" Collapsed="true">
+    <Position X="78.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAQAQCBAAAADFAUEABMgIAMRAAAAkAABABCAMYYKA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.GregorianDay" Collapsed="true">
+    <Position X="42" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GregorianDay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.GregorianMonth" Collapsed="true">
+    <Position X="46.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GregorianMonth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.GregorianMonthDay" Collapsed="true">
+    <Position X="53.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GregorianMonthDay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.GregorianYear" Collapsed="true">
+    <Position X="15" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GregorianYear.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.GregorianYearMonth" Collapsed="true">
+    <Position X="24" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GregorianYearMonth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.HexBinary" Collapsed="true">
+    <Position X="30.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HexBinary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.HyperlinkReference" Collapsed="true">
+    <Position X="80.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAEAAAAAABABAAEAAAASAAAAAAAAAA=</HashCode>
+      <FileName>HyperlinkReference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Pure" Collapsed="true">
+    <Position X="10.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pure.cs</FileName>
+      <NewMemberFileName>Integer.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.LengthFacet" Collapsed="true">
+    <Position X="7.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LengthFacet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.LengthFacetDefinition" Collapsed="true">
+    <Position X="10" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LengthFacetDefinition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.MaxLengthFacet" Collapsed="true">
+    <Position X="10" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MaxLengthFacet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.MaxLengthFacetDefinition" Collapsed="true">
+    <Position X="12.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MaxLengthFacetDefinition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.MinLengthFacet" Collapsed="true">
+    <Position X="12.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MinLengthFacet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.MinLengthFacetDefinition" Collapsed="true">
+    <Position X="1" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MinLengthFacetDefinition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.NonNegativeInteger" Collapsed="true">
+    <Position X="6" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NonNegativeInteger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.NormalizedString" Collapsed="true">
+    <Position X="56.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>NormalizedString.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Notation" Collapsed="true">
+    <Position X="33" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Notation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.PatternFacet" Collapsed="true">
+    <Position X="3.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PatternFacet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.PatternFacetDefinition" Collapsed="true">
+    <Position X="5.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PatternFacetDefinition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.QualifiedName" Collapsed="true">
+    <Position X="39.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAQAAAAAAAAAEgAAAAAAAAAABoIBACAAAABAAAIA=</HashCode>
+      <FileName>QualifiedName.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.RestrictedSimpleType" Collapsed="true">
+    <Position X="48.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>RestrictedSimpleType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.SimpleType" Collapsed="true">
+    <Position X="48.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAACAIEAQAAAAAAEAAAAAIAAAAAAA=</HashCode>
+      <FileName>SimpleType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.String" Collapsed="true">
+    <Position X="56.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>String.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Time" Collapsed="true">
+    <Position X="17.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Time.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Token" Collapsed="true">
+    <Position X="56.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAABAAAAAAEAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Token.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Unit" Collapsed="true">
+    <Position X="76.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgSCCIkBACAYhEAAQAAAAAAQAAAAECAAAAAOAAAAAEA=</HashCode>
+      <FileName>Unit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.UriPrefixDictionary" Collapsed="true">
+    <Position X="78.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAACAAAAAAAAAAIACAAAAAAAAA=</HashCode>
+      <FileName>UriPrefixDictionary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.WhiteSpaceFacet" Collapsed="true">
+    <Position X="5.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WhiteSpaceFacet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.WhiteSpaceFacetDefinition" Collapsed="true">
+    <Position X="7.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WhiteSpaceFacetDefinition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.XbrlDocument" Collapsed="true">
+    <Position X="80.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAgAAAAAAAQAIAAAAAAAAAAAAAAAAAAgEEAAIAAAA=</HashCode>
+      <FileName>XbrlDocument.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.XbrlException" Collapsed="true">
+    <Position X="71.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>XbrlException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.XbrlFragment" Collapsed="true">
+    <Position X="73.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QEBAAAAGiAGYBAaACACISgAQEACREAIaMChAJBJJgAQ=</HashCode>
+      <FileName>XbrlFragment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.XbrlSchema" Collapsed="true">
+    <Position X="75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAEQAAIBAAgg4AAAMQiAAACAAIAQAIEgkAAA3YABA=</HashCode>
+      <FileName>XbrlSchema.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.XmlUtilities" Collapsed="true">
+    <Position X="76.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>XmlUtilities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Monetary" Collapsed="true">
+    <Position X="3.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Monetary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Attribute" Collapsed="true">
+    <Position X="73.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAEAAAAAACAAAAQAAAAAAAAAAAAAAAAAFAA=</HashCode>
+      <FileName>Attribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.AttributeGroup" Collapsed="true">
+    <Position X="1.75" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>AttributeGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.ID" Collapsed="true">
+    <Position X="55.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ID.cs</FileName>
+      <NewMemberFileName>NCName.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Name" Collapsed="true">
+    <Position X="56.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Name.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.NCName" Collapsed="true">
+    <Position X="56.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NCName.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.FactAttributes" Collapsed="true">
+    <Position X="1.75" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FactAttributes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.ItemAttributes" Collapsed="true">
+    <Position X="1.75" Y="17.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ItemAttributes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.IDREF" Collapsed="true">
+    <Position X="57.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IDREF.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.EssentialNumericItemAttributes" Collapsed="true">
+    <Position X="0.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EssentialNumericItemAttributes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.NumericItemAttributes" Collapsed="true">
+    <Position X="0.5" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NumericItemAttributes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Integer" Collapsed="true">
+    <Position X="7" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Integer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.PrecisionType" Collapsed="true">
+    <Position X="6" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PrecisionType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.DecimalsType" Collapsed="true">
+    <Position X="8.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DecimalsType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.PureItemType" Collapsed="true">
+    <Position X="60" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PureItemType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.DecimalItemType" Collapsed="true">
+    <Position X="64.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DecimalItemType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.MonetaryItemType" Collapsed="true">
+    <Position X="66.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MonetaryItemType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Shares" Collapsed="true">
+    <Position X="12.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shares.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.SharesItemType" Collapsed="true">
+    <Position X="69" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SharesItemType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.DefinitionArc" Collapsed="true">
+    <Position X="80.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAIAAAAAAAAAAEgQAAAAAABAAAAAAgAABAIAAAAE=</HashCode>
+      <FileName>DefinitionArc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.ExtensionMethods" Collapsed="true">
+    <Position X="75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ExtensionMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.LinkbaseDocument" Collapsed="true">
+    <Position X="71.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BEAIABAAAAAAAAAAAAIAAAAAQIBAEAAAEAAAAAAEAAA=</HashCode>
+      <FileName>LinkbaseDocument.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.Locator" Collapsed="true">
+    <Position X="73.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAEAAQEAAAAMAEAgAAAAAAAAAAAABAAAEAAAAAQAA=</HashCode>
+      <FileName>Locator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.NonNumericItemAttributes" Collapsed="true">
+    <Position X="2.75" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NonNumericItemAttributes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.TokenItemType" Collapsed="true">
+    <Position X="62.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TokenItemType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.CalculationArc" Collapsed="true">
+    <Position X="75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEBAIAAAAAAAAAAEAYAAAAAADAAAAAAgAAAAIAAAAE=</HashCode>
+      <FileName>CalculationArc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.CalculationLink" Collapsed="true">
+    <Position X="76.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAACAAKAAARAAAACEAAACAAAABQA=</HashCode>
+      <FileName>CalculationLink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.DefinitionLink" Collapsed="true">
+    <Position X="71.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAAAAAAAAAAACAACAAARQAAAAAQAAAAAAACAA=</HashCode>
+      <FileName>DefinitionLink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JeffFerguson.Gepsio.SummationConcept" Collapsed="true">
+    <Position X="75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAECAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>SummationConcept.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

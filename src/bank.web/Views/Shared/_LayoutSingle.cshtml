@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    @RenderSection("Header", required: false)
+
+    <div class="container-fluid">
+        <div class="row-padding">
+            <div class="col-xs-12">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Meta {
+    @RenderSection("MetaProxy", required: false)
+}
+
+@section Stylesheets {
+    @RenderSection("StylesheetsProxy", required: false)
+}
+
+@section Scripts {
+    @RenderSection("ScriptsProxy", required: false)
+}

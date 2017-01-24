@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div @Html.Raw(ViewBag.RootItemType)>
+    @RenderSection("Header", required: false)
+
+    <div class="container-fluid">
+        <div class="col-xs-12 col-lg-4 sidebar-column">
+            @* Lender Sidebar *@
+            @RenderSection("Sidebar")
+        </div>
+        <div class="col-xs-12 col-lg-8 main-column p-0">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Meta {
+    @RenderSection("MetaProxy", required: false)
+}
+
+@section Stylesheets {
+    @RenderSection("StylesheetsProxy", required: false)
+}
+
+@section Scripts {
+    @RenderSection("ScriptsProxy", required: false)
+}

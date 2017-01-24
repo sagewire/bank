@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A567264B-3053-4DAA-B601-AAC3DFC94FBB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JeffFerguson.Gepsio</RootNamespace>
+    <AssemblyName>JeffFerguson.Gepsio</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\JeffFerguson.Gepsio.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ArcroleReference.cs" />
+    <Compile Include="ArcroleReferenceValidationError.cs" />
+    <Compile Include="CalculationLinkbaseDocument.cs" />
+    <Compile Include="DefinitionLinkbaseDocument.cs" />
+    <Compile Include="FactCollection.cs" />
+    <Compile Include="LabelLinkbaseDocument.cs" />
+    <Compile Include="PresentableFactTree.cs" />
+    <Compile Include="PresentableFactTreeNode.cs" />
+    <Compile Include="Reference.cs" />
+    <Compile Include="ReferenceArc.cs" />
+    <Compile Include="PresentationArc.cs" />
+    <Compile Include="PresentationLink.cs" />
+    <Compile Include="PresentationLinkbaseDocument.cs" />
+    <Compile Include="ReferenceLink.cs" />
+    <Compile Include="ReferenceLinkbaseDocument.cs" />
+    <Compile Include="RoleReference.cs" />
+    <Compile Include="RoleReferenceValidationError.cs" />
+    <Compile Include="Xml\Implementation\SystemXml\SchemaAttribute.cs" />
+    <Compile Include="Xml\Interfaces\ISchemaAttribute.cs" />
+    <Compile Include="Xsd\AnySimpleType.cs" />
+    <Compile Include="Xsd\AnyType.cs" />
+    <Compile Include="Xsd\AnyUri.cs" />
+    <Compile Include="AssemblyResources.cs" />
+    <Compile Include="Attribute.cs" />
+    <Compile Include="AttributeGroup.cs" />
+    <Compile Include="Xsd\Base64Binary.cs" />
+    <Compile Include="Xsd\Boolean.cs" />
+    <Compile Include="CalculationArc.cs" />
+    <Compile Include="CalculationLink.cs" />
+    <Compile Include="Xsd\ComplexType.cs" />
+    <Compile Include="Context.cs" />
+    <Compile Include="ContextValidationError.cs" />
+    <Compile Include="Xsd\Date.cs" />
+    <Compile Include="Xsd\DateTime.cs" />
+    <Compile Include="Xsd\Decimal.cs" />
+    <Compile Include="Xsd\DecimalItemType.cs" />
+    <Compile Include="Xsd\DecimalsType.cs" />
+    <Compile Include="DecimalValidationError.cs" />
+    <Compile Include="DefinitionArc.cs" />
+    <Compile Include="DefinitionArcValidationError.cs" />
+    <Compile Include="DefinitionLink.cs" />
+    <Compile Include="Xsd\Double.cs" />
+    <Compile Include="Xsd\Duration.cs" />
+    <Compile Include="Xsd\Element.cs" />
+    <Compile Include="ElementValidationError.cs" />
+    <Compile Include="Xsd\EnumerationFacet.cs" />
+    <Compile Include="Xsd\EnumerationFacetDefinition.cs" />
+    <Compile Include="EssentialNumericItemAttributes.cs" />
+    <Compile Include="Xsd\Facet.cs" />
+    <Compile Include="Xsd\FacetDefinition.cs" />
+    <Compile Include="Xsd\FacetProperty.cs" />
+    <Compile Include="Xsd\FacetPropertyDefinition.cs" />
+    <Compile Include="Fact.cs" />
+    <Compile Include="FactAttributes.cs" />
+    <Compile Include="Xsd\Float.cs" />
+    <Compile Include="Footnote.cs" />
+    <Compile Include="FootnoteArc.cs" />
+    <Compile Include="FootnoteArcValidationError.cs" />
+    <Compile Include="FootnoteLink.cs" />
+    <Compile Include="FootnoteLocator.cs" />
+    <Compile Include="FootnoteValidationError.cs" />
+    <Compile Include="Gepsio.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Gepsio.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd\GregorianDay.cs" />
+    <Compile Include="Xsd\GregorianMonth.cs" />
+    <Compile Include="Xsd\GregorianMonthDay.cs" />
+    <Compile Include="Xsd\GregorianYear.cs" />
+    <Compile Include="Xsd\GregorianYearMonth.cs" />
+    <Compile Include="Xsd\HexBinary.cs" />
+    <Compile Include="HyperlinkReference.cs" />
+    <Compile Include="HyperlinkReferenceValidationError.cs" />
+    <Compile Include="Xsd\ID.cs" />
+    <Compile Include="Xsd\IDREF.cs" />
+    <Compile Include="Xsd\Integer.cs" />
+    <Compile Include="IoC\Container.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="ItemAttributes.cs" />
+    <Compile Include="ItemsValidationError.cs" />
+    <Compile Include="ItemValidationError.cs" />
+    <Compile Include="Label.cs" />
+    <Compile Include="LabelArc.cs" />
+    <Compile Include="LabelLink.cs" />
+    <Compile Include="Xsd\LengthFacet.cs" />
+    <Compile Include="Xsd\LengthFacetDefinition.cs" />
+    <Compile Include="LinkbaseDocument.cs" />
+    <Compile Include="Locator.cs" />
+    <Compile Include="Xsd\MaxLengthFacet.cs" />
+    <Compile Include="Xsd\MaxLengthFacetDefinition.cs" />
+    <Compile Include="Xsd\MinLengthFacet.cs" />
+    <Compile Include="Xsd\MinLengthFacetDefinition.cs" />
+    <Compile Include="Xsd\Monetary.cs" />
+    <Compile Include="Xsd\MonetaryItemType.cs" />
+    <Compile Include="Xsd\Name.cs" />
+    <Compile Include="NamespaceQualifiedValue.cs" />
+    <Compile Include="Xsd\NCName.cs" />
+    <Compile Include="Xsd\NonNegativeInteger.cs" />
+    <Compile Include="Xsd\NonNumericItemAttributes.cs" />
+    <Compile Include="Xsd\NormalizedString.cs" />
+    <Compile Include="Xsd\Notation.cs" />
+    <Compile Include="NumericItemAttributes.cs" />
+    <Compile Include="Xsd\PatternFacet.cs" />
+    <Compile Include="Xsd\PatternFacetDefinition.cs" />
+    <Compile Include="Xsd\PrecisionType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Xsd\Pure.cs" />
+    <Compile Include="Xsd\PureItemType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Xsd\QualifiedName.cs" />
+    <Compile Include="Xsd\RestrictedSimpleType.cs" />
+    <Compile Include="RoleType.cs" />
+    <Compile Include="SchemaValidationError.cs" />
+    <Compile Include="Xsd\Shares.cs" />
+    <Compile Include="Xsd\SharesItemType.cs" />
+    <Compile Include="Xsd\SimpleContentComplexType.cs" />
+    <Compile Include="Xsd\SimpleType.cs" />
+    <Compile Include="Xsd\String.cs" />
+    <Compile Include="Xsd\StringItemType.cs" />
+    <Compile Include="SummationConcept.cs" />
+    <Compile Include="SummationConceptValidationError.cs" />
+    <Compile Include="SummationConceptValidator.cs" />
+    <Compile Include="Xsd\Time.cs" />
+    <Compile Include="Xsd\Token.cs" />
+    <Compile Include="Xsd\TokenItemType.cs" />
+    <Compile Include="Tuple.cs" />
+    <Compile Include="Unit.cs" />
+    <Compile Include="UnitValidationError.cs" />
+    <Compile Include="ValidationError.cs" />
+    <Compile Include="Xsd\WhiteSpaceFacet.cs" />
+    <Compile Include="Xsd\WhiteSpaceFacetDefinition.cs" />
+    <Compile Include="XbrlDocument.cs" />
+    <Compile Include="XbrlFragment.cs" />
+    <Compile Include="XbrlSchema.cs" />
+    <Compile Include="Xlink\XlinkNode.cs" />
+    <Compile Include="Xml\Implementation\SystemXml\Attribute.cs" />
+    <Compile Include="Xml\Implementation\SystemXml\AttributeList.cs" />
+    <Compile Include="Xml\Implementation\SystemXml\Document.cs" />
+    <Compile Include="Xml\Implementation\SystemXml\Schema.cs" />
+    <Compile Include="Xml\Implementation\SystemXml\SchemaSet.cs" />
+    <Compile Include="Xml\Implementation\SystemXml\SchemaType.cs" />
+    <Compile Include="Xml\Interfaces\ISchema.cs" />
+    <Compile Include="Xml\Interfaces\ISchemaSet.cs" />
+    <Compile Include="Xml\Interfaces\ISchemaType.cs" />
+    <Compile Include="Xml\Implementation\SystemXml\NamespaceManager.cs" />
+    <Compile Include="Xml\Implementation\SystemXml\Node.cs" />
+    <Compile Include="Xml\Implementation\SystemXml\NodeList.cs" />
+    <Compile Include="Xml\Implementation\SystemXml\QualifiedName.cs" />
+    <Compile Include="Xml\Implementation\SystemXml\SchemaElement.cs" />
+    <Compile Include="Xml\Interfaces\IAttribute.cs" />
+    <Compile Include="Xml\Interfaces\IAttributeList.cs" />
+    <Compile Include="Xml\Interfaces\IDocument.cs" />
+    <Compile Include="Xml\Interfaces\INamespaceManager.cs" />
+    <Compile Include="Xml\Interfaces\INode.cs" />
+    <Compile Include="Xml\Interfaces\INodeList.cs" />
+    <Compile Include="Xml\Interfaces\IQualifiedName.cs" />
+    <Compile Include="Xml\Interfaces\ISchemaElement.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Gepsio.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Gepsio.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gepsio.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<concepts>
+    <concept name="_nim1000" shortLabel="NIM" formula="UBPRE117+UBPR2170" label="Net Interest Margin" narrative="" />
+    <concept name="UBPRE010" shortLabel="ROAA" label="Return on Average Assets" narrative="" />
+    <concept name="UBPRE630" shortLabel="ROAE" label="Return on Average Equity" narrative="" />
+    <concept name="UBPRE088" shortLabel="Efficiency Ratio" />
+    <concept name="UBPR2170" shortLabel="Total Assets" />
+    <concept name="UBPRD662" shortLabel="Total Liabilities" />
+    <concept name="UBPRE119" shortLabel="Total Net Loans" />
+    <concept name="UBPR2200" shortLabel="Total Deposits" />
+    <concept name="UBPR4340" shortLabel="Net Income" />
+    <concept name="UBPRG105" shortLabel="Total Capital" />
+    <concept name="RCON0352" shortLabel="Other Nontransaction Savings" />
+    <concept name="UBPRK426" shortLabel="Deposits below Insurance Limit" />
+    <concept name="RCON6810" shortLabel="Money Market (MMDA's)" />
+    
+  </concepts>
+</configuration>

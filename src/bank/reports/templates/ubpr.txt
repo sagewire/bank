@@ -1,0 +1,6 @@
+Uniform Bank Performance Report - Summary Ratios
+1	Interest Income (TE)	UBPRE001
+1.a	Interest Expense	UBPRE002
+1.b	Net Interest Income (TE)	UBPRE003
+1.c	Noninterest Income	UBPRE004
+1.d	Noninterest Expense	UBPRE005

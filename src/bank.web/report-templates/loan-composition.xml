@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<report>
+	<line name="root" label="Loan Composition">
+		<line label="test calculated concept" abstract="true">
+			<line name="UBPRE117+UBPR2170" label="" abstract="false" />
+		</line>
+		<charts>
+			<chart type="sankey">
+				<column type="string" id="from" label="From" />
+				<column type="string" id="to" label="To" />
+				<column type="number" id="amount" label="Amount" />
+				<row>
+					<value>Total Loans &amp; Leases</value>
+					<value>Secured by Real Estate</value>
+					<value>$RCONF158+$RCONF159+$RCON1420+$RCON1797+$RCON5367+$RCON5368+$RCON1460+$RCONF160+$RCONF161</value>
+				</row>
+				<row>
+					<value>Secured by Real Estate</value>
+					<value>Construction &amp; Land Loans</value>
+					<value>$RCONF158+$RCONF159</value>
+				</row>
+				<row>
+					<value>Construction &amp; Land Loans</value>
+					<value>1-4 family residential</value>
+					<value>$RCONF158</value>
+				</row>
+				<row>
+					<value>Construction &amp; Land Loans</value>
+					<value>Other construction loans</value>
+					<value>$RCONF159</value>
+				</row>
+				<row>
+					<value>Secured by Real Estate</value>
+					<value>Secured by Farm Land</value>
+					<value>$RCON1420</value>
+				</row>
+				<row>
+					<value>Secured by Real Estate</value>
+					<value>Secured by 1-4 family</value>
+					<value isFormula="true">$RCON1797+$RCON5367+$RCON5368</value>
+				</row>
+				<row>
+					<value>Secured by 1-4 family</value>
+					<value>Revolving</value>
+					<value>$RCON1797</value>
+				</row>
+				<row>
+					<value>Secured by 1-4 family</value>
+					<value>Closed-end</value>
+					<value isFormula="true">$RCON5367+$RCON5368</value>
+				</row>
+				<row>
+					<value>Closed-end</value>
+					<value>First liens</value>
+					<value>$RCON5367</value>
+				</row>
+				<row>
+					<value>Closed-end</value>
+					<value>Junior liens</value>
+					<value>$RCON5368</value>
+				</row>
+				<row>
+					<value>Secured by Real Estate</value>
+					<value>Secured by multi family</value>
+					<value>$RCON1460</value>
+				</row>
+				<row>
+					<value>Secured by Real Estate</value>
+					<value>Nonfarm Residential</value>
+					<value>$RCONF160+$RCONF161</value>
+				</row>
+				<row>
+					<value>Nonfarm Residential</value>
+					<value>Owner-occupied</value>
+					<value>$RCONF160</value>
+				</row>
+				<row>
+					<value>Nonfarm Residential</value>
+					<value>Other nonfarm</value>
+					<value>$RCONF161</value>
+				</row>
+
+				<row>
+					<value>Total Loans &amp; Leases</value>
+					<value>Loans to Depository Institutions</value>
+					<value>$RCON1288</value>
+				</row>
+				<row>
+					<value>Total Loans &amp; Leases</value>
+					<value>Agricultural Loans</value>
+					<value>$RCON1590</value>
+				</row>
+				<row>
+					<value>Total Loans &amp; Leases</value>
+					<value>Commercial &amp; Industrial Loans</value>
+					<value>$RCON1766</value>
+				</row>
+				<row>
+					<value>Total Loans &amp; Leases</value>
+					<value>Loans to Foreign Gov</value>
+					<value>$RCON2081</value>
+				</row>
+				<row>
+					<value>Total Loans &amp; Leases</value>
+					<value>Non-securities political obligations</value>
+					<value>$RCON2107</value>
+				</row>
+				<row>
+					<value>Total Loans &amp; Leases</value>
+					<value>Nondepository Institutions &amp; Other</value>
+					<value>$RCONJ454+$RCONJ464</value>
+				</row>
+				<row>
+					<value>Nondepository Institutions</value>
+					<value>Nondepository</value>
+					<value>$RCONJ454</value>
+				</row>
+				<row>
+					<value>Nondepository Institutions</value>
+					<value>Other loans</value>
+					<value>$RCONJ464</value>
+				</row>
+				<row>
+					<value>Total Loans &amp; Leases</value>
+					<value>Individual Loans</value>
+					<value>$RCONB538+$RCONB539+$RCONK137+$RCONK207</value>
+				</row>
+				<row>
+					<value>Individual Loans</value>
+					<value>Credit Cards</value>
+					<value>$RCONB538</value>
+				</row>
+				<row>
+					<value>Individual Loans</value>
+					<value>Other Revolving</value>
+					<value>$RCONB539</value>
+				</row>
+				<row>
+					<value>Individual Loans</value>
+					<value>Automobile</value>
+					<value>$RCONK137</value>
+				</row>
+				<row>
+					<value>Individual Loans</value>
+					<value>Other Consumer Loans</value>
+					<value>$RCONK207</value>
+				</row>
+
+			</chart>
+		</charts>
+		<line name="" label="Real Estate Loans" abstract="true">
+			<line name="UBPR1410" label="" abstract="false" />
+		</line>
+		<line name="" label="Commercial Loans" abstract="true">
+			<line name="UBPRE116" label="" abstract="false" />
+		</line>
+		<line name="" label="Individual Loans" abstract="true">
+			<line name="UBPRD665" label="" abstract="false" />
+		</line>
+		<line name="" label="Agriculture Loans" abstract="true">
+			<line name="UBPR1590" label="" abstract="false" />
+		</line>
+		<line name="" label="Other Loans &amp; Leases" abstract="true">
+			<line name="UBPRE117" label="" abstract="false" />
+		</line>
+	</line>
+</report>

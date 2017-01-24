@@ -1,0 +1,11 @@
+﻿@model PagerViewModel
+
+@if (Model.PrevPage.HasValue)
+{
+    <link rel="prev" href="@Model.GetUrl(Model.PrevPage)">
+}
+
+@if (Model.NextPage.HasValue)
+{
+    <link rel="next" href="@Model.GetUrl(Model.NextPage)">
+}

@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="SharedProjectFile_SccProperties">
+    <SharedProjectFile_ProjectGuid>{886fa80b-3cf6-4ed9-9919-ea6fa645cc6e}</SharedProjectFile_ProjectGuid>
+    <SharedProjectFile_SccProjectName>SAK</SharedProjectFile_SccProjectName>
+    <SharedProjectFile_SccAuxPath>SAK</SharedProjectFile_SccAuxPath>
+    <SharedProjectFile_SccLocalPath>SAK</SharedProjectFile_SccLocalPath>
+    <SharedProjectFile_SccProvider>SAK</SharedProjectFile_SccProvider>
+  </PropertyGroup>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>cf7e7b4b-4311-4528-8876-e0c7c5a44d23</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Xbrl</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ArcroleReference.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ArcroleReferenceValidationError.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AssemblyResources.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Attribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AttributeGroup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CalculationArc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CalculationLink.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CalculationLinkbaseDocument.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Context.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ContextValidationError.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DecimalValidationError.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DefinitionArc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DefinitionArcValidationError.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DefinitionLink.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DefinitionLinkbaseDocument.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ElementValidationError.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EssentialNumericItemAttributes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Fact.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FactAttributes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FactCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Footnote.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FootnoteArc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FootnoteArcValidationError.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FootnoteLink.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FootnoteLocator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FootnoteValidationError.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HyperlinkReference.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HyperlinkReferenceValidationError.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoC\Container.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Item.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemAttributes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemsValidationError.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemValidationError.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Label.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LabelArc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LabelLink.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LabelLinkbaseDocument.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LinkbaseDocument.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Locator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MonetaryComplexType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NamespaceQualifiedValue.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NumericItemAttributes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PresentableFactTree.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PresentableFactTreeNode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PresentationArc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PresentationLink.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PresentationLinkbaseDocument.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RoleReference.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RoleReferenceValidationError.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RoleType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SchemaValidationError.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SummationConcept.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SummationConceptValidationError.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SummationConceptValidator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tuple.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Unit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UnitValidationError.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ValidationError.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)XbrlDocument.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)XbrlFragment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)XbrlSchema.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xlink\XlinkNode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)XmlUtilities.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xml\Interfaces\IAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xml\Interfaces\IAttributeList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xml\Interfaces\IDocument.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xml\Interfaces\INamespaceManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xml\Interfaces\INode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xml\Interfaces\INodeList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xml\Interfaces\IQualifiedName.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xml\Interfaces\ISchema.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xml\Interfaces\ISchemaAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xml\Interfaces\ISchemaElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xml\Interfaces\ISchemaSet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xml\Interfaces\ISchemaType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\AnySimpleType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\AnyType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\AnyUri.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\Base64Binary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\Boolean.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\ComplexType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\Date.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\DateTime.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\Decimal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\DecimalItemType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\DecimalsType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\Double.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\Duration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\Element.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\EnumerationFacet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\EnumerationFacetDefinition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\Facet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\FacetDefinition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\FacetProperty.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\FacetPropertyDefinition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\Float.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\GregorianDay.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\GregorianMonth.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\GregorianMonthDay.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\GregorianYear.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\GregorianYearMonth.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\HexBinary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\ID.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\IDREF.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\Integer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\LengthFacet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\LengthFacetDefinition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\MaxLengthFacet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\MaxLengthFacetDefinition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\MinLengthFacet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\MinLengthFacetDefinition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\Monetary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\MonetaryItemType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\Name.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\NCName.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\NonNegativeInteger.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\NonNumericItemAttributes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\NormalizedString.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\Notation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\PatternFacet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\PatternFacetDefinition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\PrecisionType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\Pure.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\PureItemType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\QualifiedName.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\RestrictedSimpleType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\Shares.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\SharesItemType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\SimpleContentComplexType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\SimpleType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\String.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\StringItemType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\Time.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\Token.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\TokenItemType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\WhiteSpaceFacet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xsd\WhiteSpaceFacetDefinition.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Gepsio.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
