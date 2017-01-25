@@ -71,8 +71,8 @@ namespace bank.web.Controllers
                         item = new ReportListViewModel();
                         item.Period = report.Period.Value;
                         list.Add(item.Period, item);
-                        item.ReportsAvailable.Add(ReportTypes.UBPR);
                     }
+                    item.ReportsAvailable.Add(ReportType.Parse(report.Name));
                                         
                 }
 
