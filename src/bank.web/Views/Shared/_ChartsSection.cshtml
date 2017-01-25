@@ -1,9 +1,0 @@
-﻿
-@using bank.reports
-@model ChartsSectionViewModel
-
-@if (Model.SubSection.ChartConfig != null)
-{
-    <h2>@Model.SubSection.ChartConfig.Name</h2>
-    <div data-chart-type="@Model.SubSection.ChartConfig.Type.ToString().ToLower()" style="width:100%; height: 450px;" data-data="@Model.Data.ToJson()"></div>
-}

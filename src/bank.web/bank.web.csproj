@@ -233,7 +233,6 @@
     <Content Include="robots.txt" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\iFrame.cshtml" />
-    <Content Include="Views\Shared\ReviewsFiltered.cshtml" />
     <Content Include="Views\Shared\States.cshtml" />
     <Content Include="Views\Shared\_FacebookSDK.cshtml" />
     <Content Include="Views\Shared\_GlobalNav.cshtml" />
@@ -287,7 +286,6 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <None Include="Properties\PublishProfiles\bank.pubxml" />
-    <Content Include="Views\Shared\SingleReview.cshtml" />
     <Content Include="Views\Fact\Details.cshtml" />
     <Content Include="Views\Report\Viewer.cshtml" />
     <Content Include="Views\Shared\Avatar.cshtml" />
