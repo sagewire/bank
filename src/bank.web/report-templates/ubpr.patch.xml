@@ -2,7 +2,7 @@
 <report xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
 
   <line>
-    <line name="pres-SummaryRatios" type="section" alias="summary" label="Summary Ratios" abstract="true" xdt:Locator="Match(name)" xdt:Transform="SetAttributes(label,type,alias)">
+    <line name="summary-ratios" type="section" alias="summary" label="Summary Ratios" abstract="true" xdt:Locator="Condition(@name='pres-SummaryRatios')" xdt:Transform="SetAttributes(label,type,name)">
       <line name="pres-line-774417" label="Earnings and Profitability" abstract="true" xdt:Locator="Match(name)" xdt:Transform="SetAttributes(label)"/>
       <line name="pres-line-774432" label="" abstract="true" xdt:Locator="Match(name)" xdt:Transform="SetAttributes(label)"/>
       <line name="pres-line-774439" label="" abstract="true" xdt:Locator="Match(name)" xdt:Transform="SetAttributes(label)"/>
@@ -12,7 +12,7 @@
       <line name="pres-line-775404" label="" abstract="true" xdt:Locator="Match(name)" xdt:Transform="SetAttributes(label)"/>
       <line name="pres-line-774468" label="Number of banks in Peer Group" abstract="true" xdt:Locator="Match(name)" xdt:Transform="Remove"/>
     </line>
-    <line name="pres-IncomeStatement" type="section" alias="income-statement" label="Income Statement" abstract="true" xdt:Locator="Match(name)" xdt:Transform="SetAttributes(label,type,alias)">
+    <line type="section" name="income-statement" label="Income Statement" abstract="true" xdt:Locator="Condition(@name='pres-IncomeStatement')" xdt:Transform="SetAttributes(label,type,name)">
       <line>
         <line name="UBPRE044" label="" abstract="false"  xdt:Locator="Match(name)" xdt:Transform="Remove"/>
         <line name="RIAD4065" label="" abstract="false"  xdt:Locator="Condition(@name='UBPRE045')" xdt:Transform="Replace"/>
@@ -100,7 +100,7 @@
 			</line>
 			-->
     </line>
-    <line name="pres-NonIntIncExpYields" type="section" alias="noninterest-income-expenses" label="Noninterest Income, Expenses and Yields" abstract="true" xdt:Locator="Match(name)" xdt:Transform="SetAttributes(label,type,alias)">
+    <line type="section" name="noninterest-income-expenses" label="Noninterest Income, Expenses and Yields" abstract="true" xdt:Locator="Condition(@name='pres-NonIntIncExpYields')" xdt:Transform="SetAttributes(label,type,name)">
       <line name="pres-line-774611" label="Fiduciary Activities" abstract="true" xdt:Locator="Match(name)" xdt:Transform="Replace">
         <line name="RIAD4070" label="" abstract="false" />
       </line>
@@ -114,7 +114,7 @@
         <line name="RIAD5416" label="" abstract="false" />
       </line>
     </line>
-    <line name="pres-BalanceSheet" type="section" alias="balancesheet" label="Balance Sheet" abstract="true" xdt:Locator="Match(name)" xdt:Transform="SetAttributes(label,type,alias)">
+    <line name="balance-sheet" type="section" label="Balance Sheet" abstract="true" xdt:Locator="Condition(@name='pres-BalanceSheet')" xdt:Transform="SetAttributes(label,type,name)">
       <line>
         <line name="UBPRE179" label="" abstract="false" xdt:Locator="Match(name)" xdt:Transform="Remove"/>
         <line name="UBPRE132" label="" abstract="false" xdt:Locator="Match(name)" xdt:Transform="Remove"/>

@@ -26,17 +26,21 @@ namespace bank.utilities
 
         public object Evaluate(string text, IDictionary<string, Fact> facts)
         {
-            
+
             if (text.Length > 8)
             {
                 return EvaluateFormula(text, facts);
             }
-            else
+            else if (facts.ContainsKey(text))
             {
                 var fact = facts[text];
                 return fact.NumericValue;
             }
-
+            else
+            {
+                return null;
+                //throw new Exception(string.Format("Fact not found {0}", text));
+            }
         }
 
         public object EvaluateFormula(string text, IDictionary<string, Fact> facts)

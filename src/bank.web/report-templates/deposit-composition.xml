@@ -1,119 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <report>
 	<line name="root" label="Deposit Allocation Details" abstract="true">
-		<line name="deposit-chart" type="subsection" label="" abstract="true">
-			<chart title="Deposit Composition" type="sankey">
+			<chart title="Deposit Composition" type="sankey" css-classes="sankey">
 				<column type="string" id="from" label="From" />
 				<column type="string" id="to" label="To" />
 				<column type="number" id="amount" label="Amount" />
 				<row>
 					<value>Total Deposits</value>
 					<value>Transaction Accounts</value>
-					<value>$RCON2215</value>
+					<value>RCON2215</value>
 				</row>
 				<row>
 					<value>Transaction Accounts</value>
 					<value>Demand Deposits</value>
-					<value>$RCON2210</value>
+					<value>RCON2210</value>
 				</row>
 				<row>
 					<value>Transaction Accounts</value>
 					<value>All NOW &amp; ATS Accounts</value>
-					<value>$UBPRE125</value>
+					<value>UBPRE125</value>
 				</row>
 				<row>
 					<value>Savings Deposits</value>
 					<value>Other Savings Deposits</value>
-					<value>$RCON0352</value>
+					<value>RCON0352</value>
 				</row>
 				<row>
 					<value>Total Deposits</value>
 					<value>Nontransaction Accounts</value>
-					<value>$RCON2385</value>
+					<value>RCON2385</value>
 				</row>
 				<row>
 					<value>Nontransaction Accounts</value>
 					<value>Savings Deposits</value>
-					<value isFormula="true">$RCON6810+$RCON0352</value>
+					<value>RCON6810+RCON0352</value>
 				</row>
-				<row>RCON6810
+				<row>
 					<value>Savings Deposits</value>
 					<value>Money Market Deposits</value>
-					<value>$RCON6810</value>
+					<value>RCON6810</value>
 				</row>
 				<row>
 					<value>Nontransaction Accounts</value>
 					<value>Time Deposits</value>
-					<value isFormula="true">$RCON6648+$RCONJ473+$RCONJ474</value>
+					<value>RCON6648+RCONJ473+RCONJ474</value>
 				</row>
 				<row>
 					<value>Time Deposits</value>
 					<value>Below 100k</value>
-					<value>$RCON6648</value>
+					<value>RCON6648</value>
 				</row>
 				<row>
 					<value>Time Deposits</value>
 					<value>100k to 250k</value>
-					<value>$RCONJ473</value>
+					<value>RCONJ473</value>
 				</row>
 				<row>
 					<value>Time Deposits</value>
 					<value>Above 250k</value>
-					<value>$RCONJ474</value>
+					<value>RCONJ474</value>
 				</row>
 				<row>
 					<value>100k to 250k</value>
 					<value>Above 100k</value>
-					<value>$RCONJ473</value>
+					<value>RCONJ473</value>
 				</row>
 				<row>
 					<value>Above 250k</value>
 					<value>Above 100k</value>
-					<value>$RCONJ474</value>
+					<value>RCONJ474</value>
 				</row>
 				<row>
 					<value>Above 100k</value>
 					<value>3 Months or Less</value>
-					<value>$RCONA584</value>
+					<value>RCONA584</value>
 				</row>
 				<row>
 					<value>Above 100k</value>
 					<value>3 to 12 Months</value>
-					<value>$RCONA585</value>
+					<value>RCONA585</value>
 				</row>
 				<row>
 					<value>Above 100k</value>
 					<value>1 to 3 Years</value>
-					<value>$RCONA586</value>
+					<value>RCONA586</value>
 				</row>
 				<row>
 					<value>Above 100k</value>
 					<value>Over 3 Years</value>
-					<value>$RCONA587</value>
+					<value>RCONA587</value>
 				</row>
 				<row>
 					<value>Below 100k</value>
 					<value>3 Months or Less</value>
-					<value>$RCONA579</value>
+					<value>RCONA579</value>
 				</row>
 				<row>
 					<value>Below 100k</value>
 					<value>3 to 12 Months</value>
-					<value>$RCONA580</value>
+					<value>RCONA580</value>
 				</row>
 				<row>
 					<value>Below 100k</value>
 					<value>1 to 3 Years</value>
-					<value>$RCONA581</value>
+					<value>RCONA581</value>
 				</row>
 				<row>
 					<value>Below 100k</value>
 					<value>Over 3 Years</value>
-					<value>$RCONA582</value>
+					<value>RCONA582</value>
 				</row>
 
 			</chart>
-		</line>
 		<line name="deposit" type="subsection" label="Deposit Composition" abstract="true">
 			<line name="" label="Demand Deposits" abstract="true">
 				<line name="RCON2210" label="" abstract="false" />

@@ -2,6 +2,11 @@
 @using bank.reports.charts
 
 @model LineItemViewModel
+@{
+    var padding = string.Format("padding-left: {0}px", Model.Level * 30 + 15);
+}
+
+
 
 @if (Model.LineItem.LineItemType == bank.reports.LineItemTypes.SubSection)
 {
@@ -15,16 +20,29 @@
 }
 else
 {
-    <tr class="lineitem-row @Html.Raw(Model.LineItem.Concepts.First().Name != null ? "mdrm-row" : "")" data-url="/modals/concept/definition/@Model.LineItem.Concepts.First().Name">
-        <td class="pl-1">@Model.LineItem.Label</td>
+    <tr class="lineitem-row @Html.Raw(Model.LineItem.Concepts.Any() ? "mdrm-row" : "")" data-url="@(Model.LineItem.Concepts.Any() ? "/modals/concept/definition/" + Model.LineItem.Concepts.First().Value : "")">
+
+        <td style="@padding" class="level-@Model.Level">
+            @if (Model.LineItem.Label != null && !Model.LineItem.Label.StartsWith("#"))
+            {
+            @Model.LineItem.Label
+            }
+        </td>
+
         @foreach (var column in Model.Report.Columns)
         {
             var fact = Report.GetCell(Model.LineItem, column);
 
+            if (fact == null)
+            {
+                <td></td>
+                continue;
+            }
+
             var companyColumn = column as CompanyColumn;
             <td align="right"
                 data-chart-type="sparkline"
-                data-series="@Model.GetSeriesData(column).ToJson()"
+                data-series="@(Model.GetSeriesData(column)?.ToJson())"
                 style="@Model.TrendingColor(fact)"
                 class="fact-column lineitem-cell px-1 pr-1 @General.TrendingClass(fact)">
 
@@ -52,7 +70,7 @@ else
             </td>
         }
     </tr>
-}
+    }
 
 @foreach (var child in Model.LineItem.LineItems)
 {

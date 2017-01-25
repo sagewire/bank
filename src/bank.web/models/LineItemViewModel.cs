@@ -40,6 +40,10 @@ namespace bank.web.models
 
         public IList<SeriesData> GetSeriesData(Column column)
         {
+            if (!LineItem.Concepts.Any())
+            {
+                return null;
+            }
 
             var chartConfig = new ComboChartConfig();
             chartConfig.ChartType = ChartTypes.Combo;

@@ -13,7 +13,7 @@ namespace bank.web.helpers
 {
     public static class Urls
     {
-        public static string Url(this UrlHelper urlHelper, Organization organization, DateTime period, string template, string section, bool isCurrentPeriod = false)
+        public static string Url(this UrlHelper urlHelper, Organization organization, DateTime period, string template, string section, bool isCurrentPeriod = false, string companies = null)
         {
             var rv = new RouteValueDictionary();
 
@@ -21,12 +21,17 @@ namespace bank.web.helpers
             rv.Add("id", Base26.Encode(organization.OrganizationId));
             rv.Add("template", template.ToLower());
             rv.Add("section", section);
-
+            
             if (period < DateTime.Now.LastQuarterDate() && !isCurrentPeriod)
             {
                 rv.Add("period", period.ToString("yyyy-MM-dd"));
             }
             
+            if (!string.IsNullOrWhiteSpace(companies))
+            {
+                rv.Add("c", companies);
+            }
+
             return urlHelper.RouteUrl("report", rv);
 
         }

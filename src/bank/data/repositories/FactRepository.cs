@@ -32,12 +32,17 @@ namespace bank.data.repositories
 
         public IList<Fact> GetFacts(IList<string> names, IList<int> organizationIds, DateTime? period = null, DateTime? lookback = null)
         {
+            
             Dapper.SqlMapper.AddTypeMap(typeof(string), System.Data.DbType.AnsiString);
             var periodEnd = DateTime.Now;
 
-            if (period.HasValue)
+            if (period.HasValue && period.Value.Year >= 2000)
             {
                 periodEnd = period.Value;
+            }
+            else
+            {
+                periodEnd = DateTime.Now;
             }
 
             var periodStart = lookback.HasValue ? lookback.Value : new DateTime(1900, 1, 1);

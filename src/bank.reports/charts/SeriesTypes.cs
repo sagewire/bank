@@ -26,6 +26,7 @@ namespace bank.reports.charts
         [EnumMember(Value = "spline")]
         Spline,
         [EnumMember(Value = "sparkline")]
-        Sparkline
+        Sparkline,
+        Sankey
     }
 }

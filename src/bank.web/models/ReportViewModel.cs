@@ -13,5 +13,7 @@ namespace bank.web.models
         public DateTime? Period { get; internal set; }
         public Report Report { get; set; }
 
+        public string Companies { get; set; }
+
     }
 }

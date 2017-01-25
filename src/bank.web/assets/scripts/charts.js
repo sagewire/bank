@@ -3,16 +3,27 @@ $(function () {
 
 
     var lastHover = null;
+    var pending = false;
 
     $("body").on("mouseenter", ".lineitem-cell,.lineitem-sparkline", function (e) {
 
+        if (pending) {
+            return;
+        }
+        
         lastHover = this;
         var thisHover = this;
-
-
+        
+        pending = true;
 
         setTimeout(function () {
+
+            
             if (lastHover === thisHover) {
+                
+                //console.log('starting timer');
+                //console.log(thisHover);
+                //console.log(lastHover);
 
                 if ($(thisHover).find(".lineitem-sparkline").exists()) {
                     $(thisHover).find(".lineitem-sparkline").fadeIn();
@@ -38,6 +49,7 @@ $(function () {
     });
 
     $("body").on("mouseleave", ".lineitem-cell", function (e) {
+        pending = false;
         var that = this;
         setTimeout(function () {
             $(that).find(".lineitem-sparkline").fadeOut();
@@ -88,8 +100,11 @@ $(function () {
     
 
     function drawSankeyChart(element) {
-        var d = $(element).data("data")
-        var data = google.visualization.arrayToDataTable(d);
+        var d = $(element).data("series")
+
+        console.log(d);
+
+        var data = google.visualization.arrayToDataTable(d[0].data);
 
         var view = new google.visualization.DataView(data);
 

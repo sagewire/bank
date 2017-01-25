@@ -90,9 +90,9 @@ namespace bank.web.models
         }
     }
 
-    public class ReportListViewModel
-    {
-        public DateTime Period { get; set; }
-        public List<ReportTypes> ReportsAvailable { get; set; } = new List<ReportTypes>();
-    }
+    //public class ReportListViewModel
+    //{
+    //    public DateTime Period { get; set; }
+    //    public List<ReportTypes> ReportsAvailable { get; set; } = new List<ReportTypes>();
+    //}
 }

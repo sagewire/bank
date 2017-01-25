@@ -23,15 +23,31 @@ namespace bank.reports
         public List<Section> Sections { get; set; } = new List<Section>();
         public List<Concept> Concepts { get; set; } = new List<Concept>();
         public List<Column> Columns { get; set; } = new List<Column>();
+        public IList<ChartConfig> Charts { get; internal set; } = new List<ChartConfig>();
+
+        private Guid _reportId = Guid.NewGuid();
+        public Guid ReportId
+        {
+            get
+            {
+                return _reportId;
+            }
+        }
 
         public Report() { }
 
-        public Report(string template, IList<Column> columns)
+        public Report(string template, IList<Column> columns, IDictionary<string, string> placeholders = null, string section = null)
         {
+            Placeholders = placeholders;
             Columns.AddRange(columns);
             Template = template;
-            Parse();
+            Parse(section);
         }
+
+        public DateTime Period { get; set; }
+        public DateTime MaxPeriod { get; set; }
+
+        public bool IsCurrentPeriod { get; set; }
 
         public string Title
         {
@@ -45,12 +61,20 @@ namespace bank.reports
             }
         }
 
-
+        private Section _currentSection = null;
         public Section CurrentSection
         {
             get
             {
-                return Sections.First();
+                if (_currentSection == null)
+                {
+                    _currentSection = Sections.First();
+                }
+                return _currentSection;
+            }
+            set
+            {
+                _currentSection = value;
             }
         }
 
@@ -62,6 +86,8 @@ namespace bank.reports
 
         private void ParseSections(XElement element, string sectionName = null)
         {
+            sectionName = sectionName?.ToLower();
+
             var rootName = element.Attribute("root");
 
             Partial = element.SafeAttributeValue("partial") ?? "_Report";
@@ -73,18 +99,13 @@ namespace bank.reports
 
             IEnumerable<XElement> children;
 
-            if (sectionName != null)
-            {
-                children = element.Elements("line").Where(x => x.Attribute("name").Value == sectionName);
-            }
-            else
-            {
-                children = element.Elements();
-            }
+            
+            children = element.Elements();
+            
 
             foreach (var childElement in children)
             {
-                ParseSection(childElement);
+                ParseSection(childElement, sectionName);
             }
         }
 
@@ -163,7 +184,9 @@ namespace bank.reports
         {
             var factRepo = new FactRepository();
 
-            var facts = factRepo.GetFacts(report.ConceptKeys, report.AllOrganizations());//, lookback: DateTime.Now.AddQuarters(-12));
+            var facts = factRepo.GetFacts(report.ConceptKeys, report.AllOrganizations(), report.Period);//, lookback: DateTime.Now.AddQuarters(-12));
+
+            report.MaxPeriod = facts.Max(x => x.Period.Value);
 
             report.SetFacts(facts);
             
@@ -192,7 +215,7 @@ namespace bank.reports
             return null;
         }
 
-        private void ParseSection(XElement element)
+        private void ParseSection(XElement element, string sectionFilter)
         {
             var section = new Section();
 
@@ -200,7 +223,15 @@ namespace bank.reports
 
             Sections.Add(section);
 
-            ParseElements(element, section);
+            if (sectionFilter == null || sectionFilter == section.Id.ToLower())
+            {
+                ParseElements(element, section);
+
+                if (sectionFilter == section.Id?.ToLower())
+                {
+                    CurrentSection = section;
+                }
+            }
 
         }
         private void ParseSubSection(XElement element, Section section)
@@ -306,7 +337,8 @@ namespace bank.reports
 
             if (lineItem.LineItems == null) lineItem.LineItems = new List<LineItem>();
 
-            chart.ChartConfig = ChartConfig.Build(element);
+            chart.ChartConfig = ChartConfig.Build(element, Placeholders);
+
             chart.Concepts.AddRange(chart.ChartConfig.Concepts);
 
             lineItem.LineItems.Add(chart);
@@ -314,6 +346,8 @@ namespace bank.reports
             if (Concepts == null) Concepts = new List<Concept>();
 
             Concepts.AddRange(chart.Concepts);
+
+            Charts.Add(chart.ChartConfig);
 
         }
 
@@ -353,10 +387,11 @@ namespace bank.reports
             }
         }
 
+        public IDictionary<string, string> Placeholders { get; set; }
 
         private void SetCommonAttributes(ICommonAttributes obj, XElement element)
         {
-            obj.Id = element.SafeAttributeValue("name");
+            obj.Id = element.SafeAttributeValue("name")?.ToLower();
             obj.Label = element.SafeAttributeValue("label");
         }
 

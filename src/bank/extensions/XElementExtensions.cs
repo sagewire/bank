@@ -33,6 +33,18 @@ namespace bank.extensions
             return null;
         }
 
+        public static long? SafeLongAttributeValue(this XElement element, string name)
+        {
+            long b;
+            var text = SafeAttributeValue(element, name);
+
+            if (long.TryParse(text, out b))
+            {
+                return b;
+            }
+            return null;
+        }
+
         public static string SafeAttributeValue(this XElement element, string name)
         {
             var attrib = element.Attribute(name);

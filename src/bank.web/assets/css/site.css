@@ -318,6 +318,9 @@ footer a {
 .mdrm-row {
   cursor: pointer;
 }
+.sankey {
+  height: 450px;
+}
 .report-table {
   overflow: hidden;
   width: 100%;
@@ -331,6 +334,9 @@ footer a {
 }
 .report-table thead h5 {
   margin-bottom: 0;
+}
+.report-table tbody .level-0 {
+  font-weight: bold;
 }
 .report-table tbody td {
   font-size: 20px;

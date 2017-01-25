@@ -15,10 +15,20 @@ namespace bank.reports.charts
         public ChartTypes ChartType { get; set; }
         public List<Concept> Concepts { get; set; } = new List<Concept>();
         public string ChartOverride { get; private set; }
+        public IDictionary<string, string> Placeholders { get; set; }
 
+        private Guid _chartId = Guid.NewGuid();
+        public Guid ChartId
+        {
+            get
+            {
+                return _chartId;
+            }
+        }
         public abstract IList<SeriesData> GetSeriesData(Column column);
+        public abstract IList<SeriesData> GetSeriesData(IList<Column> columns);
 
-        public static ChartConfig Build(XElement element)
+        public static ChartConfig Build(XElement element, IDictionary<string, string> placeholders = null)
         {
             var chartTypeString = element.SafeAttributeValue("type");
             var chartType = (ChartTypes)Enum.Parse(typeof(ChartTypes), chartTypeString, true);
@@ -36,7 +46,7 @@ namespace bank.reports.charts
                 default:
                     throw new Exception("Chart type not supported");
             }
-
+            chartConfig.Placeholders = placeholders;
             chartConfig.Parse(element);
 
             return chartConfig;

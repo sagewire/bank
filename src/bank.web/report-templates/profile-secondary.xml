@@ -3,17 +3,17 @@
   <line>
     <charts>
       <chart type="combo" css-classes="card-sparkline">
-        <series type="spline">
+        <series type="spline" column="0">
           <concept name="UBPRE010" />
         </series>
       </chart>
       <chart type="combo" css-classes="card-sparkline">
-        <series type="spline">
+        <series type="spline" column="0">
           <concept name="UBPRE630" />
         </series>
       </chart>
       <chart type="combo" css-classes="card-sparkline">
-        <series type="spline">
+        <series type="spline" column="0">
           <concept name="UBPRE088" />
         </series>
       </chart>

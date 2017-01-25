@@ -1,13 +1,13 @@
 ﻿@using bank.reports.charts
 @model ChartItemViewModel
-@{
-    var combo = Model.ChartItem.ChartConfig as ComboChartConfig;
-}
 
 @if (!string.IsNullOrWhiteSpace(Model.ChartItem.ChartConfig.Title))
 {
     <h5>@Model.ChartItem.ChartConfig.Resolve(Model.ChartItem.ChartConfig.Title)</h5>
 }
 
-<div class="@Model.ChartItem.ChartConfig.CssClasses" data-chart-type="@Model.ChartDataType" data-series="@combo.GetSeriesData(Model.Report.Columns.First()).ToJson()"></div>
+<div id="@Model.ChartItem.ChartConfig.ChartId" 
+     class="@Model.ChartItem.ChartConfig.CssClasses" 
+     data-chart-type="@Model.ChartDataType" 
+     data-series="@Model.ChartItem.ChartConfig.GetSeriesData(Model.Report.Columns).ToJson()"></div>
 

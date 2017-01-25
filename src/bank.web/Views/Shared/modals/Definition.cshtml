@@ -1,4 +1,4 @@
-﻿@model MdrmDefinitionViewModel
+﻿@model ConceptDefinitionViewModel
 @{
     Layout = null;
 }
@@ -9,29 +9,28 @@
             <span aria-hidden="true">&times;</span>
         </button>
         <b>
-            @Model.Definition.Description
+            @(Model.Definition?.Description)
         </b>
 
         <p>
-            @Model.Definition.Narrative
+            @(Model.Definition?.Narrative)
         </p>
 
-        <div id="@Model.Mdrm" data-series="@Model.Chart.Series.ToJson()" class="main-chart"></div>
-
-        @*<b>Formula</b>
-        <p>
-            @Model.Definition.Formula
-        </p>*@
+        @Html.Partial("_Report", new ReportViewModel { Report = Model.Report })
 
     </div>
 </div>
 
 
+@foreach (var chart in Model.Report.Charts)
+{
 
-<script>
+
+    <script>
+
         $(function () {
 
-            $('#@Model.Mdrm').highcharts('LineChart', {
+            $('#@chart.ChartId.ToString()').highcharts('Combo', {
                 plotOptions: {
                     areaspline: {
                         lineWidth: 0,
@@ -48,4 +47,6 @@
             });
 
         });
-</script>
+    </script>
+
+}

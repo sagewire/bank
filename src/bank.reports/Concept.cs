@@ -18,6 +18,7 @@ namespace bank.reports
 
         public Concept(string value)
         {
+            value = value.ToUpper();
             Value = value;
             MatchCollection matches = _concepts.Matches(value);
 
@@ -29,7 +30,7 @@ namespace bank.reports
                 {
 
 
-                    if (Global.Concepts.ContainsKey(match.Value))
+                    if (Global.Concepts.ContainsKey(value))
                     {
                         var globalConcept = Global.Concepts[match.Value];
                         Label = globalConcept.Label;
@@ -65,6 +66,11 @@ namespace bank.reports
             var resolver = new FactResolver();
 
             var result = resolver.Evaluate(Value, facts.ToDictionary(x => x.Name, x => x));
+
+            if (result == null)
+            {
+                return null;
+            }
 
             var preparedFact = new Fact();
             preparedFact.NumericValue = (decimal)result;

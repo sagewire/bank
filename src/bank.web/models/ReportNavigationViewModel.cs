@@ -16,11 +16,14 @@ namespace bank.web.models
         public bool IsCurrentPeriod { get; set; }
         public HorizontalAlignment Align { get; set; } = HorizontalAlignment.Left;
         
+        public string Companies { get; set; }
+
         public bool NeedsNavigation
         {
             get
             {
-                return Report.Section.Where(x => !string.IsNullOrWhiteSpace(x.Key)).Count() > 1;
+                //return Report.Sections.Where(x => !string.IsNullOrWhiteSpace(x.Key)).Count() > 1;
+                return Report.Sections.Count() > 1;
             }
         }
     }

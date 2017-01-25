@@ -56,7 +56,28 @@ namespace bank.web.Controllers
             {
                 var factRepo = new FactRepository();
                 var reports = factRepo.GetReports(orgId);
-                return reports;
+
+                var list = new Dictionary<DateTime, ReportListViewModel>();
+
+                foreach(var report in reports)
+                {
+                    ReportListViewModel item = null;
+                    if (list.ContainsKey(report.Period.Value))
+                    {
+                        item = list[report.Period.Value];
+                    }
+                    else
+                    {
+                        item = new ReportListViewModel();
+                        item.Period = report.Period.Value;
+                        list.Add(item.Period, item);
+                        item.ReportsAvailable.Add(ReportTypes.UBPR);
+                    }
+                                        
+                }
+
+                return list.OrderByDescending(x=>x.Key).Select(x=>x.Value).ToList();
+
             });
 
 
@@ -69,7 +90,9 @@ namespace bank.web.Controllers
             tasks.Add(rawReportsTask);
             tasks.Add(populateTask);
 
-            foreach(var column in columns)
+            Task.WaitAll(tasks.ToArray());
+            
+            foreach (var column in columns)
             {
                 var companyColumn = column as CompanyColumn;
                 if (companies != null)
@@ -80,6 +103,7 @@ namespace bank.web.Controllers
 
             var org = orgTask.Result.Single(x => x.OrganizationId == orgId);
             model.Organization = org;
+            model.RawReports = rawReportsTask.Result;
             //model.ReportsAvailable = rawReportsTask.Result;
 
             model.Header = new HeaderViewModel
@@ -87,7 +111,6 @@ namespace bank.web.Controllers
                 HeaderImage = org.ProfileBanner
             };
 
-            Task.WaitAll(tasks.ToArray());
  
             ViewBag.Title = model.Title;
             return View(model);

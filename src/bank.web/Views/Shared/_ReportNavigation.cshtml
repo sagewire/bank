@@ -9,11 +9,11 @@
         </button>
         <div class="dropdown-menu @Html.Raw(Model.Align == HorizontalAlignment.Right ? "dropdown-menu-right" : "")">
 
-            @foreach (var reportSection in Model.Report.Section)
+            @foreach (var reportSection in Model.Report.Sections)
             {
-                if (!string.IsNullOrWhiteSpace(reportSection.Key))
+                if (!string.IsNullOrWhiteSpace(reportSection.Id))
                 {
-                    <a class="dropdown-item" href="@Url.Url(Model.Organization, Model.Period, Model.Report.Template, reportSection.Key, Model.IsCurrentPeriod)">@reportSection.Value.Label</a>
+                    <a class="dropdown-item" href="@Url.Url(Model.Organization, Model.Period, Model.Report.Template, reportSection.Id, Model.IsCurrentPeriod, Model.Companies)">@reportSection.Label</a>
 
                 }
             }

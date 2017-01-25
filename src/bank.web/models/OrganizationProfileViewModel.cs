@@ -31,6 +31,9 @@ namespace bank.web.models
         public Report HighlightTable { get; internal set; }
         public Report PieCharts { get; internal set; }
 
+        public IList<ReportListViewModel> RawReports { get; internal set; } = new List<ReportListViewModel>();
+
+
         public IList<Report> Reports
         {
             get
@@ -92,5 +95,11 @@ namespace bank.web.models
         //    }).ToArray();
         //}
     }
-    
+
+    public class ReportListViewModel
+    {
+        public DateTime Period { get; set; }
+        public List<ReportTypes> ReportsAvailable { get; set; } = new List<ReportTypes>();
+    }
+
 }

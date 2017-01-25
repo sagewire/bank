@@ -10,15 +10,60 @@ namespace bank.reports.charts
 {
     public class ComboChartConfig : ChartConfig
     {
+        public ComboChartConfig()
+        {
+            ChartType = ChartTypes.Combo;
+        }
+
         public IList<Series> Series { get; set; }
-        
+
         public override IList<SeriesData> GetSeriesData(Column column)
         {
             var list = new List<SeriesData>();
 
             foreach (var series in Series)
             {
-                list.Add(series.GetSeriesData(this, column, series));
+                list.Add(series.GetSeriesData(this, column));
+            }
+
+            return list;
+        }
+
+        public override IList<SeriesData> GetSeriesData(IList<Column> columns)
+        {
+            var list = new List<SeriesData>();
+
+            foreach (var series in Series)
+            {
+                var counter = 0;
+
+                foreach (var column in columns)
+                {
+                    var addColumn = true;
+
+                    if (series.ColumnIndex.HasValue && series.ColumnIndex.Value != counter)
+                    {
+                        addColumn = false;
+                    }
+
+
+                    if (series.ColumnStart.HasValue && series.ColumnStart > counter)
+                    {
+                        addColumn = false;
+                    }
+
+                    if (addColumn)
+                    {
+                        list.Add(series.GetSeriesData(this, column));
+                    }
+
+                    counter++;
+
+                    if (series.Type == SeriesTypes.Pie)
+                    {   //we can only have one column in a piechart
+                        break;
+                    }
+                }
             }
 
             return list;
@@ -28,27 +73,37 @@ namespace bank.reports.charts
         protected override void Parse(XElement element)
         {
             base.Parse(element);
-            
+
             Series = new List<charts.Series>();
             var seriesElements = element.Elements("series");
 
-            foreach(var seriesElement in seriesElements)
+            foreach (var seriesElement in seriesElements)
             {
                 var type = (SeriesTypes)Enum.Parse(typeof(SeriesTypes),
                                 seriesElement.SafeAttributeValue("type"), true);
 
                 var series = new charts.Series(type);
+                series.ColumnIndex = seriesElement.SafeLongAttributeValue("column");
+                series.ColumnStart = seriesElement.SafeLongAttributeValue("column-start");
 
                 var concepts = seriesElement.Elements("concept");
 
-                foreach(var conceptElement in concepts)
+                foreach (var conceptElement in concepts)
                 {
-                    var concept = new Concept(conceptElement.SafeAttributeValue("name"));
+                    var name = conceptElement.SafeAttributeValue("name");
+                    var placeholder = conceptElement.SafeAttributeValue("placeholder");
+
+                    if (!string.IsNullOrWhiteSpace(placeholder))
+                    {
+                        name = Placeholders[placeholder];
+                    }
+
+                    var concept = new Concept(name);
                     series.Concepts.Add(concept);
                     Concepts.Add(concept);
                 }
 
-                
+
                 //Concepts.AddRange(series.Concepts);
 
                 Series.Add(series);

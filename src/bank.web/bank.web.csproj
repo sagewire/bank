@@ -141,12 +141,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\ConceptController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\DirectoryController.cs" />
-    <Compile Include="Controllers\FactController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\BankController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -156,8 +156,10 @@
     <Compile Include="helpers\Urls.cs" />
     <Compile Include="models\BankBasicsViewModel.cs" />
     <Compile Include="models\ChartItemViewModel.cs" />
+    <Compile Include="models\ConceptDefinitionViewModel.cs" />
     <Compile Include="models\OrganizationProfileViewModel.cs" />
     <Compile Include="models\LineItemViewModel.cs" />
+    <Compile Include="models\ReportNavigationViewModel.cs" />
     <Compile Include="models\ReportViewModel.cs" />
     <Compile Include="models\BanksViewModel.cs" />
     <Compile Include="models\BankProfileViewModel.cs" />
@@ -192,6 +194,9 @@
     <Content Include="assets\scripts\charts.min.js">
       <DependentUpon>charts.js</DependentUpon>
     </Content>
+    <Content Include="assets\scripts\highcharts.es5.js" />
+    <Content Include="assets\scripts\highcharts.es5.min.js" />
+    <Content Include="assets\scripts\highcharts.js" />
     <Content Include="assets\scripts\rasterize.js" />
     <Content Include="assets\scripts\jquery.typeahead.min.js" />
     <Content Include="assets\scripts\site.es5.js">
@@ -206,12 +211,18 @@
     </Content>
     <Content Include="browserconfig.xml" />
     <Content Include="Global.asax" />
+    <Content Include="report-templates\call.patch.xml" />
     <Content Include="report-templates\config.xml" />
+    <Content Include="report-templates\concept-definition.xml" />
     <Content Include="report-templates\profile-primary.xml" />
     <Content Include="report-templates\profile-secondary.xml" />
     <Content Include="report-templates\profile-sidebar.xml" />
-    <Content Include="report-templates\profile-piecharts.xml" />
-    <Content Include="report-templates\call.xml" />
+    <Content Include="report-templates\profile-piecharts.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="report-templates\call.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="report-templates\deposit-composition.xml" />
     <Content Include="report-templates\financial-highlights.xml" />
     <Content Include="report-templates\assets-piechart.xml" />
@@ -278,14 +289,14 @@
     <None Include="Properties\PublishProfiles\bank.pubxml" />
     <Content Include="Views\Shared\SingleReview.cshtml" />
     <Content Include="Views\Fact\Details.cshtml" />
-    <Content Include="Views\Reports\Viewer.cshtml" />
+    <Content Include="Views\Report\Viewer.cshtml" />
     <Content Include="Views\Shared\Avatar.cshtml" />
     <Content Include="Views\Directory\Index.cshtml" />
-    <Content Include="Views\Reports\_Sidebar.cshtml" />
+    <Content Include="Views\Report\_Sidebar.cshtml" />
     <Content Include="Views\Shared\_BankBasics.cshtml" />
     <Content Include="Views\Shared\Modals\Search.cshtml" />
     <Content Include="Views\Shared\_States.cshtml" />
-    <Content Include="Views\Shared\Modals\Mdrm.cshtml" />
+    <Content Include="Views\Shared\Modals\Definition.cshtml" />
     <Content Include="Views\Shared\_Report.cshtml" />
     <Content Include="Views\Shared\_ReportNavigation.cshtml" />
     <Content Include="Views\Profile\Organization.cshtml" />

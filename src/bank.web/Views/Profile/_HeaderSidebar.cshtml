@@ -42,7 +42,7 @@
     <a href="@Request.Url.ToString()/report/call/pres-rc" class="list-group-item">
         Balance Sheet
     </a>
-    <a href="@Request.Url.ToString()/report/call/pres-ri" class="list-group-item">
+    <a href="@Request.Url.ToString()/report/call/income-statement" class="list-group-item">
         Income Statement
     </a>
     @*<a href="#" class="list-group-item">
@@ -59,16 +59,16 @@
             Call &amp; UBPR Reports
         </a>
         <div class="dropdown-menu" aria-labelledby="raw-reports">
-            @*@{
+            @{
                     var isCurrentPeriod = true;
                 }
-                @foreach (var report in Model.ReportsAvailable)
+                @foreach (var report in Model.RawReports)
                 {
                     <div class="dropdown-item">
                         <div class="row">
                             <div class="col-xs-4">
-                                @report.Period.Value.ToString("yyyy")
-                                @string.Format("Q{0}", report.Period.Value.Quarter())
+                                @report.Period.ToString("yyyy")
+                                @string.Format("Q{0}", report.Period.Quarter())
                             </div>
                             <div class="col-xs-4 px-2 text-xs-center">
                                 @if (report.ReportsAvailable.Contains(ReportTypes.Call))
@@ -95,7 +95,7 @@
 
                     isCurrentPeriod = false;
 
-                }*@
+                }
         </div>
     </div>
 </div>

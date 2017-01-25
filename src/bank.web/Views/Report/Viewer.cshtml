@@ -12,7 +12,14 @@
         <div class="card">
             <div class="card-block">
                 @Html.Partial("_BankBasics", new BankBasicsViewModel { Organization = Model.Organization })
-                @Html.Partial("_ReportNavigation", new ReportNavigationViewModel { Report = Model.Report, Organization = Model.Organization, Period = Model.Report.MaxPeriod, IsCurrentPeriod = Model.Report.IsCurrentPeriod})
+                @Html.Partial("_ReportNavigation", new ReportNavigationViewModel
+           {
+               Report = Model.Report,
+               Organization = Model.Organization,
+               Period = Model.Report.MaxPeriod,
+               IsCurrentPeriod = Model.Report.IsCurrentPeriod,
+               Companies = Model.Companies
+           })
             </div>
         </div>
     }
@@ -22,5 +29,3 @@
         </div>
     </div>
 </main>
-
-
