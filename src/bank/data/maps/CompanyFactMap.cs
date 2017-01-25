@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using bank.poco;
 using DapperExtensions.Mapper;
 
 namespace bank.data.maps
 {
-    public class MdrmDefinitionMap : ClassMapper<ConceptDefinition>
+    internal class FactMapper : ClassMapper<Fact>
     {
-        public MdrmDefinitionMap()
+        public FactMapper()
         {
-            Map(x => x.Mdrm).Key(KeyType.Assigned);
+            Map(x => x.OrganizationId).Key(KeyType.NotAKey);
             AutoMap();
         }
     }

@@ -61,64 +61,12 @@ namespace bank.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Call Report
-        ///1	Income Statement	RIAD4340
-        ///2	Changes in Bank Equity Capital	RIAD3210
-        ///3	Charge-offs and Recoveries on Loans and Leases
-        ///3.a	Year-to-date Charge-offs	RIAD4635
-        ///3.b	Year-to-date Recoveries	RIAD4605
-        ///4	Changes in Allowance for Loan and Lease Losses	RIAD3123
-        ///5	Disaggregated Data on the Allowance for Loan and Lease Losses
-        ///5.a	Recorded Investment: Individually Evaluated for Impairment and Determined to be Impaired	RCONM746
-        ///5.b	Allowance Balance: Individually Evaluated for Impairment and Determin [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string form_41 {
-            get {
-                return ResourceManager.GetString("form_41", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Balance Sheet
-        ///1	Cash and balances due from depository institutions	
-        ///1.a	Noninterest-bearing balances and currency and coin	RCON0081
-        ///1.b	Interest-bearing balances	RCON0071
-        ///2	Securities	
-        ///2.a	Held-to-maturity securities	RCON1754
-        ///2.b	Available-for-sale securities	RCON1773
-        ///3	Federal funds sold and securities purchased under agreements to resell	
-        ///3.a	Federal funds sold	RCONB987
-        ///3.b	 Securities purchased under agreements to resell	RCONB989
-        ///4	Loans and lease financing receivables	
-        ///4.a	Loans and leases he [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string form_41_rc {
-            get {
-                return ResourceManager.GetString("form_41_rc", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] search {
             get {
                 object obj = ResourceManager.GetObject("search", resourceCulture);
                 return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uniform Bank Performance Report - Summary Ratios
-        ///1	Interest Income (TE)	UBPRE001
-        ///1.a	Interest Expense	UBPRE002
-        ///1.b	Net Interest Income (TE)	UBPRE003
-        ///1.c	Noninterest Income	UBPRE004
-        ///1.d	Noninterest Expense	UBPRE005.
-        /// </summary>
-        internal static string ubpr {
-            get {
-                return ResourceManager.GetString("ubpr", resourceCulture);
             }
         }
     }

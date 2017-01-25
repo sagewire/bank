@@ -14,7 +14,6 @@ namespace bank.poco
     public class Fact
     {
         private static Regex _mdrm = new Regex(@"(?<series>\w{4})(?<number>\d{3,4})", RegexOptions.Compiled);
-        public int OrganizationId { get; set; }
         public string Name { get; set; }
         public string Value { get; set; }
         public decimal? NumericValue { get; set; }
@@ -142,12 +141,5 @@ namespace bank.poco
 
     }
 
-    internal class FactMapper : ClassMapper<Fact>
-    {
-        public FactMapper()
-        {
-            Map(x => x.OrganizationId).Key(KeyType.NotAKey);
-            AutoMap();
-        }
-    }
+
 }

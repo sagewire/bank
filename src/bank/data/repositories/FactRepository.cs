@@ -30,6 +30,11 @@ namespace bank.data.repositories
             }
         }
 
+        public IList<Fact> GetPeerFacts(IList<string> names, IList<string> peers, DateTime? period = null, DateTime? lookback = null)
+        {
+
+        }
+
         public IList<Fact> GetFacts(IList<string> names, IList<int> organizationIds, DateTime? period = null, DateTime? lookback = null)
         {
             

@@ -27,8 +27,9 @@ namespace bank.import.ffiec
 
             var doc = new XbrlDocument();
             
-            //var files = Directory.GetFiles("c:/data/ubpr-data", "ffiec cdr ubpr*");
-            var files = Directory.GetFiles("c:/data/call-data/09302016_Form041", "ffiec cdr call*");
+            var files = Directory.GetFiles("c:/data/ubpr-data", "ffiec cdr ubpr*");
+            //var files = Directory.GetFiles("c:/data/ubpr-data", "error ffiec cdr ubpr*");
+            //var files = Directory.GetFiles("c:/data/call-data/09302016_Form041", "ffiec cdr call*");
             //var files = Directory.GetFiles("c:/data/ubpr-data", "cdr-ubpr*");
             
             _taskPool.Start();
@@ -228,6 +229,8 @@ namespace bank.import.ffiec
             var filename = Path.GetFileName(file);
             var movePath = Path.Combine(Path.GetDirectoryName(file), moveFolder);
             movePath = Path.Combine(movePath, filename);
+
+
 
             File.Move(file, movePath);
         }
