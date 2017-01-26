@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bank.poco
+namespace bank.enums
 {
-    public class PeerFact : Fact
+    public enum FactTypes
     {
-    
+        Company,
+        PeerGroup
     }
 }

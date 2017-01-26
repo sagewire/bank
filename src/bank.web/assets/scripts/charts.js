@@ -279,7 +279,7 @@ Highcharts.Combo = function (elem, b, c) {
         },
         xAxis: {
             lineColor: 'transparent',
-            type: "datetime",
+            type: "category",
             labels: {
                 enabled: false
             },
@@ -309,7 +309,7 @@ Highcharts.Combo = function (elem, b, c) {
             enabled: false
         },
         tooltip: {
-            shared: true
+            //shared: true
         },
         plotOptions: {
             pie: {

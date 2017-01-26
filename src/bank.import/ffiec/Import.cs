@@ -204,7 +204,7 @@ namespace bank.import.ffiec
                         period = GetDate(fact.ContextRef.PeriodEndDate);
                     }
 
-                    var factObj = new bank.poco.Fact
+                    var factObj = new bank.poco.CompanyFact
                     {
                         OrganizationId = org.OrganizationId,
                         Name = fact.Name,

@@ -478,7 +478,7 @@ footer {
         margin-left: 30px;
     }
 }
- 
+
 .inline-report {
     .main-chart {
         height: 10vh;
@@ -500,6 +500,9 @@ footer {
     thead {
         width: 100%;
 
+        th {
+        }
+
         td {
             border-top: none;
             position: relative;
@@ -512,11 +515,12 @@ footer {
             margin-bottom: 0;
         }
     }
-     
+
     tbody {
         .level-0 {
             font-weight: bold;
         }
+
         td {
             font-size: 20px;
         }
@@ -530,9 +534,20 @@ footer {
         background-color: @accent-color;
     }
 
+    .subsection-filler {
+        background-color: lighten(@accent-color, 10);
+        border-top: 1px solid @accent-color;
+    }
+
     th.fact-column {
         width: 150px;
         border: none;
+        vertical-align: middle;
+        text-align: center;
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        border-bottom: none;
+        //border-bottom: 1px solid @accent-color;
     }
 }
 

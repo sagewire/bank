@@ -13,7 +13,13 @@ namespace bank.data.repositories
 {
     public class FactRepository : BaseRepository<Fact>
     {
-        public override void Save(Fact model)
+
+        static FactRepository()
+        {
+            Dapper.SqlMapper.AddTypeMap(typeof(string), System.Data.DbType.AnsiString);
+        }
+
+        public void Save(CompanyFact model)
         {
             using (var conn = new SqlConnection(Settings.ConnectionString))
             {
@@ -30,15 +36,8 @@ namespace bank.data.repositories
             }
         }
 
-        public IList<Fact> GetPeerFacts(IList<string> names, IList<string> peers, DateTime? period = null, DateTime? lookback = null)
+        private DateTime SetPeriodEnd(DateTime? period)
         {
-
-        }
-
-        public IList<Fact> GetFacts(IList<string> names, IList<int> organizationIds, DateTime? period = null, DateTime? lookback = null)
-        {
-            
-            Dapper.SqlMapper.AddTypeMap(typeof(string), System.Data.DbType.AnsiString);
             var periodEnd = DateTime.Now;
 
             if (period.HasValue && period.Value.Year >= 2000)
@@ -50,6 +49,103 @@ namespace bank.data.repositories
                 periodEnd = DateTime.Now;
             }
 
+            return periodEnd;
+        }
+
+        //exec GetAssetConcentrationPeerGroup 5815, '2016-09-30', 'UBPRE001,UBPRE002,UBPRE003,UBPRE004,UBPRE005,UBPRE006,UBPRE007,UBPRE008,UBPRE009,UBPRE010'
+        public IList<Fact> GetAssetConPeerGroupFacts(IList<string> names, int organizationId, DateTime? period = null, DateTime? lookback = null)
+        {
+            var periodStart = lookback.HasValue ? lookback.Value : new DateTime(1900, 1, 1);
+
+            using (var conn = new SqlConnection(Settings.ConnectionString))
+            {
+                conn.Open();
+
+                var facts = conn.Query<PeerGroupFact>(
+                    "GetAssetConcentrationPeerGroup @OrganizationID, @Period, @Names",
+                    new {
+                        Names = names,
+                        OrganizationId = organizationId,
+                        Period = period.Value
+                    },
+                    commandType: CommandType.StoredProcedure)
+                    .ToList();
+
+                var consolidatedFacts = ConsolidatePeerGroupFacts(facts, new string[] { "AssetCon" });
+
+                return consolidatedFacts;
+            }
+        }
+
+        private IList<Fact> ConsolidatePeerGroupFacts(IList<PeerGroupFact> facts, IList<string> peerGroups)
+        {
+            var maxPeriod = facts.Select(x => x.Period.Value).Max();
+
+            var consolidatedFacts = new List<Fact>();
+
+            foreach (var peerGroup in peerGroups.Distinct())
+            {
+                //pack older facts into most recent fact
+                var current = facts.Where(x => x.Period == maxPeriod && x.PeerGroup == peerGroup).ToList();
+
+                foreach (var fact in current)
+                {
+                    var d = facts.Where(x => x.Name == fact.Name &&
+                                                x.Period <= fact.Period &&
+                                                x.PeerGroup == peerGroup &&
+                                                x.NumericValue.HasValue)
+                                                .ToDictionary(x => x.Period.Value, x => x.NumericValue.Value);
+
+                    fact.HistoricalData = new SortedDictionary<DateTime, decimal>(d);
+                }
+
+                consolidatedFacts.AddRange(current);
+
+            }
+
+            return consolidatedFacts;
+        }
+
+        public IList<Fact> GetPeerGroupFacts(IList<string> names, IList<string> peerGroups, DateTime? period = null, DateTime? lookback = null)
+        {
+            var periodEnd = SetPeriodEnd(period);
+
+            var periodStart = lookback.HasValue ? lookback.Value : new DateTime(1900, 1, 1);
+
+            IList<PeerGroupFact> facts;
+
+            using (var conn = new SqlConnection(Settings.ConnectionString))
+            {
+                conn.Open();
+                //orgs is intentionally created as a string instead of a param due to some weird query plan decisions by SQL
+
+                facts = conn.Query<PeerGroupFact>("  select  * " +
+                                                "from   PeerGroupFact " +
+                                                "where PeerGroup in @PeerGroups " +
+                                                "   and Period between @periodStart and @periodEnd " +
+                                                "   and Name in @Names ", new
+                                                {
+                                                    PeerGroups = peerGroups.Distinct(),
+                                                    Names = names.Distinct(),
+                                                    PeriodEnd = periodEnd,
+                                                    PeriodStart = periodStart
+                                                },
+                                                commandType: CommandType.Text)
+                                                .ToList();
+                
+                var consolidatedFacts = ConsolidatePeerGroupFacts(facts, peerGroups);
+
+                return consolidatedFacts;
+
+            }
+
+
+        }
+
+        public IList<Fact> GetFacts(IList<string> names, IList<int> organizationIds, DateTime? period = null, DateTime? lookback = null)
+        {
+            var periodEnd = SetPeriodEnd(period);
+
             var periodStart = lookback.HasValue ? lookback.Value : new DateTime(1900, 1, 1);
 
             using (var conn = new SqlConnection(Settings.ConnectionString))
@@ -58,7 +154,7 @@ namespace bank.data.repositories
                 var orgs = string.Join(",", organizationIds.Distinct());
                 //orgs is intentionally created as a string instead of a param due to some weird query plan decisions by SQL
 
-                var facts = conn.Query<Fact>("  select  * " +
+                var facts = conn.Query<CompanyFact>("  select  * " +
                                                 "from   Fact " +
                                                 "where OrganizationID in (" + orgs + ") " +
                                                 "   and Period between @periodStart and @periodEnd " +
@@ -120,12 +216,12 @@ namespace bank.data.repositories
         //    }
         //}
 
-        public IList<Fact> GetFacts(string name, int organizationId)
+        public IList<CompanyFact> GetFacts(string name, int organizationId)
         {
             using (var conn = new SqlConnection(Settings.ConnectionString))
             {
                 conn.Open();
-                var facts = conn.Query<Fact>("GetFacts", new
+                var facts = conn.Query<CompanyFact>("GetFacts", new
                 {
                     Name = name,
                     OrganizationID = organizationId
@@ -136,7 +232,7 @@ namespace bank.data.repositories
             }
         }
 
-        public IList<Fact> GetReports(int organizationId)
+        public IList<CompanyFact> GetReports(int organizationId)
         {
             var names = new string[]
             {
@@ -148,7 +244,7 @@ namespace bank.data.repositories
             using (var conn = new SqlConnection(Settings.ConnectionString))
             {
                 conn.Open();
-                var facts = conn.Query<Fact>("  select  * " +
+                var facts = conn.Query<CompanyFact>("  select  * " +
                                                 "from   Fact " +
                                                 "where  OrganizationID = @OrganizationID " +
                                                 "   and Name in @Names " +

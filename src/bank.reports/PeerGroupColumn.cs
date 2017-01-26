@@ -7,45 +7,43 @@ using bank.poco;
 
 namespace bank.reports
 {
-    public class CompanyColumn : Column
+    public class PeerGroupColumn : Column
     {
+        public string PeerGroup { get; set; }
         public override ColumnTypes ColumnType
         {
             get
             {
-                return ColumnTypes.Company;
+                return ColumnTypes.PeerGroup;
             }
         }
 
+        private string _headerText;
         public override string HeaderText
         {
             get
             {
-                return Organization.Name;
+                return _headerText;
             }
             set
             {
-                throw new NotSupportedException();
+                _headerText = value;
             }
         }
 
-        public int OrganizationId { get; set; }
-
-        public Organization Organization { get; set; }
-        
         public override void SetFacts(IList<Fact> facts)
         {
             //var existing = Facts.Select(x => x..Name).Distinct().ToList();
-            var filtered = facts.Where(x => x.FactType == enums.FactTypes.Company && ((CompanyFact)x).OrganizationId == OrganizationId);
-            
+            var filtered = facts.Where(x => x.FactType == enums.FactTypes.PeerGroup && ((PeerGroupFact)x).PeerGroup == PeerGroup);
+
             var distinct = filtered.Distinct().ToList();
 
-            foreach(var fact in distinct)
+            foreach (var fact in distinct)
             {
                 Facts.TryAdd(fact.Name, fact);
                 //Facts.AddOrUpdate(fact.Name, fact, (key, oldValue) => fact);
             }
         }
-        
+
     }
 }

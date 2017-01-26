@@ -172,6 +172,24 @@ namespace bank.poco
             }
         }
 
+        public string StatePeerGroup
+        {
+            get
+            {
+                var bankType = "COM";
+
+                switch(BankClass)
+                {
+                    case "SA":
+                    case "SB":
+                        bankType = "SVG";
+                        break;
+                }
+
+                return string.Format("{0}{1}", State, bankType);
+            }
+        }
+
         public string ProfileUrl
         {
             get

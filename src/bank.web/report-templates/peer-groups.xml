@@ -1,0 +1,482 @@
+<peergroups>
+	<peergroup>
+		<code>1</code>
+		<name>Insured commercial banks having assets greater than $3 billion</name>
+	</peergroup>
+	<peergroup>
+		<code>10</code>
+		<name>Insured commercial banks having assets between $50 million and $100 million, with 2 or fewer full service banking offices and located in a metropolitan statistical area</name>
+	</peergroup>
+	<peergroup>
+		<code>101</code>
+		<name>Insured savings banks having assets greater than $1 billion</name>
+	</peergroup>
+	<peergroup>
+		<code>101M</code>
+		<name>Mutually-owned insured savings banks having assets greater than $1 billion</name>
+	</peergroup>
+	<peergroup>
+		<code>101S</code>
+		<name>Stock-owned insured savigns banks having assets greater than $1 billion</name>
+	</peergroup>
+	<peergroup>
+		<code>102</code>
+		<name>Insured savings banks having assets between $300 million and $1 billion</name>
+	</peergroup>
+	<peergroup>
+		<code>102M</code>
+		<name>Mutually-owned insured savings banks having assets between $300 million and $1 billion</name>
+	</peergroup>
+	<peergroup>
+		<code>102S</code>
+		<name>Stock-owned insured savings banks having assets between $300 million and $1 billion</name>
+	</peergroup>
+	<peergroup>
+		<code>103</code>
+		<name>Insured savings banks having assets between $100 million and $300 million</name>
+	</peergroup>
+	<peergroup>
+		<code>103M</code>
+		<name>Mutually-owned insured savings banks having assets between $100 million and $300 million</name>
+	</peergroup>
+	<peergroup>
+		<code>103S</code>
+		<name>Stock-owned insured savings banks having assets between $100 million and $300 million</name>
+	</peergroup>
+	<peergroup>
+		<code>104</code>
+		<name>Insured savings banks having assets less than $100 million</name>
+	</peergroup>
+	<peergroup>
+		<code>104M</code>
+		<name>Mutually-owned insured savings banks having assets less than $100 million</name>
+	</peergroup>
+	<peergroup>
+		<code>104S</code>
+		<name>Stock-owned insured savings banks having assets less than $100 million</name>
+	</peergroup>
+	<peergroup>
+		<code>11</code>
+		<name>Insured commercial banks having assets between $50 million and $100 million, with 2 or fewer full service banking offices and not located in a metropolitan statistical area</name>
+	</peergroup>
+	<peergroup>
+		<code>12</code>
+		<name>Insured commercial banks having assets less than $50 million, with 2 or more full service banking offices and located in a metropolitan statistical area</name>
+	</peergroup>
+	<peergroup>
+		<code>13</code>
+		<name>Insured commercial banks having assets less than $50 million, with 2 or more full service banking offices and not located in a metropolitan statistical area</name>
+	</peergroup>
+	<peergroup>
+		<code>14</code>
+		<name>Insured commercial banks having assets less than $50 million, with 1 full service banking offices and located in a metropolitan statistical area</name>
+	</peergroup>
+	<peergroup>
+		<code>15</code>
+		<name>Insured commercial banks having assets less than $50 million, with 1 full service banking offices and not located in a metropolitan statistical area</name>
+	</peergroup>
+	<peergroup>
+		<code>2</code>
+		<name>Insured commercial banks having assets between $1billion and $3 billion</name>
+	</peergroup>
+	<peergroup>
+		<code>201</code>
+		<name>Credit card specialty banks having assets greater than $ 3 billion</name>
+	</peergroup>
+	<peergroup>
+		<code>3</code>
+		<name>Insured commercial banks having assets between $300 million and $1 billion</name>
+	</peergroup>
+	<peergroup>
+		<code>301</code>
+		<name>Bankers banks</name>
+	</peergroup>
+	<peergroup>
+		<code>4</code>
+		<name>Insured commercial banks having assets between $100 million and $300 million, with 3 or more full service banking offices and located in a metropolitan statistical area</name>
+	</peergroup>
+	<peergroup>
+		<code>401</code>
+		<name>All Non-insured Non-deposit Trust Companies</name>
+	</peergroup>
+	<peergroup>
+		<code>5</code>
+		<name>Insured commercial banks having assets between $100 million and $300 million, with 3 or more full service banking offices and not located in a metropolitan statistical area</name>
+	</peergroup>
+	<peergroup>
+		<code>6</code>
+		<name>Insured commercial banks having assets between $100 million and $300 million, with 2 or fewer full service banking offices and located in a metropolitan statistical area</name>
+	</peergroup>
+	<peergroup>
+		<code>7</code>
+		<name>Insured commercial banks having assets between $100 million and $300 million, with 2 or fewer full service banking offices and not located in a metropolitan statistical area</name>
+	</peergroup>
+	<peergroup>
+		<code>8</code>
+		<name>Insured commercial banks having assets between $50 million and $100 million, with 3 or more full service banking offices and located in a metropolitan statistical area</name>
+	</peergroup>
+	<peergroup>
+		<code>9</code>
+		<name>Insured commercial banks having assets between $50 million and $100 million, with 3 or more full service banking offices and not located in a metropolitan statistical area</name>
+	</peergroup>
+	<peergroup>
+		<code>ALCOM</code>
+		<name>All Insured Commercial Banks in Alabama</name>
+	</peergroup>
+	<peergroup>
+		<code>ARCOM</code>
+		<name>All Insured Commercial Banks in Arkansas</name>
+	</peergroup>
+	<peergroup>
+		<code>AZCOM</code>
+		<name>All Insured Commercial Banks in Arizona</name>
+	</peergroup>
+	<peergroup>
+		<code>BKR</code>
+		<name>Bankers banks</name>
+	</peergroup>
+	<peergroup>
+		<code>CACOM</code>
+		<name>All Insured Commercial Banks in California</name>
+	</peergroup>
+	<peergroup>
+		<code>CASVG</code>
+		<name>All Insured Savings Banks in California</name>
+	</peergroup>
+	<peergroup>
+		<code>COCOM</code>
+		<name>All Insured Commercial Banks in Colorado</name>
+	</peergroup>
+	<peergroup>
+		<code>COM</code>
+		<name>All insured commercial banks</name>
+	</peergroup>
+	<peergroup>
+		<code>COSVG</code>
+		<name>All Insured Savings Banks in Colorado</name>
+	</peergroup>
+	<peergroup>
+		<code>CRC</code>
+		<name>All credit card specialty banks</name>
+	</peergroup>
+	<peergroup>
+		<code>CTCOM</code>
+		<name>All Insured Commercial Banks in Connecticut</name>
+	</peergroup>
+	<peergroup>
+		<code>CTSVG</code>
+		<name>All Insured Savings Banks in Connecticut</name>
+	</peergroup>
+	<peergroup>
+		<code>DECOM</code>
+		<name>All Insured Commercial Banks in Delaware</name>
+	</peergroup>
+	<peergroup>
+		<code>DENDT</code>
+		<name>All Non-insured Non-deposit Trust Companies in Delaware</name>
+	</peergroup>
+	<peergroup>
+		<code>FLCOM</code>
+		<name>All Insured Commercial Banks in Florida</name>
+	</peergroup>
+	<peergroup>
+		<code>FLSVG</code>
+		<name>All Insured Savings Banks in Florida</name>
+	</peergroup>
+	<peergroup>
+		<code>GACOM</code>
+		<name>All Insured Commercial Banks in Georgia</name>
+	</peergroup>
+	<peergroup>
+		<code>GASVG</code>
+		<name>All Insured Savings Banks in Georgia</name>
+	</peergroup>
+	<peergroup>
+		<code>HICOM</code>
+		<name>All Insured Commercial Banks in Hawaii</name>
+	</peergroup>
+	<peergroup>
+		<code>IACOM</code>
+		<name>All Insured Commercial Banks in Iowa</name>
+	</peergroup>
+	<peergroup>
+		<code>IDCOM</code>
+		<name>All Insured Commercial Banks in Idaho</name>
+	</peergroup>
+	<peergroup>
+		<code>ILCOM</code>
+		<name>All Insured Commercial Banks in Illinois</name>
+	</peergroup>
+	<peergroup>
+		<code>ILSVG</code>
+		<name>All Insured Savings Banks in Illinois</name>
+	</peergroup>
+	<peergroup>
+		<code>INCOM</code>
+		<name>All Insured Commercial Banks in Indiana</name>
+	</peergroup>
+	<peergroup>
+		<code>INSVG</code>
+		<name>All Insured Savings Banks in Indiana</name>
+	</peergroup>
+	<peergroup>
+		<code>KSCOM</code>
+		<name>All Insured Commercial Banks in Kansas</name>
+	</peergroup>
+	<peergroup>
+		<code>KSSVG</code>
+		<name>All Insured Savings Banks in Kansas</name>
+	</peergroup>
+	<peergroup>
+		<code>KYCOM</code>
+		<name>All Insured Commercial Banks in Kentucky</name>
+	</peergroup>
+	<peergroup>
+		<code>KYSVG</code>
+		<name>All Insured Savings Banks in Kentucky</name>
+	</peergroup>
+	<peergroup>
+		<code>LACOM</code>
+		<name>All Insured Commercial Banks in Louisiana</name>
+	</peergroup>
+	<peergroup>
+		<code>LASVG</code>
+		<name>All Insured Savings Banks in Louisiana</name>
+	</peergroup>
+	<peergroup>
+		<code>MACOM</code>
+		<name>All Insured Commercial Banks in Massachusetts</name>
+	</peergroup>
+	<peergroup>
+		<code>MASVG</code>
+		<name>All Insured Savings Banks in Massachusetts</name>
+	</peergroup>
+	<peergroup>
+		<code>MDCOM</code>
+		<name>All Insured Commercial Banks in Maryland</name>
+	</peergroup>
+	<peergroup>
+		<code>MDSVG</code>
+		<name>All Insured Savings Banks in Maryland</name>
+	</peergroup>
+	<peergroup>
+		<code>MECOM</code>
+		<name>All Insured Commercial Banks in Maine</name>
+	</peergroup>
+	<peergroup>
+		<code>MESVG</code>
+		<name>All Insured Savings Banks in Maine</name>
+	</peergroup>
+	<peergroup>
+		<code>MICOM</code>
+		<name>All Insured Commercial Banks in Michigan</name>
+	</peergroup>
+	<peergroup>
+		<code>MISVG</code>
+		<name>All Insured Savings Banks in Michigan</name>
+	</peergroup>
+	<peergroup>
+		<code>MNCOM</code>
+		<name>All Insured Commercial Banks in Minnesota</name>
+	</peergroup>
+	<peergroup>
+		<code>MNSVG</code>
+		<name>All Insured Savings Banks in Minnesota</name>
+	</peergroup>
+	<peergroup>
+		<code>MOCOM</code>
+		<name>All Insured Commercial Banks in Missouri</name>
+	</peergroup>
+	<peergroup>
+		<code>MOSVG</code>
+		<name>All Insured Savings Banks in Missouri</name>
+	</peergroup>
+	<peergroup>
+		<code>MSCOM</code>
+		<name>All Insured Commercial Banks in Mississippi</name>
+	</peergroup>
+	<peergroup>
+		<code>MTCOM</code>
+		<name>All Insured Commercial Banks in Montana</name>
+	</peergroup>
+	<peergroup>
+		<code>NATIONAL</code>
+		<name>All banks in nation </name>
+	</peergroup>
+	<peergroup>
+		<code>NCCOM</code>
+		<name>All Insured Commercial Banks in North Carolina</name>
+	</peergroup>
+	<peergroup>
+		<code>NCSVG</code>
+		<name>All Insured Savings Banks in North Carolina</name>
+	</peergroup>
+	<peergroup>
+		<code>NDCOM</code>
+		<name>All Insured Commercial Banks in North Dakota</name>
+	</peergroup>
+	<peergroup>
+		<code>NDT</code>
+		<name>All Non-insured Non-deposit Trust Companies</name>
+	</peergroup>
+	<peergroup>
+		<code>NECOM</code>
+		<name>All Insured Commercial Banks in Nebraska</name>
+	</peergroup>
+	<peergroup>
+		<code>NESVG</code>
+		<name>All Insured Savings Banks in Nebraska</name>
+	</peergroup>
+	<peergroup>
+		<code>NHCOM</code>
+		<name>All Insured Commercial Banks in New Hampshire</name>
+	</peergroup>
+	<peergroup>
+		<code>NHSVG</code>
+		<name>All Insured Savings Banks in New Hampshire</name>
+	</peergroup>
+	<peergroup>
+		<code>NJCOM</code>
+		<name>All Insured Commercial Banks in New Jersey</name>
+	</peergroup>
+	<peergroup>
+		<code>NJSVG</code>
+		<name>All Insured Savings Banks in New Jersey</name>
+	</peergroup>
+	<peergroup>
+		<code>NMCOM</code>
+		<name>All Insured Commercial Banks in New Mexico</name>
+	</peergroup>
+	<peergroup>
+		<code>NVCOM</code>
+		<name>All Insured Commercial Banks in Nevada</name>
+	</peergroup>
+	<peergroup>
+		<code>NYCOM</code>
+		<name>All Insured Commercial Banks in New York</name>
+	</peergroup>
+	<peergroup>
+		<code>NYNDT</code>
+		<name>All Non-insured Non-deposit Trust Companies in New York</name>
+	</peergroup>
+	<peergroup>
+		<code>NYSVG</code>
+		<name>All Insured Savings Banks in New York</name>
+	</peergroup>
+	<peergroup>
+		<code>OHCOM</code>
+		<name>All Insured Commercial Banks in Ohio</name>
+	</peergroup>
+	<peergroup>
+		<code>OHSVG</code>
+		<name>All Insured Savings Banks in Ohio</name>
+	</peergroup>
+	<peergroup>
+		<code>OKCOM</code>
+		<name>All Insured Commercial Banks in Oklahoma</name>
+	</peergroup>
+	<peergroup>
+		<code>ORCOM</code>
+		<name>All Insured Commercial Banks in Oregon</name>
+	</peergroup>
+	<peergroup>
+		<code>PACOM</code>
+		<name>All Insured Commercial Banks in Pennsylvania</name>
+	</peergroup>
+	<peergroup>
+		<code>PASVG</code>
+		<name>All Insured Savings Banks in Pennsylvania</name>
+	</peergroup>
+	<peergroup>
+		<code>RICOM</code>
+		<name>All Insured Commercial Banks in Rhode Island</name>
+	</peergroup>
+	<peergroup>
+		<code>SCCOM</code>
+		<name>All Insured Commercial Banks in South Carolina</name>
+	</peergroup>
+	<peergroup>
+		<code>SCSVG</code>
+		<name>All Insured Savings Banks in South Carolina</name>
+	</peergroup>
+	<peergroup>
+		<code>SDCOM</code>
+		<name>All Insured Commercial Banks in South Dakota</name>
+	</peergroup>
+	<peergroup>
+		<code>SVG</code>
+		<name>All insured savings banks</name>
+	</peergroup>
+	<peergroup>
+		<code>TNCOM</code>
+		<name>All Insured Commercial Banks in Tennessee</name>
+	</peergroup>
+	<peergroup>
+		<code>TNSVG</code>
+		<name>All Insured Savings Banks in Tennessee</name>
+	</peergroup>
+	<peergroup>
+		<code>TRST301</code>
+		<name>Trust Assets in excess of $100 billion</name>
+	</peergroup>
+	<peergroup>
+		<code>TRST302</code>
+		<name>Trust Assets between $10 billion and $100 billion </name>
+	</peergroup>
+	<peergroup>
+		<code>TRST303</code>
+		<name>Trust Assets between $1 billion and $10 billion </name>
+	</peergroup>
+	<peergroup>
+		<code>TRST304</code>
+		<name>Trust Assets between $250 million and $1 billion</name>
+	</peergroup>
+	<peergroup>
+		<code>TRST305</code>
+		<name>Trust Assets less than $250 million </name>
+	</peergroup>
+	<peergroup>
+		<code>TXCOM</code>
+		<name>All Insured Commercial Banks in Texas</name>
+	</peergroup>
+	<peergroup>
+		<code>TXSVG</code>
+		<name>All Insured Savings Banks in Texas</name>
+	</peergroup>
+	<peergroup>
+		<code>UTCOM</code>
+		<name>All Insured Commercial Banks in Utah</name>
+	</peergroup>
+	<peergroup>
+		<code>VACOM</code>
+		<name>All Insured Commercial Banks in Virginia</name>
+	</peergroup>
+	<peergroup>
+		<code>VTCOM</code>
+		<name>All Insured Commercial Banks in Vermont</name>
+	</peergroup>
+	<peergroup>
+		<code>WACOM</code>
+		<name>All Insured Commercial Banks in Washington</name>
+	</peergroup>
+	<peergroup>
+		<code>WASVG</code>
+		<name>All Insured Savings Banks in Washington</name>
+	</peergroup>
+	<peergroup>
+		<code>WICOM</code>
+		<name>All Insured Commercial Banks in Wisconsin</name>
+	</peergroup>
+	<peergroup>
+		<code>WISVG</code>
+		<name>All Insured Savings Banks in Wisconsin</name>
+	</peergroup>
+	<peergroup>
+		<code>WVCOM</code>
+		<name>All Insured Commercial Banks in West Virginia</name>
+	</peergroup>
+	<peergroup>
+		<code>WYCOM</code>
+		<name>All Insured Commercial Banks in Wyoming</name>
+	</peergroup>
+</peergroups>

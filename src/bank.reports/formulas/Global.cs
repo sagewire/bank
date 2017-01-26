@@ -6,14 +6,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using bank.extensions;
+using bank.poco;
 
 namespace bank.reports.formulas
 {
     public static class Global
     {
         private static IDictionary<string, Concept> _concepts = new Dictionary<string, Concept>();
+        private static IDictionary<string, PeerGroupStandard> _peerGroups = new Dictionary<string, PeerGroupStandard>();
 
         static Global()
+        {
+            InitConcepts();
+            InitPeerGroups();
+        }
+
+
+        private static void InitConcepts()
         {
             var configLocation = Path.Combine(Settings.ReportTemplatePath, "config.xml");
 
@@ -23,7 +32,7 @@ namespace bank.reports.formulas
 
             var concepts = xml.Element("configuration").Element("concepts").Elements("concept");
 
-            foreach(var conceptElement in concepts)
+            foreach (var conceptElement in concepts)
             {
                 var name = conceptElement.SafeAttributeValue("name");
                 var shortLabel = conceptElement.SafeAttributeValue("shortLabel");
@@ -48,6 +57,45 @@ namespace bank.reports.formulas
             get
             {
                 return _concepts;
+            }
+        }
+
+
+        public static IDictionary<string, PeerGroupStandard> PeerGroups
+        {
+            get
+            {
+                return _peerGroups;
+            }
+        }
+
+        private static void InitPeerGroups()
+        {
+            var configLocation = Path.Combine(Settings.ReportTemplatePath, "peer-groups.xml");
+
+            var xmlText = File.ReadAllText(configLocation);
+
+            var xml = XDocument.Parse(xmlText);
+
+            var peergroups = xml.Element("peergroups").Elements("peergroup");
+
+            foreach(var peerGroupElement in peergroups)
+            {
+                var code = peerGroupElement.Element("code").Value;
+                var name = peerGroupElement.Element("name").Value;
+                var labelNode = peerGroupElement.Element("label");
+
+                var label = labelNode == null ? name: labelNode.Value;
+
+                var pg = new PeerGroupStandard
+                {
+                    Code = code,
+                    Name = name,
+                    Label = label ?? name
+                };
+
+                _peerGroups.Add(code, pg);
+
             }
         }
     }

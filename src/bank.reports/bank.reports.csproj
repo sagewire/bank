@@ -64,6 +64,7 @@
     <Compile Include="Column.cs" />
     <Compile Include="formulas\Global.cs" />
     <Compile Include="LineItemTypes.cs" />
+    <Compile Include="PeerGroupColumn.cs" />
     <Compile Include="SubSection.cs" />
     <Compile Include="TableItem.cs" />
     <Compile Include="ChartItem.cs" />

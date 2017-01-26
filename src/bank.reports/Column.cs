@@ -20,6 +20,6 @@ namespace bank.reports
             return facts.Select(x=>x.Value).ToList();
         }
 
-        public abstract string HeaderText { get; }
+        public abstract string HeaderText { get; set; }
     }
 }

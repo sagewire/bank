@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using bank.enums;
 using bank.extensions;
 using DapperExtensions.Mapper;
 
@@ -18,6 +19,8 @@ namespace bank.poco
         public string Value { get; set; }
         public decimal? NumericValue { get; set; }
         public DateTime? Period { get; set; }
+
+        public virtual FactTypes FactType { get; }
         /// <summary>
         /// Number of quarters in the past to compare too.
         /// </summary>

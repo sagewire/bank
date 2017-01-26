@@ -10,6 +10,7 @@ using bank.reports;
 using bank.web.models;
 using bank.extensions;
 using bank.enums;
+using bank.reports.formulas;
 
 namespace bank.web.Controllers
 {
@@ -25,6 +26,11 @@ namespace bank.web.Controllers
 
             var model = new OrganizationProfileViewModel();
 
+            var orgRepo = new OrganizationRepository();
+            var orgs = orgRepo.GetOrganizations(companies);
+            var org = orgs.Single(x => x.OrganizationId == orgId);
+
+
             var columns = new List<Column>();
 
             foreach (var companyId in companies)
@@ -35,6 +41,15 @@ namespace bank.web.Controllers
                 });
             }
 
+            var statepg = Global.PeerGroups[org.StatePeerGroup];
+
+            columns.Add(new PeerGroupColumn
+            {
+                PeerGroup = statepg.Code,
+                HeaderText = string.Format("Peer Group {0}", statepg.Code)
+            });
+
+
             model.PrimaryChart = new Report("profile-primary", columns);
             model.PieCharts = new Report("profile-piecharts", columns);
             model.SecondaryCharts = new Report("profile-secondary", columns);
@@ -43,50 +58,19 @@ namespace bank.web.Controllers
 
             var tasks = new List<Task>();
 
-            var orgTask = Task.Run(() =>
-            {
-                var orgRepo = new OrganizationRepository();
-                var orgs = orgRepo.GetOrganizations(companies);
-                //var org = orgs.Single(x => x.OrganizationId == orgId);
-                return orgs;
-            });
+            //var orgTask = Task.Run(() =>
+            //{
+            //    var orgRepo = new OrganizationRepository();
+            //    var orgs = orgRepo.GetOrganizations(companies);
+            //    //var org = orgs.Single(x => x.OrganizationId == orgId);
+            //    return orgs;
+            //});
 
 
-            var rawReportsTask = Task.Run(() =>
-            {
-                var factRepo = new FactRepository();
-                var reports = factRepo.GetReports(orgId);
-
-                var list = new Dictionary<DateTime, ReportListViewModel>();
-
-                foreach(var report in reports)
-                {
-                    ReportListViewModel item = null;
-                    if (list.ContainsKey(report.Period.Value))
-                    {
-                        item = list[report.Period.Value];
-                    }
-                    else
-                    {
-                        item = new ReportListViewModel();
-                        item.Period = report.Period.Value;
-                        list.Add(item.Period, item);
-                    }
-                    item.ReportsAvailable.Add(ReportType.Parse(report.Name));
-                                        
-                }
-
-                return list.OrderByDescending(x=>x.Key).Select(x=>x.Value).ToList();
-
-            });
-
-
-            var populateTask = Task.Run(() =>
-            {
-                Report.PopulateReports(model.Reports);
-            });
-
-            tasks.Add(orgTask);
+            var rawReportsTask = Task.Run(() => GetRawReports(orgId));
+            var populateTask = Task.Run(() => Report.PopulateReports(model.Reports));
+            
+            //tasks.Add(orgTask);
             tasks.Add(rawReportsTask);
             tasks.Add(populateTask);
 
@@ -95,25 +79,56 @@ namespace bank.web.Controllers
             foreach (var column in columns)
             {
                 var companyColumn = column as CompanyColumn;
-                if (companies != null)
+
+                if (companyColumn != null)
                 {
-                    companyColumn.Organization = orgTask.Result.Single(x => x.OrganizationId == companyColumn.OrganizationId);
+                    if (companies != null)
+                    {
+                        companyColumn.Organization = orgs.Single(x => x.OrganizationId == companyColumn.OrganizationId);
+                    }
                 }
             }
 
-            var org = orgTask.Result.Single(x => x.OrganizationId == orgId);
             model.Organization = org;
             model.RawReports = rawReportsTask.Result;
             //model.ReportsAvailable = rawReportsTask.Result;
 
-            model.Header = new HeaderViewModel
-            {
-                HeaderImage = org.ProfileBanner
-            };
+            //model.Header = new HeaderViewModel
+            //{
+            //    HeaderImage = org.ProfileBanner
+            //};
 
  
             ViewBag.Title = model.Title;
             return View(model);
+
+        }
+
+        private IList<ReportListViewModel> GetRawReports(int orgId)
+        {
+            var factRepo = new FactRepository();
+            var reports = factRepo.GetReports(orgId);
+
+            var list = new Dictionary<DateTime, ReportListViewModel>();
+
+            foreach (var report in reports)
+            {
+                ReportListViewModel item = null;
+                if (list.ContainsKey(report.Period.Value))
+                {
+                    item = list[report.Period.Value];
+                }
+                else
+                {
+                    item = new ReportListViewModel();
+                    item.Period = report.Period.Value;
+                    list.Add(item.Period, item);
+                }
+                item.ReportsAvailable.Add(ReportType.Parse(report.Name));
+
+            }
+
+            return list.OrderByDescending(x => x.Key).Select(x => x.Value).ToList();
 
         }
 

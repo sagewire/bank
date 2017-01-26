@@ -33,7 +33,7 @@ namespace bank.web.Controllers
 
             var list = ids.Split(',');
 
-            foreach(var s in list)
+            foreach(var s in list.Where(x=>!string.IsNullOrWhiteSpace(x)))
             {
                 var decodedId = DecodeId(s);
                 intList.Add(decodedId);

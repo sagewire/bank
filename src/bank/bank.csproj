@@ -86,7 +86,6 @@
     <Compile Include="data\elasticsearch\responses\DeleteResponse.cs" />
     <Compile Include="data\elasticsearch\responses\IndexResponse.cs" />
     <Compile Include="data\maps\CompanyFactMap.cs" />
-    <Compile Include="data\maps\FactMap.cs" />
     <Compile Include="data\maps\ConceptDefinitionMap.cs" />
     <Compile Include="data\maps\OrganizationMap.cs" />
     <Compile Include="data\maps\TwitterFriendMap.cs" />
@@ -97,6 +96,7 @@
     <Compile Include="data\repositories\FactRepository.cs" />
     <Compile Include="data\repositories\IRepository.cs" />
     <Compile Include="data\repositories\TwitterFriendRepository.cs" />
+    <Compile Include="enums\FactTypes.cs" />
     <Compile Include="enums\HorizontalAlignment.cs" />
     <Compile Include="enums\ReportTypes.cs" />
     <Compile Include="enums\Sources.cs" />
@@ -110,7 +110,8 @@
     <Compile Include="poco\Fact.cs" />
     <Compile Include="poco\ConceptDefinition.cs" />
     <Compile Include="poco\Organization.cs" />
-    <Compile Include="poco\PeerFact.cs" />
+    <Compile Include="poco\PeerGroupFact.cs" />
+    <Compile Include="poco\PeerGroupStandard.cs" />
     <Compile Include="poco\TwitterFriend.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

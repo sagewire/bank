@@ -7,17 +7,16 @@ using bank.enums;
 
 namespace bank.poco
 {
-    public class CompanyFact : Fact
+    public class PeerGroupFact : Fact
     {
-        public int OrganizationId { get; set; }
+        public string PeerGroup { get; set; }
 
         public override FactTypes FactType
         {
             get
             {
-                return FactTypes.Company;
+                return FactTypes.PeerGroup;
             }
         }
-
     }
 }

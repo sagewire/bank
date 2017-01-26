@@ -347,9 +347,18 @@ footer a {
 .report-table .table-header {
   background-color: #30C8CA;
 }
+.report-table .subsection-filler {
+  background-color: #56d5d7;
+  border-top: 1px solid #30C8CA;
+}
 .report-table th.fact-column {
   width: 150px;
   border: none;
+  vertical-align: middle;
+  text-align: center;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-bottom: none;
 }
 .trending-up {
   background-color: #f0fff0;

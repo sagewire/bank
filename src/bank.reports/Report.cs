@@ -34,6 +34,29 @@ namespace bank.reports
             }
         }
 
+        private IList<CompanyColumn> _companyColumns;
+        public IList<CompanyColumn> CompanyColumns
+        {
+            get
+            {
+                return _companyColumns = Columns.Where(x => x.ColumnType == ColumnTypes.Company)
+                                .Select(x => (CompanyColumn)x)
+                                .ToList();
+            }
+        }
+
+
+        private IList<PeerGroupColumn> _peerGroupColumns;
+        public IList<PeerGroupColumn> PeerGroupColumns
+        {
+            get
+            {
+                return _peerGroupColumns = Columns.Where(x => x.ColumnType == ColumnTypes.PeerGroup)
+                                .Select(x => (PeerGroupColumn)x)
+                                .ToList();
+            }
+        }
+
         public Report() { }
 
         public Report(string template, IList<Column> columns, IDictionary<string, string> placeholders = null, string section = null)
@@ -99,9 +122,9 @@ namespace bank.reports
 
             IEnumerable<XElement> children;
 
-            
+
             children = element.Elements();
-            
+
 
             foreach (var childElement in children)
             {
@@ -188,8 +211,11 @@ namespace bank.reports
 
             report.MaxPeriod = facts.Max(x => x.Period.Value);
 
-            report.SetFacts(facts);
+            var peerGroupFacts = factRepo.GetPeerGroupFacts(report.ConceptKeys, report.AllPeerGroups(), report.Period);
             
+            report.SetFacts(facts);
+            report.SetFacts(peerGroupFacts);
+
         }
 
         public void SetFacts(IList<Fact> facts)
@@ -349,6 +375,22 @@ namespace bank.reports
 
             Charts.Add(chart.ChartConfig);
 
+        }
+
+        public List<string> AllPeerGroups()
+        {
+            var peerGroups = new List<string>();
+
+            foreach (var column in Columns)
+            {
+                var peerGroupColumn = column as PeerGroupColumn;
+                if (peerGroupColumn != null)
+                {
+                    peerGroups.Add(peerGroupColumn.PeerGroup);
+                }
+            }
+
+            return peerGroups;
         }
 
         public List<int> AllOrganizations()

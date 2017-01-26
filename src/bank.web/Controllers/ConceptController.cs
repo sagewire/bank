@@ -17,7 +17,7 @@ namespace bank.web.Controllers
     public class ConceptController: ApplicationController
     {
 
-        public ActionResult Definition(string type, string id)
+        public ActionResult Definition(string type, string id, string c)
         {
             var originalType = type;
             type = "ubpr" + type.Substring(4);
@@ -34,24 +34,9 @@ namespace bank.web.Controllers
                 Mdrm = type,
                 Definition = def
             };
-
-
             
 
-
-            //var concept = new Concept(type);
-
-            //var chartConfig = new ComboChartConfig();
-            //chartConfig.ChartType = ChartTypes.Combo;
-            //chartConfig.Concepts.Add(concept);
-            //chartConfig.Series = new List<Series>();
-            //chartConfig.Series.Add(new Series(SeriesTypes.AreaSpline));
-            //chartConfig.Series.First().Concepts = chartConfig.Concepts;
-            
-            //model.Chart = chartConfig;
-
-
-            var companyList = DecodeIds(Request.QueryString["c"]);
+            var companyList = DecodeIds(c);
 
             var orgs = orgRepo.GetOrganizations(companyList);
 

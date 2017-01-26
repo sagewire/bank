@@ -164,7 +164,6 @@
     <Compile Include="models\BanksViewModel.cs" />
     <Compile Include="models\BankProfileViewModel.cs" />
     <Compile Include="models\DashboardViewModel.cs" />
-    <Compile Include="models\FactViewModel.cs" />
     <Compile Include="models\HeaderViewModel.cs" />
     <Compile Include="models\SearchViewModel.cs" />
     <Compile Include="models\TableSectionViewModel.cs" />
@@ -214,6 +213,7 @@
     <Content Include="report-templates\call.patch.xml" />
     <Content Include="report-templates\config.xml" />
     <Content Include="report-templates\concept-definition.xml" />
+    <Content Include="report-templates\peer-groups.xml" />
     <Content Include="report-templates\profile-primary.xml" />
     <Content Include="report-templates\profile-secondary.xml" />
     <Content Include="report-templates\profile-sidebar.xml" />
@@ -286,7 +286,6 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <None Include="Properties\PublishProfiles\bank.pubxml" />
-    <Content Include="Views\Fact\Details.cshtml" />
     <Content Include="Views\Report\Viewer.cshtml" />
     <Content Include="Views\Shared\Avatar.cshtml" />
     <Content Include="Views\Directory\Index.cshtml" />
