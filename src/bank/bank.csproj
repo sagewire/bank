@@ -110,6 +110,8 @@
     <Compile Include="poco\Fact.cs" />
     <Compile Include="poco\ConceptDefinition.cs" />
     <Compile Include="poco\Organization.cs" />
+    <Compile Include="poco\PeerGroupCustom.cs" />
+    <Compile Include="poco\PeerGroupCustomMember.cs" />
     <Compile Include="poco\PeerGroupFact.cs" />
     <Compile Include="poco\PeerGroupStandard.cs" />
     <Compile Include="poco\TwitterFriend.cs" />

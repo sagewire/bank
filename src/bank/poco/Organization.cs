@@ -11,6 +11,7 @@ namespace bank.poco
 {
     public class Organization : Address
     {
+        public IList<PeerGroupCustom> CustomPeerGroups { get; set; }
         public int OrganizationId { get; set; }
         //NAME
         public string Name { get; set; }

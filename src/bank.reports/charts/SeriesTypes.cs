@@ -27,6 +27,10 @@ namespace bank.reports.charts
         Spline,
         [EnumMember(Value = "sparkline")]
         Sparkline,
-        Sankey
+        Sankey,
+        [EnumMember(Value = "columnrange")]
+        ColumnRange,
+        [EnumMember(Value = "bubble")]
+        Bubble
     }
 }

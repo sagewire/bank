@@ -11,6 +11,11 @@ namespace bank.poco
     {
         public string PeerGroup { get; set; }
 
+        public double StandardDeviation { get; set; }
+
+        public double MinValue { get; set; }
+        public double MaxValue { get; set; }
+
         public override FactTypes FactType
         {
             get

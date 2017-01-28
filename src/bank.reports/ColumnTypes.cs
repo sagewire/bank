@@ -9,6 +9,7 @@ namespace bank.reports
     public enum ColumnTypes
     {
         Company,
-        PeerGroup
+        PeerGroup,
+        PeerGroupCustom
     }
 }

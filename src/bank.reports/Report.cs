@@ -134,7 +134,7 @@ namespace bank.reports
 
         public static void PopulateReport(Report report)
         {
-            PopulateReports(new Report[] { report });
+            PopulateReports(new Report[] { report }, report.Columns);
         }
 
         private static void PopulateDefinitions(IList<Report> reports, IList<string> conceptKeys)
@@ -170,28 +170,39 @@ namespace bank.reports
             }
         }
 
-        public static void PopulateReports(IList<Report> reports)
+        public static void PopulateReports(IList<Report> reports, IList<Column> columns)
         {
             var conceptKeys = new List<string>();
             var orgs = new List<int>();
+            var peerGroups = new List<string>();
 
             foreach (var report in reports.Where(x => x != null))
             {
                 conceptKeys.AddRange(report.ConceptKeys);
                 orgs.AddRange(report.AllOrganizations());
+                peerGroups.AddRange(report.AllPeerGroups());
             }
 
             conceptKeys = conceptKeys.Distinct().ToList();
 
+            //var factRepo = new FactRepository();
+
+            //var facts = factRepo.GetFacts(conceptKeys, orgs);//, lookback: DateTime.Now.AddQuarters(-12));
+
+
             var tasks = new List<Task>();
 
-            foreach (var report in reports.Where(x => x != null))
+            tasks.Add(Task.Run(() =>
             {
-                tasks.Add(Task.Run(() =>
+                var facts = GetFacts(columns, conceptKeys, orgs, peerGroups, new DateTime(2016, 9, 30));
+
+                foreach (var report in reports.Where(x => x != null))
                 {
-                    PopulateFacts(report);
-                }));
-            }
+                    report.MaxPeriod = facts.Max(x => x.Period.Value);
+                    report.SetFacts(facts);
+                }
+            }));
+
 
             tasks.Add(Task.Run(() =>
             {
@@ -202,21 +213,65 @@ namespace bank.reports
 
         }
 
-
-        private static void PopulateFacts(Report report)
+        private static IList<Fact> GetFacts(IList<Column> columns, IList<string> conceptKeys, IList<int> orgs, IList<string> peerGroups, DateTime? period = null)
         {
-            var factRepo = new FactRepository();
+            var tasks = new List<Task<IList<Fact>>>();
 
-            var facts = factRepo.GetFacts(report.ConceptKeys, report.AllOrganizations(), report.Period);//, lookback: DateTime.Now.AddQuarters(-12));
+            if (columns.Any(x => x.ColumnType == ColumnTypes.Company))
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    var factRepo = new FactRepository();
+                    return factRepo.GetFacts(conceptKeys, orgs, period);//, lookback: DateTime.Now.AddQuarters(-12));
+                }));
+            }
 
-            report.MaxPeriod = facts.Max(x => x.Period.Value);
+            if (columns.Any(x => x.ColumnType == ColumnTypes.PeerGroup))
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    var factRepo = new FactRepository();
+                    return factRepo.GetPeerGroupFacts(conceptKeys, peerGroups, period);//, lookback: DateTime.Now.AddQuarters(-12));
+                }));
+            }
 
-            var peerGroupFacts = factRepo.GetPeerGroupFacts(report.ConceptKeys, report.AllPeerGroups(), report.Period);
-            
-            report.SetFacts(facts);
-            report.SetFacts(peerGroupFacts);
+            if (columns.Any(x => x.ColumnType == ColumnTypes.PeerGroupCustom))
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    var column = columns.First(x => x.ColumnType == ColumnTypes.PeerGroupCustom) as PeerGroupCustomColumn;
 
+                    var factRepo = new FactRepository();
+                    return factRepo.GetPeerGroupCustomFacts(conceptKeys, column.PeerGroupCustom, period: period);//, lookback: DateTime.Now.AddQuarters(-12));
+                }));
+            }
+
+            Task.WaitAll(tasks.ToArray());
+
+            var facts = new List<Fact>();
+
+            foreach (var task in tasks)
+            {
+                facts.AddRange(task.Result);
+            }
+
+            return facts;
         }
+
+        //private static void PopulateFacts(Report report)
+        //{
+        //    var factRepo = new FactRepository();
+
+        //    var facts = factRepo.GetFacts(report.ConceptKeys, report.AllOrganizations(), report.Period);//, lookback: DateTime.Now.AddQuarters(-12));
+
+        //    report.MaxPeriod = facts.Max(x => x.Period.Value);
+
+        //    var peerGroupFacts = factRepo.GetPeerGroupFacts(report.ConceptKeys, report.AllPeerGroups(), report.Period);
+
+        //    report.SetFacts(facts);
+        //    report.SetFacts(peerGroupFacts);
+
+        //}
 
         public void SetFacts(IList<Fact> facts)
         {

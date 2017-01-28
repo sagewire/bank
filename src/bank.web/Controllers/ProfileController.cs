@@ -27,8 +27,7 @@ namespace bank.web.Controllers
             var model = new OrganizationProfileViewModel();
 
             var orgRepo = new OrganizationRepository();
-            var orgs = orgRepo.GetOrganizations(companies);
-            var org = orgs.Single(x => x.OrganizationId == orgId);
+            var org = orgRepo.GetOrganization(orgId, true);
 
 
             var columns = new List<Column>();
@@ -49,6 +48,17 @@ namespace bank.web.Controllers
                 HeaderText = string.Format("Peer Group {0}", statepg.Code)
             });
 
+            foreach(var pg in org.CustomPeerGroups)
+            {
+                columns.Add(new PeerGroupCustomColumn
+                {
+                    PeerGroupCustom = pg,
+                    HeaderText = string.Format("Peer Group {0}", pg.PeerGroupCode)
+                });
+            }
+
+
+
 
             model.PrimaryChart = new Report("profile-primary", columns);
             model.PieCharts = new Report("profile-piecharts", columns);
@@ -68,14 +78,16 @@ namespace bank.web.Controllers
 
 
             var rawReportsTask = Task.Run(() => GetRawReports(orgId));
-            var populateTask = Task.Run(() => Report.PopulateReports(model.Reports));
-            
-            //tasks.Add(orgTask);
+            var populateTask = Task.Run(() => Report.PopulateReports(model.Reports, columns));
+            var orgTask = Task.Run(() => orgRepo.GetOrganizations(companies));
+
+            tasks.Add(orgTask);
             tasks.Add(rawReportsTask);
             tasks.Add(populateTask);
 
             Task.WaitAll(tasks.ToArray());
-            
+
+
             foreach (var column in columns)
             {
                 var companyColumn = column as CompanyColumn;
@@ -84,7 +96,7 @@ namespace bank.web.Controllers
                 {
                     if (companies != null)
                     {
-                        companyColumn.Organization = orgs.Single(x => x.OrganizationId == companyColumn.OrganizationId);
+                        companyColumn.Organization = orgTask.Result.Single(x => x.OrganizationId == companyColumn.OrganizationId);
                     }
                 }
             }

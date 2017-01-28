@@ -51,6 +51,7 @@
     <Compile Include="charts\ChartConfig.cs" />
     <Compile Include="charts\ChartTypes.cs" />
     <Compile Include="charts\ComboChartConfig.cs" />
+    <Compile Include="charts\PointSeriesData.cs" />
     <Compile Include="charts\LineSeriesData.cs" />
     <Compile Include="charts\SankeySeriesData.cs" />
     <Compile Include="charts\PieSeriesData.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Column.cs" />
     <Compile Include="formulas\Global.cs" />
     <Compile Include="LineItemTypes.cs" />
+    <Compile Include="PeerGroupCustomColumn.cs" />
     <Compile Include="PeerGroupColumn.cs" />
     <Compile Include="SubSection.cs" />
     <Compile Include="TableItem.cs" />

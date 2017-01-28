@@ -53,7 +53,7 @@ namespace bank.data.repositories
         }
 
         //exec GetAssetConcentrationPeerGroup 5815, '2016-09-30', 'UBPRE001,UBPRE002,UBPRE003,UBPRE004,UBPRE005,UBPRE006,UBPRE007,UBPRE008,UBPRE009,UBPRE010'
-        public IList<Fact> GetAssetConPeerGroupFacts(IList<string> names, int organizationId, DateTime? period = null, DateTime? lookback = null)
+        public IList<Fact> GetPeerGroupCustomFacts(IList<string> names, PeerGroupCustom peerGroupCustom, DateTime? period = null, DateTime? lookback = null)
         {
             var periodStart = lookback.HasValue ? lookback.Value : new DateTime(1900, 1, 1);
 
@@ -62,16 +62,17 @@ namespace bank.data.repositories
                 conn.Open();
 
                 var facts = conn.Query<PeerGroupFact>(
-                    "GetAssetConcentrationPeerGroup @OrganizationID, @Period, @Names",
+                    "GetPeerGroupCustomFacts",// @OrganizationID, @Period, @Names",
                     new {
-                        Names = names,
-                        OrganizationId = organizationId,
+                        Names = string.Join(",", names),
+                        PeerGroupCustomId = peerGroupCustom.PeerGroupCustomId,
+                        PeerGroupCode = peerGroupCustom.PeerGroupCode,
                         Period = period.Value
                     },
                     commandType: CommandType.StoredProcedure)
                     .ToList();
 
-                var consolidatedFacts = ConsolidatePeerGroupFacts(facts, new string[] { "AssetCon" });
+                var consolidatedFacts = ConsolidatePeerGroupFacts(facts, new string[] { peerGroupCustom.PeerGroupCode });
 
                 return consolidatedFacts;
             }
@@ -79,6 +80,11 @@ namespace bank.data.repositories
 
         private IList<Fact> ConsolidatePeerGroupFacts(IList<PeerGroupFact> facts, IList<string> peerGroups)
         {
+            if (facts == null || !facts.Any())
+            {
+                return new List<Fact>();
+            }
+
             var maxPeriod = facts.Select(x => x.Period.Value).Max();
 
             var consolidatedFacts = new List<Fact>();

@@ -48,6 +48,10 @@ namespace bank.reports.charts
                     seriesData = new LineSeriesData();
                     seriesData.SeriesType = SeriesTypes.Column;
                     break;
+                case SeriesTypes.Bubble:
+                    seriesData = new PointSeriesData();
+                    seriesData.SeriesType = SeriesTypes.Bubble;
+                    break;
                 default:
                     throw new Exception("Series type not supported");
             }

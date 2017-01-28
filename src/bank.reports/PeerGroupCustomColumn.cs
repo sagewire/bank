@@ -7,17 +7,16 @@ using bank.poco;
 
 namespace bank.reports
 {
-    public class PeerGroupColumn : Column
+    public class PeerGroupCustomColumn : Column
     {
 
-        public string PeerGroup { get; set; }
-
-        private ColumnTypes _columnType = ColumnTypes.PeerGroup;
+        public PeerGroupCustom PeerGroupCustom { get; set; }
+        
         public override ColumnTypes ColumnType
         {
             get
             {
-                return _columnType;
+                return ColumnTypes.PeerGroupCustom;
             }
         }
 
@@ -37,7 +36,7 @@ namespace bank.reports
         public override void SetFacts(IList<Fact> facts)
         {
             //var existing = Facts.Select(x => x..Name).Distinct().ToList();
-            var filtered = facts.Where(x => x.FactType == enums.FactTypes.PeerGroup && ((PeerGroupFact)x).PeerGroup == PeerGroup);
+            var filtered = facts.Where(x => x.FactType == enums.FactTypes.PeerGroup && ((PeerGroupFact)x).PeerGroup == PeerGroupCustom.PeerGroupCode);
 
             var distinct = filtered.Distinct().ToList();
 

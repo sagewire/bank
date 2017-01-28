@@ -60,22 +60,55 @@ namespace bank.data.repositories
             }
         }
 
-
-        public IList<Organization> GetOrganizations(IList<int> organizationIds)
+        public Organization GetOrganization(int organizationId, bool loadPeerGroups = false)
         {
+            return GetOrganizations(new int[] { organizationId }, loadPeerGroups)?.First();
+        }
+
+        public IList<Organization> GetOrganizations(IList<int> organizationIds, bool loadPeerGroups = false)
+        {
+            const string orgSql = "select * from Organization where OrganizationID in @OrganizationIDs ";
+            const string peerSql = "select * from PeerGroupCustom where OrganizationID in @OrganizationIDs ";
+            const string peerMemberSql = "select * from PeerGroupCustomMember where PeerGroupCustomID in (select PeerGroupCustomID from PeerGroupCustom where OrganizationID in @OrganizationIDs) ";
+
+            var sb = new StringBuilder();
+
+            sb.AppendLine(orgSql);
+
+            if (loadPeerGroups)
+            {
+                sb.AppendLine(peerSql);
+                sb.AppendLine(peerMemberSql);
+            }
+
             using (var conn = new SqlConnection(Settings.ConnectionString))
             {
                 conn.Open();
-                var orgs = conn.Query<Organization>("select    * " +
-                                              "from   Organization " +
-                                              "where  OrganizationID in @OrganizationIDs ",
-                                                new
-                                                {
-                                                    OrganizationIDs = organizationIds
-                                                },
-                                                commandType: CommandType.Text);
 
-                return orgs.ToList();
+                using (SqlMapper.GridReader multi = conn.QueryMultiple(sb.ToString(), new { OrganizationIDs = organizationIds },
+                    commandTimeout: 100, commandType: CommandType.Text))
+                {
+                    //get entities
+                    var orgs = multi.Read<Organization>().ToList();
+
+                    if (loadPeerGroups)
+                    {
+                        var peerGroups = multi.Read<PeerGroupCustom>().ToList();
+                        var peerGroupMembers = multi.Read<PeerGroupCustomMember>().ToList();
+
+                        foreach (var peerGroup in peerGroups)
+                        {
+                            peerGroup.Members = peerGroupMembers.Where(x => x.PeerGroupCustomId == peerGroup.PeerGroupCustomId).ToList();
+                        }
+
+                        foreach (var org in orgs)
+                        {
+                            org.CustomPeerGroups = peerGroups.Where(x => x.OrganizationId == org.OrganizationId).ToList();
+                        }
+                    }
+
+                    return orgs;
+                }
             }
         }
     }
