@@ -142,9 +142,9 @@ namespace bank.reports
             }
         }
 
-        public static void PopulateReport(Report report)
+        public static void PopulateReport(Report report, DateTime periodStart, DateTime periodEnd)
         {
-            PopulateReports(new Report[] { report }, report.Columns);
+            PopulateReports(new Report[] { report }, report.Columns, periodStart, periodEnd);
         }
 
         private static void PopulateDefinitions(IList<Report> reports, IList<string> conceptKeys)
@@ -180,7 +180,7 @@ namespace bank.reports
             }
         }
 
-        public static void PopulateReports(IList<Report> reports, IList<Column> columns)
+        public static void PopulateReports(IList<Report> reports, IList<Column> columns, DateTime periodStart, DateTime periodEnd)
         {
             var conceptKeys = new List<string>();
             var orgs = new List<int>();
@@ -204,7 +204,7 @@ namespace bank.reports
 
             tasks.Add(Task.Run(() =>
             {
-                var facts = GetFacts(columns, conceptKeys, orgs, peerGroups, new DateTime(2016, 9, 30));
+                var facts = GetFacts(columns, conceptKeys, orgs, peerGroups, periodStart, periodEnd);
 
                 foreach (var report in reports.Where(x => x != null))
                 {
@@ -223,7 +223,7 @@ namespace bank.reports
 
         }
 
-        private static IList<Fact> GetFacts(IList<Column> columns, IList<string> conceptKeys, IList<int> orgs, IList<string> peerGroups, DateTime? period = null)
+        private static IList<Fact> GetFacts(IList<Column> columns, IList<string> conceptKeys, IList<int> orgs, IList<string> peerGroups, DateTime periodStart, DateTime periodEnd)
         {
             var tasks = new List<Task<IList<Fact>>>();
 
@@ -232,7 +232,7 @@ namespace bank.reports
                 tasks.Add(Task.Run(() =>
                 {
                     var factRepo = new FactRepository();
-                    return factRepo.GetFacts(conceptKeys, orgs, period);//, lookback: DateTime.Now.AddQuarters(-12));
+                    return factRepo.GetFacts(conceptKeys, orgs, periodStart, periodEnd);//, lookback: DateTime.Now.AddQuarters(-12));
                 }));
             }
 
@@ -241,7 +241,7 @@ namespace bank.reports
                 tasks.Add(Task.Run(() =>
                 {
                     var factRepo = new FactRepository();
-                    return factRepo.GetPeerGroupFacts(conceptKeys, peerGroups, period);//, lookback: DateTime.Now.AddQuarters(-12));
+                    return factRepo.GetPeerGroupFacts(conceptKeys, peerGroups, periodStart, periodEnd);//, lookback: DateTime.Now.AddQuarters(-12));
                 }));
             }
 
@@ -252,7 +252,7 @@ namespace bank.reports
                     var column = columns.First(x => x.ColumnType == ColumnTypes.PeerGroupCustom) as PeerGroupCustomColumn;
 
                     var factRepo = new FactRepository();
-                    return factRepo.GetPeerGroupCustomFacts(conceptKeys, column.PeerGroupCustom, period: period);//, lookback: DateTime.Now.AddQuarters(-12));
+                    return factRepo.GetPeerGroupCustomFacts(conceptKeys, column.PeerGroupCustom, periodStart, periodEnd);//, lookback: DateTime.Now.AddQuarters(-12));
                 }));
             }
 

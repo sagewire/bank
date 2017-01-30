@@ -53,10 +53,9 @@ namespace bank.data.repositories
         }
 
         //exec GetAssetConcentrationPeerGroup 5815, '2016-09-30', 'UBPRE001,UBPRE002,UBPRE003,UBPRE004,UBPRE005,UBPRE006,UBPRE007,UBPRE008,UBPRE009,UBPRE010'
-        public IList<Fact> GetPeerGroupCustomFacts(IList<string> names, PeerGroupCustom peerGroupCustom, DateTime? period = null, DateTime? lookback = null)
+        public IList<Fact> GetPeerGroupCustomFacts(IList<string> names, PeerGroupCustom peerGroupCustom, DateTime periodStart, DateTime periodEnd)
         {
-            var periodStart = lookback.HasValue ? lookback.Value : new DateTime(1900, 1, 1);
-
+            
             using (var conn = new SqlConnection(Settings.ConnectionString))
             {
                 conn.Open();
@@ -67,7 +66,8 @@ namespace bank.data.repositories
                         Names = string.Join(",", names),
                         PeerGroupCustomId = peerGroupCustom.PeerGroupCustomId,
                         PeerGroupCode = peerGroupCustom.PeerGroupCode,
-                        Period = period.Value
+                        PeriodStart = periodStart,
+                        PeriodEnd = periodEnd
                     },
                     commandType: CommandType.StoredProcedure)
                     .ToList();
@@ -112,11 +112,8 @@ namespace bank.data.repositories
             return consolidatedFacts;
         }
 
-        public IList<Fact> GetPeerGroupFacts(IList<string> names, IList<string> peerGroups, DateTime? period = null, DateTime? lookback = null)
+        public IList<Fact> GetPeerGroupFacts(IList<string> names, IList<string> peerGroups, DateTime periodStart, DateTime periodEnd)
         {
-            var periodEnd = SetPeriodEnd(period);
-
-            var periodStart = lookback.HasValue ? lookback.Value : new DateTime(1900, 1, 1);
 
             IList<PeerGroupFact> facts;
 
@@ -148,11 +145,11 @@ namespace bank.data.repositories
 
         }
 
-        public IList<Fact> GetFacts(IList<string> names, IList<int> organizationIds, DateTime? period = null, DateTime? lookback = null)
+        public IList<Fact> GetFacts(IList<string> names, IList<int> organizationIds, DateTime periodStart, DateTime periodEnd)
         {
-            var periodEnd = SetPeriodEnd(period);
+            //var periodEnd = SetPeriodEnd(period);
 
-            var periodStart = lookback.HasValue ? lookback.Value : new DateTime(1900, 1, 1);
+            //var periodStart = lookback.HasValue ? lookback.Value : new DateTime(1900, 1, 1);
 
             using (var conn = new SqlConnection(Settings.ConnectionString))
             {
@@ -238,33 +235,33 @@ namespace bank.data.repositories
             }
         }
 
-        public IList<CompanyFact> GetReports(int organizationId)
-        {
-            var names = new string[]
-            {
-                "RCONC752",
-                "RCONA346",
-                "UBPRC752"
-            };
+        //public IList<CompanyFact> GetReports(int organizationId)
+        //{
+        //    var names = new string[]
+        //    {
+        //        "RCONC752",
+        //        "RCONA346",
+        //        "UBPRC752"
+        //    };
 
-            using (var conn = new SqlConnection(Settings.ConnectionString))
-            {
-                conn.Open();
-                var facts = conn.Query<CompanyFact>("  select  * " +
-                                                "from   Fact " +
-                                                "where  OrganizationID = @OrganizationID " +
-                                                "   and Name in @Names " +
-                                                "order by Period desc"
-                                                , new
-                                                {
-                                                    Names = names,
-                                                    OrganizationID = organizationId
-                                                },
-                                                commandType: CommandType.Text);
+        //    using (var conn = new SqlConnection(Settings.ConnectionString))
+        //    {
+        //        conn.Open();
+        //        var facts = conn.Query<CompanyFact>("  select  * " +
+        //                                        "from   Fact " +
+        //                                        "where  OrganizationID = @OrganizationID " +
+        //                                        "   and Name in @Names " +
+        //                                        "order by Period desc"
+        //                                        , new
+        //                                        {
+        //                                            Names = names,
+        //                                            OrganizationID = organizationId
+        //                                        },
+        //                                        commandType: CommandType.Text);
 
-                return facts.ToList();
-            }
-        }
+        //        return facts.ToList();
+        //    }
+        //}
 
         //public void PopulateChart(ChartConfig configuration, DateTime? currentPeriod = null)
         //{

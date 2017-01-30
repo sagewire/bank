@@ -14,6 +14,9 @@ $(function () {
             },
             skipClone: true
         },
+        lang: {
+            thousandsSep: ","
+        },
         title: {
             text: ''
         },
@@ -53,8 +56,23 @@ $(function () {
         legend: {
             enabled: false
         },
+        //tooltip: {
+        //    shared: true
+        //},
         tooltip: {
-            shared: true
+            
+            formatter: function () {
+                console.log(this);
+                var name = this.series.name;
+                var key = this.key;
+
+                if ($.isNumeric(key)) {
+                    key = "";
+                }
+
+                return '<b>' + name + '</b><br/><i>' + key + "</i><br/>" +
+                    Highcharts.dateFormat('%e-%b-%Y', new Date(this.x)) + '<br/> Value: ' + Highcharts.numberFormat(this.y, 0,"", ",")  + ' ';
+            }
         },
         plotOptions: {
             pie: {

@@ -27,6 +27,7 @@ namespace bank.web.Controllers
             var orgRepo = new OrganizationRepository();
 
 
+
             var def = mdrmRepo.Get(type);
 
             var model = new ConceptDefinitionViewModel
@@ -65,8 +66,10 @@ namespace bank.web.Controllers
 
             var report = new Report("concept-definition", columns, placeholders);
 
+            var periodStart = primaryOrg.ReportImports.Select(x => x.Quarter).Min();
+            var periodEnd = primaryOrg.ReportImports.Select(x => x.Quarter).Max();
 
-            Report.PopulateReport(report);
+            Report.PopulateReport(report, periodStart, periodEnd);
             model.Report = report;
             
 

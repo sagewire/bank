@@ -60,16 +60,17 @@ namespace bank.data.repositories
             }
         }
 
-        public Organization GetOrganization(int organizationId, bool loadPeerGroups = false)
+        public Organization GetOrganization(int organizationId, bool loadPeerGroups = false, bool loadReportList = false)
         {
-            return GetOrganizations(new int[] { organizationId }, loadPeerGroups)?.First();
+            return GetOrganizations(new int[] { organizationId }, loadPeerGroups, loadReportList)?.First();
         }
 
-        public IList<Organization> GetOrganizations(IList<int> organizationIds, bool loadPeerGroups = false)
+        public IList<Organization> GetOrganizations(IList<int> organizationIds, bool loadPeerGroups = false, bool loadReportList = false)
         {
             const string orgSql = "select * from Organization where OrganizationID in @OrganizationIDs ";
             const string peerSql = "select * from PeerGroupCustom where OrganizationID in @OrganizationIDs ";
             const string peerMemberSql = "select * from PeerGroupCustomMember where PeerGroupCustomID in (select PeerGroupCustomID from PeerGroupCustom where OrganizationID in @OrganizationIDs) ";
+            const string reportListSql = "select * from ReportImport where OrganizationID in @OrganizationIds";
 
             var sb = new StringBuilder();
 
@@ -79,6 +80,11 @@ namespace bank.data.repositories
             {
                 sb.AppendLine(peerSql);
                 sb.AppendLine(peerMemberSql);
+            }
+
+            if (loadReportList)
+            {
+                sb.AppendLine(reportListSql);
             }
 
             using (var conn = new SqlConnection(Settings.ConnectionString))
@@ -104,6 +110,16 @@ namespace bank.data.repositories
                         foreach (var org in orgs)
                         {
                             org.CustomPeerGroups = peerGroups.Where(x => x.OrganizationId == org.OrganizationId).ToList();
+                        }
+                    }
+
+                    if (loadReportList)
+                    {
+                        var reportList = multi.Read<ReportImport>().ToList();
+
+                        foreach (var org in orgs)
+                        {
+                            org.ReportImports = reportList.Where(x => x.OrganizationId == org.OrganizationId).ToList();
                         }
                     }
 

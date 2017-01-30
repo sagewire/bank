@@ -33,7 +33,7 @@ namespace poc
             report.Template = "financial-highlights";
             report.Parse();
 
-            Report.PopulateReport(report);
+            //Report.PopulateReport(report);
             
             Write(report);
             

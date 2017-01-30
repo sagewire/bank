@@ -64,8 +64,11 @@ namespace bank.web.Controllers
         protected void PopulateReportsAndColumns(int orgId, IList<int> companies, IReports model)
         {
             var orgRepo = new OrganizationRepository();
-            var org = orgRepo.GetOrganization(orgId, true);
+            var org = orgRepo.GetOrganization(orgId, true, true);
 
+            var periodStart = org.ReportImports.Select(x => x.Quarter).Min();
+            var periodEnd = org.ReportImports.Select(x => x.Quarter).Max();
+                
             var columns = new List<Column>();
 
             foreach (var companyId in companies)
@@ -100,7 +103,7 @@ namespace bank.web.Controllers
 
             var tasks = new List<Task>();
             
-            var populateTask = Task.Run(() => Report.PopulateReports(model.Reports, columns));
+            var populateTask = Task.Run(() => Report.PopulateReports(model.Reports, columns, periodStart, periodEnd));
             var orgTask = Task.Run(() => orgRepo.GetOrganizations(companies));
 
             tasks.Add(orgTask);

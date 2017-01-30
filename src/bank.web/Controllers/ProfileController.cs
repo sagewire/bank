@@ -35,41 +35,38 @@ namespace bank.web.Controllers
             var tasks = new List<Task>();
 
             var modelTask = Task.Run(()=> PopulateReportsAndColumns(orgId, companies, model));
-            var rawReportsTask = Task.Run(() => GetRawReports(orgId));
+            //var rawReportsTask = Task.Run(() => GetRawReports(orgId));
             
-            tasks.Add(rawReportsTask);
+            //tasks.Add(rawReportsTask);
             tasks.Add(modelTask);
 
             Task.WaitAll(tasks.ToArray());
 
-            model.RawReports = rawReportsTask.Result;
+            model.RawReports = RawReports(model.Organization);
  
             ViewBag.Title = model.Title;
             return View(model);
 
         }
 
-        private IList<ReportListViewModel> GetRawReports(int orgId)
+        private IList<ReportListViewModel> RawReports(Organization org)
         {
-            var factRepo = new FactRepository();
-            var reports = factRepo.GetReports(orgId);
-
             var list = new Dictionary<DateTime, ReportListViewModel>();
 
-            foreach (var report in reports)
+            foreach (var report in org.ReportImports)
             {
                 ReportListViewModel item = null;
-                if (list.ContainsKey(report.Period.Value))
+                if (list.ContainsKey(report.Quarter))
                 {
-                    item = list[report.Period.Value];
+                    item = list[report.Quarter];
                 }
                 else
                 {
                     item = new ReportListViewModel();
-                    item.Period = report.Period.Value;
+                    item.Period = report.Quarter;
                     list.Add(item.Period, item);
                 }
-                item.ReportsAvailable.Add(ReportType.Parse(report.Name));
+                item.ReportsAvailable.Add(report.ReportType);
 
             }
 

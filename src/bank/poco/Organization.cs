@@ -226,6 +226,8 @@ namespace bank.poco
             }
         }
 
+        public List<ReportImport> ReportImports { get; internal set; }
+
         //public string AvatarImageUrl
         //{
         //    get
