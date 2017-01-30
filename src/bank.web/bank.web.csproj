@@ -157,6 +157,7 @@
     <Compile Include="models\BankBasicsViewModel.cs" />
     <Compile Include="models\ChartItemViewModel.cs" />
     <Compile Include="models\ConceptDefinitionViewModel.cs" />
+    <Compile Include="models\IReports.cs" />
     <Compile Include="models\OrganizationProfileViewModel.cs" />
     <Compile Include="models\LineItemViewModel.cs" />
     <Compile Include="models\ReportNavigationViewModel.cs" />

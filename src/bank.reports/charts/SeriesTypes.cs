@@ -31,6 +31,10 @@ namespace bank.reports.charts
         [EnumMember(Value = "columnrange")]
         ColumnRange,
         [EnumMember(Value = "bubble")]
-        Bubble
+        Bubble,
+        [EnumMember(Value = "areasplinerange")]
+        AreaSplineRange,
+        [EnumMember(Value = "arearange")]
+        AreaRange
     }
 }

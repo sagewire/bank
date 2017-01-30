@@ -100,9 +100,9 @@ namespace bank.data.repositories
                                                 x.Period <= fact.Period &&
                                                 x.PeerGroup == peerGroup &&
                                                 x.NumericValue.HasValue)
-                                                .ToDictionary(x => x.Period.Value, x => x.NumericValue.Value);
+                                                .ToDictionary(x => x.Period.Value, x => (Fact)x);
 
-                    fact.HistoricalData = new SortedDictionary<DateTime, decimal>(d);
+                    fact.HistoricalData = new SortedDictionary<DateTime, Fact>(d);
                 }
 
                 consolidatedFacts.AddRange(current);
@@ -189,9 +189,9 @@ namespace bank.data.repositories
                                                     x.Period <= fact.Period &&
                                                     x.OrganizationId == orgId &&
                                                     x.NumericValue.HasValue)
-                                                    .ToDictionary(x => x.Period.Value, x => x.NumericValue.Value);
+                                                    .ToDictionary(x => x.Period.Value, x => (Fact)x);
 
-                        fact.HistoricalData = new SortedDictionary<DateTime, decimal>(d);
+                        fact.HistoricalData = new SortedDictionary<DateTime, Fact>(d);
                     }
 
                     consolidatedFacts.AddRange(current);

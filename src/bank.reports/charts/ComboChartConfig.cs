@@ -19,14 +19,25 @@ namespace bank.reports.charts
 
         public override IList<SeriesData> GetSeriesData(Column column)
         {
-            var list = new List<SeriesData>();
+            return GetSeriesData(new Column[] { column });
+            //var list = new List<SeriesData>();
 
-            foreach (var series in Series)
-            {
-                list.Add(series.GetSeriesData(this, column));
-            }
+            //foreach (var series in Series)
+            //{
+            //    var seriesData = series.GetSeriesData(this, column);
 
-            return list;
+            //    if (seriesData == null) continue;
+
+            //    list.Add(seriesData);
+
+            //    if (seriesData.IsRange)
+            //    {
+            //        var rangeData = seriesData as RangeSeriesData;
+            //        list.Add(rangeData.PointSeriesData);
+            //    }
+            //}
+
+            //return list;
         }
 
         public override IList<SeriesData> GetSeriesData(IList<Column> columns)
@@ -54,7 +65,17 @@ namespace bank.reports.charts
 
                     if (addColumn)
                     {
-                        list.Add(series.GetSeriesData(this, column));
+                        var seriesData = series.GetSeriesData(this, column);
+
+                        if (seriesData == null) continue;
+
+                        list.Add(seriesData);
+
+                        if (seriesData.IsRange)
+                        {
+                            var rangeData = seriesData as RangeSeriesData;
+                            list.Add(rangeData.PointSeriesData);
+                        }
                     }
 
                     counter++;
@@ -85,6 +106,7 @@ namespace bank.reports.charts
                 var series = new charts.Series(type);
                 series.ColumnIndex = seriesElement.SafeLongAttributeValue("column");
                 series.ColumnStart = seriesElement.SafeLongAttributeValue("column-start");
+                series.zIndex = (int?)seriesElement.SafeLongAttributeValue("z-index");
 
                 var concepts = seriesElement.Elements("concept");
 

@@ -18,126 +18,88 @@ namespace bank.web.Controllers
 
         public ActionResult Viewer(string name, string id, DateTime? period, string template, string section, string c = null)
         {
-            var isCurrentPeriod = false;
-            if (!period.HasValue)
-            {
-                period = DateTime.Now.LastQuarterDate();
-                isCurrentPeriod = true;
-            }
-
             var orgId = DecodeId(id);
             var companies = new List<int>();
             companies.Add(orgId);
+            var model = new ReportViewModel();
             companies.AddRange(DecodeIds(c));
 
-            var model = new ReportViewModel();
-            model.Companies = c;
+            model.Report = new Report(template, section: section);
 
-            var columns = new List<Column>();
-
-            foreach (var companyId in companies)
-            {
-                columns.Add(new CompanyColumn
-                {
-                    OrganizationId = companyId
-                });
-            }
-
-            model.Report = new Report(template, columns, section: section);
-            model.Report.IsCurrentPeriod = isCurrentPeriod;
-            model.Report.Period = period.Value;
 
             var tasks = new List<Task>();
 
-            var orgTask = Task.Run(() =>
-            {
-                var orgRepo = new OrganizationRepository();
-                var orgs = orgRepo.GetOrganizations(companies);
-                return orgs;
-            });
+            var modelTask = Task.Run(() => PopulateReportsAndColumns(orgId, companies, model));
 
-
-            var populateTask = Task.Run(() =>
-            {
-                Report.PopulateReport(model.Report);
-            });
-
-            tasks.Add(orgTask);
-            tasks.Add(populateTask);
+            tasks.Add(modelTask);
 
             Task.WaitAll(tasks.ToArray());
-
-            foreach (var column in columns)
-            {
-                var companyColumn = column as CompanyColumn;
-                if (companies != null)
-                {
-                    companyColumn.Organization = orgTask.Result.Single(x => x.OrganizationId == companyColumn.OrganizationId);
-                }
-            }
-
-            var org = orgTask.Result.Single(x => x.OrganizationId == orgId);
-            model.Organization = org;
-
-            //ViewBag.Title = model.Title;
+            
             return View(model);
 
-            //var factRepo = new FactRepository();
-
-            //var report = new bank.reports.Report();
-            //report.Template = template;
-            //report.Parse();
-            //report.CurrentSection = section;
-            //report.IsCurrentPeriod = isCurrentPeriod;
-
-            //var tasks = new List<Task<FactColumn>>();
-
-            //var orgRepo = new OrganizationRepository();
-            //var orgs = orgRepo.GetOrganizations(companies.ToArray());
-            //var mdrmList = report.MdrmList(report.CurrentSectionLineItem);
-
-
-
-            //foreach (var company in companies)
+            //var isCurrentPeriod = false;
+            //if (!period.HasValue)
             //{
-            //    var task = Task<FactColumn>.Run(() =>
+            //    period = DateTime.Now.LastQuarterDate();
+            //    isCurrentPeriod = true;
+            //}
+
+            //var orgId = DecodeId(id);
+            //var companies = new List<int>();
+            //companies.Add(orgId);
+            //companies.AddRange(DecodeIds(c));
+
+            //var model = new ReportViewModel();
+            //model.Companies = c;
+
+            //var columns = new List<Column>();
+
+            //foreach (var companyId in companies)
+            //{
+            //    columns.Add(new CompanyColumn
             //    {
-            //        var facts = factRepo.GetFacts(mdrmList.ToArray(), new int[] { company }, period, period.Value.AddYears(-2));
-
-            //        var maxPeriod = facts.Max(x => x.Period).Value;
-
-            //        var factColumn = new CompanyFactColumn
-            //        {
-            //            Facts = facts.Where(x => x.Period == maxPeriod).ToDictionary(x => x.Name, x => x),
-            //            Organization = orgs.Single(x => x.OrganizationId == company)
-            //        };
-
-            //        factColumn.HeaderUrl = Url.Url(factColumn.Organization);
-
-            //        return (FactColumn)factColumn;
+            //        OrganizationId = companyId
             //    });
-            //    tasks.Add(task);
             //}
 
-            //var allTasks = new List<Task>();
-            ////allTasks.Add(loadDefinitionsTask);
-            //allTasks.AddRange(tasks);
+            //model.Report = new Report(template, columns, section: section);
+            //model.Report.IsCurrentPeriod = isCurrentPeriod;
+            //model.Report.Period = period.Value;
 
-            //Task.WaitAll(allTasks.ToArray());
+            //var tasks = new List<Task>();
 
-            //foreach (var task in tasks)
+            //var orgTask = Task.Run(() =>
             //{
-            //    report.AddColumn(task.Result);
+            //    var orgRepo = new OrganizationRepository();
+            //    var orgs = orgRepo.GetOrganizations(companies);
+            //    return orgs;
+            //});
+
+
+            //var populateTask = Task.Run(() =>
+            //{
+            //    Report.PopulateReport(model.Report);
+            //});
+
+            //tasks.Add(orgTask);
+            //tasks.Add(populateTask);
+
+            //Task.WaitAll(tasks.ToArray());
+
+            //foreach (var column in columns)
+            //{
+            //    var companyColumn = column as CompanyColumn;
+            //    if (companies != null)
+            //    {
+            //        companyColumn.Organization = orgTask.Result.Single(x => x.OrganizationId == companyColumn.OrganizationId);
+            //    }
             //}
 
-            //var model = new ReportViewModel
-            //{
-            //    Period = period,
-            //    Report = report,
-            //    Organization = orgs.Single(x=>x.OrganizationId == DecodeId(id))
-            //};
+            //var org = orgTask.Result.Single(x => x.OrganizationId == orgId);
+            //model.Organization = org;
 
             //return View(model);
+
         }
 
     }

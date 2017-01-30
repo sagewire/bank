@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using bank.data.repositories;
+using bank.reports;
+using bank.reports.formulas;
 using bank.utilities;
+using bank.web.models;
 
 namespace bank.web.Controllers
 {
@@ -54,6 +59,86 @@ namespace bank.web.Controllers
 
                 return sw.GetStringBuilder().ToString();
             }
+        }
+
+        protected void PopulateReportsAndColumns(int orgId, IList<int> companies, IReports model)
+        {
+            var orgRepo = new OrganizationRepository();
+            var org = orgRepo.GetOrganization(orgId, true);
+
+            var columns = new List<Column>();
+
+            foreach (var companyId in companies)
+            {
+                columns.Add(new CompanyColumn
+                {
+                    OrganizationId = companyId
+                });
+            }
+
+            var statepg = Global.PeerGroups[org.StatePeerGroup];
+
+            columns.Add(new PeerGroupColumn
+            {
+                PeerGroup = statepg.Code,
+                HeaderText = string.Format("Peer Group {0}", statepg.Code)
+            });
+
+            foreach (var pg in org.CustomPeerGroups)
+            {
+                columns.Add(new PeerGroupCustomColumn
+                {
+                    PeerGroupCustom = pg,
+                    HeaderText = string.Format("Peer Group {0}", pg.PeerGroupCode)
+                });
+            }
+
+            foreach(var report in model.Reports)
+            {
+                report.Columns = columns;
+            }
+
+            var tasks = new List<Task>();
+            
+            var populateTask = Task.Run(() => Report.PopulateReports(model.Reports, columns));
+            var orgTask = Task.Run(() => orgRepo.GetOrganizations(companies));
+
+            tasks.Add(orgTask);
+            tasks.Add(populateTask);
+
+            foreach (var column in columns)
+            {
+                var companyColumn = column as CompanyColumn;
+
+                if (companyColumn != null)
+                {
+                    if (companies != null)
+                    {
+                        companyColumn.Organization = orgTask.Result.Single(x => x.OrganizationId == companyColumn.OrganizationId);
+                    }
+                }
+            }
+
+
+            Task.WaitAll(tasks.ToArray());
+
+
+            foreach (var column in columns)
+            {
+                var companyColumn = column as CompanyColumn;
+
+                if (companyColumn != null)
+                {
+                    if (companies != null)
+                    {
+                        companyColumn.Organization = orgTask.Result.Single(x => x.OrganizationId == companyColumn.OrganizationId);
+                    }
+                }
+            }
+
+
+            model.Organization = org;
+
         }
     }
 

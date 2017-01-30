@@ -111,6 +111,8 @@ a:hover {
 .top-row .main-column,
 .top-row .sidebar-column {
   min-height: 570px;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 .top-row .highlight-item {
   padding: 0;
@@ -128,14 +130,12 @@ a:hover {
 }
 .top-row .highlight-item .main-chart {
   height: 20vh;
-  position: absolute;
-  bottom: 0;
   left: 0;
   right: 0;
-  opacity: .8;
-}
-.top-row .highlight-item .main-chart:hover {
-  opacity: 1;
+  /*opacity: .8;*/
+  /*&:hover {
+                opacity: 1;
+            }*/
 }
 .top-row .highlight-item .pie-chart {
   height: 150px;

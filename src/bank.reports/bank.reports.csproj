@@ -51,6 +51,7 @@
     <Compile Include="charts\ChartConfig.cs" />
     <Compile Include="charts\ChartTypes.cs" />
     <Compile Include="charts\ComboChartConfig.cs" />
+    <Compile Include="charts\RangeSeriesData.cs" />
     <Compile Include="charts\PointSeriesData.cs" />
     <Compile Include="charts\LineSeriesData.cs" />
     <Compile Include="charts\SankeySeriesData.cs" />

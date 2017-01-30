@@ -21,7 +21,9 @@ $(function () {
             enabled: false
         },
         xAxis: {
-            lineColor: 'transparent',
+            lineWidth: 0,
+            gridLineWidth: 0,
+            gridLineColor: 'transparent',
             type: "datetime",
             labels: {
                 enabled: false
@@ -46,7 +48,7 @@ $(function () {
             title: {
                 text: null
             },
-            tickPositions: [0]
+            tickPositions: []
         },
         legend: {
             enabled: false
@@ -74,20 +76,20 @@ $(function () {
                 animation: {
                     duration: 1750
                 },
-                lineColor: "#FF3B3F",
+                lineWidth: 2,
+                //lineColor: "transparent",
                 shadow: false,
                 states: {
                     hover: {
-                        lineWidth: 0
+                        lineWidth: 2
                     }
                 },
                 marker: {
                     radius: 0,
+                    symbol: "circle",
                     states: {
                         hover: {
-                            fillColor: "#57A8ED",
-                            lineColor: "#F6F67A",
-                            radius: 20
+                            radius: 5
                         }
                     }
                 },
@@ -106,17 +108,17 @@ $(function () {
         if (pending) {
             return;
         }
-        
+
         lastHover = this;
         var thisHover = this;
-        
+
         pending = true;
 
         setTimeout(function () {
 
-            
+
             if (lastHover === thisHover) {
-                
+
                 //console.log('starting timer');
                 //console.log(thisHover);
                 //console.log(lastHover);
@@ -155,7 +157,7 @@ $(function () {
 });
 
 $(function () {
-    
+
 
     $("[data-chart-type='sankey']").each(function (index, element) {
 
@@ -167,31 +169,35 @@ $(function () {
     });
 
     $("[data-chart-type='combo']").each(function (index, element) {
-        
+
         $(this).highcharts('Combo', {
 
         });
-         
+
     });
 
 
     $('[data-chart-type="primary"]').highcharts('Combo', {
-        
+
         plotOptions: {
             areaspline: {
                 lineWidth: 0,
+            }
+        },
+        series: [
+            {
                 fillColor: {
                     linearGradient: { x1: .2, x2: 0, y1: 0, y2: .75 },
 
                     stops: [
-                        [0, '#2E96EA'],
-                        [1, '#30C8CA']
+                        [0, Highcharts.Color('#2E96EA').setOpacity(.70).get('rgba')],
+                        [1, Highcharts.Color('#30C8CA').setOpacity(.70).get('rgba')]
                     ]
                 }
             }
-        }
+        ]
     });
-    
+
 
     function drawSankeyChart(element) {
         var d = $(element).data("series")
@@ -249,7 +255,7 @@ $(function () {
 jQuery.fn.exists = function () { return this.length > 0; }
 
 Highcharts.Combo = function (elem, b, c) {
-    
+
     var hasRenderToArg = typeof elem === 'string' || elem.nodeName,
     options = arguments[hasRenderToArg ? 1 : 0],
     defaultOptions = {
@@ -260,13 +266,19 @@ Highcharts.Combo = function (elem, b, c) {
         series: [],
 
     };
-    
+
     options = Highcharts.merge(defaultOptions, options);
 
     var seriesData = $(elem).data("series");
 
+    var counter = 0;
+    $.each(seriesData, function (index, value) {
+        var def = options.series[counter++];
+        $.extend(true, value, def);
+    });
+
+
     options.series = seriesData;
-    
 
     return hasRenderToArg ?
         new Highcharts.Chart(elem, options, c) :

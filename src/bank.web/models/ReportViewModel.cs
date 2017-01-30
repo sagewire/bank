@@ -7,7 +7,7 @@ using bank.reports;
 
 namespace bank.web.models
 {
-    public class ReportViewModel
+    public class ReportViewModel : IReports
     {
         public Organization Organization { get; set; }
         public DateTime? Period { get; internal set; }
@@ -15,5 +15,12 @@ namespace bank.web.models
 
         public string Companies { get; set; }
 
+        public IList<Report> Reports
+        {
+            get
+            {
+                return new Report[] { Report };
+            }
+        }
     }
 }

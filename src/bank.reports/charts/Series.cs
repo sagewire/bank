@@ -20,6 +20,7 @@ namespace bank.reports.charts
         public IList<Concept> Concepts { get; set; } = new List<Concept>();
         public long? ColumnIndex { get; internal set; }
         public long? ColumnStart { get; internal set; }
+        public int? zIndex{ get; internal set; }
 
         public Series(SeriesTypes type)
         {
@@ -28,6 +29,11 @@ namespace bank.reports.charts
 
         public SeriesData GetSeriesData(ChartConfig chart, Column column)
         {
+            if (column.Facts == null || !column.Facts.Any())
+            {
+                return null;
+            }
+
             SeriesData seriesData;
             switch (Type)
             {
@@ -52,12 +58,17 @@ namespace bank.reports.charts
                     seriesData = new PointSeriesData();
                     seriesData.SeriesType = SeriesTypes.Bubble;
                     break;
+                case SeriesTypes.AreaRange:
+                    seriesData = new RangeSeriesData();
+                    seriesData.SeriesType = SeriesTypes.AreaRange;
+                    break;
                 default:
                     throw new Exception("Series type not supported");
             }
             seriesData.Chart = chart;
             seriesData.Column = column;
             seriesData.Series = this;
+            seriesData.zIndex = this.zIndex;
             seriesData.Init();
 
             return seriesData;

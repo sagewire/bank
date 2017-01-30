@@ -25,8 +25,21 @@ namespace bank.poco
         /// Number of quarters in the past to compare too.
         /// </summary>
         public int TrendPeriodInterval { get; set; } = 4;
-        public SortedDictionary<DateTime, decimal> HistoricalData { get; set; } = new SortedDictionary<DateTime, decimal>();
+        public SortedDictionary<DateTime, Fact> HistoricalData { get; set; } = new SortedDictionary<DateTime, Fact>();
         
+        public static Fact Build(FactTypes type)
+        {
+            switch(type)
+            {
+                case FactTypes.Company:
+                    return new Fact();
+                case FactTypes.PeerGroup:
+                    return new PeerGroupFact();
+                default:
+                    throw new NotSupportedException();
+            }
+        }
+
         public string ValueFormatted
         {
             get
@@ -105,9 +118,9 @@ namespace bank.poco
                 if (HistoricalData.ContainsKey(previousPeriod))
                 {
                     var previousValue = HistoricalData[previousPeriod];
-                    if (NumericValue.HasValue && previousValue > 0)
+                    if (NumericValue.HasValue && previousValue.NumericValue.Value > 0)
                     {
-                        return (NumericValue.Value - previousValue) / previousValue;
+                        return (NumericValue.Value - previousValue.NumericValue.Value) / previousValue.NumericValue.Value;
                     }
                 }
 

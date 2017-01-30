@@ -7,7 +7,7 @@
             <h3>@Model.Report.Title</h3>
         </td>
 
-        @foreach (var column in Model.Report.Columns)
+        @foreach (var column in Model.Report.VisibleColumns)
             {
                 var company = column as CompanyColumn;
 

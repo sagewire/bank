@@ -10,9 +10,13 @@
 
             <h4 class="chart-title">@Model.PrimaryChart.Title</h4>
 
+            @Html.Partial("_Report", new ReportViewModel { Report = Model.PieCharts })
+
+
+
+
             @Html.Partial("_Report", new ReportViewModel { Report = Model.PrimaryChart })
 
-            @Html.Partial("_Report", new ReportViewModel { Report = Model.PieCharts})
 
         </div>
     </div>

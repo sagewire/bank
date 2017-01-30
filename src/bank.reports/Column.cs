@@ -17,9 +17,17 @@ namespace bank.reports
         public List<Fact> GetFacts(IList<string> keys)
         {
             var facts = Facts.Where(x => keys.Contains(x.Key));
-            return facts.Select(x=>x.Value).ToList();
+            return facts.Select(x => x.Value).ToList();
         }
 
         public abstract string HeaderText { get; set; }
+
+        public bool ShowColumn
+        {
+            get
+            {
+                return Facts != null && Facts.Any();
+            }
+        }
     }
 }

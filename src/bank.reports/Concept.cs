@@ -63,7 +63,13 @@ namespace bank.reports
 
         public Fact PrepareFact(IList<Fact> facts)
         {
+            if (!facts.Any())
+            {
+                return null;
+            }
+
             var resolver = new FactResolver();
+            var factType = facts.First().FactType;
 
             var result = resolver.Evaluate(Value, facts.ToDictionary(x => x.Name, x => x));
 
@@ -72,9 +78,19 @@ namespace bank.reports
                 return null;
             }
 
-            var preparedFact = new Fact();
+            var preparedFact = Fact.Build(factType);
             preparedFact.NumericValue = (decimal)result;
             preparedFact.Period = facts.First().Period;
+
+            var peerGroupFact = preparedFact as PeerGroupFact;
+
+            if (peerGroupFact != null && facts.Count == 1)
+            {
+                var sourceFact = facts.First() as PeerGroupFact;
+                peerGroupFact.StandardDeviation = sourceFact.StandardDeviation;
+                peerGroupFact.MinValue = sourceFact.MinValue;
+                peerGroupFact.MaxValue = sourceFact.MaxValue;
+            }
 
             var periods = new List<DateTime>();
 
@@ -89,20 +105,31 @@ namespace bank.reports
 
             foreach (var period in periods.Distinct().OrderBy(x => x))
             {
-                var filtered = facts.Select(x => new Fact
-                {
-                    Name = x.Name,
-                    NumericValue = x.HistoricalData.ContainsKey(period) ?
+                var filtered = facts.Select(x => x.HistoricalData.ContainsKey(period) ?
                                           x.HistoricalData.Where(h => h.Key == period).First().Value :
-                                          new decimal?()
-                }).ToList();
+                                          Fact.Build(factType)).ToList();
 
                 var refiltered = filtered.Where(x => x.NumericValue.HasValue).ToDictionary(x => x.Name, x => x);
 
                 if (refiltered.Count == facts.Count)
                 {
                     result = resolver.Evaluate(Value, refiltered);
-                    preparedFact.HistoricalData.Add(period, (decimal)result);
+
+                    var oldFact = Fact.Build(factType);
+                    oldFact.Name = preparedFact.Name;
+                    oldFact.NumericValue = (decimal)result;
+
+                    if (facts.Count == 1 && peerGroupFact != null)
+                    {
+                        var oldFactPg = oldFact as PeerGroupFact;
+                        var oldFactSource = filtered.First() as PeerGroupFact;
+
+                        oldFactPg.StandardDeviation = oldFactSource.StandardDeviation;
+                        oldFactPg.MinValue = oldFactSource.MinValue;
+                        oldFactPg.MaxValue = oldFactSource.MaxValue;
+                    }
+
+                    preparedFact.HistoricalData.Add(period, oldFact);
                 }
 
             }

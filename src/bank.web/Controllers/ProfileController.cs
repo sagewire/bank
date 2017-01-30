@@ -22,94 +22,27 @@ namespace bank.web.Controllers
             var orgId = DecodeId(id);
             var companies = new List<int>();
             companies.Add(orgId);
+            var model = new OrganizationProfileViewModel();
             companies.AddRange(DecodeIds(c));
 
-            var model = new OrganizationProfileViewModel();
-
-            var orgRepo = new OrganizationRepository();
-            var org = orgRepo.GetOrganization(orgId, true);
-
-
-            var columns = new List<Column>();
-
-            foreach (var companyId in companies)
-            {
-                columns.Add(new CompanyColumn
-                {
-                    OrganizationId = companyId
-                });
-            }
-
-            var statepg = Global.PeerGroups[org.StatePeerGroup];
-
-            columns.Add(new PeerGroupColumn
-            {
-                PeerGroup = statepg.Code,
-                HeaderText = string.Format("Peer Group {0}", statepg.Code)
-            });
-
-            foreach(var pg in org.CustomPeerGroups)
-            {
-                columns.Add(new PeerGroupCustomColumn
-                {
-                    PeerGroupCustom = pg,
-                    HeaderText = string.Format("Peer Group {0}", pg.PeerGroupCode)
-                });
-            }
-
-
-
-
-            model.PrimaryChart = new Report("profile-primary", columns);
-            model.PieCharts = new Report("profile-piecharts", columns);
-            model.SecondaryCharts = new Report("profile-secondary", columns);
-            model.SidebarCharts = new Report("profile-sidebar", columns);
-            model.HighlightTable = new Report("financial-highlights", columns);
+            
+            model.PrimaryChart = new Report("profile-primary");
+            model.PieCharts = new Report("profile-piecharts");
+            model.SecondaryCharts = new Report("profile-secondary");
+            model.SidebarCharts = new Report("profile-sidebar");
+            model.HighlightTable = new Report("financial-highlights");
 
             var tasks = new List<Task>();
 
-            //var orgTask = Task.Run(() =>
-            //{
-            //    var orgRepo = new OrganizationRepository();
-            //    var orgs = orgRepo.GetOrganizations(companies);
-            //    //var org = orgs.Single(x => x.OrganizationId == orgId);
-            //    return orgs;
-            //});
-
-
+            var modelTask = Task.Run(()=> PopulateReportsAndColumns(orgId, companies, model));
             var rawReportsTask = Task.Run(() => GetRawReports(orgId));
-            var populateTask = Task.Run(() => Report.PopulateReports(model.Reports, columns));
-            var orgTask = Task.Run(() => orgRepo.GetOrganizations(companies));
-
-            tasks.Add(orgTask);
+            
             tasks.Add(rawReportsTask);
-            tasks.Add(populateTask);
+            tasks.Add(modelTask);
 
             Task.WaitAll(tasks.ToArray());
 
-
-            foreach (var column in columns)
-            {
-                var companyColumn = column as CompanyColumn;
-
-                if (companyColumn != null)
-                {
-                    if (companies != null)
-                    {
-                        companyColumn.Organization = orgTask.Result.Single(x => x.OrganizationId == companyColumn.OrganizationId);
-                    }
-                }
-            }
-
-            model.Organization = org;
             model.RawReports = rawReportsTask.Result;
-            //model.ReportsAvailable = rawReportsTask.Result;
-
-            //model.Header = new HeaderViewModel
-            //{
-            //    HeaderImage = org.ProfileBanner
-            //};
-
  
             ViewBag.Title = model.Title;
             return View(model);

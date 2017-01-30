@@ -13,24 +13,36 @@ namespace bank.reports.charts
     {
         public PointSeriesData() : base(SeriesTypes.Bubble) { }
 
+        public bool InXyzFormat { get; set; } = false;
+
         [JsonProperty(PropertyName = "data")]
         public IList<object> Data
         {
             get
             {
-                var list = new Dictionary<DateTime, decimal>();
+                var list = new List<object>();
                 
                 var facts = Column.GetFacts(Series.Concept.ConceptKeys);
-                var peerGroupFact = facts.First() as PeerGroupFact;
-
-                var fact = Series.Concept.PrepareFact(facts);
+                
+                var fact = Series.Concept.PrepareFact(facts) as PeerGroupFact;
 
                 foreach (var datum in fact.HistoricalData)
                 {
-                    list.Add(datum.Key, datum.Value);
+                    var pgFact = (PeerGroupFact)datum.Value;
+
+                    if (InXyzFormat)
+                    {
+                        list.Add(new { x = datum.Key.ToMillisecondsSince1970(), y = datum.Value.NumericValue.Value, z = pgFact.StandardDeviation });
+                    }
+                    else
+                    {
+                        list.Add(new object[] { datum.Key.ToMillisecondsSince1970(),
+                            datum.Value.NumericValue.Value - (decimal)pgFact.StandardDeviation/2,
+                        datum.Value.NumericValue.Value + (decimal)pgFact.StandardDeviation/2});
+                    }
                 }
                 
-                return list.Select(d => (object)new { x = d.Key.ToMillisecondsSince1970(), y = d.Value, z = peerGroupFact.StandardDeviation }).ToList();
+                return list.ToList();
             }
         }
 

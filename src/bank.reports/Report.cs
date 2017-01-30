@@ -34,6 +34,14 @@ namespace bank.reports
             }
         }
 
+        public IList<Column> VisibleColumns
+        {
+            get
+            {
+                return Columns.Where(x => x.ShowColumn == true).ToList();
+            }
+        }
+
         private IList<CompanyColumn> _companyColumns;
         public IList<CompanyColumn> CompanyColumns
         {
@@ -59,10 +67,12 @@ namespace bank.reports
 
         public Report() { }
 
-        public Report(string template, IList<Column> columns, IDictionary<string, string> placeholders = null, string section = null)
+        public Report(string template, IList<Column> columns = null, IDictionary<string, string> placeholders = null, string section = null)
         {
             Placeholders = placeholders;
-            Columns.AddRange(columns);
+
+            if (columns != null) Columns.AddRange(columns);
+
             Template = template;
             Parse(section);
         }
