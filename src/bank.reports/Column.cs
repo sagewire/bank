@@ -10,6 +10,7 @@ namespace bank.reports
         //public ConcurrentDictionary<string, Fact> Facts { get; protected set; } = new ConcurrentDictionary<string, Fact>();
         public ConcurrentDictionary<string, Fact> Facts { get; protected set; } = new ConcurrentDictionary<string, Fact>();
 
+        public abstract string Key { get; }
         public abstract ColumnTypes ColumnType { get; }
 
         public abstract void SetFacts(IList<Fact> facts);

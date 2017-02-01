@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Performance2.psess = Performance2.psess
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bank.app", "bank.app\bank.app.csproj", "{5C343228-30DC-464F-AB23-026BD9126647}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{F435C6D1-74CB-4D32-B03F-53AE56770533}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F435C6D1-74CB-4D32-B03F-53AE56770533}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F435C6D1-74CB-4D32-B03F-53AE56770533}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C343228-30DC-464F-AB23-026BD9126647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C343228-30DC-464F-AB23-026BD9126647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C343228-30DC-464F-AB23-026BD9126647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C343228-30DC-464F-AB23-026BD9126647}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

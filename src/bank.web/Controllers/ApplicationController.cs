@@ -66,8 +66,8 @@ namespace bank.web.Controllers
             var orgRepo = new OrganizationRepository();
             var org = orgRepo.GetOrganization(orgId, true, true);
 
-            var periodStart = org.ReportImports.Select(x => x.Quarter).Min();
-            var periodEnd = org.ReportImports.Select(x => x.Quarter).Max();
+            var periodStart = org.ReportImports.Select(x => x.Period).Min();
+            var periodEnd = org.ReportImports.Select(x => x.Period).Max();
                 
             var columns = new List<Column>();
 

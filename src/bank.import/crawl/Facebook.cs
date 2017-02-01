@@ -9,7 +9,7 @@ using RestSharp;
 
 namespace bank.import.crawl
 {
-    class Facebook
+    public class Facebook
     {
         private TaskPool<Organization> _taskPool = new TaskPool<Organization>();
         private static string _auth = string.Format("{0}|{1}", Settings.FacebookImportAppId, Settings.FacebookImportAppSecret);

@@ -216,7 +216,9 @@
     <Content Include="report-templates\concept-definition.xml" />
     <Content Include="report-templates\peer-groups.xml" />
     <Content Include="report-templates\profile-primary.xml" />
-    <Content Include="report-templates\profile-secondary.xml" />
+    <Content Include="report-templates\profile-secondary.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="report-templates\profile-sidebar.xml" />
     <Content Include="report-templates\profile-piecharts.xml">
       <SubType>Designer</SubType>

@@ -14,7 +14,7 @@ using CsvHelper.TypeConversion;
 
 namespace bank.import.fdic
 {
-    class ImportInstitutions
+    public class ImportInstitutions
     {
         public static void Start()
         {
@@ -35,7 +35,7 @@ namespace bank.import.fdic
                 {
                     Console.Write(record.Name);
 
-                    var existing = repo.LookupByFFIEC(record.FFIEC);
+                    var existing = repo.LookupByRssd(record.FFIEC);
 
                     if (existing != null)
                     {

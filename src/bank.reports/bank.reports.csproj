@@ -64,6 +64,7 @@
     <Compile Include="CompanyColumn.cs" />
     <Compile Include="Concept.cs" />
     <Compile Include="Column.cs" />
+    <Compile Include="FactLookup.cs" />
     <Compile Include="formulas\Global.cs" />
     <Compile Include="LineItemTypes.cs" />
     <Compile Include="PeerGroupCustomColumn.cs" />

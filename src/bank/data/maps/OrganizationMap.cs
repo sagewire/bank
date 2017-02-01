@@ -18,6 +18,9 @@ namespace bank.data.maps
             Map(x => x.ProfileUrl).Ignore();
             Map(x => x.WebsiteDomainOnly).Ignore();
             Map(x => x.WebsiteUri).Ignore();
+            Map(x => x.CustomPeerGroups).Ignore();
+            Map(x => x.StatePeerGroup).Ignore();
+            Map(x => x.ReportImports).Ignore();
             //Map(x => x.AvatarImageUrl).Ignore();
 
             AutoMap();

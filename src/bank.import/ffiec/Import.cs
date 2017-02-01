@@ -11,13 +11,16 @@ using System.Text.RegularExpressions;
 using bank.poco;
 using Newtonsoft.Json;
 using System.Xml.Linq;
+using Microsoft.Web.Services3.Security.Tokens;
+using System.Threading;
 
 namespace bank.import.ffiec
 {
-    class Import
+    public class Import
     {
         private static Regex _id = new Regex(@"(?<=\s)\d+?(?=\(ID RSSD\))", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        private static TaskPool<string> _taskPool = new TaskPool<string>();
+        private static Regex _version = new Regex(@"(?<=ubpr-)v\d{2,3}(?=-Core)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static TaskPool<ReportImport> _taskPool = new TaskPool<ReportImport>();
 
         public static void Start()
         {
@@ -26,29 +29,24 @@ namespace bank.import.ffiec
             InitializeTaskPool();
 
             var doc = new XbrlDocument();
-            
-            var files = Directory.GetFiles("c:/data/ubpr-data", "ffiec cdr ubpr*");
+
+            //var files = Directory.GetFiles("c:/data/ubpr-data", "ffiec cdr ubpr*");
             //var files = Directory.GetFiles("c:/data/ubpr-data", "error ffiec cdr ubpr*");
             //var files = Directory.GetFiles("c:/data/call-data/09302016_Form041", "ffiec cdr call*");
             //var files = Directory.GetFiles("c:/data/ubpr-data", "cdr-ubpr*");
-            
+
+
             _taskPool.Start();
 
 
-            foreach (var file in files)
-            {
-                Console.WriteLine("Enqueuing {0}", file);
-
-
-                _taskPool.Enqueue(file);
-
-            }
+ 
 
         }
 
         static void InitializeTaskPool()
         {
             _taskPool.MaxWorkers = 12;
+            _taskPool.MinimumQueueSize = 50;
 
             _taskPool.RefillQueue += _taskPool_RefillQueue;
             _taskPool.NextTask += _taskPool_NextTask;
@@ -58,12 +56,23 @@ namespace bank.import.ffiec
 
         private static int _taskPool_RefillQueue(int queueCount)
         {
-            return 0;
+
+            var repo = new ReportImportRepository();
+            var records = repo.GetRecordsToImport(100);
+
+            foreach (var record in records)
+            {
+                //Console.Write(".");
+                Console.WriteLine("Enqueuing {0}\t{1}\t{2}", record.Period, record.OrganizationId, record.Filed);
+                _taskPool.Enqueue(record);
+            }
+
+            return records.Count;
         }
 
-        private static void _taskPool_NextTask(string task)
+        private static void _taskPool_NextTask(ReportImport task)
         {
-            Console.WriteLine("Next Task {0}", task);
+            Console.WriteLine("Next Import Task {0} {1} {2}", task.Period, task.OrganizationId, task.ReportType);
             ProcessFile(task);
         }
 
@@ -75,7 +84,7 @@ namespace bank.import.ffiec
         static Organization GetOrg(int id)
         {
             var orgRepo = new OrganizationRepository();
-            var org = orgRepo.LookupByFFIEC(id);
+            var org = orgRepo.LookupByRssd(id);
 
             if (org == null)
             {
@@ -105,7 +114,7 @@ namespace bank.import.ffiec
         {
             var note = "";
 
-            for(int i = 0; i <= level; i++)
+            for (int i = 0; i <= level; i++)
             {
                 note += ".o";
             }
@@ -122,7 +131,7 @@ namespace bank.import.ffiec
             sb.AppendLine(line);
             Console.WriteLine(line);
 
-            foreach(var child in node.ChildNodes)
+            foreach (var child in node.ChildNodes)
             {
                 WriteLine(sb, child, level + 1);
             }
@@ -145,23 +154,64 @@ namespace bank.import.ffiec
 
             element.Add(child);
 
-            foreach(var childnode in node.ChildNodes)
+            foreach (var childnode in node.ChildNodes)
             {
                 SerializeNode(child, childnode);
             }
         }
 
-        static void ProcessFile(string file)
+        static string RetrieveFile(ReportImport reportImport, Organization org)
         {
-            //var contents = File.ReadAllText(file);
-            //contents = contents.Replace("ubpr-v61", "ubpr-v64");
-            ////contents = contents.Replace("/v61/", "/v64/");
-            //File.WriteAllText(file, contents);
+            var userToken = new UsernameToken(Settings.FfiecWebServiceUsername, Settings.FfiecWebServiceToken, PasswordOption.SendHashed);
+            var ffiec = new gov.ffiec.cdr.RetrievalService();
 
+            ffiec.RequestSoapContext.Security.Tokens.Add(userToken);
 
-            var id = int.Parse(_id.Match(file).Value);
+            if (reportImport.ReportType == ReportTypes.Call)
+            {
+                var result = ffiec.RetrieveFacsimile(
+                    gov.ffiec.cdr.ReportingDataSeriesName.Call,
+                    reportImport.Period.ToShortDateString(), 
+                    gov.ffiec.cdr.FinancialInstitutionIDType.ID_RSSD,
+                    org.FFIEC,
+                    gov.ffiec.cdr.FacsimileFormat.XBRL);
 
-            var org = GetOrg(id);
+                return null;
+            }
+            else
+            {
+                var result = ffiec.RetrieveUBPRXBRLFacsimile(
+                    reportImport.Period.ToShortDateString(),
+                    gov.ffiec.cdr.FinancialInstitutionIDType.ID_RSSD,
+                    org.FFIEC);
+
+                var text = UTF8Encoding.UTF8.GetString(result);
+
+                var file = Path.Combine(
+                    Settings.ReportSchemas, 
+                    reportImport.ReportTypeAsString.ToLower(), 
+                    _version.Match(text).Value, 
+                    reportImport.OrganizationId.ToString() + ".xml");
+
+                File.WriteAllBytes(file, result);
+
+                return file; 
+            }
+        }
+
+        static void ProcessFile(ReportImport reportImport)
+        {
+            var org = Repository<Organization>.New().Get(reportImport.OrganizationId);
+
+            var file = RetrieveFile(reportImport, org);
+
+            
+            //File.WriteAllBytes(
+            //    string.Format(@"c:\temp\downloads\{0}-{1}-{2}.xml", org.OrganizationId, reportImport.ReportTypeAsString, reportImport.Period.ToString("yyyyMMdd")),
+            //    fileContents);
+
+            //return;
+            
             var moveFolder = "completed";
 
             XbrlDocument doc = new XbrlDocument();
@@ -169,12 +219,6 @@ namespace bank.import.ffiec
             try
             {
                 doc.Load(file);
-
-                //var tree = doc.XbrlFragments[0].GetPresentableFactTree();
-
-//                Serialize(tree);
-
-                //WriteTemplate(tree);
                 
                 if (!doc.IsValid)
                 {
@@ -188,12 +232,8 @@ namespace bank.import.ffiec
 
                     decimal numeric;
                     decimal? numericValue = null;
-
-                    if (decimal.TryParse(fact.Value, out numeric))
-                    {
-                        numericValue = numeric;
-                    }
-
+                    string value = fact.Value;
+                    
                     DateTime? period = null;
                     if (fact.ContextRef.InstantDate != null && fact.ContextRef.InstantDate > DateTime.MinValue)
                     {
@@ -204,25 +244,44 @@ namespace bank.import.ffiec
                         period = GetDate(fact.ContextRef.PeriodEndDate);
                     }
 
+                    if (period != reportImport.Period)
+                    {
+                        continue;
+                    }
+
+                    if (decimal.TryParse(fact.Value, out numeric))
+                    {
+                        numericValue = numeric;
+                        value = null;
+                    }
+
                     var factObj = new bank.poco.CompanyFact
                     {
                         OrganizationId = org.OrganizationId,
                         Name = fact.Name,
                         NumericValue = numericValue,
-                        Value = fact.Value,
+                        Value = value,
                         Period = period
                     };
+
+                    if (!string.IsNullOrWhiteSpace(fact.UnitRefName))
+                    {
+                        factObj.Unit = fact.UnitRefName.ToUpper().First();
+                    }
+                    
 
                     Repository<bank.poco.Fact>.New().Save(factObj);
 
                 }
 
+                reportImport.State = null;
+                reportImport.Processed = DateTime.Now;
             }
             catch (Exception e)
             {
                 doc = null;
                 moveFolder = "error";
-
+                reportImport.State = "error";
                 Console.WriteLine(e);
             }
 
@@ -230,9 +289,12 @@ namespace bank.import.ffiec
             var movePath = Path.Combine(Path.GetDirectoryName(file), moveFolder);
             movePath = Path.Combine(movePath, filename);
 
+            var reportImportRepo = new ReportImportRepository();
+            reportImportRepo.Save(reportImport);
 
+            File.Delete(file);
 
-            File.Move(file, movePath);
+            //File.Move(file, movePath);
         }
 
         static DateTime? GetDate(DateTime date)

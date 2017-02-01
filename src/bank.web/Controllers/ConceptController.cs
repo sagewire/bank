@@ -66,8 +66,8 @@ namespace bank.web.Controllers
 
             var report = new Report("concept-definition", columns, placeholders);
 
-            var periodStart = primaryOrg.ReportImports.Select(x => x.Quarter).Min();
-            var periodEnd = primaryOrg.ReportImports.Select(x => x.Quarter).Max();
+            var periodStart = primaryOrg.ReportImports.Select(x => x.Period).Min();
+            var periodEnd = primaryOrg.ReportImports.Select(x => x.Period).Max();
 
             Report.PopulateReport(report, periodStart, periodEnd);
             model.Report = report;

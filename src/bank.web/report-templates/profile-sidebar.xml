@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<report partial="_SidebarReport">
+<report partial="_SidebarReport" lookback="4">
   <line>
     <line name="" label="Total Assets" abstract="true">
       <line name="UBPR2170" label="" abstract="false" />

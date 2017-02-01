@@ -21,6 +21,14 @@ namespace bank.reports
             }
         }
 
+        public override string Key
+        {
+            get
+            {
+                return string.Format("{0}|{1}", ColumnType, PeerGroup);
+            }
+        }
+
         private string _headerText;
         public override string HeaderText
         {

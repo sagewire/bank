@@ -56,14 +56,14 @@ namespace bank.web.Controllers
             foreach (var report in org.ReportImports)
             {
                 ReportListViewModel item = null;
-                if (list.ContainsKey(report.Quarter))
+                if (list.ContainsKey(report.Period))
                 {
-                    item = list[report.Quarter];
+                    item = list[report.Period];
                 }
                 else
                 {
                     item = new ReportListViewModel();
-                    item.Period = report.Quarter;
+                    item.Period = report.Period;
                     list.Add(item.Period, item);
                 }
                 item.ReportsAvailable.Add(report.ReportType);

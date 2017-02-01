@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<report>
+<report lookback="4">
 	<line name="root" label="Deposit Allocation Details" abstract="true">
 			<chart title="Deposit Composition" type="sankey" css-classes="sankey">
 				<column type="string" id="from" label="From" />

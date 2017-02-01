@@ -11,6 +11,18 @@ namespace bank.poco
     {
         public int OrganizationId { get; set; }
         public ReportTypes ReportType { get; set; }
-        public DateTime Quarter { get; set; }
+        public DateTime Period { get; set; }
+        public DateTime? Created { get; set; }
+        public DateTime? Filed { get; set; }
+        public DateTime? Processed { get; set; }
+        public string State { get; set; }
+
+        public string ReportTypeAsString
+        {
+            get
+            {
+                return ReportType.ToString();
+            }
+        }
     }
 }

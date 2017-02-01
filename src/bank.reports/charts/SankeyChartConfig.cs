@@ -20,6 +20,8 @@ namespace bank.reports.charts
             return GetSeriesData(columns.First());
         }
 
+
+
         public override IList<SeriesData> GetSeriesData(Column column)
         {
             var seriesData = new SankeySeriesData();
@@ -58,7 +60,7 @@ namespace bank.reports.charts
                 }
                 else
                 {
-                    Console.WriteLine();
+                    result.Add(0);
                 }
 
                 seriesData.Data.Add(result);
@@ -91,6 +93,14 @@ namespace bank.reports.charts
 
         public IList<SankeyColumn> SankeyColumns { get; set; } = new List<SankeyColumn>();
         public IList<SankeyRow> SankeyRows { get; set; } = new List<SankeyRow>();
+
+        public override IList<Column> VisibleColumns
+        {
+            get
+            {
+                return Columns;
+            }
+        }
 
         protected override void Parse(XElement element)
         {

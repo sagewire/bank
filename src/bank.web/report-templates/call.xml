@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<report>
+<report lookback="4">
   <line name="pres-report" label="" abstract="true">
     <line name="pres-ENT" label="Bank Demographic Information" abstract="true">
       <line name="pres-line-766249" label="Reporting date" abstract="true">

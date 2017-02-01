@@ -2,17 +2,17 @@
 <report partial="_SecondaryReport">
   <line>
     <charts>
-      <chart type="combo" css-classes="card-sparkline">
+      <chart type="combo" css-classes="card-sparkline" lookback="20">
         <series type="spline" column="0">
           <concept name="UBPRE010" />
         </series>
       </chart>
-      <chart type="combo" css-classes="card-sparkline">
+      <chart type="combo" css-classes="card-sparkline" lookback="20">
         <series type="spline" column="0">
           <concept name="UBPRE630" />
         </series>
       </chart>
-      <chart type="combo" css-classes="card-sparkline">
+      <chart type="combo" css-classes="card-sparkline" lookback="20">
         <series type="spline" column="0">
           <concept name="UBPRE088" />
         </series>

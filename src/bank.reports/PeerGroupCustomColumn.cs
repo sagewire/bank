@@ -33,6 +33,14 @@ namespace bank.reports
             }
         }
 
+        public override string Key
+        {
+            get
+            {
+                return string.Format("{0}|{1}", ColumnType, PeerGroupCustom.PeerGroupCustomId);
+            }
+        }
+
         public override void SetFacts(IList<Fact> facts)
         {
             //var existing = Facts.Select(x => x..Name).Distinct().ToList();

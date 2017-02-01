@@ -29,6 +29,15 @@ namespace bank.reports
             }
         }
 
+        public override string Key
+        {
+            get
+            {
+                string format = "{0}|{1}";
+                return string.Format(format, ColumnType.ToString(), OrganizationId);
+            }
+        }
+
         public int OrganizationId { get; set; }
 
         public Organization Organization { get; set; }

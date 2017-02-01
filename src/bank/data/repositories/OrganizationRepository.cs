@@ -13,7 +13,7 @@ namespace bank.data.repositories
 {
     public class OrganizationRepository : BaseRepository<Organization>
     {
-        public Organization LookupByFFIEC(int id)
+        public Organization LookupByRssd(int id)
         {
             using (var conn = new SqlConnection(Settings.ConnectionString))
             {
@@ -70,7 +70,7 @@ namespace bank.data.repositories
             const string orgSql = "select * from Organization where OrganizationID in @OrganizationIDs ";
             const string peerSql = "select * from PeerGroupCustom where OrganizationID in @OrganizationIDs ";
             const string peerMemberSql = "select * from PeerGroupCustomMember where PeerGroupCustomID in (select PeerGroupCustomID from PeerGroupCustom where OrganizationID in @OrganizationIDs) ";
-            const string reportListSql = "select * from ReportImport where OrganizationID in @OrganizationIds";
+            const string reportListSql = "select * from ReportImport where OrganizationID in @OrganizationIds and Processed is not null";
 
             var sb = new StringBuilder();
 

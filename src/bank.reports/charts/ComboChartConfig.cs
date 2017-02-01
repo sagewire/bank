@@ -15,7 +15,43 @@ namespace bank.reports.charts
             ChartType = ChartTypes.Combo;
         }
 
+        
         public IList<Series> Series { get; set; }
+
+        public override IList<Column> VisibleColumns
+        {
+            get
+            {
+                var list = new List<Column>();
+                foreach (var series in Series)
+                {
+                    var counter = 0;
+                    foreach (var column in Columns)
+                    {
+                        var addColumn = true;
+
+                        if (series.ColumnIndex.HasValue && series.ColumnIndex.Value != counter)
+                        {
+                            addColumn = false;
+                        }
+
+
+                        if (series.ColumnStart.HasValue && series.ColumnStart > counter)
+                        {
+                            addColumn = false;
+                        }
+
+                        if (addColumn)
+                        {
+                            list.Add(column);
+                        }
+
+                        counter++;
+                    }
+                }
+                return list;
+            }
+        }
 
         public override IList<SeriesData> GetSeriesData(Column column)
         {

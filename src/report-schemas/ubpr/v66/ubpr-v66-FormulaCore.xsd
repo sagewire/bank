@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+Taxonomy based on XBRL standard Version 2.1.
+Created by FFIEC CDR 2017 Unisys Corp., All Rights Reserved
+Produced on 2017-01-25 19:53:07
+-->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ufcore="http://www.cdr.ffiec.gov/xbrl/ubpr/v66/FormulaCore" xmlns:mdr="http://www.ffiec.gov/xbrl/mdr-schema" xmlns:uc="http://www.cdr.ffiec.gov/xbrl/ubpr/v66/Concepts" xmlns:ucom="http://www.cdr.ffiec.gov/xbrl/RoleTypes" xmlns:cc="http://www.cdr.ffiec.gov/xbrl/ubpr/v66/SourceConcepts" targetNamespace="http://www.cdr.ffiec.gov/xbrl/ubpr/v66/FormulaCore" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<annotation xmlns="http://www.w3.org/2001/XMLSchema">
+  <appinfo>
+    <link:linkbaseRef xlink:type="simple" xlink:href="ubpr-v66-Formula.xml" xlink:role="http://www.ffiec.gov/2003/role/formulaLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:title="Formula Links, all" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:link="http://www.xbrl.org/2003/linkbase" />
+    <mdr:versionInfo xmlns:mdr="http://www.ffiec.gov/xbrl/mdr-schema">
+      <mdr:dataSeries>UBPR</mdr:dataSeries>
+      <mdr:reportName>FormulaCore</mdr:reportName>
+      <mdr:versionName>v66</mdr:versionName>
+      <mdr:versionDate>2017-01-25</mdr:versionDate>
+      <mdr:versionDescription></mdr:versionDescription>
+    </mdr:versionInfo>
+  </appinfo>
+</annotation>
+<import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd" xmlns="http://www.w3.org/2001/XMLSchema" />
+<import namespace="http://www.cdr.ffiec.gov/xbrl/ubpr/v66/Concepts" schemaLocation="ubpr-v66-Concepts.xsd" xmlns="http://www.w3.org/2001/XMLSchema" />
+<import namespace="http://www.cdr.ffiec.gov/xbrl/RoleTypes" schemaLocation="ubprRoleTypes.xsd" xmlns="http://www.w3.org/2001/XMLSchema" />
+<import namespace="http://www.cdr.ffiec.gov/xbrl/ubpr/v66/SourceConcepts" schemaLocation="ubpr-v66-SourceConcepts.xsd" xmlns="http://www.w3.org/2001/XMLSchema" />
+<import namespace="http://www.ffiec.gov/xbrl/mdr-schema" schemaLocation="mdr_schema.xsd" />
+</schema>

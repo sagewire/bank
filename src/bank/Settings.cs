@@ -33,6 +33,14 @@ namespace bank
         public static string TwitterSecret { get; set; }
             = ConfigurationManager.AppSettings.AllKeys.Contains("TwitterSecret") ? ConfigurationManager.AppSettings["TwitterSecret"] : null;
 
+        public static string FfiecWebServiceUsername { get; set; }
+            = ConfigurationManager.AppSettings.AllKeys.Contains("FfiecWebServiceUsername") ? ConfigurationManager.AppSettings["FfiecWebServiceUsername"] : null;
+
+        public static string FfiecWebServiceToken { get; set; }
+            = ConfigurationManager.AppSettings.AllKeys.Contains("FfiecWebServiceToken") ? ConfigurationManager.AppSettings["FfiecWebServiceToken"] : null;
+        public static string ReportSchemas { get; set; }
+            = ConfigurationManager.AppSettings.AllKeys.Contains("ReportSchemas") ? ConfigurationManager.AppSettings["ReportSchemas"] : null;
+
 
         private static string _phantomJs = null;
         public static string PhantomJs

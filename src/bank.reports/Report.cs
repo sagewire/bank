@@ -21,9 +21,32 @@ namespace bank.reports
         public string Partial { get; set; }
         public string Template { get; set; }
         public List<Section> Sections { get; set; } = new List<Section>();
-        public List<Concept> Concepts { get; set; } = new List<Concept>();
         public List<Column> Columns { get; set; } = new List<Column>();
         public IList<ChartConfig> Charts { get; internal set; } = new List<ChartConfig>();
+        public int? Lookback { get; set; }
+
+        public List<Concept> ReportConcepts { get; set; } = new List<Concept>();
+
+        private List<Concept> _combined;
+        public List<Concept> Concepts {
+            get
+            {
+                if (_combined == null)
+                {
+                    var combined = new List<Concept>();
+                    combined.AddRange(ReportConcepts);
+
+                    foreach (var chart in Charts)
+                    {
+                        combined.AddRange(chart.Concepts);
+                    }
+
+                    _combined = combined;
+                }
+                return _combined;
+            }
+        }
+
 
         private Guid _reportId = Guid.NewGuid();
         public Guid ReportId
@@ -124,6 +147,7 @@ namespace bank.reports
             var rootName = element.Attribute("root");
 
             Partial = element.SafeAttributeValue("partial") ?? "_Report";
+            Lookback = element.SafeIntAttributeValue("lookback");
 
             if (rootName != null)
             {
@@ -186,8 +210,12 @@ namespace bank.reports
             var orgs = new List<int>();
             var peerGroups = new List<string>();
 
+            var lookups = new List<FactLookup>();
+
             foreach (var report in reports.Where(x => x != null))
             {
+                lookups = FactLookup.Merge(report.FactLookups, lookups);
+
                 conceptKeys.AddRange(report.ConceptKeys);
                 orgs.AddRange(report.AllOrganizations());
                 peerGroups.AddRange(report.AllPeerGroups());
@@ -204,7 +232,8 @@ namespace bank.reports
 
             tasks.Add(Task.Run(() =>
             {
-                var facts = GetFacts(columns, conceptKeys, orgs, peerGroups, periodStart, periodEnd);
+                //var facts = GetFacts(lookups, columns, conceptKeys, orgs, peerGroups, periodStart, periodEnd);
+                var facts = GetFacts(lookups, periodEnd);
 
                 foreach (var report in reports.Where(x => x != null))
                 {
@@ -223,38 +252,46 @@ namespace bank.reports
 
         }
 
-        private static IList<Fact> GetFacts(IList<Column> columns, IList<string> conceptKeys, IList<int> orgs, IList<string> peerGroups, DateTime periodStart, DateTime periodEnd)
+        //private static IList<Fact> GetFacts(IList<FactLookup> lookups, IList<Column> columns, IList<string> conceptKeys, IList<int> orgs, IList<string> peerGroups, DateTime period)
+        private static IList<Fact> GetFacts(IList<FactLookup> lookups, DateTime period)
         {
             var tasks = new List<Task<IList<Fact>>>();
 
-            if (columns.Any(x => x.ColumnType == ColumnTypes.Company))
+            foreach(var lookup in lookups)
             {
-                tasks.Add(Task.Run(() =>
+                if (lookup.Columns.Any(x => x.ColumnType == ColumnTypes.Company))
                 {
-                    var factRepo = new FactRepository();
-                    return factRepo.GetFacts(conceptKeys, orgs, periodStart, periodEnd);//, lookback: DateTime.Now.AddQuarters(-12));
-                }));
+                    tasks.Add(Task.Run(() =>
+                    {
+                        var factRepo = new FactRepository();
+                        //return factRepo.GetFacts(conceptKeys, orgs, periodStart, periodEnd);//, lookback: DateTime.Now.AddQuarters(-12));
+
+                        return factRepo.GetFacts(lookup.ConceptKeys, lookup.OrganizationIds, period, lookup.Lookback);//, lookback: DateTime.Now.AddQuarters(-12));
+                    }));
+                }
+
+                if (lookup.Columns.Any(x => x.ColumnType == ColumnTypes.PeerGroup))
+                {
+                    tasks.Add(Task.Run(() =>
+                    {
+                        var factRepo = new FactRepository();
+                        return factRepo.GetPeerGroupFacts(lookup.ConceptKeys, lookup.PeerGroups, period, lookup.Lookback);//, lookback: DateTime.Now.AddQuarters(-12));
+                    }));
+                }
+
+                if (lookup.Columns.Any(x => x.ColumnType == ColumnTypes.PeerGroupCustom))
+                {
+                    tasks.Add(Task.Run(() =>
+                    {
+                        var column = lookup.Columns.First(x => x.ColumnType == ColumnTypes.PeerGroupCustom) as PeerGroupCustomColumn;
+
+                        var factRepo = new FactRepository();
+                        return factRepo.GetPeerGroupCustomFacts(lookup.ConceptKeys, column.PeerGroupCustom, period, lookup.Lookback);//, lookback: DateTime.Now.AddQuarters(-12));
+                    }));
+                }
             }
 
-            if (columns.Any(x => x.ColumnType == ColumnTypes.PeerGroup))
-            {
-                tasks.Add(Task.Run(() =>
-                {
-                    var factRepo = new FactRepository();
-                    return factRepo.GetPeerGroupFacts(conceptKeys, peerGroups, periodStart, periodEnd);//, lookback: DateTime.Now.AddQuarters(-12));
-                }));
-            }
 
-            if (columns.Any(x => x.ColumnType == ColumnTypes.PeerGroupCustom))
-            {
-                tasks.Add(Task.Run(() =>
-                {
-                    var column = columns.First(x => x.ColumnType == ColumnTypes.PeerGroupCustom) as PeerGroupCustomColumn;
-
-                    var factRepo = new FactRepository();
-                    return factRepo.GetPeerGroupCustomFacts(conceptKeys, column.PeerGroupCustom, periodStart, periodEnd);//, lookback: DateTime.Now.AddQuarters(-12));
-                }));
-            }
 
             Task.WaitAll(tasks.ToArray());
 
@@ -393,7 +430,7 @@ namespace bank.reports
                 var name = element.SafeAttributeValue("name");
                 var concept = new Concept(name);
                 lineItem.Concepts.Add(concept);
-                this.Concepts.Add(concept);
+                this.ReportConcepts.Add(concept);
             }
             else
             {
@@ -434,9 +471,9 @@ namespace bank.reports
 
             lineItem.LineItems.Add(chart);
 
-            if (Concepts == null) Concepts = new List<Concept>();
+            //if (Concepts == null) Concepts = new List<Concept>();
 
-            Concepts.AddRange(chart.Concepts);
+            //Concepts.AddRange(chart.Concepts);
 
             Charts.Add(chart.ChartConfig);
 
@@ -474,6 +511,40 @@ namespace bank.reports
             return orgs;
         }
 
+        private List<FactLookup> _factLookups;
+        public IList<FactLookup> FactLookups
+        {
+            get
+            {
+                if (_factLookups == null)
+                {
+                    var lookups = new List<FactLookup>();
+
+                    var reportLookup = new FactLookup
+                    {
+                        Lookback = this.Lookback,
+                        Columns = this.Columns,
+                        ConceptKeys = Concept.GetConceptKeys(this.ReportConcepts)
+                    };
+
+                    if (reportLookup.ConceptKeys.Any())
+                    {
+                        lookups.Add(reportLookup);
+                    }
+                    
+                    foreach(var chart in this.Charts)
+                    {
+                        chart.Columns = this.Columns;
+                        
+                        lookups = FactLookup.Merge(chart.FactLookups, lookups);
+                    }
+
+                    _factLookups = lookups;
+                }
+                return _factLookups;
+            }
+        }
+
         private List<string> _conceptKeys;
         public IList<string> ConceptKeys
         {
@@ -481,14 +552,7 @@ namespace bank.reports
             {
                 if (_conceptKeys == null)
                 {
-                    var conceptKeys = new List<string>();
-
-                    foreach (var concept in Concepts)
-                    {
-                        conceptKeys.AddRange(concept.ConceptKeys);
-                    }
-
-                    _conceptKeys = conceptKeys;
+                    _conceptKeys = Concept.GetConceptKeys(Concepts);
                 }
                 return _conceptKeys;
             }
@@ -529,4 +593,5 @@ namespace bank.reports
             return xml;
         }
     }
+
 }

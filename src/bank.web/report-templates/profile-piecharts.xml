@@ -2,8 +2,8 @@
 <report>
   <line>
     <charts>
-      <chart title="Assets" type="combo" css-classes="pie-chart">
-        <series type="pie">
+      <chart title="Assets" type="combo" css-classes="pie-chart" lookback="0">
+        <series type="pie" column="0">
           <concept name="UBPRE119"/>
           <concept name="UBPRE122"/>
           <concept name="UBPR0081"/>
@@ -12,16 +12,16 @@
           <concept name="UBPRE124"/>
         </series>
       </chart>
-      <chart title="Loans" type="combo" css-classes="pie-chart">
-        <series type="pie">
+      <chart title="Loans" type="combo" css-classes="pie-chart" lookback="0">
+        <series type="pie" column="0">
           <concept name="UBPR1410"/>
           <concept name="UBPRE116"/>
           <concept name="UBPRD665"/>
           <concept name="UBPRE117"/>
         </series>
       </chart>
-      <chart title="Deposits" type="combo" css-classes="pie-chart">
-        <series type="pie">
+      <chart title="Deposits" type="combo" css-classes="pie-chart" lookback="0">
+        <series type="pie" column="0">
           <concept name="UBPRE125"/>
           <concept name="RCON6810"/>
           <concept name="RCON0352"/>

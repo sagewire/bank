@@ -8,9 +8,14 @@ using JeffFerguson.Gepsio;
 using DapperExtensions;
 using System.IO;
 using System.Data;
+
 using bank;
 using bank.data.repositories;
 using bank.reports;
+using Microsoft.Web.Services3.Security;
+using Microsoft.Web.Services3.Security.Tokens;
+using System.ServiceModel;
+using System.Web.Services.Protocols;
 
 namespace poc
 {
@@ -19,6 +24,42 @@ namespace poc
         //private const string ConnString = @"Data Source=.\SQL2014;Initial Catalog=BankData;Integrated Security=True";
         static void Main(string[] args)
         {
+
+            TestFfiecWebservice();
+            Console.ReadKey();
+        }
+
+        static void TestFfiecWebservice()
+        {
+            var userToken = new UsernameToken("sagewire", "oNWaFfn9THI6aYyJLwHB", PasswordOption.SendHashed);
+
+            //WSHttpBinding b = new WSHttpBinding();
+            //b.Security.Mode = SecurityMode.Message;
+
+            var ffiec = new gov.ffiec.cdr.RetrievalService();
+            ffiec.RequestSoapContext.Security.Tokens.Add(userToken);
+            //var result = ffiec.TestUserAccess();
+
+
+            //var result = ffiec.RetrievePanelOfReporters(gov.ffiec.cdr.ReportingDataSeriesName.Call, "2016-12-31");
+
+            //var result = ffiec.RetrieveFilersSubmissionDateTime(gov.ffiec.cdr.ReportingDataSeriesName.Call, "2016-12-31", "2016-12-31");
+
+            var result = ffiec.RetrieveFacsimile(
+                gov.ffiec.cdr.ReportingDataSeriesName.Call,
+                "2002-12-31",
+                gov.ffiec.cdr.FinancialInstitutionIDType.ID_RSSD,
+                688556,
+                gov.ffiec.cdr.FacsimileFormat.XBRL);
+
+            //var result = ffiec.RetrieveUBPRXBRLFacsimile("2002-12-31", gov.ffiec.cdr.FinancialInstitutionIDType.ID_RSSD, 688556);
+
+            File.WriteAllBytes(@"c:\temp\test\688556.xml", result);
+        }
+
+        static void TestReport()
+        {
+
             var report = new bank.reports.Report();
 
             report.Columns.Add(new CompanyColumn
@@ -34,10 +75,8 @@ namespace poc
             report.Parse();
 
             //Report.PopulateReport(report);
-            
+
             Write(report);
-            
-            Console.ReadKey();
         }
 
         static void Write(Report report)

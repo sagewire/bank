@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <report>
   <charts>
-    <chart type="combo" chart-override="primary" css-classes="main-chart">
+    <chart type="combo" chart-override="primary" css-classes="main-chart" lookback="200">
       <series type="areaspline" column="0" z-index="10">
         <concept name="UBPR2170"/>
       </series>

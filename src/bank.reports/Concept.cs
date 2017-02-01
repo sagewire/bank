@@ -61,6 +61,18 @@ namespace bank.reports
             return PrepareFact(new Fact[] { fact });
         }
 
+        public static List<string> GetConceptKeys(IList<Concept> concepts)
+        {
+            var conceptKeys = new List<string>();
+
+            foreach (var concept in concepts)
+            {
+                conceptKeys.AddRange(concept.ConceptKeys);
+            }
+
+            return conceptKeys;
+        }
+
         public Fact PrepareFact(IList<Fact> facts)
         {
             if (!facts.Any())

@@ -16,6 +16,7 @@ namespace bank.reports.charts
         public List<Concept> Concepts { get; set; } = new List<Concept>();
         public string ChartOverride { get; private set; }
         public IDictionary<string, string> Placeholders { get; set; }
+        public int? Lookback { get; set; }
 
         private Guid _chartId = Guid.NewGuid();
         public Guid ChartId
@@ -25,8 +26,34 @@ namespace bank.reports.charts
                 return _chartId;
             }
         }
+
+        public IList<Column> Columns { get; set; }
+        public abstract IList<Column> VisibleColumns { get; }
+
         public abstract IList<SeriesData> GetSeriesData(Column column);
         public abstract IList<SeriesData> GetSeriesData(IList<Column> columns);
+
+        public IList<FactLookup> FactLookups
+        {
+            get
+            {
+                var factLookup = new FactLookup
+                {
+                    Columns = VisibleColumns,
+                    ConceptKeys = Concept.GetConceptKeys(Concepts),
+                    Lookback = this.Lookback
+                };
+
+                if (factLookup.ConceptKeys.Any())
+                {
+                    return new FactLookup[] { factLookup };
+                }
+                else
+                {
+                    return new FactLookup[] { };
+                }
+            }
+        }
 
         public static ChartConfig Build(XElement element, IDictionary<string, string> placeholders = null)
         {
@@ -60,7 +87,7 @@ namespace bank.reports.charts
                 var concept = Concepts.Single(x => x.Name == pair[0]);
                 var result = "";
 
-                switch(pair[1].ToLower())
+                switch (pair[1].ToLower())
                 {
                     case "shortlabel":
                         result = concept.ShortLabel;
@@ -80,6 +107,7 @@ namespace bank.reports.charts
             Title = element.SafeAttributeValue("title");
             CssClasses = element.SafeAttributeValue("css-classes");
             ChartOverride = element.SafeAttributeValue("chart-override");
+            Lookback = element.SafeIntAttributeValue("lookback");
         }
 
     }

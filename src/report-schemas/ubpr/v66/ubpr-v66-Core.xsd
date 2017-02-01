@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+Taxonomy based on XBRL standard Version 2.1.
+Created by FFIEC CDR 2017 Unisys Corp., All Rights Reserved
+Produced on 2017-01-25 19:53:05
+-->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ucore="http://www.cdr.ffiec.gov/xbrl/ubpr/v66/Core" xmlns:mdr="http://www.ffiec.gov/xbrl/mdr-schema" xmlns:uc="http://www.cdr.ffiec.gov/xbrl/ubpr/v66/Concepts" xmlns:ucom="http://www.cdr.ffiec.gov/xbrl/RoleTypes" xmlns:cc="http://www.cdr.ffiec.gov/xbrl/ubpr/v66/SourceConcepts" xmlns:upc="http://www.cdr.ffiec.gov/xbrl/ubpr/v66/PresentationConcepts" targetNamespace="http://www.cdr.ffiec.gov/xbrl/ubpr/v66/Core" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<annotation xmlns="http://www.w3.org/2001/XMLSchema">
+  <appinfo>
+    <link:linkbaseRef xlink:type="simple" xlink:href="ubpr-v66-Reference.xml" xlink:role="http://www.xbrl.org/2003/role/referenceLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:title="Reference Links, all" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:link="http://www.xbrl.org/2003/linkbase" />
+    <link:linkbaseRef xlink:type="simple" xlink:href="ubpr-v66-Formula.xml" xlink:role="http://www.ffiec.gov/2003/role/formulaLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:title="Formula Links, all" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:link="http://www.xbrl.org/2003/linkbase" />
+    <link:linkbaseRef xlink:type="simple" xlink:href="ubpr-v66-Definition.xml" xlink:role="http://www.xbrl.org/2003/role/definitionLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:title="Definition Links, all" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:link="http://www.xbrl.org/2003/linkbase" />
+    <link:linkbaseRef xlink:type="simple" xlink:href="ubpr-v66-Presentation.xml" xlink:role="http://www.xbrl.org/2003/role/presentationLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:title="Presentation Links, all" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:link="http://www.xbrl.org/2003/linkbase" />
+    <link:linkbaseRef xlink:type="simple" xlink:href="ubpr-v66-Label.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:title="Label Links, all" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:link="http://www.xbrl.org/2003/linkbase" />
+    <mdr:versionInfo xmlns:mdr="http://www.ffiec.gov/xbrl/mdr-schema">
+      <mdr:dataSeries>UBPR</mdr:dataSeries>
+      <mdr:reportName>Core</mdr:reportName>
+      <mdr:versionName>v66</mdr:versionName>
+      <mdr:versionDate>2017-01-25</mdr:versionDate>
+      <mdr:versionDescription></mdr:versionDescription>
+    </mdr:versionInfo>
+  </appinfo>
+</annotation>
+<import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd" xmlns="http://www.w3.org/2001/XMLSchema" />
+<import namespace="http://www.xbrl.org/2003/linkbase" schemaLocation="http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd" xmlns="http://www.w3.org/2001/XMLSchema" />
+<import namespace="http://www.cdr.ffiec.gov/xbrl/ubpr/v66/Concepts" schemaLocation="ubpr-v66-Concepts.xsd" xmlns="http://www.w3.org/2001/XMLSchema" />
+<import namespace="http://www.cdr.ffiec.gov/xbrl/RoleTypes" schemaLocation="ubprRoleTypes.xsd" xmlns="http://www.w3.org/2001/XMLSchema" />
+<import namespace="http://www.cdr.ffiec.gov/xbrl/ubpr/v66/SourceConcepts" schemaLocation="ubpr-v66-SourceConcepts.xsd" xmlns="http://www.w3.org/2001/XMLSchema" />
+<import namespace="http://www.cdr.ffiec.gov/xbrl/ubpr/v66/PresentationConcepts" schemaLocation="ubpr-v66-PresentationConcepts.xsd" xmlns="http://www.w3.org/2001/XMLSchema" />
+<import namespace="http://www.ffiec.gov/xbrl/mdr-schema" schemaLocation="mdr_schema.xsd" />
+<element id="ucore_linkPart_report" name="report" type="string" substitutionGroup="link:part" />
+<element id="ucore_linkPart_page" name="page" type="string" substitutionGroup="link:part" />
+<element id="ucore_linkPart_column" name="column" type="string" substitutionGroup="link:part" />
+</schema>

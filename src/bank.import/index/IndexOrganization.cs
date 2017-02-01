@@ -9,7 +9,7 @@ using bank.poco;
 
 namespace bank.import.index
 {
-    static class IndexOrganization
+    public static class IndexOrganization
     {
         public static void Start()
         {

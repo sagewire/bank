@@ -22,6 +22,8 @@ namespace bank.data.repositories
                 case "TwitterFriend":
                     var friend = new TwitterFriendRepository();
                     return (IRepository<T>)friend;
+                case "ReportImport":
+                    return (IRepository<T>)new ReportImportRepository();
                 case "MdrmDefinition":
                     return (IRepository<T>)new ConceptDefinitionRepository();
                 default:

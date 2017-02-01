@@ -19,6 +19,18 @@ namespace bank.data.repositories
             Dapper.SqlMapper.AddTypeMap(typeof(string), System.Data.DbType.AnsiString);
         }
 
+        public override void Save(Fact model)
+        {
+            if (model.FactType == enums.FactTypes.Company)
+            {
+                Save((CompanyFact)model);
+            }
+            else
+            {
+                throw new NotSupportedException();
+            }
+        }
+
         public void Save(CompanyFact model)
         {
             using (var conn = new SqlConnection(Settings.ConnectionString))
@@ -30,7 +42,8 @@ namespace bank.data.repositories
                     NumericValue = model.NumericValue,
                     Value = model.Value,
                     OrganizationID = model.OrganizationId,
-                    Period = model.Period
+                    Period = model.Period,
+                    Unit = model.Unit
                 },
                 commandType: CommandType.StoredProcedure);
             }
@@ -52,30 +65,72 @@ namespace bank.data.repositories
             return periodEnd;
         }
 
+        public IList<Fact> GetPeerGroupCustomFacts(IList<string> names, PeerGroupCustom peerGroupCustom, DateTime period, int? lookback = null)
+        {
+            if (!lookback.HasValue)
+            {
+                lookback = 0;
+            }
+            var periodStart = period.AddQuarters(-lookback.Value);
+
+            return GetPeerGroupCustomFacts(names, peerGroupCustom, periodStart, period);
+        }
+
         //exec GetAssetConcentrationPeerGroup 5815, '2016-09-30', 'UBPRE001,UBPRE002,UBPRE003,UBPRE004,UBPRE005,UBPRE006,UBPRE007,UBPRE008,UBPRE009,UBPRE010'
         public IList<Fact> GetPeerGroupCustomFacts(IList<string> names, PeerGroupCustom peerGroupCustom, DateTime periodStart, DateTime periodEnd)
         {
-            
+            const string sql = "select @peerGroup PeerGroup, Period, Name, avg(NumericValue) NumericValue, stdev(NumericValue), min(NumericValue) MinValue, max(NumericValue) MaxValue, count(*) c " +
+                                "from Fact " +
+                                "where OrganizationID in (select MemberOrganizationID from PeerGroupCustomMember pm where pm.PeerGroupCustomID = @peerGroupCustomID) " +
+                               "    and Period between @periodStart and @periodEnd " +
+                                "   and Name in @Names " +
+                                "group by Period, Name ";
+
+            IList<PeerGroupFact> facts;
+
             using (var conn = new SqlConnection(Settings.ConnectionString))
             {
                 conn.Open();
+                //orgs is intentionally created as a string instead of a param due to some weird query plan decisions by SQL
 
-                var facts = conn.Query<PeerGroupFact>(
-                    "GetPeerGroupCustomFacts",// @OrganizationID, @Period, @Names",
-                    new {
-                        Names = string.Join(",", names),
-                        PeerGroupCustomId = peerGroupCustom.PeerGroupCustomId,
-                        PeerGroupCode = peerGroupCustom.PeerGroupCode,
-                        PeriodStart = periodStart,
-                        PeriodEnd = periodEnd
-                    },
-                    commandType: CommandType.StoredProcedure)
-                    .ToList();
+                facts = conn.Query<PeerGroupFact>(sql, new
+                                                {
+                                                    PeerGroupCustomId = peerGroupCustom.PeerGroupCustomId,
+                                                    Names = names.Distinct(),
+                                                    PeriodEnd = periodEnd,
+                                                    PeriodStart = periodStart,
+                                                    PeerGroup = peerGroupCustom.PeerGroupCode
+                                                },
+                                                commandType: CommandType.Text)
+                                                .ToList();
 
                 var consolidatedFacts = ConsolidatePeerGroupFacts(facts, new string[] { peerGroupCustom.PeerGroupCode });
 
                 return consolidatedFacts;
+
             }
+
+            //using (var conn = new SqlConnection(Settings.ConnectionString))
+            //{
+            //    conn.Open();
+
+            //    var facts = conn.Query<PeerGroupFact>(
+            //        "GetPeerGroupCustomFacts",// @OrganizationID, @Period, @Names",
+            //        new
+            //        {
+            //            Names = string.Join(",", names.Distinct()),
+            //            PeerGroupCustomId = peerGroupCustom.PeerGroupCustomId,
+            //            PeerGroupCode = peerGroupCustom.PeerGroupCode,
+            //            PeriodStart = periodStart,
+            //            PeriodEnd = periodEnd
+            //        },
+            //        commandType: CommandType.StoredProcedure)
+            //        .ToList();
+
+            //    var consolidatedFacts = ConsolidatePeerGroupFacts(facts, new string[] { peerGroupCustom.PeerGroupCode });
+
+            //    return consolidatedFacts;
+            //}
         }
 
         private IList<Fact> ConsolidatePeerGroupFacts(IList<PeerGroupFact> facts, IList<string> peerGroups)
@@ -112,6 +167,17 @@ namespace bank.data.repositories
             return consolidatedFacts;
         }
 
+        public IList<Fact> GetPeerGroupFacts(IList<string> names, IList<string> peerGroups, DateTime period, int? lookback = null)
+        {
+            if (!lookback.HasValue)
+            {
+                lookback = 0;
+            }
+            var periodStart = period.AddQuarters(-lookback.Value);
+
+            return GetPeerGroupFacts(names, peerGroups, periodStart, period);
+        }
+
         public IList<Fact> GetPeerGroupFacts(IList<string> names, IList<string> peerGroups, DateTime periodStart, DateTime periodEnd)
         {
 
@@ -135,7 +201,7 @@ namespace bank.data.repositories
                                                 },
                                                 commandType: CommandType.Text)
                                                 .ToList();
-                
+
                 var consolidatedFacts = ConsolidatePeerGroupFacts(facts, peerGroups);
 
                 return consolidatedFacts;
@@ -143,6 +209,17 @@ namespace bank.data.repositories
             }
 
 
+        }
+
+        public IList<Fact> GetFacts(IList<string> names, IList<int> organizationIds, DateTime period, int? lookback = null)
+        {
+            if (!lookback.HasValue)
+            {
+                lookback = 0;
+            }
+            var periodStart = period.AddQuarters(-lookback.Value);
+
+            return GetFacts(names, organizationIds, periodStart, period);
         }
 
         public IList<Fact> GetFacts(IList<string> names, IList<int> organizationIds, DateTime periodStart, DateTime periodEnd)
@@ -159,13 +236,14 @@ namespace bank.data.repositories
 
                 var facts = conn.Query<CompanyFact>("  select  * " +
                                                 "from   Fact " +
-                                                "where OrganizationID in (" + orgs + ") " +
+                                                "where OrganizationID in @OrganizationIds " + //(" + orgs + ") " +
                                                 "   and Period between @periodStart and @periodEnd " +
                                                 "   and Name in @Names ", new
                                                 {
                                                     Names = names.Distinct(),
                                                     PeriodEnd = periodEnd,
-                                                    PeriodStart = periodStart
+                                                    PeriodStart = periodStart,
+                                                    OrganizationIds = organizationIds.Distinct()
                                                 },
                                                 commandType: CommandType.Text)
                                                 .ToList();

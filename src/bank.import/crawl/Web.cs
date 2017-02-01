@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using bank.crawl;
 using bank.poco;
 using RestSharp.Extensions.MonoHttp;
 
 namespace bank.import.crawl
 {
-    class Web
+    public class Web
     {
         private TaskPool<WebJob> _taskPool = new TaskPool<WebJob>();
         public delegate void TaskCompletedHandler(WebJob job);
@@ -80,7 +79,7 @@ namespace bank.import.crawl
         }
     }
 
-    class WebJob
+    public class WebJob
     {
         public Organization Organization { get; set;}
         public string Url { get; set; }

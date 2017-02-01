@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using bank.extensions;
 using bank.utilities;
 using DapperExtensions.Mapper;
+using Newtonsoft.Json;
 
 namespace bank.poco
 {

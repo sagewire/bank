@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Taxonomy based on XBRL standard Version 2.1.
+Created by FFIEC CDR 2017 Unisys Corp., All Rights Reserved
+Produced on 2017-01-25 19:53:05
+-->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ucom="http://www.cdr.ffiec.gov/xbrl/RoleTypes" targetNamespace="http://www.cdr.ffiec.gov/xbrl/RoleTypes" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <annotation>
+    <appinfo>
+      <link:roleType roleURI="http://www.ffiec.gov/xbrl/report/lineCaption" id="lineCaption">
+        <link:usedOn>link:label</link:usedOn>
+      </link:roleType>
+      <link:roleType roleURI="http://www.ffiec.gov/xbrl/report/columnCaption" id="columnCaption">
+        <link:usedOn>link:label</link:usedOn>
+      </link:roleType>
+      <link:roleType roleURI="http://www.ffiec.gov/xbrl/report/form" id="form">
+        <link:usedOn>link:reference</link:usedOn>
+      </link:roleType>
+      <link:roleType roleURI="http://www.ffiec.gov/xbrl/role/peerDefinitionFormula" id="peerDefinitionFormula">
+        <link:usedOn>link:formula</link:usedOn>
+      </link:roleType>
+      <link:roleType roleURI="http://www.ffiec.gov/xbrl/role/ratioFormula" id="ratioFormula">
+        <link:usedOn>link:formula</link:usedOn>
+      </link:roleType>
+      <link:roleType roleURI="http://www.ffiec.gov/xbrl/report/line" id="line">
+        <link:usedOn>link:presentationLink</link:usedOn>
+      </link:roleType>
+      <link:roleType roleURI="http://www.ffiec.gov/xbrl/report/column" id="column">
+        <link:usedOn>link:presentationLink</link:usedOn>
+      </link:roleType>
+      <link:roleType roleURI="http://www.ffiec.gov/xbrl/ConfidentialConcepts" id="ConfidentialConcepts">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+    </appinfo>
+  </annotation>
+  <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd" />
+  <element id="ucom_pres-root" name="pres-root" type="xbrli:stringItemType" substitutionGroup="xbrli:item" xbrli:periodType="instant" abstract="true" nillable="true" />
+</schema>

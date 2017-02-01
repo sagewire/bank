@@ -46,10 +46,6 @@
       <HintPath>..\packages\Elasticsearch.Net.5.0.0\lib\net46\Elasticsearch.Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="mustache-sharp, Version=0.2.10.0, Culture=neutral, PublicKeyToken=40ca26c1e088cef4, processorArchitecture=MSIL">
       <HintPath>..\packages\mustache-sharp.0.2.10\lib\net40\mustache-sharp.dll</HintPath>
       <Private>True</Private>
@@ -78,13 +74,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="crawl\cleaners\FacebookCleaner.cs" />
-    <Compile Include="crawl\cleaners\TwitterCleaner.cs" />
     <Compile Include="data\Database.cs" />
     <Compile Include="data\elasticsearch\queries\SearchQueries.cs" />
     <Compile Include="data\elasticsearch\responses\BaseResponse.cs" />
     <Compile Include="data\elasticsearch\responses\DeleteResponse.cs" />
     <Compile Include="data\elasticsearch\responses\IndexResponse.cs" />
+    <Compile Include="data\maps\ReportImport.cs" />
     <Compile Include="data\maps\CompanyFactMap.cs" />
     <Compile Include="data\maps\ConceptDefinitionMap.cs" />
     <Compile Include="data\maps\OrganizationMap.cs" />
@@ -95,6 +90,7 @@
     <Compile Include="data\repositories\Repository.cs" />
     <Compile Include="data\repositories\FactRepository.cs" />
     <Compile Include="data\repositories\IRepository.cs" />
+    <Compile Include="data\repositories\ReportImportRepository.cs" />
     <Compile Include="data\repositories\TwitterFriendRepository.cs" />
     <Compile Include="enums\FactTypes.cs" />
     <Compile Include="enums\HorizontalAlignment.cs" />
@@ -126,9 +122,6 @@
     <Compile Include="utilities\Base26.cs" />
     <Compile Include="utilities\FactResolver.cs" />
     <Compile Include="utilities\Misc.cs" />
-    <Compile Include="crawl\cleaners\BaseCleaner.cs" />
-    <Compile Include="crawl\Crawler.cs" />
-    <Compile Include="crawl\Page.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\elasticsearch\json\search.json" />

@@ -19,6 +19,7 @@ namespace bank.poco
         public string Value { get; set; }
         public decimal? NumericValue { get; set; }
         public DateTime? Period { get; set; }
+        public char? Unit { get; set; }
 
         public virtual FactTypes FactType { get; }
         /// <summary>
