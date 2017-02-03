@@ -306,6 +306,8 @@ $(function () {
         tooltip: {
             shared: true,
             //split: true,
+            borderWidth: 0,
+            shadow: false,
             useHTML: true,
             valueDecimals: 0,
             headerFormat: "<table class='primary-tooltip table table-sm table-striped'><tr><th colspan='2'>{point.x:%b %e %Y}</th></th>",
