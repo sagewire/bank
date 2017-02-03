@@ -232,7 +232,7 @@
     <Content Include="report-templates\call.patch.xml" />
     <Content Include="report-templates\config.xml" />
     <Content Include="report-templates\concept-definition.xml" />
-    <Content Include="report-templates\deposit-breakdown.xml" />
+    <Content Include="report-templates\profile-layout.xml" />
     <Content Include="report-templates\peer-groups.xml" />
     <Content Include="report-templates\profile-primary.xml" />
     <Content Include="report-templates\profile-secondary.xml">

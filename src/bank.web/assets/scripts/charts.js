@@ -219,15 +219,16 @@ $(function () {
                 layout: "horizontal"
             },
             tooltip: {
-                shared: false,
+                //shared: true,
                 split: true,
                 useHTML: true,
-                padding: 1,
+                padding: 0,
                 valueDecimals: 2,
-                //headerFormat: "<table class='mb-0 table table-striped table-sm'><tr><th colspan='2'>{point.x:%b %e %Y}</th></th>",
-                //pointFormat: "<tr><td style='border-left: 10px solid {point.series.color};'>{point.series.name}</td><td>${point.y}</td></tr>",
-                pointFormat: "${point.y}",
-                //footerFormat: "</table>",
+                borderWidth: 0,
+                headerFormat: "<table class='table'>",
+                pointFormat: "<tr><td><b>${point.y}    </b></td><td> {point.x:%b %Y}</td></tr>",
+                footerFormat: "</table>",
+                //footerFormat: "<b>${point.y}</b> {point.x:%b %Y}",
                 formatter: null,
                 positioner: function () {
                     return { x: -5, y: -100 };
@@ -274,17 +275,6 @@ $(function () {
         });
 
     });
-
-    //$("[data-chart-type='sparkline']").each(function (index, element) {
-
-    //    $(this).highcharts('Combo', {
-
-    //        legend: {
-    //            enabled: false
-    //        }
-    //    }
-    //});
-
 
     $('[data-chart-type="primary"]').highcharts('Combo', {
         chart: {

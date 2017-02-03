@@ -18,10 +18,51 @@
 
 
                 <ul class="nav nav-fill">
-                    <li class="nav-item reveal home">
+                    <li class="nav-item reveal">
                         <a class="nav-link" href="@Url.Url(Model.Organization)">
                             <i class="fa fa-university" aria-hidden="true"></i>
                         </a>
+                    </li>
+                    <li class="nav-item reveal">
+                        <a class="nav-link" href="#" onclick="return false;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <button class="dropdown-item" type="button">
+                                <i class="fa fa-fw fa-hashtag" aria-hidden="true"></i>
+                                Add Bank to Dashboard
+                            </button>
+                            <button class="dropdown-item" type="button">
+                                <i class="fa fa-fw fa-clone" aria-hidden="true"></i>
+                                Add to Peer Group
+                            </button>
+                            <button class="dropdown-item" type="button">
+                                <i class="fa fa-fw fa-line-chart" aria-hidden="true"></i>
+                                New Report for Bank
+                            </button>
+
+                            <div class="dropdown-divider"></div>
+
+                            <button class="dropdown-item" type="button">
+                                <i class="fa fa-fw fa-link" aria-hidden="true"></i>
+                                Link
+                            </button>
+                            <button class="dropdown-item" type="button">
+                                <i class="fa fa-fw fa-code" aria-hidden="true"></i>
+                                Embed
+                            </button>
+                            <button class="dropdown-item" type="button">
+                                <i class="fa fa-fw fa-share-alt" aria-hidden="true"></i>
+                                Share
+                            </button>
+
+                            <div class="dropdown-divider"></div>
+
+                            <button class="dropdown-item" type="button">
+                                <i class="fa fa-fw fa-question" aria-hidden="true"></i>
+                                Help
+                            </button>
+                        </div>
                     </li>
                     <li class="nav-item reveal">
                         <a class="nav-link" href="@Url.Url(Model.Organization, DateTime.Now, "ubpr", "balance-sheet")">
