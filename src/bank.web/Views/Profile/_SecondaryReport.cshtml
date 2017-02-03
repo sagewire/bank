@@ -1,25 +1,33 @@
 ﻿@using bank.reports
 @model ReportViewModel
-@{ 
+@{
     var charts = (Charts)Model.Report.CurrentSection.LineItems.First();
 }
-<div class="card">
-    <div class="highlights">
-        <div class="row mx-0">
-            @{
-                var isFirst = true;
-            }
-            @foreach (ChartItem chart in charts.LineItems)
-            {
-                <div class="col-sm-4 px-0">
-                    <div class="highlight-item @(isFirst ? "left" : "")">
-                        <h6>@chart.ChartConfig.Concepts.First().ShortLabel</h6>
-                        <h2>@Report.GetCell(chart, Model.Report.Columns.First()).ValueFormatted</h2>
-                        @Html.Partial("_Chart", new ChartItemViewModel { Report = Model.Report, ChartItem = chart })
-                    </div>
+<div class="row">
+    @foreach (ChartItem chart in charts.LineItems)
+    {
+        var fact = Report.GetCell(chart, Model.Report.Columns.First());
+        
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    @chart.ChartConfig.Concepts.First().ShortLabel
+                    @Html.Partial("_CardMenu")
                 </div>
-                isFirst = false;
-            }
+                
+                <div class="card-block">
+                    <h2 class="text-left">
+                        @fact.ValueFormatted
+                        <small>
+                            @Html.Partial("_FactTrendArrow", fact)
+                        </small>
+                    </h2>
+                    @Html.Partial("_Chart", new ChartItemViewModel { Report = Model.Report, ChartConfig = chart.ChartConfig })
+                </div>
+            </div>
         </div>
-    </div>
+
+    }
+
 </div>
+

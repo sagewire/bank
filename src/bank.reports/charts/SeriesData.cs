@@ -17,13 +17,8 @@ namespace bank.reports.charts
         public virtual SeriesTypes SeriesType { get; set; }
 
         [JsonProperty(PropertyName = "name", NullValueHandling = NullValueHandling.Ignore)]
-        public virtual string Name
-        {
-            get
-            {
-                return Series.Concept.Label;
-            }
-        }
+        public virtual string Name { get; set; }
+        
 
         public virtual bool IsRange
         {
@@ -34,6 +29,12 @@ namespace bank.reports.charts
         }
 
         public Series Series { get; internal set; }
+
+        [JsonProperty(PropertyName = "visible", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? Visible { get; internal set; }
+
+        [JsonProperty(PropertyName = "focus", NullValueHandling = NullValueHandling.Ignore)]
+        public string Focus { get; internal set; }
 
         public SeriesData(SeriesTypes type)
         {

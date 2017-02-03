@@ -1,13 +1,13 @@
 ﻿@using bank.reports.charts
 @model ChartItemViewModel
 
-@if (!string.IsNullOrWhiteSpace(Model.ChartItem.ChartConfig.Title))
+@if (Model.ShowTitle && !string.IsNullOrWhiteSpace(Model.ChartConfig.Title))
 {
-    <h5>@Model.ChartItem.ChartConfig.Resolve(Model.ChartItem.ChartConfig.Title)</h5>
+    <h5>@Model.ChartConfig.Resolve(Model.ChartConfig.Title)</h5>
 }
 
-<div id="@Model.ChartItem.ChartConfig.ChartId" 
-     class="@Model.ChartItem.ChartConfig.CssClasses" 
+<div id="@Model.ChartConfig.ChartId" 
+     class="reveal-slow chart-responsive @Model.ChartConfig.CssClasses" 
      data-chart-type="@Model.ChartDataType" 
-     data-series="@Model.ChartItem.ChartConfig.GetSeriesData(Model.Report.Columns).ToJson()"></div>
+     data-series="@Model.ChartConfig.GetSeriesData(Model.Report.Columns).ToJson()"></div>
 

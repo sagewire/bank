@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <report lookback="4">
-	<line name="root" label="Deposit Allocation Details" abstract="true">
+	<line name="root" label="Deposit Composition Breakdown &amp; Ratios" abstract="true">
 			<chart title="Deposit Composition" type="sankey" css-classes="sankey">
 				<column type="string" id="from" label="From" />
 				<column type="string" id="to" label="To" />

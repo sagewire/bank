@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<report root="pres-report" xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform" xdt:Locator="Condition(/report)" xdt:Transform="SetAttributes(root)">
+<report lookback="4" root="pres-report" xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform" xdt:Locator="Condition(/report)" xdt:Transform="SetAttributes(root, lookback)">
 	<line>
 		<line name="income-statement" label="Schedule RI - Income Statement" abstract="true" xdt:Locator="Condition(@name='pres-RI')" xdt:Transform="SetAttributes(name)"/>
 	</line>

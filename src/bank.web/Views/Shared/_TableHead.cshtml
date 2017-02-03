@@ -3,8 +3,11 @@
 
 <thead>
     <tr>
-        <td style="width:100%;" class="pl-1 align-middle">
-            <h3>@Model.Report.Title</h3>
+        <td class="width-75 card-header align-middle">
+            @if (Model.ShowTitle)
+            {
+                @Model.Report.Title
+            }
         </td>
 
         @foreach (var column in Model.Report.VisibleColumns)

@@ -25,24 +25,27 @@ namespace bank.web.Controllers
             var model = new OrganizationProfileViewModel();
             companies.AddRange(DecodeIds(c));
 
-            
+            var orgRepo = new OrganizationRepository();
+            model.Organization = orgRepo.GetOrganization(orgId, true, true);
+
             model.PrimaryChart = new Report("profile-primary");
             model.PieCharts = new Report("profile-piecharts");
             model.SecondaryCharts = new Report("profile-secondary");
             model.SidebarCharts = new Report("profile-sidebar");
             model.HighlightTable = new Report("financial-highlights");
+            model.DepositComposition = new Report("deposit-composition");
 
             var tasks = new List<Task>();
 
-            var modelTask = Task.Run(()=> PopulateReportsAndColumns(orgId, companies, model));
-            //var rawReportsTask = Task.Run(() => GetRawReports(orgId));
+            var modelTask = Task.Run(()=> PopulateReportsAndColumns(model.Organization, companies, model));
+            var rawReportsTask = Task.Run(() => RawReports(model.Organization));
             
-            //tasks.Add(rawReportsTask);
+            tasks.Add(rawReportsTask);
             tasks.Add(modelTask);
 
             Task.WaitAll(tasks.ToArray());
 
-            model.RawReports = RawReports(model.Organization);
+            model.RawReports = rawReportsTask.Result;
  
             ViewBag.Title = model.Title;
             return View(model);
@@ -72,6 +75,37 @@ namespace bank.web.Controllers
 
             return list.OrderByDescending(x => x.Key).Select(x => x.Value).ToList();
 
+        }
+
+        public ActionResult Viewer(string name, string id, DateTime? period, string template, string section, string c = null)
+        {
+            var orgId = DecodeId(id);
+            var companies = new List<int>();
+            companies.Add(orgId);
+            var model = new ReportViewModel();
+            companies.AddRange(DecodeIds(c));
+
+            var orgRepo = new OrganizationRepository();
+            model.Organization = orgRepo.GetOrganization(orgId, true, true);
+
+            model.Report = new Report(template, section: section);
+            model.ShowTitle = false;
+
+            var tasks = new List<Task>();
+            var modelTask = Task.Run(() => PopulateReportsAndColumns(model.Organization, companies, model, period));
+            var rawReportsTask = Task.Run(() => RawReports(model.Organization));
+            
+
+            tasks.Add(rawReportsTask);
+            tasks.Add(modelTask);
+
+            Task.WaitAll(tasks.ToArray());
+
+            model.RawReports = rawReportsTask.Result;
+
+            ViewBag.Title = model.Title;
+            return View(model);
+            
         }
 
     }

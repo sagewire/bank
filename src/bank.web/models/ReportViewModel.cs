@@ -12,8 +12,11 @@ namespace bank.web.models
         public Organization Organization { get; set; }
         public DateTime? Period { get; internal set; }
         public Report Report { get; set; }
+        public bool ShowTitle { get; set; }
 
         public string Companies { get; set; }
+
+        public IList<ReportListViewModel> RawReports { get; set; } = new List<ReportListViewModel>();
 
         public IList<Report> Reports
         {
@@ -22,5 +25,14 @@ namespace bank.web.models
                 return new Report[] { Report };
             }
         }
+
+        public string Title
+        {
+            get
+            {
+                return Organization.Name;
+            }
+        }
+
     }
 }

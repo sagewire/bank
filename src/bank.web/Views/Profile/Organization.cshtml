@@ -3,25 +3,51 @@
 @model OrganizationProfileViewModel
 
 @{
-    Layout = "~/Views/Shared/_LayoutSidebar.cshtml";
+    Layout = "~/Views/Shared/_LayoutSingle.cshtml";
 }
 
 @section Header {
-
-    @Html.Partial("_Header", Model)
-
-}
-
-
-@section Sidebar {
-
-    @Html.Partial(Model.SidebarCharts.Partial, new ReportViewModel { Report = Model.SidebarCharts })
+    @Html.Partial("_Header", new ProfileHeaderViewModel { Organization = Model.Organization, RawReports = Model.RawReports })
 
 }
 
-<div class="">
-    @Html.Partial(Model.SecondaryCharts.Partial, new ReportViewModel { Report = Model.SecondaryCharts })
+<div class="first">
+
+    @Html.Partial("_SecondaryReport", new ReportViewModel { Report = Model.SecondaryCharts })
+
 </div>
 
-@Html.Partial("_Report", new ReportViewModel { Report = Model.HighlightTable })
+<div class="card">
+    <div class="card-header">
+        Balance Sheet Highlights
+        @Html.Partial("_CardMenu")
+    </div>
+
+    <div class="card-block">
+        @Html.Partial("_Report", new ReportViewModel { Report = Model.PrimaryChart })
+    </div>
+</div>
+
+<div class="row" data-spy="scroll">
+    <div class="col-lg-8 col-xs-12">
+        <div class="card">
+            @Html.Partial("_Report", new ReportViewModel { Report = Model.HighlightTable, ShowTitle = true })
+
+        </div>
+    </div>
+    <div class="col-lg-4">
+        @foreach (var pie in Model.PieCharts.Charts)
+        {
+            <div class="card">
+                <div class="card-header">
+                    @pie.Title
+                    @Html.Partial("_CardMenu")
+                </div>
+                <div class="card-block">
+                    @Html.Partial("_Chart", new ChartItemViewModel { Report = Model.PieCharts, ChartConfig = pie })
+                </div>
+            </div>
+        }
+    </div>
+</div>
 

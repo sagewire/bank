@@ -34,7 +34,7 @@ namespace bank.reports.formulas
 
             foreach (var conceptElement in concepts)
             {
-                var name = conceptElement.SafeAttributeValue("name");
+                var name = conceptElement.SafeAttributeValue("name").ToUpper();
                 var shortLabel = conceptElement.SafeAttributeValue("shortLabel");
                 var formula = conceptElement.SafeAttributeValue("formula") ?? conceptElement.SafeAttributeValue("name");
                 var label = conceptElement.SafeAttributeValue("label");

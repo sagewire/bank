@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+  <row>
+    <col class="col-xs-12 col-md-3">
+      <report></report>
+    </col>
+    <col class="col-xs-12 col-md-3">
+      <report></report>
+    </col>
+    <col class="col-xs-12 col-md-3">
+      <report></report>
+    </col>
+    <col class="col-xs-12 col-md-3">
+      <report></report>
+    </col>
+  </row>
+  <row>
+    <col>
+      <report></report>
+    </col>
+  </row>
+  <row>
+    <col class="col-xs-12 col-md-8">
+      <report></report>
+    </col>
+    <col class="col-xs-12 col-md-4">
+      <report></report>
+      <report></report>
+      <report></report>
+    </col>
+  </row>
+</layout>

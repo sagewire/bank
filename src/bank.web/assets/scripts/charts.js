@@ -3,11 +3,16 @@ $(function () {
 
 
     Highcharts.theme = {
-        colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
+        colors: ['#058DC7', '#64E572', '#FF9655', '#FFF263', '#6AF9C4', '#50B432', '#ED561B', '#DDDF00'],
         chart: {
             backgroundColor: null,
             borderWidth: 0,
-            margin: [0, 0, 0, 0],
+            //margin: [0, 0, 0, 0],
+            //marginLeft: 0,
+            //marginRight: 0,
+            //marginTop: 0,
+            //marginBottom: 0,
+            //spacingBottom: 0,
 
             style: {
                 overflow: 'visible'
@@ -26,7 +31,7 @@ $(function () {
         xAxis: {
             lineWidth: 0,
             gridLineWidth: 0,
-            gridLineColor: 'transparent',
+            gridLineColor: '#eeeeee',
             type: "datetime",
             labels: {
                 enabled: false
@@ -42,7 +47,7 @@ $(function () {
         },
         yAxis: {
             gridLineWidth: 0,
-            gridLineColor: 'transparent',
+            gridLineColor: '#eeeeee',
             endOnTick: false,
             startOnTick: false,
             labels: {
@@ -54,15 +59,16 @@ $(function () {
             tickPositions: []
         },
         legend: {
-            enabled: false
+            enabled: true,
+            layout: "vertical"
         },
         //tooltip: {
         //    shared: true
         //},
         tooltip: {
-            
+
             formatter: function () {
-                console.log(this);
+
                 var name = this.series.name;
                 var key = this.key;
 
@@ -71,17 +77,19 @@ $(function () {
                 }
 
                 return '<b>' + name + '</b><br/><i>' + key + "</i><br/>" +
-                    Highcharts.dateFormat('%e-%b-%Y', new Date(this.x)) + '<br/> Value: ' + Highcharts.numberFormat(this.y, 0,"", ",")  + ' ';
+                    Highcharts.dateFormat('%e-%b-%Y', new Date(this.x)) + '<br/> Value: ' + Highcharts.numberFormat(this.y, 0, "", ",") + ' ';
             }
         },
         plotOptions: {
             pie: {
                 dataLabels: {
                     enabled: false
-                }
+                },
+                showInLegend: true
             },
             areaspline: {
                 pointPlacement: null
+
             },
             column: {
                 pointPadding: 0
@@ -194,13 +202,130 @@ $(function () {
 
     });
 
+    $("[data-chart-type='key-ratio']").each(function (index, element) {
+
+        $(this).highcharts('Combo', {
+            chart: {
+                marginBottom: 75,
+                spacingBottom: 0
+            },
+            plotOptions: {
+                areaspline: {
+                    lineWidth: 0
+                }
+            },
+            legend: {
+                enabled: true,
+                layout: "horizontal"
+            },
+            tooltip: {
+                shared: false,
+                split: true,
+                useHTML: true,
+                padding: 1,
+                valueDecimals: 2,
+                //headerFormat: "<table class='mb-0 table table-striped table-sm'><tr><th colspan='2'>{point.x:%b %e %Y}</th></th>",
+                //pointFormat: "<tr><td style='border-left: 10px solid {point.series.color};'>{point.series.name}</td><td>${point.y}</td></tr>",
+                pointFormat: "${point.y}",
+                //footerFormat: "</table>",
+                formatter: null,
+                positioner: function () {
+                    return { x: -5, y: -100 };
+                },
+            },
+            series: [
+                {},
+                { lineWidth: 0 }
+            ]
+        });
+
+    });
+
+
+    $("[data-chart-type='fixed-placement']").each(function (index, element) {
+
+        $(this).highcharts('Combo', {
+            plotOptions: {
+                bar: {
+                    grouping: true,
+                    borderWidth: 0,
+                    groupPadding: 0,
+                    pointPadding: 0
+                }
+            },
+            yAxis: {
+                max: 100
+            },
+            series: [
+                {
+                    color: 'rgba(165,170,217,.5)',
+                    pointPadding: 0.1,
+                    zIndex: 100
+                },
+                {
+                    color: 'rgba(126,86,134,.9)',
+                    pointPadding: 0.2,
+                },
+                {
+                    color: 'rgba(186,60,61,.9)',
+                    pointPadding: 0.3,
+                }
+            ]
+        });
+
+    });
+
+    //$("[data-chart-type='sparkline']").each(function (index, element) {
+
+    //    $(this).highcharts('Combo', {
+
+    //        legend: {
+    //            enabled: false
+    //        }
+    //    }
+    //});
+
 
     $('[data-chart-type="primary"]').highcharts('Combo', {
-
+        chart: {
+            marginBottom: 85,
+            spacingBottom: 0
+        },
         plotOptions: {
             areaspline: {
                 lineWidth: 0,
             }
+        },
+        lang: {
+            thousandsSep: ','
+        },
+        legend: {
+            enabled: true,
+            layout: "horizontal"
+        },
+        tooltip: {
+            shared: true,
+            //split: true,
+            useHTML: true,
+            valueDecimals: 0,
+            headerFormat: "<table class='primary-tooltip table table-sm table-striped'><tr><th colspan='2'>{point.x:%b %e %Y}</th></th>",
+            pointFormat: "<tr><td style='border-left: 10px solid {point.series.color}'>{point.name}</td><td style='text-align: right;'>${point.y}</td></tr>",
+            footerFormat: "</table>",
+            formatter: null,
+            positioner: function () {
+                return { x: 0, y: 0 };
+            },
+        },
+        xAxis: {
+            gridLineWidth: 1,
+            tickPositions: null,
+            labels: {
+                enabled: true
+            },
+        },
+        yAxis: {
+            gridLineWidth: 0,
+            tickPositions: null
         },
         series: [
             {
@@ -272,6 +397,30 @@ $(function () {
 
 jQuery.fn.exists = function () { return this.length > 0; }
 
+Highcharts.SparkLine = function (elem, b, c) {
+
+    var hasRenderToArg = typeof elem === 'string' || elem.nodeName,
+    options = arguments[hasRenderToArg ? 1 : 0],
+    defaultOptions = {
+
+        chart: {
+            renderTo: (options.chart && options.chart.renderTo) || this,
+            margin: [0, 0, 0, 0],
+        },
+
+        tooltip: {
+            enabled: false
+        },
+        legend:{
+            enabled: false
+        },
+        series: [],
+
+    };
+
+    return DefaultChart(elem, b, c, defaultOptions);
+};
+
 Highcharts.Combo = function (elem, b, c) {
 
     var hasRenderToArg = typeof elem === 'string' || elem.nodeName,
@@ -284,6 +433,16 @@ Highcharts.Combo = function (elem, b, c) {
         series: [],
 
     };
+
+    return DefaultChart(elem, b, c, defaultOptions);
+};
+
+
+function DefaultChart (elem, b, c, defaultOptions) {
+
+    var hasRenderToArg = typeof elem === 'string' || elem.nodeName,
+    options = arguments[hasRenderToArg ? 1 : 0],
+
 
     options = Highcharts.merge(defaultOptions, options);
 
@@ -298,9 +457,30 @@ Highcharts.Combo = function (elem, b, c) {
 
     options.series = seriesData;
 
-    return hasRenderToArg ?
+    var chart = hasRenderToArg ?
         new Highcharts.Chart(elem, options, c) :
         new Highcharts.Chart(options, b);
+
+    //chart.series[0].data[40].select();
+
+    var pointsToSelect = [];
+    $.each(chart.series, function (index, s) {
+        var focus = s.options.focus;
+
+        if (focus === "last") {
+            var points = s.points;
+            var point = points[points.length - 1];
+            pointsToSelect.push(point);
+        }
+    });
+
+
+    if (pointsToSelect.length > 0) {
+        chart.tooltip.refresh(pointsToSelect);
+    }
+    chart.reflow();
+
+    return chart;
 };
 
-Highcharts.SparkLine = Highcharts.Combo;
+//Highcharts.SparkLine = Highcharts.Combo;

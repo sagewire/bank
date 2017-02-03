@@ -14,5 +14,8 @@ namespace bank.web.models
         //IList<Column> Columns { get; }
 
         Organization Organization { get; set; }
+
+        IList<ReportListViewModel> RawReports { get; set; }
+
     }
 }

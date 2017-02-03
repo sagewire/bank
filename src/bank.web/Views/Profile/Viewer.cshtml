@@ -1,0 +1,25 @@
+﻿@using bank.reports
+@using bank.enums
+@model ReportViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutSingle.cshtml";
+}
+
+@section Header {
+
+    @Html.Partial("_Header", new ProfileHeaderViewModel { Organization = Model.Organization, RawReports = Model.RawReports })
+
+
+}
+
+<main class="first">
+    <div class="card">
+        <card class="card-header">
+            @Model.Report.Title
+        </card>
+        <div class="card-block">
+            @Html.Partial("_Report", Model)
+        </div>
+    </div>
+</main>

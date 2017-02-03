@@ -3,15 +3,13 @@
 }
 
 
-<div>
-    @RenderSection("Header", required: false)
 
-    <div class="container-fluid">
-        <div class="row-padding">
-            <div class="col-xs-12">
-                @RenderBody()
-            </div>
-        </div>
+
+@RenderSection("Header", required: false)
+
+<div class="container-fluid">
+    <div id="main-wrapper">
+        @RenderBody()
     </div>
 </div>
 
@@ -25,4 +23,4 @@
 
 @section Scripts {
     @RenderSection("ScriptsProxy", required: false)
-}
+    @*  *@}

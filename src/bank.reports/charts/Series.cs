@@ -21,6 +21,8 @@ namespace bank.reports.charts
         public long? ColumnIndex { get; internal set; }
         public long? ColumnStart { get; internal set; }
         public int? zIndex{ get; internal set; }
+        public bool? Visible { get; internal set; }
+        public string Focus { get; internal set; }
 
         public Series(SeriesTypes type)
         {
@@ -50,9 +52,17 @@ namespace bank.reports.charts
                     seriesData = new LineSeriesData();
                     seriesData.SeriesType = SeriesTypes.AreaSpline;
                     break;
+                case SeriesTypes.Area:
+                    seriesData = new LineSeriesData();
+                    seriesData.SeriesType = SeriesTypes.Area;
+                    break;
                 case SeriesTypes.Column:
                     seriesData = new LineSeriesData();
                     seriesData.SeriesType = SeriesTypes.Column;
+                    break;
+                case SeriesTypes.Bar:
+                    seriesData = new LineSeriesData();
+                    seriesData.SeriesType = SeriesTypes.Bar;
                     break;
                 case SeriesTypes.Bubble:
                     seriesData = new PointSeriesData();
@@ -69,6 +79,8 @@ namespace bank.reports.charts
             seriesData.Column = column;
             seriesData.Series = this;
             seriesData.zIndex = this.zIndex;
+            seriesData.Focus = this.Focus;
+            seriesData.Visible = this.Visible;
             seriesData.Init();
 
             return seriesData;

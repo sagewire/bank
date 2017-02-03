@@ -2,6 +2,11 @@
     var lastSize = findBootstrapEnvironment();
     console.log(lastSize);
 
+    window.sr = ScrollReveal();
+    sr.reveal('.reveal', { distance: "5px", origin: "right", duration: 500, delay: 0 });
+    sr.reveal('.reveal-no-mobile', { distance: "5px", origin: "right", duration: 500, delay: 0, mobile: false });
+    sr.reveal('.reveal-slow', { distance: "5px", origin: "right", duration: 2000, delay: 0 });
+
     $(".scroll-to").click(function (e) {
         e.preventDefault();
         var href = $(this).attr("href");
@@ -27,6 +32,10 @@
         sidebarPosition();
     }
 
+    
+    $(".card-menu .dropdown-item").click(function (e) {
+        alert("Demo feature. Not ready yet.");
+    });
 
     $("body").on("mouseenter", ".lineitem-cell", function (e) {
         $(this).find(".trending-percent").fadeIn(500);
@@ -131,6 +140,7 @@
     //                '</div>'
     //})
 
+    
 
     $("#modal").on("show.bs.modal", function (e) {
         var content = $(e.relatedTarget).data("content");

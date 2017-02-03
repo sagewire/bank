@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using bank.data.repositories;
+using bank.poco;
 using bank.reports;
 using bank.reports.formulas;
 using bank.utilities;
@@ -61,13 +62,13 @@ namespace bank.web.Controllers
             }
         }
 
-        protected void PopulateReportsAndColumns(int orgId, IList<int> companies, IReports model)
+        protected void PopulateReportsAndColumns(Organization org, IList<int> companies, IReports model, DateTime? period = null)
         {
             var orgRepo = new OrganizationRepository();
-            var org = orgRepo.GetOrganization(orgId, true, true);
+            //var org = orgRepo.GetOrganization(orgId, true, true);
 
             var periodStart = org.ReportImports.Select(x => x.Period).Min();
-            var periodEnd = org.ReportImports.Select(x => x.Period).Max();
+            var periodEnd = period.HasValue ? period.Value : org.ReportImports.Select(x => x.Period).Max();
                 
             var columns = new List<Column>();
 

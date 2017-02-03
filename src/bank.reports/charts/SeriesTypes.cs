@@ -23,6 +23,8 @@ namespace bank.reports.charts
         Line,
         [EnumMember(Value = "column")]
         Column,
+        [EnumMember(Value = "bar")]
+        Bar,
         [EnumMember(Value = "spline")]
         Spline,
         [EnumMember(Value = "sparkline")]

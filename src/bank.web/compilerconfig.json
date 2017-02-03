@@ -1,26 +1,37 @@
-﻿[
+[
   {
     "outputFile": "css/site.css",
-    "inputFile": "css/site.less"
+    "inputFile": "css/site.less",
+    "sourceMap": false
   },
   {
     "outputFile": "assets/css/site.css",
-    "inputFile": "assets/css/site.less"
+    "inputFile": "assets/css/site.less",
+    "sourceMap": false
   },
   {
     "outputFile": "assets/css/stately/stately.css",
-    "inputFile": "assets/css/stately/stately.scss"
+    "inputFile": "assets/css/stately/stately.scss",
+    "sourceMap": false
   },
   {
     "outputFile": "assets/css/imagegen.css",
-    "inputFile": "assets/css/imagegen.less"
+    "inputFile": "assets/css/imagegen.less",
+    "sourceMap": false
   },
   {
-    "outputFile": "assets/scripts/highcharts.es5.js",
-    "inputFile": "assets/scripts/highcharts.js"
+    "outputFile": "assets/css/site/site.css",
+    "inputFile": "assets/css/site/site.scss",
+    "sourceMap": false
   },
   {
-    "outputFile": "assets/scripts/site.es5.js",
-    "inputFile": "assets/scripts/site.js"
+    "outputFile": "assets/css/site/site.css",
+    "inputFile": "assets/css/site/site.less",
+    "sourceMap": false
+  },
+  {
+    "outputFile": "assets/css/site/responsive.css",
+    "inputFile": "assets/css/site/responsive.less",
+    "sourceMap": false
   }
 ]

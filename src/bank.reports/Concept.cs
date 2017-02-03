@@ -91,6 +91,7 @@ namespace bank.reports
             }
 
             var preparedFact = Fact.Build(factType);
+            preparedFact.Name = Value;
             preparedFact.NumericValue = (decimal)result;
             preparedFact.Period = facts.First().Period;
 

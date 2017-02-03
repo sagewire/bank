@@ -2,12 +2,30 @@
 <report>
   <charts>
     <chart type="combo" chart-override="primary" css-classes="main-chart" lookback="200">
-      <series type="areaspline" column="0" z-index="10">
+      <series type="areaspline" column="0" z-index="10" focus="last">
         <concept name="UBPR2170"/>
       </series>
-      <series type="areaspline" column-start="1">
+      <!--<series type="areaspline" column-start="1" z-index="5" focus="last" visible="false">
         <concept name="UBPR2170"/>
+      </series>-->
+      <series type="areaspline" column="0" z-index="10" focus="last">
+        <concept name="UBPRE119"/>
       </series>
+      <!--<series type="areaspline" column-start="1" z-index="5" focus="last" visible="false">
+        <concept name="UBPRE119"/>
+      </series>-->
+
+      <series type="areaspline" column="0" z-index="10" focus="last">
+        <concept name="UBPRK434"/>
+      </series>
+      <!--<series type="areaspline" column-start="1" z-index="5" focus="last" visible="false">
+        <concept name="UBPRK434"/>
+      </series>-->
+      <series type="areaspline" column="0" z-index="10" focus="last">
+        <concept name="UBPR3210"/>
+      </series>
+      
+
     </chart>
   </charts>
 </report>

@@ -56,24 +56,6 @@ namespace bank.reports.charts
         public override IList<SeriesData> GetSeriesData(Column column)
         {
             return GetSeriesData(new Column[] { column });
-            //var list = new List<SeriesData>();
-
-            //foreach (var series in Series)
-            //{
-            //    var seriesData = series.GetSeriesData(this, column);
-
-            //    if (seriesData == null) continue;
-
-            //    list.Add(seriesData);
-
-            //    if (seriesData.IsRange)
-            //    {
-            //        var rangeData = seriesData as RangeSeriesData;
-            //        list.Add(rangeData.PointSeriesData);
-            //    }
-            //}
-
-            //return list;
         }
 
         public override IList<SeriesData> GetSeriesData(IList<Column> columns)
@@ -105,6 +87,8 @@ namespace bank.reports.charts
 
                         if (seriesData == null) continue;
 
+                        seriesData.Name = column.HeaderText;
+                        
                         list.Add(seriesData);
 
                         if (seriesData.IsRange)
@@ -142,7 +126,9 @@ namespace bank.reports.charts
                 var series = new charts.Series(type);
                 series.ColumnIndex = seriesElement.SafeLongAttributeValue("column");
                 series.ColumnStart = seriesElement.SafeLongAttributeValue("column-start");
+                series.Visible = seriesElement.SafeBoolAttributeValue("visible");
                 series.zIndex = (int?)seriesElement.SafeLongAttributeValue("z-index");
+                series.Focus = seriesElement.SafeAttributeValue("focus");
 
                 var concepts = seriesElement.Elements("concept");
 

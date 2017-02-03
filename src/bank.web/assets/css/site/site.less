@@ -1,0 +1,433 @@
+﻿@primary-color: #2E96EA; //; //#1d365d; //bloo
+@primary-color-secondary: lighten(#57A8ED, 15);
+@accent-color: #30C8CA; // FFE545;
+@accent-color-secondary: #F6F67A;
+
+@body-color: #eeeeee; //#F0F1EE;
+@white: #fff;
+
+@darkish: darken(@white, 10);
+@dark: darken(@white, 25);
+@darker: darken(@white, 50);
+@darkest: darken(@white, 75);
+//@dark: #3E637D;
+
+@green: #3CC47C;
+@red: #f00;
+
+@screen-xs: 480px;
+//** Deprecated `@screen-xs-min` as of v3.2.0
+@screen-xs-min: @screen-xs;
+//** Deprecated `@screen-phone` as of v3.0.1
+@screen-phone: @screen-xs-min;
+
+// Small screen / tablet
+//** Deprecated `@screen-sm` as of v3.0.1
+@screen-sm: 768px;
+@screen-sm-min: @screen-sm;
+//** Deprecated `@screen-tablet` as of v3.0.1
+@screen-tablet: @screen-sm-min;
+
+// Medium screen / desktop
+//** Deprecated `@screen-md` as of v3.0.1
+@screen-md: 992px;
+@screen-md-min: @screen-md;
+//** Deprecated `@screen-desktop` as of v3.0.1
+@screen-desktop: @screen-md-min;
+
+// Large screen / wide desktop
+//** Deprecated `@screen-lg` as of v3.0.1
+@screen-lg: 1200px;
+@screen-lg-min: @screen-lg;
+//** Deprecated `@screen-lg-desktop` as of v3.0.1
+@screen-lg-desktop: @screen-lg-min;
+
+// So media queries don't overlap when required, provide a maximum
+@screen-xs-max: (@screen-sm-min - 1);
+@screen-sm-max: (@screen-md-min - 1);
+@screen-md-max: (@screen-lg-min - 1);
+
+body {
+    background-color: @body-color;
+    font-family: "Titillium Web";
+    color: @darkest;
+    position: relative;
+}
+
+.container-fluid {
+    max-width: 1440px;
+}
+
+.logo {
+    text-decoration: none !important;
+    display: inline-block;
+
+    a, h1 {
+        color: #fff !important;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin: 0;
+        padding: 0;
+
+        .b {
+            display: inline-block;
+            background-color: @accent-color;
+            padding: 0 4px !important;
+            border-radius: 4px;
+        }
+    }
+}
+
+.top-nav {
+    background-color: @darkest;
+}
+
+.bg-faded {
+    background-color: transparent;
+}
+
+#global-nav {
+    padding-left: 0;
+}
+
+#header {
+    position: relative;
+    background-color: @primary-color;
+    height: 300px;
+    padding-top: 90px;
+
+    h1 {
+        color: @white;
+        font-size: 3rem;
+        margin-bottom: 0;
+    }
+
+    h4 {
+        color: @white;
+    }
+}
+
+.skirt {
+    height: 75px;
+}
+
+#main-wrapper {
+    .first {
+        margin-top: -53px;
+    }
+}
+
+
+.box-shadow {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12);
+}
+
+.card {
+    border-radius: 0 !important;
+    margin-bottom: 30px;
+    .box-shadow;
+
+    .card-header {
+        background-color: transparent;
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+
+
+    .card-menu {
+
+        .dropdown-item {
+            font-size: 15px;
+        }
+
+        .fa {
+            color: @darkest;
+            margin-right: 15px;
+
+            &:hover {
+                color: @darkest;
+            }
+        }
+    }
+}
+
+.header-wrap {
+    background-color: @primary-color;
+    color: @white;
+}
+
+.org-nav {
+    //background-color: @primary-color;
+    //color: @white;
+    min-height: 56px;
+    padding-top: 8px;
+
+    a {
+        color: @darkest;
+    }
+
+    .nav {
+        //padding-top: 8px;
+    }
+
+    .reports-dropdown-menu {
+        min-width: 300px;
+    }
+
+    .nav-item {
+        .active {
+            background-color: @darker;
+            color: @white !important;
+        }
+    }
+
+    .nav-link {
+        background-color: @darkish;
+        color: @darkest !important;
+        margin-left: 2px;
+        white-space: nowrap;
+        min-height: 40px;
+        padding-left: 0;
+        padding-right: 0;
+
+        &:hover {
+            background-color: @darker;
+            color: @white !important;
+        }
+    }
+    //position: absolute;
+    /*bottom: 75px;
+    left: 0;
+    right:0;*/
+}
+
+//charts
+.primary-tooltip {
+    margin-bottom: 0;
+    font-size: 1rem;
+}
+
+.card-sparkline {
+    height: 50px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: .80;
+    //padding-bottom: 30px;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.key-ratio {
+    height: 150px;
+}
+
+.fixed-placement {
+    height: 40px;
+}
+
+.main-chart {
+    //height: 350px;
+    height: 450px;
+    max-height: 700px;
+}
+
+.sankey {
+    height: 500px;
+}
+
+// run of site classes
+.highcharts-container {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute;
+    overflow: visible !important;
+}
+
+.dropdown-menu {
+    z-index: 1100;
+}
+
+.highcharts-tooltip {
+}
+
+.reveal {
+    visibility: hidden;
+}
+
+svg {
+    overflow: visible;
+}
+
+.fa-arrow-up {
+    color: @green;
+}
+
+.fa-arrow-down {
+    color: @red;
+}
+
+
+//table
+.report-table {
+    //overflow: hidden;
+    //width: 100%;
+
+    thead {
+        width: 100%;
+
+        th {
+            font-size: 15px;
+        }
+
+        td {
+            border-top: none;
+            position: relative;
+
+            h3 {
+            }
+        }
+
+        h5 {
+            margin-bottom: 0;
+        }
+    }
+
+    tbody {
+        .level-0 {
+            font-weight: bold;
+        }
+
+        td {
+            font-size: 15px;
+        }
+
+        h5 {
+            margin-bottom: 0;
+        }
+    }
+
+    .table-header {
+        background-color: @accent-color;
+    }
+
+    .subsection-filler {
+        background-color: lighten(@accent-color, 10);
+        border-top: 1px solid @accent-color;
+    }
+
+    th.fact-column {
+        //width: 100%;
+        border: none;
+        vertical-align: middle;
+        text-align: center;
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        border-bottom: none;
+        //border-bottom: 1px solid @accent-color;
+    }
+}
+
+
+.trending-base() {
+
+    &:hover {
+        font-weight: 700;
+        //cursor: pointer;
+    }
+}
+
+.trending-up {
+    background-color: lighten(#0f0, 47);
+}
+
+.trending-up-1x {
+    .trending-base;
+    //border-right-color: green !important;
+    background-color: lighten(#0f0, 47);
+}
+
+.trending-up-2x {
+    .trending-up-1x;
+    background-color: lighten(#0f0, 42);
+}
+
+.trending-up-3x {
+    .trending-up-1x;
+    background-color: lighten(#0f0, 37);
+}
+
+.trending-down-1x {
+    .trending-base;
+    //border-right-color: red !important;
+    background-color: lighten(#f00, 47);
+}
+
+.trending-down-2x {
+    .trending-down-1x;
+    background-color: lighten(#f00, 42);
+}
+
+.trending-down-3x {
+    .trending-down-1x;
+    background-color: lighten(#f00, 37);
+}
+
+.trending-percent {
+    position: absolute;
+    font-size: .7rem;
+    font-weight: bold;
+    bottom: 0;
+    left: 0;
+    padding: 0;
+    //background-color: rgba(0, 0, 0, .25);
+    color: #000;
+    display: none;
+    min-width: 50px;
+    z-index: 11;
+    line-height: 1;
+    height: 100%;
+
+
+    &:hover {
+        background-color: rgba(255,255,255, 0.4);
+    }
+}
+
+.lineitem-cell {
+    position: relative;
+    z-index: 10;
+    padding-left: 45px !important;
+}
+
+.lineitem-sparkline {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+}
+
+.table-header {
+    border-top: none !important;
+    border-left: none !important;
+}
+
+.width-50 {
+    width: 50%;
+}
+
+.width-75 {
+    width: 75%;
+}
+
+
+.width-100 {
+    width: 100%;
+}
+
+@import (less) "responsive.less";

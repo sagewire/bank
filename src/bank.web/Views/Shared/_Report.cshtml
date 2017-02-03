@@ -31,18 +31,20 @@
         if (lineItem.LineItemType == LineItemTypes.Charts)
         {
             var col = string.Format("col-xs-{0}", 12 / lineItem.LineItems.Count);
-            <div class="row p-0 m-0">
+            <div class="row p-0 mb-3">
                 @foreach (var chartItem in lineItem.LineItems)
                 {
                     <div class="@col p-0">
-                        @Html.Partial("_Chart", new ChartItemViewModel { Report = Model.Report, ChartItem = chartItem as ChartItem })
+                        @Html.Partial("_Chart", new ChartItemViewModel { Report = Model.Report, ChartConfig = (chartItem as ChartItem).ChartConfig })
                     </div>
                 }
             </div>
         }
         else
         {
-            @Html.Partial("_Chart", new ChartItemViewModel { Report = Model.Report, ChartItem = lineItem as ChartItem })
+            <div class="mb-3">
+                @Html.Partial("_Chart", new ChartItemViewModel { Report = Model.Report, ChartConfig = (lineItem as ChartItem).ChartConfig })
+            </div>
         }
 
         showHeader = true;

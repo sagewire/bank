@@ -22,7 +22,7 @@ namespace bank.web.models
         public Report HighlightTable { get; internal set; }
         public Report PieCharts { get; internal set; }
 
-        public IList<ReportListViewModel> RawReports { get; internal set; } = new List<ReportListViewModel>();
+        public IList<ReportListViewModel> RawReports { get; set; } = new List<ReportListViewModel>();
 
         public string Title
         {
@@ -42,10 +42,13 @@ namespace bank.web.models
                             SecondaryCharts,
                             SidebarCharts,
                             PieCharts,
-                            HighlightTable
+                            HighlightTable,
+                            DepositComposition
                 };
             }
         }
+
+        public Report DepositComposition { get; internal set; }
 
         //public IList<Column> Columns { get; set; } = new List<Column>();
 

@@ -40,7 +40,7 @@ namespace bank.web
             routes.MapRoute(
                 name: "report",
                 url: "org/{name}.{id}/report/{template}/{section}/{period}",
-                defaults: new { controller = "Report", action = "Viewer", section = UrlParameter.Optional, period = UrlParameter.Optional }
+                defaults: new { controller = "Profile", action = "Viewer", section = UrlParameter.Optional, period = UrlParameter.Optional }
             );
 
             routes.MapRoute(

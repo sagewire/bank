@@ -43,7 +43,7 @@ namespace bank.web.helpers
             rv.Add("name", organization.Name.CreateSlug());
             rv.Add("id", Base26.Encode(organization.OrganizationId));
 
-            return urlHelper.RouteUrl("bank", rv);
+            return urlHelper.RouteUrl("organization", rv);
 
         }
     }

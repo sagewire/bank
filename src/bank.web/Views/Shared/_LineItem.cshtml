@@ -6,13 +6,16 @@
     var padding = string.Format("padding-left: {0}px", Model.Level * 30 + 15);
 }
 
-
+@if (Model.LineItem.Label != null && Model.LineItem.Label.StartsWith("#"))
+{
+    return;
+}
 
 @if (Model.LineItem.LineItemType == bank.reports.LineItemTypes.SubSection)
 {
     var subSection = Model.LineItem as SubSection;
     <tr>
-        <td class="table-header p-1">
+        <td class="reveal table-header p-2">
             <h5>@subSection.Label</h5>
         </td>
         <td class="subsection-filler" colspan="@(Model.Report.VisibleColumns.Count))">
@@ -28,10 +31,12 @@ else
         <td style="@padding" class="level-@Model.Level">
             @if (Model.LineItem.Label != null && !Model.LineItem.Label.StartsWith("#"))
             {
-            @Model.LineItem.Label
+                @Model.LineItem.Label
             }
         </td>
-
+        @{
+            var firstColumn = true;
+        }
         @foreach (var column in Model.Report.VisibleColumns)
         {
             var fact = Report.GetCell(Model.LineItem, column);
@@ -47,11 +52,11 @@ else
                 data-chart-type="sparkline"
                 data-series="@(Model.GetSeriesData(column)?.ToJson())"
                 style="@Model.TrendingColor(fact)"
-                class="fact-column lineitem-cell px-1 pr-1 @General.TrendingClass(fact)">
+                class="@(firstColumn ? "reveal" : "reveal-no-mobile") fact-column lineitem-cell  @General.TrendingClass(fact)">
 
                 @if (fact.TrendRatio.HasValue)
                 {
-                    <div class="float-xs-left trending-percent text-xs-center">
+                    <div class="float-xs-left trending-percent text-left">
                         @if (!fact.Trend.HasValue)
                         {
                             <div aria-hidden="true">&mdash;</div>
@@ -69,11 +74,19 @@ else
                     </div>
                 }
 
-                @Report.GetCell(Model.LineItem, column).ValueFormatted
+                @{
+                    firstColumn = false;
+                    var cell = Report.GetCell(Model.LineItem, column);
+                }
+
+                @*<small>
+                        @cell.Name
+                    </small>*@
+                @cell.ValueFormatted
             </td>
-        }
+                    }
     </tr>
-    }
+                    }
 
 @foreach (var child in Model.LineItem.LineItems)
 {

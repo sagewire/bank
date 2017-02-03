@@ -24,8 +24,8 @@
     <meta name="description" content="@ViewBag.MetaDescription" />
 
     <!-- stylesheets -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-    <link rel="stylesheet" href="~/assets/css/site.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/assets/css/site/site.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
     <link rel="stylesheet" href="~/assets/css/jquery.typeahead.min.css" />
     <script src="https://use.fontawesome.com/40ec8562ca.js"></script>
@@ -58,29 +58,33 @@
 
     @if (ViewBag.NoNav == null)
     {
-        <div class="top-nav">
-            <div class="collapse" id="navbar-header">
-                <div class="container-fluid p-a-1 p-3">
-                    <button class="navbar-toggler close hidden-sm-down" type="button" data-toggle="collapse" data-target="#navbar-header" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+        <div class="top-nav fixed-top">
+            <div id="global-nav" class="container-fluid">
+                <div class="collapse" id="navbar-header">
+                    <div class="p-a-1 p-3">
+                        <button class="navbar-toggler close hidden-sm-down" type="button" data-toggle="collapse" data-target="#navbar-header" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
 
-                    @Html.Partial("_GlobalNav")
+                        @Html.Partial("_GlobalNav")
 
+                    </div>
                 </div>
-            </div>
-            <div class="navbar navbar-light bg-faded">
-                <div class="container-fluid align-middle">
-                    <a class="logo" href="/">
-                        <h1 class="logo">
-                            Bankjitsu
-                        </h1>
-                    </a>
+                <nav class="navbar navbar-light bg-faded">
 
-                    <button class="navbar-toggler event" type="button" data-toggle="collapse" data-target="#navbar-header" data-cat="Navigation" data-action="click" data-label="Main Menu">
-                        ☰
-                    </button>
-                </div>
+                    <div class="align-middle">
+
+                        <a class="logo" href="/">
+                            <h1>
+                                Bankjitsu
+                            </h1>
+                        </a>
+
+                        <button class="navbar-toggler event float-right" type="button" data-toggle="collapse" data-target="#navbar-header" data-cat="Navigation" data-action="click" data-label="Main Menu">
+                            ☰
+                        </button>
+                    </div>
+                </nav>
             </div>
         </div>
     }
@@ -117,9 +121,11 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
     <script src="~/assets/scripts/jquery.typeahead.min.js"></script>
+    <script src="~/assets/scripts/scrollreveal.min.js"></script>
+    
     <script src="~/assets/scripts/site.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
