@@ -10,7 +10,7 @@ namespace bank.web.Controllers
     public class PagesController : ApplicationController
     {
         
-        public ActionResult Index()
+        public ActionResult Placeholder()
         {
             return View();
         }

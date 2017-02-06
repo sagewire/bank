@@ -103,8 +103,10 @@
     <Compile Include="extensions\XElementExtensions.cs" />
     <Compile Include="poco\Address.cs" />
     <Compile Include="poco\CompanyFact.cs" />
+    <Compile Include="poco\Concept.cs" />
     <Compile Include="poco\Fact.cs" />
     <Compile Include="poco\ConceptDefinition.cs" />
+    <Compile Include="poco\Global.cs" />
     <Compile Include="poco\Organization.cs" />
     <Compile Include="poco\PeerGroupCustom.cs" />
     <Compile Include="poco\PeerGroupCustomMember.cs" />

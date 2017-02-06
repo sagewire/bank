@@ -21,6 +21,16 @@ namespace bank.reports
             return facts.Select(x => x.Value).ToList();
         }
 
+        public Fact GetCell(Concept concept, Column column)
+        {
+
+            var facts = column.GetFacts(concept.ConceptKeys);
+            var fact = concept.PrepareFact(facts);
+
+            return fact;
+
+        }
+
         public abstract string HeaderText { get; set; }
 
         public bool ShowColumn

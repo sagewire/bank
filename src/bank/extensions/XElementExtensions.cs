@@ -63,5 +63,16 @@ namespace bank.extensions
                 return null;
             }
         }
+
+        public static char? SafeCharAttributeValue(this XElement element, string name)
+        {
+            var text = element.SafeAttributeValue(name);
+
+            if (!string.IsNullOrWhiteSpace(text))
+            {
+                return (char?)text.ToCharArray()[0];
+            }
+            return null;
+        }
     }
 }

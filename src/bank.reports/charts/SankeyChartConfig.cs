@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using bank.extensions;
+using bank.poco;
 
 namespace bank.reports.charts
 {
@@ -14,18 +15,13 @@ namespace bank.reports.charts
         {
             ChartType = ChartTypes.Sankey;
         }
-
-        public override IList<SeriesData> GetSeriesData(IList<Column> columns)
-        {
-            return GetSeriesData(columns.First());
-        }
-
-
-
-        public override IList<SeriesData> GetSeriesData(Column column)
+        
+        public override IList<SeriesData> GetSeriesData()
         {
             var seriesData = new SankeySeriesData();
             ((SeriesData)seriesData).Chart = this;
+
+            var column = Columns.First();
 
             seriesData.Data = new List<object>();
 

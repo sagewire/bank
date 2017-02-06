@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using bank.extensions;
+using bank.poco;
 
 namespace bank.reports.charts
 {
@@ -30,8 +31,7 @@ namespace bank.reports.charts
         public IList<Column> Columns { get; set; }
         public abstract IList<Column> VisibleColumns { get; }
 
-        public abstract IList<SeriesData> GetSeriesData(Column column);
-        public abstract IList<SeriesData> GetSeriesData(IList<Column> columns);
+        public abstract IList<SeriesData> GetSeriesData();
 
         public IList<FactLookup> FactLookups
         {
@@ -54,7 +54,7 @@ namespace bank.reports.charts
                 }
             }
         }
-
+        
         public static ChartConfig Build(XElement element, IDictionary<string, string> placeholders = null)
         {
             var chartTypeString = element.SafeAttributeValue("type");

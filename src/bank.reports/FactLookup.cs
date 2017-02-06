@@ -43,6 +43,8 @@ namespace bank.reports
         public static List<FactLookup> Merge(IList<FactLookup> sourceList, IList<FactLookup> targetList)
         {
 
+            if (sourceList == null || !sourceList.Any()) return targetList.ToList();
+
             var lookup = targetList.ToDictionary(x => x.Key, x => x);
 
             foreach (var source in sourceList)

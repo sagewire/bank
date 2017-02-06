@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Newtonsoft.Json;
 using bank.poco;
 using bank.web.models;
+using bank.extensions;
 
 namespace bank.web.Controllers
 {
@@ -24,10 +25,16 @@ namespace bank.web.Controllers
         {
             var entities = bank.data.elasticsearch.queries.SearchQueries.Search(q);
 
+            var gravatarUrl = "https://www.gravatar.com/avatar/{0}?d=identicon";
+
             var snippets = entities.Select(x => new {
                 name = x.Name,
                 url = x.ProfileUrl,
-                html = GetSnippet("_BankBasics", new BankBasicsViewModel { Organization = x })
+                avatar = x.Avatar ?? "/assets/images/bank.png",
+                assets = x.TotalAssets.HasValue ? x.TotalAssets.Value.ToAbbreviatedString(true, 0).ToUpper() : "",
+                city = x.City,
+                state = x.State
+                //html = GetSnippet("_BankBasics", new BankBasicsViewModel { Organization = x })
             }
             );
 

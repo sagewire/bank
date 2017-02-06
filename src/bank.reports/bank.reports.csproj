@@ -45,9 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculatedConcept.cs" />
-    <Compile Include="Cell.cs" />
-    <Compile Include="Charts.cs" />
+    <Compile Include="ChartElement.cs" />
     <Compile Include="charts\ChartConfig.cs" />
     <Compile Include="charts\ChartTypes.cs" />
     <Compile Include="charts\ComboChartConfig.cs" />
@@ -62,21 +60,22 @@
     <Compile Include="charts\SeriesTypes.cs" />
     <Compile Include="ColumnTypes.cs" />
     <Compile Include="CompanyColumn.cs" />
-    <Compile Include="Concept.cs" />
     <Compile Include="Column.cs" />
+    <Compile Include="EmptyElement.cs" />
     <Compile Include="FactLookup.cs" />
-    <Compile Include="formulas\Global.cs" />
-    <Compile Include="LineItemTypes.cs" />
+    <Compile Include="HtmlElement.cs" />
+    <Compile Include="ITableRow.cs" />
+    <Compile Include="Layout.cs" />
     <Compile Include="PeerGroupCustomColumn.cs" />
     <Compile Include="PeerGroupColumn.cs" />
-    <Compile Include="SubSection.cs" />
-    <Compile Include="TableItem.cs" />
-    <Compile Include="ChartItem.cs" />
-    <Compile Include="ICommonAttributes.cs" />
-    <Compile Include="LineItem.cs" />
-    <Compile Include="Report.cs" />
+    <Compile Include="TableElement.cs" />
+    <Compile Include="TableOrientation.cs" />
+    <Compile Include="TableRowGroup.cs" />
+    <Compile Include="TableRow.cs" />
+    <Compile Include="TemplateElement.cs" />
+    <Compile Include="TemplateRow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Section.cs" />
+    <Compile Include="TemplateColumn.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bank\bank.csproj">

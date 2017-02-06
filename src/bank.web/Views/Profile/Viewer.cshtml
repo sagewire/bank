@@ -14,12 +14,7 @@
 }
 
 <main class="first">
-    <div class="card">
-        <card class="card-header">
-            @Model.Report.Title
-        </card>
-        <div class="card-block">
-            @Html.Partial("_Report", Model)
-        </div>
-    </div>
+
+    @Html.Partial("template/_Rows", new RowsViewModel { Rows = Model.Layout.Rows })
+
 </main>

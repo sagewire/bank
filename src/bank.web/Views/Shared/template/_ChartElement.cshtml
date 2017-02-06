@@ -1,0 +1,9 @@
+﻿@using bank.reports
+@model ChartElement
+
+
+<div id="@Model.ChartConfig.ChartId"
+     class="reveal-slow chart-responsive @Model.ChartConfig.CssClasses"
+     data-chart-type="@Model.ChartDataType"
+     data-series="@Model.ChartConfig.GetSeriesData().ToJson()"></div>
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+  <row>
+    <col>
+      <table lookback="4" title="Income Statement">
+
+        <header></header>
+        <!--<concept name="UBPR4010" />
+        <concept name="RIAD4065" />
+        <concept name="RIAD4313" />
+        <concept name="UBPRE030" />-->
+        <concept name="UBPRE031" />
+        <concept name="UBPRE033" />
+        <concept name="UBPR4107" />
+
+
+        <concept name="RIAD4073" />
+        <concept name="UBPR4074" />
+        <concept name="RIAD4079" />
+        <concept name="UBPRE036" />
+        <concept name="UBPRE037" />
+        <concept name="RIAD4230" />
+        <concept name="UBPRE038" />
+        <concept name="UBPRE039" />
+        <concept name="RIAD4302" />
+        <concept name="RIAD4300" />
+        <concept name="UBPR4340" />
+        <concept name="UBPRE625" />
+        <concept name="UBPRE043" />
+
+      </table>
+    </col>
+  </row>
+</layout>

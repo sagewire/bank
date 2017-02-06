@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+  <row>
+    <col>
+      <table orientation="horizontal" title="Top Florida Banks by Total Assets" lookback="4">
+        <header>Balance Sheet</header>
+        <concept name="UBPR2170" />
+      </table>
+    </col>
+  </row>
+</layout>

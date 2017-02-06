@@ -1,0 +1,7 @@
+﻿@using bank.reports
+@model RowsViewModel
+
+@foreach (var row in Model.Rows)
+{
+    @Html.Partial("template/_Row", new RowViewModel { Row = row, Parent = Model })
+}

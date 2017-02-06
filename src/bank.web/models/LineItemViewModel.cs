@@ -52,7 +52,7 @@ namespace bank.web.models
             chartConfig.Series.Add(new Series(SeriesTypes.AreaSpline));
             chartConfig.Series.First().Concepts = LineItem.Concepts;
 
-            var seriesData = chartConfig.GetSeriesData(column);
+            var seriesData = chartConfig.GetSeriesData();
 
             return seriesData;
         }

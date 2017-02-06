@@ -1,0 +1,52 @@
+﻿@using bank.reports
+@using bank.reports.charts
+@model TableRowViewModel
+
+<tr>
+
+    <td width="100%">
+        <a title="@(Model.Row.Concept?.Name)">@Model.Row.Label</a>
+    </td>
+
+
+    @if (Model.Row.Concept != null)
+    {
+        var counter = 0;
+        foreach (var column in Model.Columns)
+        {
+            var fact = column.GetCell(Model.Row.Concept, column);
+            var seriesJson = "";
+
+            if (fact != null)
+            {
+                seriesJson = ComboChartConfig.GetSparklineData(fact, Model.Row.Concept, column).ToJson();
+            }
+            <td align="right"
+                data-chart-type="sparkline"
+                data-series="@seriesJson"
+                style="@General.TrendingColor(fact)"
+                class="@(counter++ == 0 ? "reveal" : "") fact-column lineitem-cell  @General.TrendingClass(fact)">
+
+
+                @{
+                    var value = fact?.ValueFormatted(Model.Row.Concept);
+
+                    if (value == null)
+                    {
+                        <text>
+                            &mdash;
+                        </text>
+                    }
+                    else
+                    {
+                        @value
+                    }
+                }
+
+
+            </td>
+
+                        }
+
+
+                    }

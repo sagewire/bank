@@ -1,4 +1,5 @@
 ﻿{
+    "size":  20,
     "query": {
         "function_score": {
             "query": {

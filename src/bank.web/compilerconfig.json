@@ -1,37 +1,22 @@
-[
-  {
-    "outputFile": "css/site.css",
-    "inputFile": "css/site.less",
-    "sourceMap": false
-  },
-  {
-    "outputFile": "assets/css/site.css",
-    "inputFile": "assets/css/site.less",
-    "sourceMap": false
-  },
+﻿[
   {
     "outputFile": "assets/css/stately/stately.css",
-    "inputFile": "assets/css/stately/stately.scss",
-    "sourceMap": false
-  },
-  {
-    "outputFile": "assets/css/imagegen.css",
-    "inputFile": "assets/css/imagegen.less",
-    "sourceMap": false
+    "inputFile": "assets/css/stately/stately.scss"
   },
   {
     "outputFile": "assets/css/site/site.css",
-    "inputFile": "assets/css/site/site.scss",
-    "sourceMap": false
+    "inputFile": "assets/css/site/site.less"
   },
   {
-    "outputFile": "assets/css/site/site.css",
-    "inputFile": "assets/css/site/site.less",
-    "sourceMap": false
+    "outputFile": "assets/css/site/styles.css",
+    "inputFile": "assets/css/site/styles.less"
   },
   {
-    "outputFile": "assets/css/site/responsive.css",
-    "inputFile": "assets/css/site/responsive.less",
-    "sourceMap": false
+    "outputFile": "assets/css/jquery.typeahead.css",
+    "inputFile": "assets/css/jquery.typeahead.scss"
+  },
+  {
+    "outputFile": "assets/scripts/jquery.typeahead.es5.js",
+    "inputFile": "assets/scripts/jquery.typeahead.js"
   }
 ]

@@ -228,7 +228,6 @@ namespace bank.import.ffiec
                 foreach (Item fact in doc.XbrlFragments[0].Facts)//.Where(x=>x.Name == "RIAD4300"))
                 {
                     lastFact = fact;
-                    Console.WriteLine("{0}\t{1}\t{2}\t{3}", System.Threading.Thread.CurrentThread.ManagedThreadId, fact.Id, fact.Name, fact.Value);
 
                     decimal numeric;
                     decimal? numericValue = null;
@@ -268,10 +267,13 @@ namespace bank.import.ffiec
                     {
                         factObj.Unit = fact.UnitRefName.ToUpper().First();
                     }
-                    
 
-                    Repository<bank.poco.Fact>.New().Save(factObj);
+                    if ((factObj.NumericValue.HasValue && factObj.NumericValue.Value > 0) || !string.IsNullOrWhiteSpace(factObj.Value))
+                    {
+                        Console.WriteLine("{0}\t{1}\t{2}\t{3}", System.Threading.Thread.CurrentThread.ManagedThreadId, fact.Id, fact.Name, fact.Value);
 
+                        Repository<bank.poco.Fact>.New().Save(factObj);
+                    }
                 }
 
                 reportImport.State = null;

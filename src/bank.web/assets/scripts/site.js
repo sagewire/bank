@@ -1,4 +1,49 @@
-﻿$(function () {
+﻿var sidenavTimer = null;
+var sidenavState = null;
+
+function openSidenav(delay) {
+    
+    sidenavTimer = setTimeout(function () {
+        var nav = $("#global-sidenav");
+        nav.addClass("open");
+        $(".top-nav").addClass("sidenav-open");
+        $("#search-box").focus();
+    }, delay);
+}
+
+function closeSidenav() {
+    clearTimeout(sidenavTimer);
+
+    var nav = $("#global-sidenav");
+    nav.removeClass("open");
+    $(".top-nav").removeClass("sidenav-open");
+
+}
+
+function toggleSidenav(delay) {
+    var nav = $("#global-sidenav");
+    if (nav.hasClass("open")) {
+        closeSidenav();
+    }
+    else {
+        openSidenav(delay);
+    }
+}
+
+$(function () {
+
+    $("#global-sidenav").on("mouseenter", function () {
+        openSidenav(225);
+    })
+
+    $("#global-sidenav").on("mouseleave", function () {
+        closeSidenav();
+    })
+
+    $("#sidenav-toggler").click(function () {
+        toggleSidenav(0);
+    })
+
     var lastSize = findBootstrapEnvironment();
     console.log(lastSize);
 
@@ -32,7 +77,14 @@
         sidebarPosition();
     }
 
-    
+
+    /* off-canvas sidebar toggle */
+    $('[data-toggle=offcanvas]').click(function () {
+        $('.row-offcanvas').toggleClass('active');
+        $('.collapse').toggleClass('in').toggleClass('hidden-xs').toggleClass('visible-xs');
+    });
+
+
     $(".card-menu .dropdown-item").click(function (e) {
         alert("Demo feature. Not ready yet.");
     });
@@ -46,43 +98,10 @@
     });
 
     $("body").on("show.bs.popover", function (e) {
-        //console.log('hi');
+        
     });
 
-    //$(".mdrm-cell").on("click", function (e) {
 
-        //var row = $(e.currentTarget).parents("tr");
-        //var cell = $(e.currentTarget);
-        //var url = cell.data("url").toLowerCase();
-        //var loaded = cell.data("loaded");
-        //var organizationCells = $("td[data-organization]");
-
-        //var organizations = [];
-
-        //$.each(organizationCells, function (index, value) {
-        //    organizations.push($(value).data("organization"));
-        //});
-
-        //console.log(organizations);
-
-        //if (!loaded) {
-        //    console.log(url);
-
-        //    var jqxhr = $.ajax({
-        //        url: url,
-        //        method: "GET",
-        //        data: {
-        //            c: organizations.join(",")
-        //        }
-        //    })
-        //      .done(function (data) {
-
-        //          cell.data("loaded", true);
-        //          $("<tr><td class='no-border' style='padding-left:" + cell.css("padding-left") + "' colspan='20'>" + data + "</td></tr>").insertAfter($(e.target).parents("tr"));
-        //          //$(data).appendTo($(e.target));
-        //      })
-        //}
-    //});
 
     $("body").on("click", ".inline-report .close", function (e) {
         var target = $(e.currentTarget).parents(".inline-report");
@@ -103,7 +122,7 @@
         });
 
         if (!row.next().hasClass("inline-report")) {
-            
+
             var newRow = $("<tr style='display:none;' class='inline-report'><td class='no-border' colspan='20'><div class='inside'><div class='p-1 text-xs-center'><i class='fa fa-circle-o-notch fa-spin fa-3x fa-fw'></i></div></div></td></tr>").insertAfter($(e.currentTarget));
             var inside = newRow.find(".inside");
 
@@ -128,6 +147,10 @@
         //}
     });
 
+    
+    
+    
+
     //$('[data-toggle="popover"]').popover({
 
     //    trigger: 'click',
@@ -140,7 +163,7 @@
     //                '</div>'
     //})
 
-    
+
 
     $("#modal").on("show.bs.modal", function (e) {
         var content = $(e.relatedTarget).data("content");
@@ -209,4 +232,56 @@
     }
 
 
+});
+
+
+$(function () {
+
+
+    $.typeahead({
+        input: '.js-typeahead-name',
+        filter: false,
+        dynamic: true,
+        delay: 90,
+        maxItem: 20,
+        //order: "desc",
+        template: function (query, item) {
+         //   <a href="@Model.Organization.ProfileUrl"
+         //   class="preload avatar avatar-md media-object img-responsive"
+         //   style="background-image: url('@Model.Organization.Avatar')">
+
+         //</a>
+            return '<div class="search-result"><div class="media"><i class="media-left"><a href="{{url}}" class="media-object avatar avatar-sm img-responsive" style="background-image: url({{avatar}})"></a></i><div class="name">{{name}}<br/><small>{{city}}, {{state}} <div class="float-right"><b>{{assets}} Assets</b></div></small></div></div>';
+        },
+        emptyTemplate: "No results for {{query}}",
+        href: "{{url}}",
+        source: {
+            lenders: {
+                display: "name",
+                ajax: function (query) {
+                    return {
+                        url: "/modals/search/data",
+                        path: "data.snippets",
+                        data: {
+                            q: "{{query}}"
+                        }
+                    }
+                }
+            }
+        },
+        callback: {
+            onReady: function () {
+
+                setTimeout(function () {
+                    $("#search-box").focus();
+                }, 750);
+            },
+            onClick: function (node, a, item, event) {
+                window.location = item.url;
+            },
+            onSubmit: function (node, form, item, event) {
+                return false;
+            }
+        }
+    });
 });

@@ -1,0 +1,20 @@
+﻿@using bank.reports
+@using bank.reports.charts
+@model TableRowViewModel
+@{
+    var counter = 0;
+}
+
+<tr>
+    <th class="reveal table-header align-middle">
+        @Model.Row.Label
+    </th>
+
+    @foreach (var column in Model.Columns)
+    {
+        <td class="align-middle @(counter++ == 0 ? "reveal" : "") subsection-filler column-header">
+            @column.HeaderText
+        </td>
+    }
+
+</tr>

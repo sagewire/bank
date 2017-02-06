@@ -115,6 +115,10 @@
   margin-bottom: 0;
   font-size: 1rem;
 }
+.child-title {
+  text-align: center;
+  font-weight: bold;
+}
 .card-sparkline {
   height: 50px;
   width: 100%;
@@ -144,6 +148,9 @@
   position: absolute;
   overflow: visible !important;
 }
+.col {
+  min-width: 200px;
+}
 .dropdown-menu {
   z-index: 1100;
 }
@@ -158,6 +165,13 @@ svg {
 }
 .fa-arrow-down {
   color: #f00;
+}
+.table td,
+.table th {
+  padding: .55rem;
+}
+.report-table {
+  margin-bottom: 0;
 }
 .report-table thead {
   width: 100%;
@@ -185,8 +199,12 @@ svg {
   background-color: #30C8CA;
 }
 .report-table .subsection-filler {
+  font-weight: bold;
   background-color: #56d5d7;
   border-top: 1px solid #30C8CA;
+  border-right: 1px solid #30C8CA;
+  font-size: 14px;
+  text-align: center;
 }
 .report-table th.fact-column {
   border: none;
@@ -268,6 +286,7 @@ svg {
   left: 0;
   right: 0;
   z-index: 5;
+  overflow-y: hidden;
 }
 .table-header {
   border-top: none !important;
@@ -283,12 +302,10 @@ svg {
   width: 100%;
 }
 @media (max-width: 1200px) {
-  /*#main-wrapper {
-        margin:0 !important;
-    }
-    .container-fluid {
-        padding:0 !important;
-    }*/
+  .container-fluid {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+  }
 }
 @media (max-width: 767px) {
   .primary-tooltip {
@@ -303,6 +320,12 @@ svg {
     font-size: 1.5rem;
   }
   #header h4 {
+    font-size: 1rem;
+  }
+  .top-nav-item {
+    font-size: 40%;
+  }
+  .top-nav-item h4 {
     font-size: 1rem;
   }
   /*.home {

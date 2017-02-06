@@ -1,174 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<report lookback="4">
-	<line name="root" label="Deposit Composition Breakdown &amp; Ratios" abstract="true">
-			<chart title="Deposit Composition" type="sankey" css-classes="sankey">
-				<column type="string" id="from" label="From" />
-				<column type="string" id="to" label="To" />
-				<column type="number" id="amount" label="Amount" />
-				<row>
-					<value>Total Deposits</value>
-					<value>Transaction Accounts</value>
-					<value>RCON2215</value>
-				</row>
-				<row>
-					<value>Transaction Accounts</value>
-					<value>Demand Deposits</value>
-					<value>RCON2210</value>
-				</row>
-				<row>
-					<value>Transaction Accounts</value>
-					<value>All NOW &amp; ATS Accounts</value>
-					<value>UBPRE125</value>
-				</row>
-				<row>
-					<value>Savings Deposits</value>
-					<value>Other Savings Deposits</value>
-					<value>RCON0352</value>
-				</row>
-				<row>
-					<value>Total Deposits</value>
-					<value>Nontransaction Accounts</value>
-					<value>RCON2385</value>
-				</row>
-				<row>
-					<value>Nontransaction Accounts</value>
-					<value>Savings Deposits</value>
-					<value>RCON6810+RCON0352</value>
-				</row>
-				<row>
-					<value>Savings Deposits</value>
-					<value>Money Market Deposits</value>
-					<value>RCON6810</value>
-				</row>
-				<row>
-					<value>Nontransaction Accounts</value>
-					<value>Time Deposits</value>
-					<value>RCON6648+RCONJ473+RCONJ474</value>
-				</row>
-				<row>
-					<value>Time Deposits</value>
-					<value>Below 100k</value>
-					<value>RCON6648</value>
-				</row>
-				<row>
-					<value>Time Deposits</value>
-					<value>100k to 250k</value>
-					<value>RCONJ473</value>
-				</row>
-				<row>
-					<value>Time Deposits</value>
-					<value>Above 250k</value>
-					<value>RCONJ474</value>
-				</row>
-				<row>
-					<value>100k to 250k</value>
-					<value>Above 100k</value>
-					<value>RCONJ473</value>
-				</row>
-				<row>
-					<value>Above 250k</value>
-					<value>Above 100k</value>
-					<value>RCONJ474</value>
-				</row>
-				<row>
-					<value>Above 100k</value>
-					<value>3 Months or Less</value>
-					<value>RCONA584</value>
-				</row>
-				<row>
-					<value>Above 100k</value>
-					<value>3 to 12 Months</value>
-					<value>RCONA585</value>
-				</row>
-				<row>
-					<value>Above 100k</value>
-					<value>1 to 3 Years</value>
-					<value>RCONA586</value>
-				</row>
-				<row>
-					<value>Above 100k</value>
-					<value>Over 3 Years</value>
-					<value>RCONA587</value>
-				</row>
-				<row>
-					<value>Below 100k</value>
-					<value>3 Months or Less</value>
-					<value>RCONA579</value>
-				</row>
-				<row>
-					<value>Below 100k</value>
-					<value>3 to 12 Months</value>
-					<value>RCONA580</value>
-				</row>
-				<row>
-					<value>Below 100k</value>
-					<value>1 to 3 Years</value>
-					<value>RCONA581</value>
-				</row>
-				<row>
-					<value>Below 100k</value>
-					<value>Over 3 Years</value>
-					<value>RCONA582</value>
-				</row>
+<layout>
+  <row>
+    <col>
+      <chart title="Deposit Composition" type="sankey" css-classes="sankey">
+        <column type="string" id="from" label="From" />
+        <column type="string" id="to" label="To" />
+        <column type="number" id="amount" label="Amount" />
+        <row>
+          <value>Total Deposits</value>
+          <value>Transaction Accounts</value>
+          <value>RCON2215</value>
+        </row>
+        <row>
+          <value>Transaction Accounts</value>
+          <value>Demand Deposits</value>
+          <value>RCON2210</value>
+        </row>
+        <row>
+          <value>Transaction Accounts</value>
+          <value>All NOW &amp; ATS Accounts</value>
+          <value>UBPRE125</value>
+        </row>
+        <row>
+          <value>Savings Deposits</value>
+          <value>Other Savings Deposits</value>
+          <value>RCON0352</value>
+        </row>
+        <row>
+          <value>Total Deposits</value>
+          <value>Nontransaction Accounts</value>
+          <value>RCON2385</value>
+        </row>
+        <row>
+          <value>Nontransaction Accounts</value>
+          <value>Savings Deposits</value>
+          <value>RCON6810+RCON0352</value>
+        </row>
+        <row>
+          <value>Savings Deposits</value>
+          <value>Money Market Deposits</value>
+          <value>RCON6810</value>
+        </row>
+        <row>
+          <value>Nontransaction Accounts</value>
+          <value>Time Deposits</value>
+          <value>RCON6648+RCONJ473+RCONJ474</value>
+        </row>
+        <row>
+          <value>Time Deposits</value>
+          <value>Below 100k</value>
+          <value>RCON6648</value>
+        </row>
+        <row>
+          <value>Time Deposits</value>
+          <value>100k to 250k</value>
+          <value>RCONJ473</value>
+        </row>
+        <row>
+          <value>Time Deposits</value>
+          <value>Above 250k</value>
+          <value>RCONJ474</value>
+        </row>
+        <row>
+          <value>100k to 250k</value>
+          <value>Above 100k</value>
+          <value>RCONJ473</value>
+        </row>
+        <row>
+          <value>Above 250k</value>
+          <value>Above 100k</value>
+          <value>RCONJ474</value>
+        </row>
+        <row>
+          <value>Above 100k</value>
+          <value>3 Months or Less</value>
+          <value>RCONA584</value>
+        </row>
+        <row>
+          <value>Above 100k</value>
+          <value>3 to 12 Months</value>
+          <value>RCONA585</value>
+        </row>
+        <row>
+          <value>Above 100k</value>
+          <value>1 to 3 Years</value>
+          <value>RCONA586</value>
+        </row>
+        <row>
+          <value>Above 100k</value>
+          <value>Over 3 Years</value>
+          <value>RCONA587</value>
+        </row>
+        <row>
+          <value>Below 100k</value>
+          <value>3 Months or Less</value>
+          <value>RCONA579</value>
+        </row>
+        <row>
+          <value>Below 100k</value>
+          <value>3 to 12 Months</value>
+          <value>RCONA580</value>
+        </row>
+        <row>
+          <value>Below 100k</value>
+          <value>1 to 3 Years</value>
+          <value>RCONA581</value>
+        </row>
+        <row>
+          <value>Below 100k</value>
+          <value>Over 3 Years</value>
+          <value>RCONA582</value>
+        </row>
 
-			</chart>
-		<line name="deposit" type="subsection" label="Deposit Composition" abstract="true">
-			<line name="" label="Demand Deposits" abstract="true">
-				<line name="RCON2210" label="" abstract="false" />
-			</line>
-			<line name="" label="All NOW &amp; ATS Accounts" abstract="true">
-				<line name="UBPRE125" label="" abstract="false" />
-			</line>
-			<line name="" label="Money Market Deposit Accounts" abstract="true">
-				<line name="RCON6810" label="" abstract="false" />
-			</line>
-			<line name="" label="Other Savings Deposits" abstract="true">
-				<line name="RCON0352" label="" abstract="false" />
-			</line>
-			<line name="" label="Time Deposits At Or Below Insurance Limit" abstract="true">
-				<line name="UBPRK426" label="" abstract="false" />
-			</line>
-			<line name="" label="Fully Insured Brokered Deposits" abstract="true">
-				<line name="UBPR2366" label="" abstract="false" />
-			</line>
-			<line name="" label="Time Deposits Above Insurance Limit" abstract="true">
-				<line name="UBPRK437" label="" abstract="false" />
-			</line>
-			<line name="" label="Deposits in Foreign Offices" abstract="true">
-				<line name="UBPRD078" label="" abstract="false" />
-			</line>
-			<line name="" label="Core Deposits" abstract="true">
-				<line name="UBPRK434" label="" abstract="false" />
-			</line>
-		</line>
-		<line name="deposit-ratios" type="subsection" label="Deposit Composition Ratios" abstract="true">
-			<line name="" label="Demand Deposits as a percent of Average Assets" abstract="true">
-				<line name="UBPRE362" label="" abstract="false" />
-			</line>
-			<line name="" label="All NOW &amp; ATS Accounts as a percent of Average Assets" abstract="true">
-				<line name="UBPRE363" label="" abstract="false" />
-			</line>
-			<line name="" label="Money Market Deposit Accounts as a percent of Average Assets" abstract="true">
-				<line name="UBPRE364" label="" abstract="false" />
-			</line>
-			<line name="" label="Other Savings Deposits as a percent of Average Assets" abstract="true">
-				<line name="UBPRE365" label="" abstract="false" />
-			</line>
-			<line name="" label="Time Deposits At or Below Insurance Limit as a percent of Average Assets" abstract="true">
-				<line name="UBPRK440" label="" abstract="false" />
-			</line>
-			<line name="" label="Core Deposits as a percent of Average Assets" abstract="true">
-				<line name="UBPRK443" label="" abstract="false" />
-			</line>
-			<line name="" label="Fully Insured Brokered Deposits as a percent of Average Assets" abstract="true">
-				<line name="UBPRK441" label="" abstract="false" />
-			</line>
-			<line name="" label="Time Deposits Above Insurance Limit as a percent of Average Assets" abstract="true">
-				<line name="UBPRK444" label="" abstract="false" />
-			</line>
-			<line name="" label="Deposits in Foreign Offices as a percent of Average Assets" abstract="true">
-				<line name="UBPRE369" label="" abstract="false" />
-			</line>
-		</line>
-	</line>
-</report>
+      </chart>
+    </col>
+  </row>
+  <row>
+    <col>
+      <table lookback="4">
+        <header>Deposit Composition</header>
+        <concept name="RCON2210" />
+        <concept name="UBPRE125" />
+        <concept name="RCON6810" />
+        <concept name="RCON0352" />
+        <concept name="UBPRK426" />
+        <concept name="UBPR2366" />
+        <concept name="UBPRK437" />
+        <concept name="UBPRD078" />
+        <concept name="UBPRK434" />
+
+        <header>Deposit Composition Ratios</header>
+        <concept name="UBPRE362" />
+        <concept name="UBPRE363" />
+        <concept name="UBPRE364" />
+        <concept name="UBPRE365" />
+        <concept name="UBPRK440" />
+        <concept name="UBPRK443" />
+        <concept name="UBPRK441" />
+        <concept name="UBPRK444" />
+        <concept name="UBPRE369" />
+      </table>
+    </col>
+  </row>
+</layout>

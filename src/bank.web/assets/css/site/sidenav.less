@@ -1,0 +1,123 @@
+﻿@import "site.less";
+
+.sidenav {
+    height: 100%;
+    width: 60px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: darken(@darkish,3);
+    //opacity: .96;
+    overflow-x: hidden;
+    transition: .5s;
+    text-align: center;
+    z-index: 500;
+    max-width: 350px;
+    margin-top: 56px;
+    text-align: left;
+    box-shadow: 8px 0 19px 5px rgba(0,0,0,0.35);
+
+
+    a {
+        padding: 20px 0 20px 15px;
+        text-decoration: none;
+        font-size: 20px;
+        color: @darkest;
+        display: block;
+        transition: 0.3s;
+
+        &:hover {
+            color: #f1f1f1;
+        }
+    }
+
+    .dropdown-menu {
+        background-color: lighten(@darkish, 5);
+        border-radius: 0;
+        margin-left: 60px;
+        width: 100%;
+    }
+
+    .dropdown-item {
+        padding: 5px;
+        padding-left: 10px;
+        padding-right: 20px;
+        font-size: 16px;
+    }
+
+    .dropdown-divider {
+        background-color: @dark;
+    }
+
+    .nav {
+        opacity: 1 !important;
+    }
+
+    .nav-justified {
+        .nav-item {
+            min-width: 60px;
+            text-align: left;
+
+            &:first-child {
+                border-right: 1px solid darken(@accent-color,10);
+            }
+        }
+
+        .sign-in, .register {
+            background-color: @accent-color;
+
+            &:hover {
+                background-color: darken(@accent-color,10);
+            }
+        }
+    }
+
+    .nav-item {
+        border-bottom: 1px solid @dark;
+
+        .fa {
+            margin-right: 10px;
+            width: 30px;
+            display: inline-block;
+        }
+
+        input {
+            width: 100%;
+            padding-left: 7px;
+            border: none;
+            margin-right: 10px;
+            margin-bottom: -5px;
+            margin-top: -5px;
+            padding: 9px;
+        }
+
+        .nav-link {
+            margin-left: 0;
+        }
+
+        .input-group-addon {
+            padding: 0;
+            background-color: transparent;
+            border: none;
+            font-size: inherit;
+        }
+    }
+}
+
+.open {
+    width: 100%;
+    z-index: 100;
+}
+
+
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}

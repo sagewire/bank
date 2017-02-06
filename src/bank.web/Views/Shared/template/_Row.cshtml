@@ -1,0 +1,6 @@
+﻿@using bank.reports
+@model RowViewModel
+
+<div class="row">
+    @Html.Partial("template/_cols", new ColsViewModel { Columns = Model.Row.Columns, Parent = Model })
+</div>

@@ -42,13 +42,15 @@ namespace bank.reports.charts
                     var facts = Column.GetFacts(concept.ConceptKeys);
                     var fact = concept.PrepareFact(facts);
 
-
-                    list.Add(new PieData
+                    if (fact != null)
                     {
-                        y = fact.NumericValue.Value,
-                        temp = concept.Value,
-                        name = concept.ShortLabel
-                    });
+                        list.Add(new PieData
+                        {
+                            y = fact.NumericValue.Value,
+                            temp = concept.Value,
+                            name = concept.ShortLabel
+                        });
+                    }
                 }
                 
                 return list;

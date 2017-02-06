@@ -10,14 +10,34 @@
     <concept name="UBPR2200" shortLabel="Total Deposits" />
     <concept name="UBPR4340" shortLabel="Net Income" />
     <concept name="UBPRG105" shortLabel="Total Capital" />
-    <concept name="RCON0352" shortLabel="Other Nontransaction Savings" />
+    <concept name="RCON0352" shortLabel="Other Nontransaction Savings" label="Other Savings Deposits"/>
     <concept name="UBPRK426" shortLabel="Deposits below Insurance Limit" />
-    <concept name="RCON6810" shortLabel="Money Market (MMDA's)" />
-    <concept name="UBPRE018" shortLabel="NIM" />
+    <concept name="RCON6810" label="Money Market Deposit Accounts" shortLabel="MMDA" />
+    <concept name="UBPRE018" shortLabel="NIM" label="Net Interest Margin" />
     <concept name="UBPR2130" shortLabel="Inv &amp; Uncon Subs" />
     <concept name="UBPR0081" shortLabel="Non-Int Cash &amp; Due from Banks" />
     <concept name="UBPRE117" shortLabel="Other Loans &amp; Leases" />
-    
+    <concept name="_LOANDEP" shortLabel="Loans/Dep" label="Loans to Deposits" formula="UBPRE119/UBPR2200*100" unit="P"/>
+    <concept name="UBPRP859" label="Tier 1 Common Capital" />
+    <concept name="UBPR8274" label="Tier 1 Capital" />
+    <concept name="UBPR8275" label="Tier 2 Capital" />
+    <concept name="UBPR3792" label="Total Capital" />
+    <concept name="UBPRE660" label="Total Risk Weighted Assets" />
+    <concept name="UBPRD486" label="Leverage Ratio" />
+    <concept name="UBPRR029" label="Common Equity Tier 1 Capital Ratio" />
+    <concept name="UBPRD487" label="Tier 1 Capital Ratio" />
+    <concept name="UBPRD488" label="Total Capital Ratio" />
+    <concept name="RCON2210" label="Demand Deposits" />
+    <concept name="RIAD4073" label="Total Interest Expense" />
+    <concept name="RIAD4079" label="Non-Interest Income" />
+    <concept name="RIAD4230" label="Provision: Loan &amp; Lease Losses" />
+    <concept name="RIAD4302" label="Applicable Income Taxes" />
+    <concept name="RIAD4300" label="Net Operating Income" />
+    <!--<concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />-->
 
+    
   </concepts>
 </configuration>

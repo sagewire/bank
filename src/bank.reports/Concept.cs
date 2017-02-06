@@ -54,6 +54,7 @@ namespace bank.reports
         public string Label { get; set; }
         public string Narrative { get; set; }
         public string Value { get; set; }
+        public char? Unit { get; set; }
         public List<string> ConceptKeys { get; set; }
 
         public Fact PrepareFact(Fact fact)
@@ -94,6 +95,7 @@ namespace bank.reports
             preparedFact.Name = Value;
             preparedFact.NumericValue = (decimal)result;
             preparedFact.Period = facts.First().Period;
+            preparedFact.Unit = facts.First().Unit;
 
             var peerGroupFact = preparedFact as PeerGroupFact;
 
@@ -156,6 +158,7 @@ namespace bank.reports
             ShortLabel = ShortLabel ?? def.Description;
             Label = Label ?? def.Description;
             Narrative = Narrative ?? def.Narrative;
+            Unit = def.Unit;
         }
 
         internal void SetValues(Concept concept)
@@ -163,6 +166,7 @@ namespace bank.reports
             ShortLabel = concept.ShortLabel ?? ShortLabel ?? Label;
             Narrative = concept.Narrative ?? Narrative;
             Label = concept.Label ?? Label;
+            Unit = concept.Unit;
         }
     }
 }

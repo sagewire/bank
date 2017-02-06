@@ -141,7 +141,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
-    <Compile Include="Controllers\ConceptController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\DirectoryController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -155,39 +154,26 @@
     <Compile Include="helpers\StringExtensions.cs" />
     <Compile Include="helpers\Urls.cs" />
     <Compile Include="models\BankBasicsViewModel.cs" />
-    <Compile Include="models\ChartItemViewModel.cs" />
-    <Compile Include="models\ConceptDefinitionViewModel.cs" />
+    <Compile Include="models\ColsViewModel.cs" />
+    <Compile Include="models\ColViewModel.cs" />
     <Compile Include="models\ProfileHeaderViewModel.cs" />
-    <Compile Include="models\IReports.cs" />
     <Compile Include="models\OrganizationProfileViewModel.cs" />
-    <Compile Include="models\LineItemViewModel.cs" />
-    <Compile Include="models\ReportNavigationViewModel.cs" />
     <Compile Include="models\ReportViewModel.cs" />
     <Compile Include="models\BanksViewModel.cs" />
-    <Compile Include="models\BankProfileViewModel.cs" />
-    <Compile Include="models\DashboardViewModel.cs" />
-    <Compile Include="models\HeaderViewModel.cs" />
+    <Compile Include="models\RowsViewModel.cs" />
     <Compile Include="models\SearchViewModel.cs" />
-    <Compile Include="models\TableSectionViewModel.cs" />
+    <Compile Include="models\TableRowViewModel.cs" />
+    <Compile Include="models\TemplateColumnViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="models\RowViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\phantomjs\phantomjs.exe" />
-    <Content Include="assets\css\jquery.typeahead.css" />
+    <Content Include="assets\css\jquery.typeahead.css">
+      <DependentUpon>jquery.typeahead.scss</DependentUpon>
+    </Content>
     <Content Include="assets\css\jquery.typeahead.min.css">
       <DependentUpon>jquery.typeahead.css</DependentUpon>
-    </Content>
-    <Content Include="assets\css\site - Copy.css">
-      <DependentUpon>site - Copy.less</DependentUpon>
-    </Content>
-    <Content Include="assets\css\site - Copy.min.css">
-      <DependentUpon>site - Copy.css</DependentUpon>
-    </Content>
-    <Content Include="assets\css\site.css">
-      <DependentUpon>site.less</DependentUpon>
-    </Content>
-    <Content Include="assets\css\site.min.css">
-      <DependentUpon>site.css</DependentUpon>
     </Content>
     <Content Include="assets\css\site\responsive.css">
       <DependentUpon>responsive.less</DependentUpon>
@@ -201,6 +187,12 @@
     <Content Include="assets\css\site\site.min.css">
       <DependentUpon>site.css</DependentUpon>
     </Content>
+    <Content Include="assets\css\site\styles.css">
+      <DependentUpon>styles.less</DependentUpon>
+    </Content>
+    <Content Include="assets\css\site\styles.min.css">
+      <DependentUpon>styles.css</DependentUpon>
+    </Content>
     <Content Include="assets\css\stately\stately.css" />
     <Content Include="assets\css\stately\stately.min.css" />
     <Content Include="assets\fonts\stately\stately-webfont.svg" />
@@ -213,8 +205,14 @@
     <Content Include="assets\scripts\charts.min.js">
       <DependentUpon>charts.js</DependentUpon>
     </Content>
+    <Content Include="assets\scripts\jquery.typeahead.es5.js">
+      <DependentUpon>jquery.typeahead.js</DependentUpon>
+    </Content>
+    <Content Include="assets\scripts\jquery.typeahead.es5.min.js">
+      <DependentUpon>jquery.typeahead.es5.js</DependentUpon>
+    </Content>
+    <Content Include="assets\scripts\jquery.typeahead.js" />
     <Content Include="assets\scripts\rasterize.js" />
-    <Content Include="assets\scripts\jquery.typeahead.min.js" />
     <Content Include="assets\scripts\scrollreveal.js" />
     <Content Include="assets\scripts\scrollreveal.min.js" />
     <Content Include="assets\scripts\site.es5.js">
@@ -229,19 +227,22 @@
     </Content>
     <Content Include="browserconfig.xml" />
     <Content Include="Global.asax" />
+    <Content Include="report-templates\income-statement.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="report-templates\call.patch.xml" />
-    <Content Include="report-templates\config.xml" />
+    <Content Include="report-templates\config.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="report-templates\concept-definition.xml" />
-    <Content Include="report-templates\profile-layout.xml" />
+    <Content Include="report-templates\balance-sheet.xml" />
+    <Content Include="report-templates\test.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="report-templates\profile-layout.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="report-templates\peer-groups.xml" />
-    <Content Include="report-templates\profile-primary.xml" />
-    <Content Include="report-templates\profile-secondary.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="report-templates\profile-sidebar.xml" />
-    <Content Include="report-templates\profile-piecharts.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="report-templates\call.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -256,7 +257,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\iFrame.cshtml" />
     <Content Include="Views\Shared\States.cshtml" />
-    <Content Include="Views\Shared\_FacebookSDK.cshtml" />
     <Content Include="Views\Shared\_GlobalNav.cshtml" />
     <Content Include="Views\Shared\_GoogleAnalytics.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
@@ -291,9 +291,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\css\site.less" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="assets\css\stately\screen.scss" />
     <Content Include="assets\css\stately\stately.scss" />
     <Content Include="assets\css\stately\_customizations.scss" />
@@ -301,9 +298,11 @@
     <Content Include="assets\fonts\stately\stately-webfont.eot" />
     <Content Include="assets\fonts\stately\stately-webfont.ttf" />
     <Content Include="assets\fonts\stately\stately-webfont.woff" />
-    <Content Include="assets\css\site - Copy.less" />
     <Content Include="assets\css\site\site.less" />
     <Content Include="assets\css\site\responsive.less" />
+    <Content Include="assets\css\site\styles.less" />
+    <Content Include="assets\css\site\sidenav.less" />
+    <Content Include="assets\css\jquery.typeahead.scss" />
     <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
@@ -318,18 +317,25 @@
     <Content Include="Views\Shared\Modals\Search.cshtml" />
     <Content Include="Views\Shared\_States.cshtml" />
     <Content Include="Views\Shared\Modals\Definition.cshtml" />
-    <Content Include="Views\Shared\_Report.cshtml" />
-    <Content Include="Views\Shared\_ReportNavigation.cshtml" />
     <Content Include="Views\Profile\Organization.cshtml" />
-    <Content Include="Views\Shared\_LineItem.cshtml" />
-    <Content Include="Views\Shared\_TableHead.cshtml" />
-    <Content Include="Views\Shared\_Chart.cshtml" />
     <Content Include="Views\Profile\_HeaderSidebar.cshtml" />
     <Content Include="Views\Profile\_SidebarReport.cshtml" />
     <Content Include="Views\Profile\_SecondaryReport.cshtml" />
     <Content Include="Views\Profile\_Header.cshtml" />
     <Content Include="Views\Shared\_CardMenu.cshtml" />
     <Content Include="Views\Shared\_FactTrendArrow.cshtml" />
+    <Content Include="Views\Shared\template\_Rows.cshtml" />
+    <Content Include="Views\Shared\template\_Row.cshtml" />
+    <Content Include="Views\Shared\template\_Cols.cshtml" />
+    <Content Include="Views\Shared\template\_Col.cshtml" />
+    <Content Include="Views\Shared\template\_HtmlElement.cshtml" />
+    <Content Include="Views\Shared\template\_ChartElement.cshtml" />
+    <Content Include="Views\Shared\template\_KeyRatio.cshtml" />
+    <Content Include="Views\Shared\template\_TableElement.cshtml" />
+    <Content Include="Views\Shared\template\_TableRowConcept.cshtml" />
+    <Content Include="Views\Shared\template\_TableRowHeader.cshtml" />
+    <Content Include="Views\Shared\_Sidenav.cshtml" />
+    <Content Include="Views\Pages\Placeholder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bank.reports\bank.reports.csproj">

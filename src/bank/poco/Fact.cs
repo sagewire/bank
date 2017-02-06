@@ -21,19 +21,21 @@ namespace bank.poco
         public DateTime? Period { get; set; }
         public char? Unit { get; set; }
 
+        //public Concept Concept { get; set; }
+
         public virtual FactTypes FactType { get; }
         /// <summary>
         /// Number of quarters in the past to compare too.
         /// </summary>
         public int TrendPeriodInterval { get; set; } = 4;
         public SortedDictionary<DateTime, Fact> HistoricalData { get; set; } = new SortedDictionary<DateTime, Fact>();
-        
+
         public static Fact Build(FactTypes type)
         {
-            switch(type)
+            switch (type)
             {
                 case FactTypes.Company:
-                    return new Fact();
+                    return new CompanyFact();
                 case FactTypes.PeerGroup:
                     return new PeerGroupFact();
                 default:
@@ -41,24 +43,36 @@ namespace bank.poco
             }
         }
 
-        public string ValueFormatted
+        public string ValueFormatted(Concept concept)
         {
-            get
+            if (!NumericValue.HasValue)
             {
-                if (!NumericValue.HasValue)
-                {
-                    return Value;
-                }
-
-                if (NumericValue >= 1000)
-                {
-                    return (NumericValue.Value / 1000).ToString("N0");
-                }
-                else
-                {
-                    return NumericValue.Value.ToString("N2");
-                }
+                return Value;
             }
+
+            char? unit = concept?.Unit ?? Unit;
+
+            switch (unit)
+            {
+                case 'P':
+                    return NumericValue.Value.ToString("#.##");
+                case 'U':
+                    return NumericValue.Value.ToString("N0");
+                case 'D':
+                    return NumericValue.Value.ToString();
+                default:
+                    return "na";
+            }
+
+            //if (NumericValue >= 1000)
+            //{
+            //    return (NumericValue.Value / 1000).ToString("N0");
+            //}
+            //else
+            //{
+            //    return NumericValue.Value.ToString("N2");
+            //}
+
         }
 
         //public string Series

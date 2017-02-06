@@ -13,18 +13,18 @@ namespace bank.web.helpers
 {
     public static class Urls
     {
-        public static string Url(this UrlHelper urlHelper, Organization organization, DateTime period, string template, string section, bool isCurrentPeriod = false, string companies = null)
+        public static string Url(this UrlHelper urlHelper, Organization organization, DateTime? period = null, string template = null, string section = null, bool isCurrentPeriod = false, string companies = null)
         {
             var rv = new RouteValueDictionary();
 
             rv.Add("name", organization.Name.CreateSlug());
             rv.Add("id", Base26.Encode(organization.OrganizationId));
-            rv.Add("template", template.ToLower());
+            rv.Add("template", template?.ToLower());
             rv.Add("section", section);
             
-            if (period < DateTime.Now.LastQuarterDate() && !isCurrentPeriod)
+            if (period.HasValue && period < DateTime.Now.LastQuarterDate() && !isCurrentPeriod)
             {
-                rv.Add("period", period.ToString("yyyy-MM-dd"));
+                rv.Add("period", period.Value.ToString("yyyy-MM-dd"));
             }
             
             if (!string.IsNullOrWhiteSpace(companies))
@@ -36,15 +36,16 @@ namespace bank.web.helpers
 
         }
 
-        public static string Url(this UrlHelper urlHelper, Organization organization)
-        {
-            var rv = new RouteValueDictionary();
+        //public static string Url(this UrlHelper urlHelper, Organization organization)
+        //{
+        //    var rv = new RouteValueDictionary();
 
-            rv.Add("name", organization.Name.CreateSlug());
-            rv.Add("id", Base26.Encode(organization.OrganizationId));
+        //    rv.Add("name", organization.Name.CreateSlug());
+        //    rv.Add("id", Base26.Encode(organization.OrganizationId));
+        //    rv.Add("template", null);
 
-            return urlHelper.RouteUrl("organization", rv);
+        //    return urlHelper.RouteUrl("report", rv);
 
-        }
+        //}
     }
 }

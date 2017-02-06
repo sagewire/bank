@@ -1,0 +1,22 @@
+﻿@using bank.reports
+@using bank.reports.charts
+@model ChartElement
+
+@{ 
+    var chartConfig = Model.ChartConfig as ComboChartConfig;
+    var concept = chartConfig.Series.First().Concept;
+    var fact = chartConfig.VisibleColumns.First().Facts.Single(x => x.Key == concept.Name).Value;
+}
+
+<h2 class="text-left">
+    @fact.ValueFormatted(concept)
+    <small>
+        @Html.Partial("_FactTrendArrow", fact)
+    </small>
+</h2>
+
+<div id="@Model.ChartConfig.ChartId"
+     class="reveal-slow chart-responsive @Model.ChartConfig.CssClasses"
+     data-chart-type="@Model.ChartDataType"
+     data-series="@Model.ChartConfig.GetSeriesData().ToJson()"></div>
+

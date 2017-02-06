@@ -10,47 +10,46 @@ using bank.reports;
 using bank.web.models;
 using bank.extensions;
 using bank.enums;
-using bank.reports.formulas;
 
 namespace bank.web.Controllers
 {
     public class ProfileController : ApplicationController
     {
 
-        public ActionResult Organization(string name, string id, string c = null)
-        {
-            var orgId = DecodeId(id);
-            var companies = new List<int>();
-            companies.Add(orgId);
-            var model = new OrganizationProfileViewModel();
-            companies.AddRange(DecodeIds(c));
+        //public ActionResult Organization(string name, string id, string c = null)
+        //{
+        //    var orgId = DecodeId(id);
+        //    var companies = new List<int>();
+        //    companies.Add(orgId);
+        //    var model = new OrganizationProfileViewModel();
+        //    companies.AddRange(DecodeIds(c));
 
-            var orgRepo = new OrganizationRepository();
-            model.Organization = orgRepo.GetOrganization(orgId, true, true);
+        //    var orgRepo = new OrganizationRepository();
+        //    model.Organization = orgRepo.GetOrganization(orgId, true, true);
 
-            model.PrimaryChart = new Report("profile-primary");
-            model.PieCharts = new Report("profile-piecharts");
-            model.SecondaryCharts = new Report("profile-secondary");
-            model.SidebarCharts = new Report("profile-sidebar");
-            model.HighlightTable = new Report("financial-highlights");
-            model.DepositComposition = new Report("deposit-composition");
+        //    model.PrimaryChart = new Report("profile-primary");
+        //    model.PieCharts = new Report("profile-piecharts");
+        //    model.SecondaryCharts = new Report("profile-secondary");
+        //    model.SidebarCharts = new Report("profile-sidebar");
+        //    model.HighlightTable = new Report("financial-highlights");
+        //    model.DepositComposition = new Report("deposit-composition");
 
-            var tasks = new List<Task>();
+        //    var tasks = new List<Task>();
 
-            var modelTask = Task.Run(()=> PopulateReportsAndColumns(model.Organization, companies, model));
-            var rawReportsTask = Task.Run(() => RawReports(model.Organization));
-            
-            tasks.Add(rawReportsTask);
-            tasks.Add(modelTask);
+        //    var modelTask = Task.Run(() => PopulateReportsAndColumns(model.Organization, companies, model));
+        //    var rawReportsTask = Task.Run(() => RawReports(model.Organization));
 
-            Task.WaitAll(tasks.ToArray());
+        //    tasks.Add(rawReportsTask);
+        //    tasks.Add(modelTask);
 
-            model.RawReports = rawReportsTask.Result;
- 
-            ViewBag.Title = model.Title;
-            return View(model);
+        //    Task.WaitAll(tasks.ToArray());
 
-        }
+        //    model.RawReports = rawReportsTask.Result;
+
+        //    ViewBag.Title = model.Title;
+        //    return View(model);
+
+        //}
 
         private IList<ReportListViewModel> RawReports(Organization org)
         {
@@ -77,7 +76,7 @@ namespace bank.web.Controllers
 
         }
 
-        public ActionResult Viewer(string name, string id, DateTime? period, string template, string section, string c = null)
+        public ActionResult Viewer(string name, string id, DateTime? period, string section, string c = null, string template = "profile-layout")
         {
             var orgId = DecodeId(id);
             var companies = new List<int>();
@@ -87,25 +86,16 @@ namespace bank.web.Controllers
 
             var orgRepo = new OrganizationRepository();
             model.Organization = orgRepo.GetOrganization(orgId, true, true);
-
-            model.Report = new Report(template, section: section);
-            model.ShowTitle = false;
-
-            var tasks = new List<Task>();
-            var modelTask = Task.Run(() => PopulateReportsAndColumns(model.Organization, companies, model, period));
-            var rawReportsTask = Task.Run(() => RawReports(model.Organization));
             
+            model.Layout = new Layout();
+            model.Layout.Load(template);
 
-            tasks.Add(rawReportsTask);
-            tasks.Add(modelTask);
+            PopulateReportsAndColumns(model.Organization, companies, model.Layout, period);
 
-            Task.WaitAll(tasks.ToArray());
-
-            model.RawReports = rawReportsTask.Result;
 
             ViewBag.Title = model.Title;
             return View(model);
-            
+
         }
 
     }

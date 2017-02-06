@@ -79,7 +79,7 @@ namespace bank.data.repositories
         //exec GetAssetConcentrationPeerGroup 5815, '2016-09-30', 'UBPRE001,UBPRE002,UBPRE003,UBPRE004,UBPRE005,UBPRE006,UBPRE007,UBPRE008,UBPRE009,UBPRE010'
         public IList<Fact> GetPeerGroupCustomFacts(IList<string> names, PeerGroupCustom peerGroupCustom, DateTime periodStart, DateTime periodEnd)
         {
-            const string sql = "select @peerGroup PeerGroup, Period, Name, avg(NumericValue) NumericValue, stdev(NumericValue), min(NumericValue) MinValue, max(NumericValue) MaxValue, count(*) c " +
+            const string sql = "select @peerGroup PeerGroup, Period, Name, avg(NumericValue) NumericValue, stdev(NumericValue), min(NumericValue) MinValue, max(NumericValue) MaxValue, min(Unit) Unit, count(*) c " +
                                 "from Fact " +
                                 "where OrganizationID in (select MemberOrganizationID from PeerGroupCustomMember pm where pm.PeerGroupCustomID = @peerGroupCustomID) " +
                                "    and Period between @periodStart and @periodEnd " +

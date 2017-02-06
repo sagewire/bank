@@ -1,0 +1,43 @@
+﻿@using bank.reports
+@model TemplateColumnViewModel
+
+<div class="@Model.ColumnGrid @Model.Col.CssClasses">
+
+    @Html.Raw(Model.ShowCard(true))
+
+
+    @foreach (TemplateElement element in Model.Elements)
+    {
+        if (!string.IsNullOrWhiteSpace(element.Title))
+        {
+            if (Model.IsInCard)
+            {
+                <div class="card-header">
+                    @element.Title
+                    @Html.Partial("_CardMenu")
+                </div>
+            }
+            else
+            {
+                <div class="child-title">
+                    @element.Title
+                </div>
+            }
+        }
+
+        @Html.Raw(Model.CardBlock(element, true))
+
+
+        if (element as EmptyElement == null)
+        {
+            @Html.Partial(Model.Partial(element), element)
+        }
+
+        @Html.Partial("template/_Rows", new RowsViewModel { Rows = Model.Col.Rows, Parent = Model })
+        @Html.Raw(Model.CardBlock(element, false))
+
+    }
+
+    @Html.Raw(Model.ShowCard(false))
+
+</div>

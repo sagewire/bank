@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using bank.extensions;
+using bank.poco;
 
 namespace bank.reports.charts
 {
@@ -15,7 +16,7 @@ namespace bank.reports.charts
             ChartType = ChartTypes.Combo;
         }
 
-        
+
         public IList<Series> Series { get; set; }
 
         public override IList<Column> VisibleColumns
@@ -23,42 +24,99 @@ namespace bank.reports.charts
             get
             {
                 var list = new List<Column>();
-                foreach (var series in Series)
+                var counter = 0;
+
+                foreach (var column in Columns)
                 {
-                    var counter = 0;
-                    foreach (var column in Columns)
+                    var addColumn = false;
+
+                    foreach (var series in Series)
                     {
-                        var addColumn = true;
-
-                        if (series.ColumnIndex.HasValue && series.ColumnIndex.Value != counter)
+                        if (!series.ColumnIndex.HasValue && !series.ColumnStart.HasValue)
                         {
-                            addColumn = false;
+                            addColumn = true;
+                        }
+
+                        if (series.ColumnIndex.HasValue && series.ColumnIndex.Value == counter)
+                        {
+                            addColumn = true;
                         }
 
 
-                        if (series.ColumnStart.HasValue && series.ColumnStart > counter)
+                        if (series.ColumnStart.HasValue && series.ColumnStart >= counter)
                         {
-                            addColumn = false;
+                            addColumn = true;
                         }
 
-                        if (addColumn)
-                        {
-                            list.Add(column);
-                        }
 
-                        counter++;
+                        if (addColumn) break;
                     }
+
+                    counter++;
+                    
+                    if (addColumn)
+                    {
+                        list.Add(column);
+                    }
+
                 }
+
                 return list;
             }
         }
 
-        public override IList<SeriesData> GetSeriesData(Column column)
+        //public override IList<Column> VisibleColumns
+        //{
+        //    get
+        //    {
+        //        var list = new List<Column>();
+        //        foreach (var series in Series)
+        //        {
+        //            var counter = 0;
+        //            foreach (var column in Columns)
+        //            {
+        //                var addColumn = true;
+
+        //                if (series.ColumnIndex.HasValue && series.ColumnIndex.Value != counter)
+        //                {
+        //                    addColumn = false;
+        //                }
+
+
+        //                if (series.ColumnStart.HasValue && series.ColumnStart > counter)
+        //                {
+        //                    addColumn = false;
+        //                }
+
+        //                if (addColumn)
+        //                {
+        //                    list.Add(column);
+        //                }
+
+        //                counter++;
+        //            }
+        //        }
+        //        return list;
+        //    }
+        //}
+
+        public static IList<SeriesData> GetSparklineData(Fact fact, Concept concept, Column column)
         {
-            return GetSeriesData(new Column[] { column });
+
+            var chartConfig = new ComboChartConfig();
+            chartConfig.ChartType = ChartTypes.Combo;
+            chartConfig.Columns = new List<Column> { column };
+            chartConfig.Concepts = new List<Concept> { concept };
+            chartConfig.Series = new List<Series>();
+            chartConfig.Series.Add(new Series(SeriesTypes.AreaSpline));
+            chartConfig.Series.First().Concepts = chartConfig.Concepts;
+
+            var seriesData = chartConfig.GetSeriesData();
+
+            return seriesData;
         }
 
-        public override IList<SeriesData> GetSeriesData(IList<Column> columns)
+        public override IList<SeriesData> GetSeriesData()
         {
             var list = new List<SeriesData>();
 
@@ -66,7 +124,7 @@ namespace bank.reports.charts
             {
                 var counter = 0;
 
-                foreach (var column in columns)
+                foreach (var column in VisibleColumns)
                 {
                     var addColumn = true;
 
@@ -87,8 +145,15 @@ namespace bank.reports.charts
 
                         if (seriesData == null) continue;
 
-                        seriesData.Name = column.HeaderText;
-                        
+                        if (VisibleColumns.Count > 1)
+                        {
+                            seriesData.Name = column.HeaderText;
+                        }
+                        else
+                        {
+                            seriesData.Name = series.Concept.Label;
+                        }
+
                         list.Add(seriesData);
 
                         if (seriesData.IsRange)

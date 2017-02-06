@@ -15,5 +15,6 @@ namespace bank.poco
         public string Description { get; set; }
         public string Narrative { get; set; }
         public string Formula { get; set; }
+        public char? Unit { get; set; }
     }
 }

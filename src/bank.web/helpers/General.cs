@@ -32,7 +32,22 @@ namespace bank.web.helpers
         }
 
 
-
+        public static string TrendingColor(Fact fact)
+        {
+            if (fact != null && fact.Trend.HasValue)
+            {
+                string format = "background-color: rgba({0}, {1})";
+                if (fact.Trend.Value)
+                {
+                    return string.Format(format, "0,255,0", fact.TrendRatio.Value * (decimal)0.5);
+                }
+                else
+                {
+                    return string.Format(format, "255,0,0", Math.Abs(Math.Round(fact.TrendRatio.Value * (decimal)0.5, 2)));
+                }
+            }
+            return null;
+        }
 
     }
 }
