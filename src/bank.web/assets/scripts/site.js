@@ -318,7 +318,7 @@ $(function () {
                 display: "name",
                 ajax: function (query) {
                     return {
-                        url: "/modals/search/data",
+                        url: "/data/search/data",
                         path: "data.snippets",
                         data: {
                             q: "{{query}}"

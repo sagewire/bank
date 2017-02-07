@@ -12,11 +12,15 @@ using bank.utilities;
 using bank.web.models;
 using Microsoft.AspNet.Identity;
 using bank.web.helpers;
+using Microsoft.Owin.Security;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace bank.web.Controllers
 {
     public class ApplicationController : Controller
     {
+        private IAuthenticationManager _AuthenticationManager;
+        private AppUserManager _UserManager;
 
         public int DecodeId(string id)
         {
@@ -40,13 +44,29 @@ namespace bank.web.Controllers
 
             var list = ids.Split(',');
 
-            foreach(var s in list.Where(x=>!string.IsNullOrWhiteSpace(x)))
+            foreach (var s in list.Where(x => !string.IsNullOrWhiteSpace(x)))
             {
                 var decodedId = DecodeId(s);
                 intList.Add(decodedId);
             }
 
             return intList.ToArray();
+        }
+
+        protected IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return _AuthenticationManager = HttpContext.GetOwinContext().Authentication;
+            }
+        }
+
+        public AppUserManager UserManager
+        {
+            get
+            {
+                return _UserManager = HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
+            }
         }
 
         private AppUser _appUser;
@@ -56,10 +76,45 @@ namespace bank.web.Controllers
             {
                 if (_appUser == null)
                 {
-                    _appUser = User.Profile();
+                    
+                    _appUser = UserManager.FindByName(User.Identity.Name);
+                    
+                    var favRepo = new UserFavoriteRepository();
+                    _appUser.Favorites = favRepo.GetFavorites(_appUser.Id, FavoriteTypes.User);
+                    _appUser.RecentVisits = favRepo.GetFavorites(_appUser.Id, FavoriteTypes.Visit);
                 }
                 return _appUser;
             }
+        }
+
+        public void SetProfileVisit(int organizationId)
+        {
+            Task.Run(() =>
+            {
+                try {
+                    var userId = CurrentProfile.Id;
+
+                    if (string.IsNullOrWhiteSpace(userId))
+                    {
+                        return;
+                    }
+
+                    var visit = new UserFavorite
+                    {
+                        OrganizationId = organizationId,
+                        UserId = userId,
+                        FavoriteType = FavoriteTypes.Visit,
+                        LastVisited = DateTime.Now
+                    };
+
+                    var repo = new UserFavoriteRepository();
+                    repo.Save(visit);
+                }
+                catch(Exception ex)
+                {
+                    throw;
+                }
+            });
         }
 
         public string RenderView(string viewName, object model)

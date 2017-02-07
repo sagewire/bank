@@ -79,6 +79,7 @@
     <Compile Include="data\elasticsearch\responses\BaseResponse.cs" />
     <Compile Include="data\elasticsearch\responses\DeleteResponse.cs" />
     <Compile Include="data\elasticsearch\responses\IndexResponse.cs" />
+    <Compile Include="data\maps\UserFavoriteMap.cs" />
     <Compile Include="data\maps\ReportImport.cs" />
     <Compile Include="data\maps\CompanyFactMap.cs" />
     <Compile Include="data\maps\ConceptDefinitionMap.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="data\repositories\IRepository.cs" />
     <Compile Include="data\repositories\ReportImportRepository.cs" />
     <Compile Include="data\repositories\TwitterFriendRepository.cs" />
+    <Compile Include="data\repositories\UserFavoriteRepository.cs" />
     <Compile Include="enums\FactTypes.cs" />
     <Compile Include="enums\HorizontalAlignment.cs" />
     <Compile Include="enums\ReportTypes.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="poco\PeerGroupStandard.cs" />
     <Compile Include="poco\ReportImport.cs" />
     <Compile Include="poco\TwitterFriend.cs" />
+    <Compile Include="poco\UserFavorite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

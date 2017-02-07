@@ -17,7 +17,10 @@ namespace bank.web.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var model = new DashboardViewModel();
+            model.Profile = CurrentProfile;
+
+            return View(model);
         }
         //public ActionResult Viewer(string name, string id, DateTime? period, string template, string section, string c = null)
         //{

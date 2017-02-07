@@ -144,6 +144,25 @@ body {
     }
 }
 
+.alert {
+    border-radius: 0;
+}
+
+#flash {
+    margin-bottom: 0;
+    height: 0;
+    opacity: .92;
+
+    h1, h2, h3 {
+        padding-top: 10px;
+        color: @darkest;
+    }
+
+    &.alert-success {
+        background-color: @accent-color;
+    }
+}
+
 .box-shadow {
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12);
 }

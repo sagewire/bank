@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -8,6 +9,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 
 using bank.web.Controllers;
+using bank.web.models;
 
 namespace bank.web
 {
@@ -21,6 +23,8 @@ namespace bank.web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            Database.SetInitializer<AuthDbContext>(null);
         }
 
         protected void Application_EndRequest(object sender, EventArgs e)

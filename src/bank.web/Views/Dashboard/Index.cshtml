@@ -1,4 +1,5 @@
-﻿@{
+﻿@model DashboardViewModel
+@{
     Layout = "~/Views/Shared/_LayoutSingle.cshtml";
 }
 @{
@@ -9,7 +10,33 @@
 <div class="card">
     <div class="card-header">@profile.FirstName's Dashboard</div>
     <div class="card-block">
-        <h1 style="padding: 40vh 0" class="text-center">Dashboard</h1>
+        <h4>Favorites</h4>
+        <ul class="list-group">
+            @foreach (var fav in Model.Profile.Favorites)
+            {
+                <li class="list-group-item">
+                    <a href="@Url.Url(fav)">
+                        @fav.Name
+                    </a>
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    <div class="card-block">
+        <h4>Recently Visited</h4>
+        <ul class="list-group">
+            @foreach (var fav in Model.Profile.RecentVisits)
+            {
+                <li class="list-group-item">
+                    <a href="@Url.Url(fav)">
+                        @fav.Name
+                    </a>
+                </li>
+            }
+        </ul>
+
     </div>
 </div>
 

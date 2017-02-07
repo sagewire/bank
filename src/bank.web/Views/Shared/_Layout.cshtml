@@ -83,6 +83,9 @@
     @Html.Partial("_Sidenav")
     
     <div id="main-body">
+        @*<div id="test" style="display:none;z-index:500;position:absolute;color:gold;background-color: #eee">
+            <i class="fa fa-fw fa-star" aria-hidden="true"></i>
+        </div>*@
         @RenderBody()
     </div>
 
@@ -104,7 +107,7 @@
                 </a>*@
         </div>
 
-        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        @*<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body text-xs-center">
@@ -112,7 +115,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
+
+        <div id="flash" class="alert fixed-top" role="alert"></div>
 
         <div class="darken hidden-xl-up"></div>
         <div class="test hidden-lg-down"></div>

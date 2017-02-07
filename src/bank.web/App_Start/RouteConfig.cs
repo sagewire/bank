@@ -13,10 +13,16 @@ namespace bank.web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.MapRoute(
+            //    name: "modals",
+            //    url: "modals/{controller}/{action}/{type}/{id}",
+            //    defaults: new { controller = "", action = "", id = UrlParameter.Optional, type = UrlParameter.Optional }
+            //);
+
             routes.MapRoute(
-                name: "modals",
-                url: "modals/{controller}/{action}/{type}/{id}",
-                defaults: new { controller = "", action = "", id = UrlParameter.Optional, type = UrlParameter.Optional }
+                name: "data",
+                url: "data/{controller}/{action}/{type}/{id}",
+                defaults: new { controller = "", action = "Default", id = UrlParameter.Optional, type = UrlParameter.Optional }
             );
 
             routes.MapRoute(

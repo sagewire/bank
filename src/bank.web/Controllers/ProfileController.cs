@@ -95,6 +95,7 @@ namespace bank.web.Controllers
 
             PopulateReportsAndColumns(model.Organization, companies, model.Layout, period);
 
+            SetProfileVisit(orgId);
 
             ViewBag.Title = model.Title;
             return View(model);

@@ -18,5 +18,9 @@
   {
     "outputFile": "assets/scripts/jquery.typeahead.es5.js",
     "inputFile": "assets/scripts/jquery.typeahead.js"
+  },
+  {
+    "outputFile": "assets/scripts/json.es5.js",
+    "inputFile": "assets/scripts/json.js"
   }
 ]

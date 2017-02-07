@@ -182,6 +182,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\FavoritesController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\DirectoryController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -193,7 +194,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="helpers\Authorize403Attribute.cs" />
     <Compile Include="helpers\ClaimsAuthorizeAttribute.cs" />
+    <Compile Include="helpers\DataResponse.cs" />
     <Compile Include="helpers\General.cs" />
     <Compile Include="helpers\User.cs" />
     <Compile Include="helpers\StringExtensions.cs" />
@@ -206,6 +209,8 @@
     <Compile Include="models\BankBasicsViewModel.cs" />
     <Compile Include="models\ColsViewModel.cs" />
     <Compile Include="models\ColViewModel.cs" />
+    <Compile Include="models\DashboardViewModel.cs" />
+    <Compile Include="models\DataMessageViewModel.cs" />
     <Compile Include="models\ProfileHeaderViewModel.cs" />
     <Compile Include="models\OrganizationProfileViewModel.cs" />
     <Compile Include="models\ReportViewModel.cs" />
@@ -251,6 +256,10 @@
     <Content Include="assets\images\social\linkedin-40.png" />
     <Content Include="assets\images\social\twitter-29.png" />
     <Content Include="assets\images\social\twitter-40.png" />
+    <Content Include="assets\scripts\bundle.js" />
+    <Content Include="assets\scripts\bundle.min.js">
+      <DependentUpon>bundle.js</DependentUpon>
+    </Content>
     <Content Include="assets\scripts\charts.js" />
     <Content Include="assets\scripts\charts.min.js">
       <DependentUpon>charts.js</DependentUpon>
@@ -262,6 +271,16 @@
       <DependentUpon>jquery.typeahead.es5.js</DependentUpon>
     </Content>
     <Content Include="assets\scripts\jquery.typeahead.js" />
+    <Content Include="assets\scripts\json.es5.js">
+      <DependentUpon>json.js</DependentUpon>
+    </Content>
+    <Content Include="assets\scripts\json.es5.min.js">
+      <DependentUpon>json.es5.js</DependentUpon>
+    </Content>
+    <Content Include="assets\scripts\json.js" />
+    <Content Include="assets\scripts\json.min.js">
+      <DependentUpon>json.js</DependentUpon>
+    </Content>
     <Content Include="assets\scripts\rasterize.js" />
     <Content Include="assets\scripts\scrollreveal.js" />
     <Content Include="assets\scripts\scrollreveal.min.js" />
@@ -367,7 +386,6 @@
     <Content Include="Views\Shared\Modals\Search.cshtml" />
     <Content Include="Views\Shared\_States.cshtml" />
     <Content Include="Views\Shared\Modals\Definition.cshtml" />
-    <Content Include="Views\Profile\Organization.cshtml" />
     <Content Include="Views\Profile\_HeaderSidebar.cshtml" />
     <Content Include="Views\Profile\_SidebarReport.cshtml" />
     <Content Include="Views\Profile\_SecondaryReport.cshtml" />
@@ -392,6 +410,7 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Shared\_SignIn.cshtml" />
     <Content Include="Views\Shared\_Register.cshtml" />
+    <Content Include="Views\Shared\_DataMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bank.reports\bank.reports.csproj">

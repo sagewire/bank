@@ -25,10 +25,10 @@
                     </li>
                     <li class="nav-item reveal">
                         <a class="nav-link" href="#" onclick="return false;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            <i id="plus" class="fa fa-plus" aria-hidden="true"></i>
                         </a>
                         <div class="dropdown-menu">
-                            <button class="dropdown-item" type="button">
+                            <button class="dropdown-item" type="button" data-send="json" data-name="favorites" data-value="@Model.Organization.OrganizationId">
                                 <i class="fa fa-fw fa-star-o" aria-hidden="true"></i>
                                 Add to Favorites
                             </button>

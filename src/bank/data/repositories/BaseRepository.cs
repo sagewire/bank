@@ -13,7 +13,16 @@ namespace bank.data.repositories
     {
         public virtual void Save(T model)
         {
-            throw new NotSupportedException();
+            var existing = Get(model);
+
+            if (existing != null)
+            {
+                Update(model);
+            }
+            else
+            {
+                Insert(model);
+            }
         }
 
         public virtual T Get(T model)

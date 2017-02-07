@@ -5,8 +5,9 @@ using System.Web;
 
 namespace bank.web.models
 {
-    public class DashboardViewModel
+    public class DataMessageViewModel
     {
-        public AppUser Profile { get; internal set; }
+        public string Header { get; set; }
+        public string Message { get; set; }
     }
 }
