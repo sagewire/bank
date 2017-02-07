@@ -1,0 +1,21 @@
+﻿
+@using (Html.BeginForm("register", "account", FormMethod.Post, new { @class = "", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for="firstname">First Name</label>
+        <input type="text" class="form-control" id="firstname" name="firstname">
+    </div>
+    <div class="form-group">
+        <label for="lastname">Last Name</label>
+        <input type="text" class="form-control" id="lastname" name="lastname">
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" name="email">
+    </div>
+    <button type="submit" class="text-center btn btn-primary">Register</button>
+    <button type="button" class="btn btn-default toggle" data-group="account">Cancel</button>
+
+}

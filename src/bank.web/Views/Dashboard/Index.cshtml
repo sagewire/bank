@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutSingle.cshtml";
+}
+@{
+    var controller = ViewContext.Controller as bank.web.Controllers.ApplicationController;
+    var profile = controller.CurrentProfile;
+}
+
+<div class="card">
+    <div class="card-header">@profile.FirstName's Dashboard</div>
+    <div class="card-block">
+        <h1 style="padding: 40vh 0" class="text-center">Dashboard</h1>
+    </div>
+</div>
+

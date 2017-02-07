@@ -4,6 +4,7 @@
   color: #404040;
   position: relative;
   padding-right: 60px;
+  padding-top: 56px;
 }
 .container-fluid {
   max-width: 1440px;
@@ -43,19 +44,10 @@
   padding-left: 0;
   padding-right: 0;
 }
-#sidenav-toggler {
-  margin-top: 5px;
-  background-color: #808080;
-  border-radius: 0;
-}
-.sidenav-open {
-  z-index: 101;
-}
 #header {
   position: relative;
   background-color: #2E96EA;
   height: 300px;
-  padding-top: 90px;
 }
 #header h1 {
   color: #fff;
@@ -68,7 +60,15 @@
 .skirt {
   height: 75px;
 }
-#main-wrapper .first {
+.signin {
+  max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#main-body .single > .card {
+  margin-top: 30px;
+}
+#main-body .first {
   margin-top: -53px;
 }
 .box-shadow {
@@ -109,6 +109,12 @@
 .nav-link:hover {
   background-color: #808080;
   color: #fff !important;
+}
+.nav-link a {
+  color: #404040;
+}
+.nav-link a:hover {
+  color: #fff;
 }
 .org-nav {
   min-height: 56px;
@@ -168,10 +174,12 @@
 .avatar-sm {
   height: 40px;
   min-width: 40px;
+  display: block;
 }
 .avatar-md {
   height: 100px;
   min-width: 100px;
+  display: block;
 }
 .highcharts-container {
   width: 100% !important;
@@ -333,6 +341,20 @@ svg {
 .width-100 {
   width: 100%;
 }
+.darken {
+  display: none;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-color: #000000;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 81;
+  opacity: .4;
+}
 .search-result .name {
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -340,11 +362,49 @@ svg {
   padding-left: 10px;
   width: 100%;
 }
+.typeahead__result ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+.typeahead__result ul li {
+  padding: 10px;
+  background-color: #fff;
+  border-top: 1px solid #e6e6e6;
+}
+.typeahead__result ul li:hover {
+  background-color: #e6e6e6;
+}
+.typeahead__result ul .active {
+  background-color: #e6e6e6;
+}
+.typeahead__cancel-button {
+  top: 30px !important;
+  right: 2.5vw !important;
+  visibility: hidden;
+  user-select: none;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 8px;
+  right: .8em;
+  cursor: pointer;
+  background: url(data:image/svg+xml;charset=utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDQzOC41MzMgNDM4LjUzMyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDM4LjUzMyA0MzguNTMzOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPHBhdGggZD0iTTQwOS4xMzMsMTA5LjIwM2MtMTkuNjA4LTMzLjU5Mi00Ni4yMDUtNjAuMTg5LTc5Ljc5OC03OS43OTZDMjk1LjczNiw5LjgwMSwyNTkuMDU4LDAsMjE5LjI3MywwICAgYy0zOS43ODEsMC03Ni40Nyw5LjgwMS0xMTAuMDYzLDI5LjQwN2MtMzMuNTk1LDE5LjYwNC02MC4xOTIsNDYuMjAxLTc5LjgsNzkuNzk2QzkuODAxLDE0Mi44LDAsMTc5LjQ4OSwwLDIxOS4yNjcgICBjMCwzOS43OCw5LjgwNCw3Ni40NjMsMjkuNDA3LDExMC4wNjJjMTkuNjA3LDMzLjU5Miw0Ni4yMDQsNjAuMTg5LDc5Ljc5OSw3OS43OThjMzMuNTk3LDE5LjYwNSw3MC4yODMsMjkuNDA3LDExMC4wNjMsMjkuNDA3ICAgczc2LjQ3LTkuODAyLDExMC4wNjUtMjkuNDA3YzMzLjU5My0xOS42MDIsNjAuMTg5LTQ2LjIwNiw3OS43OTUtNzkuNzk4YzE5LjYwMy0zMy41OTYsMjkuNDAzLTcwLjI4NCwyOS40MDMtMTEwLjA2MiAgIEM0MzguNTMzLDE3OS40ODUsNDI4LjczMiwxNDIuNzk1LDQwOS4xMzMsMTA5LjIwM3ogTTMyMi42MjEsMjcwLjkzOWMzLjYxNywzLjYxMyw1LjQyOCw3LjkwNSw1LjQyOCwxMi44NTQgICBjMCw1LjEzMy0xLjgxMSw5LjUxNC01LjQyOCwxMy4xMjdsLTI1LjY5MywyNS43MDFjLTMuNjE0LDMuNjEzLTcuOTk0LDUuNDItMTMuMTM1LDUuNDJjLTQuOTQ4LDAtOS4yMzYtMS44MDctMTIuODQ3LTUuNDIgICBsLTUxLjY3Ni01MS42ODJsLTUxLjY3OCw1MS42ODJjLTMuNjE2LDMuNjEzLTcuODk4LDUuNDItMTIuODQ3LDUuNDJjLTUuMTQsMC05LjUxNy0xLjgwNy0xMy4xMzQtNS40MmwtMjUuNjk3LTI1LjcwMSAgIGMtMy42MTYtMy42MTMtNS40MjQtNy45OTQtNS40MjQtMTMuMTI3YzAtNC45NDgsMS44MDktOS4yNCw1LjQyNC0xMi44NTRsNTEuNjc4LTUxLjY3M2wtNTEuNjc4LTUxLjY3OCAgIGMtMy42MTYtMy42MTItNS40MjQtNy44OTgtNS40MjQtMTIuODQ3YzAtNS4xNCwxLjgwOS05LjUxNyw1LjQyNC0xMy4xMzRsMjUuNjk3LTI1LjY5M2MzLjYxNy0zLjYxNiw3Ljk5NC01LjQyNCwxMy4xMzQtNS40MjQgICBjNC45NDksMCw5LjIzMSwxLjgwOSwxMi44NDcsNS40MjRsNTEuNjc4LDUxLjY3NGw1MS42NzYtNTEuNjc0YzMuNjEtMy42MTYsNy44OTgtNS40MjQsMTIuODQ3LTUuNDI0ICAgYzUuMTQxLDAsOS41MjEsMS44MDksMTMuMTM1LDUuNDI0bDI1LjY5MywyNS42OTNjMy42MTcsMy42MTcsNS40MjgsNy45OTQsNS40MjgsMTMuMTM0YzAsNC45NDgtMS44MTEsOS4yMzUtNS40MjgsMTIuODQ3ICAgbC01MS42NzUsNTEuNjc4TDMyMi42MjEsMjcwLjkzOXoiIGZpbGw9IiM1NTU1NTUiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K) no-repeat scroll center center transparent;
+}
 .js-typeahead-name {
   border-radius: 0 !important;
 }
 .typeahead__group-lenders a {
   font-size: 1rem !important;
+}
+#sidenav-toggler {
+  margin-top: 5px;
+  background-color: #808080;
+  border-radius: 0;
+}
+.sidenav-open {
+  z-index: 101;
 }
 .sidenav {
   height: 100%;
@@ -363,15 +423,23 @@ svg {
   text-align: left;
   box-shadow: 8px 0 19px 5px rgba(0, 0, 0, 0.35);
 }
-.sidenav a {
-  padding: 20px 0 20px 15px;
+.sidenav .nav-settings {
+  background-color: #94e5e6;
+  min-height: 303px;
+}
+.sidenav .nav-settings:hover {
+  color: #404040 !important;
+}
+.sidenav .nav-link {
+  padding: 20px 15px 20px 15px;
   text-decoration: none;
   font-size: 20px;
   color: #404040;
   display: block;
   transition: 0.3s;
+  margin-left: 0;
 }
-.sidenav a:hover {
+.sidenav .nav-link:hover {
   color: #f1f1f1;
 }
 .sidenav .dropdown-menu {
@@ -393,45 +461,75 @@ svg {
   opacity: 1 !important;
 }
 .sidenav .nav-justified .nav-item {
-  min-width: 60px;
   text-align: left;
 }
 .sidenav .nav-justified .nav-item:first-child {
   border-right: 1px solid #269fa1;
 }
-.sidenav .nav-justified .sign-in,
-.sidenav .nav-justified .register {
+.sidenav .nav-justified .nav-link {
   background-color: #30C8CA;
 }
-.sidenav .nav-justified .sign-in:hover,
-.sidenav .nav-justified .register:hover {
+.sidenav .nav-justified .nav-link:hover {
+  background-color: #269fa1;
+}
+.sidenav .anon-options .nav-item {
+  min-width: 60px;
+  text-align: left;
+}
+.sidenav .anon-options .nav-item:first-child {
+  width: 60px;
+}
+.sidenav .account-options .nav-item:first-child {
+  width: 100%;
+}
+.sidenav .account-options .nav-item .other-icon {
+  margin-right: auto;
+  width: auto;
+}
+.sidenav .account-options .nav-link {
+  background-color: #30C8CA;
+  border-right: 1px solid #269fa1;
+  border-left: none;
+}
+.sidenav .account-options .nav-link:hover {
   background-color: #269fa1;
 }
 .sidenav .nav-item {
   border-bottom: 1px solid #bfbfbf;
+  /*input {
+            width: 100%;
+            padding-left: 7px;
+            border: none;
+            margin-right: 10px;
+            margin-bottom: -5px;
+            margin-top: -5px;
+            margin-left: 7px;
+            padding: 9px;
+        }*/
+  /*.nav-link {
+            margin-left: 0;
+
+            a {
+                color: @darkest;
+
+                &:hover {
+                    color: @white;
+                }
+            }
+
+            &:hover {
+                color: @white !important;
+            }
+        }*/
 }
 .sidenav .nav-item .fa {
   margin-right: 10px;
   width: 30px;
   display: inline-block;
 }
-.sidenav .nav-item input {
-  width: 100%;
-  padding-left: 7px;
-  border: none;
-  margin-right: 10px;
-  margin-bottom: -5px;
-  margin-top: -5px;
-  padding: 9px;
-}
-.sidenav .nav-item .nav-link {
-  margin-left: 0;
-}
-.sidenav .nav-item .input-group-addon {
-  padding: 0;
-  background-color: transparent;
-  border: none;
-  font-size: inherit;
+.sidenav .nav-item #search-box {
+  width: 80%;
+  padding-left: 6px;
 }
 .open {
   width: 100%;
@@ -461,15 +559,17 @@ svg {
     max-width: 20vw;
     transition: 0s;
   }
-  .nav-item input {
-    width: 20vw;
-  }
   .open {
     width: 20vw;
     max-width: 20vw;
   }
   body {
     padding-right: 20vw;
+  }
+}
+@media (max-width: 1199px) {
+  #main-body .single > .card {
+    margin-top: 15px;
   }
 }
 @media (max-width: 767px) {
@@ -500,6 +600,10 @@ svg {
   .sidenav a {
     padding-top: 15px;
     padding-bottom: 15px;
+  }
+  .sidenav .nav-settings {
+    padding-bottom: 100vh !important;
+    overflow-y: hidden;
   }
   .sidenav-open {
     z-index: 200;

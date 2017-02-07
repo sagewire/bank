@@ -14,6 +14,7 @@
 @media (min-width: @screen-xl) {
     @navWidth: 20vw;
 
+
     .container-fluid {
         padding-left: 45px !important;
         padding-right: 45px !important;
@@ -23,13 +24,6 @@
         width: @navWidth;
         max-width: @navWidth;
         transition: 0s;
-    }
-
-    .nav-item {
-
-        input {
-            width: @navWidth;
-        }
     }
 
     .open {
@@ -43,9 +37,16 @@
 }
 
 @media (max-width: @screen-md-max) {
+    #main-body {
+        .single {
+            & > .card {
+                margin-top: 15px;
+            }
+        }
+    }
 }
 
-@media (max-width: @screen-sm-max) {
+@media (max-width: @screen-sm-min) {
 }
 
 
@@ -59,7 +60,7 @@
     }
 
     .open {
-        width:100%;
+        width: 100%;
         max-width: 100%;
     }
 
@@ -91,6 +92,11 @@
         a {
             padding-top: 15px;
             padding-bottom: 15px;
+        }
+
+        .nav-settings {
+            padding-bottom: 100vh !important;
+            overflow-y: hidden;
         }
     }
 

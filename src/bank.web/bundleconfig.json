@@ -16,5 +16,14 @@
     "inputFiles": [
       "assets/scripts/charts.js"
     ]
+  },
+  {
+    "outputFileName": "assets/scripts/bundle.js",
+    "inputFiles": [
+        "assets/scripts/jquery.typeahead.js",
+        "assets/scripts/scrollreveal.js",
+        "assets/scripts/site.js",
+        "assets/scripts/charts.js"
+    ]
   }
 ]

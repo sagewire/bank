@@ -2,35 +2,65 @@
 var sidenavState = null;
 
 function openSidenav(delay) {
-    
+
+    if ($(".test").is(':visible')) {
+        return;
+    }
+
     sidenavTimer = setTimeout(function () {
         var nav = $("#global-sidenav");
         nav.addClass("open");
+        console.log('open');
+        $(".darken").fadeIn();
         $(".top-nav").addClass("sidenav-open");
-        $("#search-box").focus();
+        //$("#search-box").focus();
     }, delay);
 }
 
 function closeSidenav() {
+
+    if ($(".test").is(':visible')) {
+        return;
+    }
+    
+    console.log('close');
+
     clearTimeout(sidenavTimer);
 
     var nav = $("#global-sidenav");
     nav.removeClass("open");
+
+    $(".darken").fadeOut();
+    
+    $(".account").hide();
     $(".top-nav").removeClass("sidenav-open");
 
 }
 
 function toggleSidenav(delay) {
     var nav = $("#global-sidenav");
-    if (nav.hasClass("open")) {
+
+    
+
+    if (nav.width() > 200) {
+        console.log('closing');
         closeSidenav();
     }
     else {
+        console.log('opening');
         openSidenav(delay);
     }
 }
 
 $(function () {
+
+    $(document).keyup(function (e) {
+        if (e.keyCode == 27) { // escape key maps to keycode `27`
+            closeSidenav();
+
+            $('.typeahead').typeahead('setQuery', '');
+        }
+    });
 
     $("#global-sidenav").on("mouseenter", function () {
         openSidenav(225);
@@ -40,9 +70,35 @@ $(function () {
         closeSidenav();
     })
 
-    $("#sidenav-toggler").click(function () {
+    $("#sidenav-toggler").click(function (e) {
+        e.preventDefault();
         toggleSidenav(0);
+        return false;
     })
+
+    $(".darken").click(function () {
+        closeSidenav();
+    });
+
+
+    $(".toggle").on("click", function (e) {
+        e.preventDefault();
+
+        var target = $(this).attr("href");
+        var group = $(this).data("group");
+        var isVisible = $(target).is(':visible');
+
+        if (isVisible) {
+            $(target).hide();
+        }
+        else {
+            $("." + group).hide();
+            $(target).show();
+        }
+        return false;
+        
+    })
+
 
     var lastSize = findBootstrapEnvironment();
     console.log(lastSize);
@@ -165,29 +221,29 @@ $(function () {
 
 
 
-    $("#modal").on("show.bs.modal", function (e) {
-        var content = $(e.relatedTarget).data("content");
-        var html = $(e.relatedTarget).data("html");
-        var modalBody = $(".modal-body");
+    //$("#modal").on("show.bs.modal", function (e) {
+    //    var content = $(e.relatedTarget).data("content");
+    //    var html = $(e.relatedTarget).data("html");
+    //    var modalBody = $(".modal-body");
 
-        if (content !== undefined) {
+    //    if (content !== undefined) {
 
-            var jqxhr = $.ajax(content)
-                              .done(function (data) {
-                                  modalBody.html(data);
-                              })
-                              .fail(function () {
-                                  console.log("error");
-                              })
-                              .always(function () {
+    //        var jqxhr = $.ajax(content)
+    //                          .done(function (data) {
+    //                              modalBody.html(data);
+    //                          })
+    //                          .fail(function () {
+    //                              console.log("error");
+    //                          })
+    //                          .always(function () {
 
-                              });
-        }
-        else if (html !== undefined) {
-            modalBody.html(html);
-        }
+    //                          });
+    //    }
+    //    else if (html !== undefined) {
+    //        modalBody.html(html);
+    //    }
 
-    });
+    //});
 
     function sidebarPosition() {
         if (lastSize !== "lg") {
@@ -242,7 +298,9 @@ $(function () {
         input: '.js-typeahead-name',
         filter: false,
         dynamic: true,
-        delay: 90,
+        minLength: 0,
+        searchOnFocus: true,
+        delay: 250,
         maxItem: 20,
         //order: "desc",
         template: function (query, item) {
@@ -272,9 +330,9 @@ $(function () {
         callback: {
             onReady: function () {
 
-                setTimeout(function () {
-                    $("#search-box").focus();
-                }, 750);
+                //setTimeout(function () {
+                //    $("#search-box").focus();
+                //}, 750);
             },
             onClick: function (node, a, item, event) {
                 window.location = item.url;

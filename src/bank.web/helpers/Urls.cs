@@ -36,6 +36,16 @@ namespace bank.web.helpers
 
         }
 
+        public static string DefaultUrl(this UrlHelper urlHelper, string controller, string action = null)
+        {
+
+            var rv = new RouteValueDictionary();
+            rv.Add("controller", controller);
+            rv.Add("action", action);
+
+            return urlHelper.RouteUrl("Default", rv);
+        }
+
         //public static string Url(this UrlHelper urlHelper, Organization organization)
         //{
         //    var rv = new RouteValueDictionary();

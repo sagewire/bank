@@ -1,43 +1,88 @@
-﻿
-<div id="global-sidenav" class="sidenav">
+﻿@{
+    var controller = ViewContext.Controller as bank.web.Controllers.ApplicationController;
+    var profile = controller.CurrentProfile;
+}
 
-    <ul class="nav nav-justified">
-        <li class="nav-item">
-            <a class="nav-link sign-in" href="#">
-                <i class="fa fa-fw fa-sign-in" aria-hidden="true"></i>
-                Sign-in
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link register" href="#">
-                <i class="fa fa-fw fa-pencil-square-o" aria-hidden="true"></i>
-                Register
-            </a>
-        </li>
-    </ul>
+<div id="global-sidenav" class="sidenav" data-state="none">
 
+
+    @if (Request.IsAuthenticated)
+    {
+        <ul class="nav account-options">
+            <li class="nav-item">
+                <div class="nav-link">
+                    <i class="fa fa-fw fa-user" aria-hidden="true"></i>
+                    <a href="@Url.DefaultUrl("dashboard")">
+                        Hello @profile.FirstName
+                    </a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.DefaultUrl("account", "settings")" title="Settings"><i class="fa fa-fw fa-cog other-icon" aria-hidden="true"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.DefaultUrl("account", "signout")" title="Sign out"><i class="fa fa-fw fa-sign-out other-icon" aria-hidden="true"></i></a>
+            </li>
+        </ul>
+    }
+    else
+    {
+        <ul class="nav nav-justified anon-options">
+            <li class="nav-item">
+                <a class="nav-link sign-in toggle" data-group="account" href="#sidenav-signin">
+                    <i class="fa fa-fw fa-sign-in" aria-hidden="true"></i>
+                    Sign-in
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link register toggle" data-group="account" href="#sidenav-register">
+                    <i class="fa fa-fw fa-pencil-square-o" aria-hidden="true"></i>
+                    Register
+                </a>
+            </li>
+        </ul>
+        <div class="collapse account" id="sidenav-signin">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <div class="nav-link nav-settings">
+                        @Html.Partial("_SignIn")
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+        <div class="collapse account" id="sidenav-register">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+
+                    <div class="nav-link nav-settings">
+                        @Html.Partial("_Register")
+                    </div>
+
+
+                </li>
+            </ul>
+        </div>
+    }
     <ul class="nav flex-column">
         <li class="nav-item">
             <div class="typeahead__container">
 
-                <a href="#" onclick="return false">
+                <div class="nav-link">
+                    <i class="fa fa-fw fa-search" aria-hidden="true"></i>
 
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-fw fa-search" aria-hidden="true"></i>
-                        </div>
-                        <input id="search-box"
-                               autofocus
-                               type="text"
-                               class="js-typeahead-name"
-                               placeholder="" autocomplete="off" />
-                    </div>
+                    <input id="search-box"
+                           type="text"
+                           class="js-typeahead-name"
+                           placeholder="" autocomplete="off" />
+                </div>
 
-                </a>
             </div>
+
         </li>
+
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="@Url.DefaultUrl("dashboard")">
                 <i class="fa fa-fw fa-tachometer" aria-hidden="true"></i>
                 Dashboard
             </a>

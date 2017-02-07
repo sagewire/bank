@@ -23,9 +23,13 @@ namespace bank.web.Controllers
 
         public ActionResult Data(string q)
         {
+            if (string.IsNullOrWhiteSpace(q)) {
+                q = "bank";
+            }
+
             var entities = bank.data.elasticsearch.queries.SearchQueries.Search(q);
 
-            var gravatarUrl = "https://www.gravatar.com/avatar/{0}?d=identicon";
+            
 
             var snippets = entities.Select(x => new {
                 name = x.Name,

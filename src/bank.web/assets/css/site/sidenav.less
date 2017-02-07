@@ -1,5 +1,15 @@
 ﻿@import "site.less";
 
+#sidenav-toggler {
+    margin-top: 5px;
+    background-color: @darker;
+    border-radius: 0;
+}
+
+.sidenav-open {
+    z-index: 101;
+}
+
 .sidenav {
     height: 100%;
     width: 60px;
@@ -19,13 +29,23 @@
     box-shadow: 8px 0 19px 5px rgba(0,0,0,0.35);
 
 
-    a {
-        padding: 20px 0 20px 15px;
+    .nav-settings {
+        background-color: lighten(@accent-color, 25);
+        min-height: 303px;
+
+        &:hover {
+            color: @darkest !important;
+        }
+    }
+
+    .nav-link {
+        padding: 20px 15px 20px 15px;
         text-decoration: none;
         font-size: 20px;
         color: @darkest;
         display: block;
         transition: 0.3s;
+        margin-left: 0;
 
         &:hover {
             color: #f1f1f1;
@@ -55,8 +75,8 @@
     }
 
     .nav-justified {
+
         .nav-item {
-            min-width: 60px;
             text-align: left;
 
             &:first-child {
@@ -64,8 +84,43 @@
             }
         }
 
-        .sign-in, .register {
+        .nav-link {
             background-color: @accent-color;
+
+            &:hover {
+                background-color: darken(@accent-color,10);
+            }
+        }
+    }
+
+    .anon-options {
+        .nav-item {
+            min-width: 60px;
+            text-align: left;
+
+            &:first-child {
+                width: 60px;
+            }
+        }
+    }
+
+    .account-options {
+        .nav-item {
+
+            &:first-child {
+                width: 100%;
+            }
+
+            .other-icon {
+                margin-right: auto;
+                width: auto;
+            }
+        }
+
+        .nav-link {
+            background-color: @accent-color;
+            border-right: 1px solid darken(@accent-color,10);
+            border-left: none;
 
             &:hover {
                 background-color: darken(@accent-color,10);
@@ -82,34 +137,43 @@
             display: inline-block;
         }
 
-        input {
+        #search-box {
+            width: 80%;
+            padding-left: 6px;
+        }
+        /*input {
             width: 100%;
             padding-left: 7px;
             border: none;
             margin-right: 10px;
             margin-bottom: -5px;
             margin-top: -5px;
+            margin-left: 7px;
             padding: 9px;
-        }
-
-        .nav-link {
+        }*/
+        /*.nav-link {
             margin-left: 0;
-        }
 
-        .input-group-addon {
-            padding: 0;
-            background-color: transparent;
-            border: none;
-            font-size: inherit;
-        }
+            a {
+                color: @darkest;
+
+                &:hover {
+                    color: @white;
+                }
+            }
+
+            &:hover {
+                color: @white !important;
+            }
+        }*/
     }
 }
+
 
 .open {
     width: 100%;
     z-index: 100;
 }
-
 
 
 @media screen and (max-height: 450px) {

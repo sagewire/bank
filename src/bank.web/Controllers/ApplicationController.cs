@@ -10,6 +10,8 @@ using bank.poco;
 using bank.reports;
 using bank.utilities;
 using bank.web.models;
+using Microsoft.AspNet.Identity;
+using bank.web.helpers;
 
 namespace bank.web.Controllers
 {
@@ -45,6 +47,19 @@ namespace bank.web.Controllers
             }
 
             return intList.ToArray();
+        }
+
+        private AppUser _appUser;
+        public AppUser CurrentProfile
+        {
+            get
+            {
+                if (_appUser == null)
+                {
+                    _appUser = User.Profile();
+                }
+                return _appUser;
+            }
         }
 
         public string RenderView(string viewName, object model)
@@ -176,7 +191,7 @@ namespace bank.web.Controllers
 
         //    var periodStart = org.ReportImports.Select(x => x.Period).Min();
         //    var periodEnd = period.HasValue ? period.Value : org.ReportImports.Select(x => x.Period).Max();
-                
+
         //    var columns = new List<Column>();
 
         //    foreach (var companyId in companies)
@@ -210,7 +225,7 @@ namespace bank.web.Controllers
         //    }
 
         //    var tasks = new List<Task>();
-            
+
         //    var populateTask = Task.Run(() => Report.PopulateReports(model.Reports, columns, periodStart, periodEnd));
         //    var orgTask = Task.Run(() => orgRepo.GetOrganizations(companies));
 
@@ -251,6 +266,15 @@ namespace bank.web.Controllers
         //    model.Organization = org;
 
         //}
+
+        protected void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
+        }
+
     }
 
 }

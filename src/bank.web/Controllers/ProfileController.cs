@@ -10,6 +10,8 @@ using bank.reports;
 using bank.web.models;
 using bank.extensions;
 using bank.enums;
+using Microsoft.AspNet.Identity;
+using bank.web.helpers;
 
 namespace bank.web.Controllers
 {
@@ -75,7 +77,8 @@ namespace bank.web.Controllers
             return list.OrderByDescending(x => x.Key).Select(x => x.Value).ToList();
 
         }
-
+        
+        [ClaimsAuthorize(MemberType = "free")]
         public ActionResult Viewer(string name, string id, DateTime? period, string section, string c = null, string template = "profile-layout")
         {
             var orgId = DecodeId(id);

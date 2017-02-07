@@ -12,7 +12,7 @@ namespace bank.web
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            
+
             routes.MapRoute(
                 name: "modals",
                 url: "modals/{controller}/{action}/{type}/{id}",
@@ -54,6 +54,13 @@ namespace bank.web
                 name: "fact",
                 url: "fact/{id}/{text}/{companies}",
                 defaults: new { controller = "Fact", action = "Details", id = UrlParameter.Optional, companies = UrlParameter.Optional }
+            );
+
+
+            routes.MapRoute(
+                name: "dashboard",
+                url: "dashboard/{action}/{id}",
+                defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
