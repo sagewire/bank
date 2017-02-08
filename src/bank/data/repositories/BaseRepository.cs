@@ -25,6 +25,11 @@ namespace bank.data.repositories
             }
         }
 
+        public virtual void Delete(T model)
+        {
+            throw new NotSupportedException();
+        }
+
         public virtual T Get(T model)
         {
             using (var conn = new SqlConnection(Settings.ConnectionString))

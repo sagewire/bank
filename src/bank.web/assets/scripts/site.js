@@ -3,10 +3,11 @@ var sidenavState = null;
 
 function openSidenav(delay) {
 
-    if ($(".test").is(':visible')) {
+    
+    if (isSidenavOpen()) {
         return;
     }
-
+    
     sidenavTimer = setTimeout(function () {
         var nav = $("#global-sidenav");
         nav.addClass("open");
@@ -19,7 +20,8 @@ function openSidenav(delay) {
 
 function closeSidenav() {
 
-    if ($(".test").is(':visible')) {
+    var nav = $("#global-sidenav");
+    if (!isSidenavOpen()) {
         return;
     }
     
@@ -37,17 +39,16 @@ function closeSidenav() {
 
 }
 
+function isSidenavOpen() {
+    return $("#global-sidenav").width() > 75;
+}
+
 function toggleSidenav(delay) {
-    var nav = $("#global-sidenav");
-
     
-
-    if (nav.width() > 200) {
-        console.log('closing');
+    if (isSidenavOpen()) {
         closeSidenav();
     }
     else {
-        console.log('opening');
         openSidenav(delay);
     }
 }
@@ -59,8 +60,21 @@ $(function () {
             closeSidenav();
 
             $('.typeahead').typeahead('setQuery', '');
+
+            $(".fullscreen-handle").each(function (index, value) {
+
+                toggleFullscreen($(value));
+            })
+
         }
     });
+
+
+    $("#global-sidenav").on("click", function () {
+        if (!isSidenavOpen()) {
+            return false;
+        }
+    })
 
     $("#global-sidenav").on("mouseenter", function () {
         openSidenav(225);
@@ -80,6 +94,98 @@ $(function () {
         closeSidenav();
     });
 
+    $("[data-toggle=fullscreen]").click(function () {
+
+        toggleFullscreen($(this));
+    });
+
+    function toggleFullscreen(target) {
+        
+        var card = target.closest(".card");
+        var charts = card.find(".chart-responsive");
+
+        if (target.data("fullscreen")) {
+
+            card.removeClass("fullscreen");
+            $("body").removeClass("noscroll");
+            target.addClass("fa-arrows-alt");
+            target.removeClass("fa-times");
+            target.data("fullscreen", false);
+            charts.removeClass("fullscreen-chart");
+            target.removeClass("fullscreen-handle");
+
+        }
+        else {
+            card.addClass("fullscreen");
+            $("body").addClass("noscroll");
+
+            target.removeClass("fa-arrows-alt");
+            target.addClass("fa-times");
+            target.data("fullscreen", true);
+            charts.addClass("fullscreen-chart");
+            target.addClass("fullscreen-handle");
+
+        }
+
+        if (charts.length > 0) {
+            charts.highcharts().reflow();
+        }
+
+    }
+
+    $(".favorite, .not-favorite").on("mouseenter", function () {
+        var star = $(this);
+        toggleStar(star);
+    });
+
+    $(".favorite, .not-favorite").on("mouseleave", function () {
+        var star = $(this);
+        toggleStar(star);
+    });
+
+    $(".favorite, .not-favorite").on("click", function () {
+        var star = $(this);
+        toggleStar(star);
+    });
+
+
+
+    function toggleStar(star) {
+        
+        if (star.hasClass("fa-star")) {
+            console.log('star');
+            star.addClass("fa-star-o");
+            star.removeClass("fa-star");
+        }
+        else {
+            console.log('star-o');
+
+            star.addClass("fa-star");
+            star.removeClass("fa-star-o");
+        }
+    }
+
+    //$(".favorite").on("mouseleave", function () {
+    //    var f = $(this);
+    //    if (f.hasClass("fa-star")) {
+    //        $(this).addClass("fa-star-o");
+    //        $(this).removeClass("fa-star");
+    //    }
+    //    else {
+    //        $(this).addClass("fa-star");
+    //        $(this).removeClass("fa-star-o");
+    //    }
+    //});
+
+    //$(".not-favorite").on("mouseenter", function () {
+    //    $(this).removeClass("fa-star-o");
+    //    $(this).addClass("fa-star");
+    //});
+
+    //$(".not-favorite").on("mouseleave", function () {
+    //    $(this).addClass("fa-star-o");
+    //    $(this).removeClass("fa-star");
+    //});
 
     $(".toggle").on("click", function (e) {
         e.preventDefault();

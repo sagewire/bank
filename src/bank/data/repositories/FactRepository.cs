@@ -255,6 +255,7 @@ namespace bank.data.repositories
 
                 foreach (var orgId in organizationIds.Distinct())
                 {
+                    //var maxPeriod = facts.Where(x => x.OrganizationId == orgId).Select(x => x.Period.Value).Max();
                     //pack older facts into most recent fact
                     var current = facts.Where(x => x.Period == maxPeriod && x.OrganizationId == orgId).ToList();
 

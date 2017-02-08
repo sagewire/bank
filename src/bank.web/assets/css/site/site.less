@@ -55,10 +55,37 @@ body {
     position: relative;
     padding-right: 60px;
     padding-top: 56px;
+
+    &.noscroll {
+        overflow-y: hidden;
+    }
 }
 
 .container-fluid {
-    max-width: 1440px;
+    //max-width: 1440px;
+}
+
+.fullscreen-chart {
+    position: absolute;
+    height: 90% !important;
+    width: 100% !important;
+    max-height: none !important;
+    padding-right: 40px;
+    
+}
+
+.fullscreen{
+    z-index: 9999; 
+    width: 100%; 
+    height: 100%; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    margin: 0 !important;
+ }
+
+.pointer {
+    cursor: pointer;
 }
 
 .logo {
@@ -86,7 +113,6 @@ body {
 .top-nav {
     background-color: @darkest;
     z-index: 70;
-    height: 56px;
 
     .navbar {
         padding-left: 15px;
@@ -101,6 +127,7 @@ body {
 #global-nav {
     padding-left: 0;
     padding-right: 0;
+    height: 56px;
 }
 
 #header {
@@ -133,14 +160,16 @@ body {
 
 
 #main-body {
-    .single {
-        & > .card {
+    position: relative;
+
+    /*.single {
+        & + * {
             margin-top: 30px;
         }
-    }
+    }*/
 
     .first {
-        margin-top: -53px;
+        margin-top: -84px;
     }
 }
 
@@ -149,17 +178,31 @@ body {
 }
 
 #flash {
+    position: absolute;
+    z-index: 100;
+    width: 100%;
     margin-bottom: 0;
     height: 0;
     opacity: .92;
+    overflow: hidden;
 
     h1, h2, h3 {
         padding-top: 10px;
         color: @darkest;
     }
 
+    .close {
+        color: @white;
+        margin-right: 10px;
+        margin-top: 10px;
+        text-shadow: none;
+    }
+
     &.alert-success {
-        background-color: @accent-color;
+        background-color: @darkest;
+        h1, h2, h3, h4 {
+            color: @darkish !important;
+        }
     }
 }
 
@@ -169,7 +212,7 @@ body {
 
 .card {
     border-radius: 0 !important;
-    margin-bottom: 30px;
+    margin-top: 30px;
     .box-shadow;
 
     .card-header {
@@ -319,12 +362,12 @@ body {
 
 
 
-.highcharts-container {
+/*.highcharts-container {
     width: 100% !important;
     height: 100% !important;
     position: absolute;
     overflow: visible !important;
-}
+}*/
 
 .col {
     min-width: 200px;
@@ -388,8 +431,17 @@ svg {
             font-weight: bold;
         }
 
+        .label {
+            min-width: 150px;
+            width: 100%
+        }
+
         td {
+            max-width: 100px;
             font-size: 15px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
 
         h5 {
@@ -539,6 +591,17 @@ svg {
     left: 0;
     z-index: 81;
     opacity: .4;
+}
+
+.fa-star.gold, .fa-star-o.gold {
+    color: gold;
+}
+
+.favorite {
+    cursor: pointer;
+}
+.not-favorite {
+    cursor: pointer;
 }
 
 //search sidenav

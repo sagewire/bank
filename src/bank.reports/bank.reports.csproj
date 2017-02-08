@@ -68,6 +68,7 @@
     <Compile Include="Layout.cs" />
     <Compile Include="PeerGroupCustomColumn.cs" />
     <Compile Include="PeerGroupColumn.cs" />
+    <Compile Include="ReportFactory.cs" />
     <Compile Include="TableElement.cs" />
     <Compile Include="TableOrientation.cs" />
     <Compile Include="TableRowGroup.cs" />

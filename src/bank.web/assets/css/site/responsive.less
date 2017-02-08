@@ -3,22 +3,16 @@
 @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
 }
 
-@media (min-width: @screen-lg-min) {
-    .container-fluid {
-        padding-left: 45px !important;
-        padding-right: 45px !important;
-    }
-}
 
 
 @media (min-width: @screen-xl) {
     @navWidth: 20vw;
 
 
-    .container-fluid {
+    /*.container-fluid {
         padding-left: 45px !important;
         padding-right: 45px !important;
-    }
+    }*/
 
     .sidenav {
         width: @navWidth;
@@ -37,17 +31,42 @@
 }
 
 @media (max-width: @screen-md-max) {
-    #main-body {
+    /*#main-body {
         .single {
             & > .card {
                 margin-top: 15px;
             }
         }
+    }*/
+
+
+}
+
+@media (min-width: @screen-sm-min) {
+    #main-body {
+
+        .first {
+            margin-top: -69px;
+        }
+    }
+
+    .skirt {
+        height: 61px;
     }
 }
 
-@media (max-width: @screen-sm-min) {
+@media (min-width: @screen-xs-min) {
+    .card {
+        margin-top: 15px;
+    }
 }
+
+@media (min-width: @screen-lg-min) {
+    .card {
+        margin-top: 30px;
+    }
+}
+
 
 
 @media (max-width: @screen-xs-max) {
@@ -58,6 +77,29 @@
     .sidenav {
         width: 0;
     }
+
+    /*#main-body {
+        .first {
+            margin-top: -69px;
+        }
+    }*/
+
+    .card {
+        margin-top: 15px;
+        //margin-bottom: 15px;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    /*.container-fluid {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    #sidenav-toggler {
+        margin-right: 20px;
+        margin-top: 5px;
+    }*/
 
     .open {
         width: 100%;

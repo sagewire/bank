@@ -5,7 +5,30 @@
 <div id="header" class="header-wrap">
     <div class="container-fluid">
         <div class="pt-3">
-            <h1>@Model.Organization.Name</h1>
+            <h1>
+                @if (Request.IsAuthenticated)
+                {
+                <small class="float-right">
+                    @if (Model.IsFavorite)
+                    {
+                        <i title="Remove from favorites"
+                           data-send="json"
+                           data-name="favorites"
+                           data-value="@Model.Organization.OrganizationId"
+                           class="favorite float-right fa fa-star gold" aria-hidden="true"></i>
+                    }
+                    else
+                    {
+                        <i title="Add to favorites"
+                           data-send="json"
+                           data-name="favorites"
+                           data-value="@Model.Organization.OrganizationId"
+                           class="not-favorite float-right fa fa-star-o gold" aria-hidden="true"></i>
+                    }
+                </small>
+                }
+                @Model.Organization.Name
+            </h1>
             <h4>@Model.Organization.City, @Model.Organization.State</h4>
         </div>
     </div>
@@ -28,10 +51,6 @@
                             <i id="plus" class="fa fa-plus" aria-hidden="true"></i>
                         </a>
                         <div class="dropdown-menu">
-                            <button class="dropdown-item" type="button" data-send="json" data-name="favorites" data-value="@Model.Organization.OrganizationId">
-                                <i class="fa fa-fw fa-star-o" aria-hidden="true"></i>
-                                Add to Favorites
-                            </button>
                             <button class="dropdown-item" type="button">
                                 <i class="fa fa-fw fa-hashtag" aria-hidden="true"></i>
                                 Add Bank to Dashboard
@@ -99,10 +118,10 @@
                         </a>
                         <div class="dropdown-menu reports-dropdown-menu dropdown-menu-right" aria-labelledby="Call reports">
                             @{
-                    var isCurrentPeriod = true;
+                                var isCurrentPeriod = true;
                             }
                             @foreach (var report in Model.RawReports.Take(10))
-                {
+                            {
                                 <div class="dropdown-item">
                                     <div class="row">
                                         <div class="col-xs-4">
@@ -111,30 +130,30 @@
                                         </div>
                                         <div class="col-xs-4 px-2 text-xs-center">
                                             @if (report.ReportsAvailable.Contains(ReportTypes.Call))
-                                {
+                                            {
                                                 <a href="@Url.Url(Model.Organization, report.Period, @ReportTypes.Call.ToString(), "pres-rc", isCurrentPeriod)">
                                                     @ReportTypes.Call
                                                 </a>
-                                }
-                                else
-                                {
+                                            }
+                                            else
+                                            {
                                                 <span>&nbsp;</span>
-                                }
+                                            }
                                         </div>
                                         <div class="col-xs-4 px-2 text-xs-center">
                                             @if (report.ReportsAvailable.Contains(ReportTypes.UBPR))
-                                {
+                                            {
                                                 <a href="@Url.Url(Model.Organization, report.Period, @ReportTypes.UBPR.ToString(), "balance-sheet", isCurrentPeriod)">
                                                     @ReportTypes.UBPR
                                                 </a>
-                                }
+                                            }
                                         </div>
                                     </div>
                                 </div>
 
-                    isCurrentPeriod = false;
+                                isCurrentPeriod = false;
 
-                }
+                            }
                             <div class="dropdown-divider"></div>
 
                             <div class="dropdown-item text-center">

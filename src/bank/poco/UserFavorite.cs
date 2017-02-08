@@ -12,7 +12,7 @@ namespace bank.poco
         public string UserId { get; set; }
         public FavoriteTypes FavoriteType { get; set; }
         public int Visits { get; set; }
-        public DateTime LastVisited { get; set; }
+        public DateTime LastVisited { get; set; } = DateTime.Now;
     }
 
     public enum FavoriteTypes

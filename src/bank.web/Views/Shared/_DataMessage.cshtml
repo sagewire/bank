@@ -1,7 +1,13 @@
 ﻿@model DataMessageViewModel
 
 
-<h1 class="text-center align-middle">@Model.Header</h1>
+<h1 class="text-center align-middle">
+    @if (Model.HasIcon)
+    {
+    <i class="fa @Model.Icon @Model.IconClass" aria-hidden="true"></i>
+    }
+    @Model.Header
+</h1>
 
 @if (!string.IsNullOrWhiteSpace(Model.Message))
 {

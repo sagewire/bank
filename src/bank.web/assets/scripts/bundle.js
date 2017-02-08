@@ -3861,10 +3861,11 @@ var sidenavState = null;
 
 function openSidenav(delay) {
 
-    if ($(".test").is(':visible')) {
+    
+    if (isSidenavOpen()) {
         return;
     }
-
+    
     sidenavTimer = setTimeout(function () {
         var nav = $("#global-sidenav");
         nav.addClass("open");
@@ -3877,7 +3878,8 @@ function openSidenav(delay) {
 
 function closeSidenav() {
 
-    if ($(".test").is(':visible')) {
+    var nav = $("#global-sidenav");
+    if (!isSidenavOpen()) {
         return;
     }
     
@@ -3895,17 +3897,16 @@ function closeSidenav() {
 
 }
 
+function isSidenavOpen() {
+    return $("#global-sidenav").width() > 75;
+}
+
 function toggleSidenav(delay) {
-    var nav = $("#global-sidenav");
-
     
-
-    if (nav.width() > 200) {
-        console.log('closing');
+    if (isSidenavOpen()) {
         closeSidenav();
     }
     else {
-        console.log('opening');
         openSidenav(delay);
     }
 }
@@ -3917,8 +3918,21 @@ $(function () {
             closeSidenav();
 
             $('.typeahead').typeahead('setQuery', '');
+
+            $(".fullscreen-handle").each(function (index, value) {
+
+                toggleFullscreen($(value));
+            })
+
         }
     });
+
+
+    $("#global-sidenav").on("click", function () {
+        if (!isSidenavOpen()) {
+            return false;
+        }
+    })
 
     $("#global-sidenav").on("mouseenter", function () {
         openSidenav(225);
@@ -3938,6 +3952,98 @@ $(function () {
         closeSidenav();
     });
 
+    $("[data-toggle=fullscreen]").click(function () {
+
+        toggleFullscreen($(this));
+    });
+
+    function toggleFullscreen(target) {
+        
+        var card = target.closest(".card");
+        var charts = card.find(".chart-responsive");
+
+        if (target.data("fullscreen")) {
+
+            card.removeClass("fullscreen");
+            $("body").removeClass("noscroll");
+            target.addClass("fa-arrows-alt");
+            target.removeClass("fa-times");
+            target.data("fullscreen", false);
+            charts.removeClass("fullscreen-chart");
+            target.removeClass("fullscreen-handle");
+
+        }
+        else {
+            card.addClass("fullscreen");
+            $("body").addClass("noscroll");
+
+            target.removeClass("fa-arrows-alt");
+            target.addClass("fa-times");
+            target.data("fullscreen", true);
+            charts.addClass("fullscreen-chart");
+            target.addClass("fullscreen-handle");
+
+        }
+
+        if (charts.length > 0) {
+            charts.highcharts().reflow();
+        }
+
+    }
+
+    $(".favorite, .not-favorite").on("mouseenter", function () {
+        var star = $(this);
+        toggleStar(star);
+    });
+
+    $(".favorite, .not-favorite").on("mouseleave", function () {
+        var star = $(this);
+        toggleStar(star);
+    });
+
+    $(".favorite, .not-favorite").on("click", function () {
+        var star = $(this);
+        toggleStar(star);
+    });
+
+
+
+    function toggleStar(star) {
+        
+        if (star.hasClass("fa-star")) {
+            console.log('star');
+            star.addClass("fa-star-o");
+            star.removeClass("fa-star");
+        }
+        else {
+            console.log('star-o');
+
+            star.addClass("fa-star");
+            star.removeClass("fa-star-o");
+        }
+    }
+
+    //$(".favorite").on("mouseleave", function () {
+    //    var f = $(this);
+    //    if (f.hasClass("fa-star")) {
+    //        $(this).addClass("fa-star-o");
+    //        $(this).removeClass("fa-star");
+    //    }
+    //    else {
+    //        $(this).addClass("fa-star");
+    //        $(this).removeClass("fa-star-o");
+    //    }
+    //});
+
+    //$(".not-favorite").on("mouseenter", function () {
+    //    $(this).removeClass("fa-star-o");
+    //    $(this).addClass("fa-star");
+    //});
+
+    //$(".not-favorite").on("mouseleave", function () {
+    //    $(this).addClass("fa-star-o");
+    //    $(this).removeClass("fa-star");
+    //});
 
     $(".toggle").on("click", function (e) {
         e.preventDefault();
@@ -4210,6 +4316,9 @@ $(function () {
         var name = source.data("name");
         var value = source.data("value");
         var flash = $("#flash");
+        var msg = $("#flash .message");
+        var topNav = $(".top-nav");
+        var originalHeight = topNav.height();
 
         var jqxhr = $.ajax({
             url: "/data/" + name,
@@ -4220,16 +4329,14 @@ $(function () {
 
                           console.log("success");
                           var result = JSON.parse(data);
-                          
-
 
                           flash.addClass("alert-success");
-                          flash.html(result.html);
-                          flash.animate({ height: "6vh", speed: 500 })
+                          flash.animate({ height: "71px", speed: 500 })
+                          console.log(result);
+                          msg.html(result.html);
 
                           setTimeout(function () {
-                              flash.fadeOut();
-                              setTimeout(function () { flash.height(0); }, 1000);
+                              closeFlash();
                           }, 3000)
                       }) 
                       .fail(function () {
@@ -4240,6 +4347,26 @@ $(function () {
                       });
 
     });
+
+
+    $("#flash .close").click(function () {
+        closeFlash();
+    })
+
+    function closeFlash() {
+        $("#flash").animate(
+            {
+                height: "0",
+                speed: 500
+            },{
+                always: function () {
+                    var msg = $("#flash .message");
+                    msg.html("");
+                }
+            })
+
+        
+    }
 
 })
 
@@ -4575,7 +4702,7 @@ $(function () {
             useHTML: true,
             valueDecimals: 0,
             headerFormat: "<table class='primary-tooltip table table-sm table-striped'><tr><th colspan='2'>{point.x:%b %e %Y}</th></th>",
-            pointFormat: "<tr><td style='border-left: 10px solid {point.series.color}'>{point.name}</td><td style='text-align: right;'>{point.y}</td></tr>",
+            pointFormat: "<tr><td style='border-left: 10px solid {point.series.color}'>{point.series.name}</td><td style='text-align: right;'>{point.y}</td></tr>",
             footerFormat: "</table>",
             formatter: null,
             positioner: function () {

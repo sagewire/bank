@@ -27,7 +27,9 @@ namespace bank.reports.charts
                     list.Add(datum.Key, datum.Value.NumericValue.Value);
                 }
 
-                return list.Select(x => new { x = x.Key.ToMillisecondsSince1970(), y = x.Value, name = Series.Concept.Label }).ToList<object>();
+                return list.Select(x => new { x = x.Key.ToMillisecondsSince1970(), y = x.Value,
+                    name = Series.Concept.Label
+                }).ToList<object>();
             }
         }
 

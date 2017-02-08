@@ -250,6 +250,14 @@
     </Content>
     <Content Include="assets\css\stately\stately.css" />
     <Content Include="assets\css\stately\stately.min.css" />
+    <Content Include="assets\dist\css\bootstrap-grid.css" />
+    <Content Include="assets\dist\css\bootstrap-grid.min.css" />
+    <Content Include="assets\dist\css\bootstrap-reboot.css" />
+    <Content Include="assets\dist\css\bootstrap-reboot.min.css" />
+    <Content Include="assets\dist\css\bootstrap.css" />
+    <Content Include="assets\dist\css\bootstrap.min.css" />
+    <Content Include="assets\dist\js\bootstrap.js" />
+    <Content Include="assets\dist\js\bootstrap.min.js" />
     <Content Include="assets\fonts\stately\stately-webfont.svg" />
     <Content Include="assets\images\social\fb-29.png" />
     <Content Include="assets\images\social\fb-40.png" />
@@ -305,6 +313,9 @@
     </Content>
     <Content Include="report-templates\concept-definition.xml" />
     <Content Include="report-templates\balance-sheet.xml" />
+    <Content Include="report-templates\dashboard.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="report-templates\test.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -372,6 +383,12 @@
     <Content Include="assets\css\site\styles.less" />
     <Content Include="assets\css\site\sidenav.less" />
     <Content Include="assets\css\jquery.typeahead.scss" />
+    <Content Include="assets\dist\css\bootstrap-grid.css.map" />
+    <Content Include="assets\dist\css\bootstrap-grid.min.css.map" />
+    <Content Include="assets\dist\css\bootstrap-reboot.css.map" />
+    <Content Include="assets\dist\css\bootstrap-reboot.min.css.map" />
+    <Content Include="assets\dist\css\bootstrap.css.map" />
+    <Content Include="assets\dist\css\bootstrap.min.css.map" />
     <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">

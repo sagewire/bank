@@ -14,6 +14,8 @@ namespace bank.web.models
         //public Report Report { get; set; }
         public bool ShowTitle { get; set; }
 
+        public AppUser Profile { get; set; }
+
         public string Companies { get; set; }
 
         public IList<ReportListViewModel> RawReports { get; set; } = new List<ReportListViewModel>();

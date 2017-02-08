@@ -6,8 +6,27 @@
   padding-right: 60px;
   padding-top: 56px;
 }
-.container-fluid {
-  max-width: 1440px;
+body.noscroll {
+  overflow-y: hidden;
+}
+.fullscreen-chart {
+  position: absolute;
+  height: 90% !important;
+  width: 100% !important;
+  max-height: none !important;
+  padding-right: 40px;
+}
+.fullscreen {
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0 !important;
+}
+.pointer {
+  cursor: pointer;
 }
 .logo {
   text-decoration: none !important;
@@ -31,7 +50,6 @@
 .top-nav {
   background-color: #404040;
   z-index: 70;
-  height: 56px;
 }
 .top-nav .navbar {
   padding-left: 15px;
@@ -43,6 +61,7 @@
 #global-nav {
   padding-left: 0;
   padding-right: 0;
+  height: 56px;
 }
 #header {
   position: relative;
@@ -65,19 +84,28 @@
   margin-left: auto;
   margin-right: auto;
 }
-#main-body .single > .card {
-  margin-top: 30px;
+#main-body {
+  position: relative;
+  /*.single {
+        & + * {
+            margin-top: 30px;
+        }
+    }*/
 }
 #main-body .first {
-  margin-top: -53px;
+  margin-top: -84px;
 }
 .alert {
   border-radius: 0;
 }
 #flash {
+  position: absolute;
+  z-index: 100;
+  width: 100%;
   margin-bottom: 0;
   height: 0;
   opacity: .92;
+  overflow: hidden;
 }
 #flash h1,
 #flash h2,
@@ -85,15 +113,27 @@
   padding-top: 10px;
   color: #404040;
 }
+#flash .close {
+  color: #fff;
+  margin-right: 10px;
+  margin-top: 10px;
+  text-shadow: none;
+}
 #flash.alert-success {
-  background-color: #30C8CA;
+  background-color: #404040;
+}
+#flash.alert-success h1,
+#flash.alert-success h2,
+#flash.alert-success h3,
+#flash.alert-success h4 {
+  color: #e6e6e6 !important;
 }
 .box-shadow {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
 }
 .card {
   border-radius: 0 !important;
-  margin-bottom: 30px;
+  margin-top: 30px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
 }
 .card .card-header {
@@ -198,12 +238,12 @@
   min-width: 100px;
   display: block;
 }
-.highcharts-container {
-  width: 100% !important;
-  height: 100% !important;
-  position: absolute;
-  overflow: visible !important;
-}
+/*.highcharts-container {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute;
+    overflow: visible !important;
+}*/
 .col {
   min-width: 200px;
 }
@@ -245,8 +285,16 @@ svg {
 .report-table tbody .level-0 {
   font-weight: bold;
 }
+.report-table tbody .label {
+  min-width: 150px;
+  width: 100%;
+}
 .report-table tbody td {
+  max-width: 100px;
   font-size: 15px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .report-table tbody h5 {
   margin-bottom: 0;
@@ -371,6 +419,16 @@ svg {
   left: 0;
   z-index: 81;
   opacity: .4;
+}
+.fa-star.gold,
+.fa-star-o.gold {
+  color: gold;
+}
+.favorite {
+  cursor: pointer;
+}
+.not-favorite {
+  cursor: pointer;
 }
 .search-result .name {
   white-space: nowrap;

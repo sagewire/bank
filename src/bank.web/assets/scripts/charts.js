@@ -308,7 +308,7 @@ $(function () {
             useHTML: true,
             valueDecimals: 0,
             headerFormat: "<table class='primary-tooltip table table-sm table-striped'><tr><th colspan='2'>{point.x:%b %e %Y}</th></th>",
-            pointFormat: "<tr><td style='border-left: 10px solid {point.series.color}'>{point.name}</td><td style='text-align: right;'>{point.y}</td></tr>",
+            pointFormat: "<tr><td style='border-left: 10px solid {point.series.color}'>{point.series.name}</td><td style='text-align: right;'>{point.y}</td></tr>",
             footerFormat: "</table>",
             formatter: null,
             positioner: function () {

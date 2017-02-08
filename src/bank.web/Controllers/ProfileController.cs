@@ -78,26 +78,38 @@ namespace bank.web.Controllers
 
         }
         
-        [ClaimsAuthorize(MemberType = "free")]
         public ActionResult Viewer(string name, string id, DateTime? period, string section, string c = null, string template = "profile-layout")
         {
             var orgId = DecodeId(id);
             var companies = new List<int>();
             companies.Add(orgId);
-            var model = new ReportViewModel();
             companies.AddRange(DecodeIds(c));
 
             var orgRepo = new OrganizationRepository();
-            model.Organization = orgRepo.GetOrganization(orgId, true, true);
+            var org = orgRepo.GetOrganization(orgId, true, true);
+
+            //var periodStart = org.ReportImports.Select(x => x.Period).Min();
+            var periodEnd = period.HasValue ? period.Value : org.ReportImports.Select(x => x.Period).Max();
+
+            var reportFactory = new ReportFactory();
+            reportFactory.Template = template;
+            reportFactory.SectionFilter = section;
+            reportFactory.Period = periodEnd;
+            reportFactory.OrganizationIds = companies;
+            reportFactory.PeerGroups.Add(Global.PeerGroups[org.StatePeerGroup]);
+            reportFactory.CustomPeerGroups.AddRange(org.CustomPeerGroups);
+
+            var layout = reportFactory.Build();
+
+            var model = new ReportViewModel();
+            model.Layout = layout;
+            model.Organization = org;
+            model.Profile = CurrentProfile;
             
-            model.Layout = new Layout();
-            model.Layout.Load(template);
-
-            PopulateReportsAndColumns(model.Organization, companies, model.Layout, period);
-
-            SetProfileVisit(orgId);
+            SetProfileVisit(model.Organization.OrganizationId);
 
             ViewBag.Title = model.Title;
+
             return View(model);
 
         }

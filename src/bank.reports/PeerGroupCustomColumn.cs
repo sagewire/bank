@@ -9,7 +9,6 @@ namespace bank.reports
 {
     public class PeerGroupCustomColumn : Column
     {
-
         public PeerGroupCustom PeerGroupCustom { get; set; }
         
         public override ColumnTypes ColumnType

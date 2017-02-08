@@ -6,6 +6,9 @@
         var name = source.data("name");
         var value = source.data("value");
         var flash = $("#flash");
+        var msg = $("#flash .message");
+        var topNav = $(".top-nav");
+        var originalHeight = topNav.height();
 
         var jqxhr = $.ajax({
             url: "/data/" + name,
@@ -16,16 +19,14 @@
 
                           console.log("success");
                           var result = JSON.parse(data);
-                          
-
 
                           flash.addClass("alert-success");
-                          flash.html(result.html);
-                          flash.animate({ height: "6vh", speed: 500 })
+                          flash.animate({ height: "71px", speed: 500 })
+                          console.log(result);
+                          msg.html(result.html);
 
                           setTimeout(function () {
-                              flash.fadeOut();
-                              setTimeout(function () { flash.height(0); }, 1000);
+                              closeFlash();
                           }, 3000)
                       }) 
                       .fail(function () {
@@ -36,6 +37,26 @@
                       });
 
     });
+
+
+    $("#flash .close").click(function () {
+        closeFlash();
+    })
+
+    function closeFlash() {
+        $("#flash").animate(
+            {
+                height: "0",
+                speed: 500
+            },{
+                always: function () {
+                    var msg = $("#flash .message");
+                    msg.html("");
+                }
+            })
+
+        
+    }
 
 })
 

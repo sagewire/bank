@@ -35,16 +35,20 @@ namespace bank.web.Controllers
 
         public IList<int> DecodeIds(string ids)
         {
+            if (ids == null) return new int[0];
+            return DecodeIds(ids.Split(','));
+        }
+
+        public IList<int> DecodeIds(IList<string> ids)
+        {
             var intList = new List<int>();
 
-            if (string.IsNullOrWhiteSpace(ids))
+            if (ids == null)
             {
                 return intList;
             }
 
-            var list = ids.Split(',');
-
-            foreach (var s in list.Where(x => !string.IsNullOrWhiteSpace(x)))
+            foreach (var s in ids.Where(x => !string.IsNullOrWhiteSpace(x)))
             {
                 var decodedId = DecodeId(s);
                 intList.Add(decodedId);
@@ -74,7 +78,7 @@ namespace bank.web.Controllers
         {
             get
             {
-                if (_appUser == null)
+                if (Request.IsAuthenticated && _appUser == null)
                 {
                     
                     _appUser = UserManager.FindByName(User.Identity.Name);
@@ -92,7 +96,7 @@ namespace bank.web.Controllers
             Task.Run(() =>
             {
                 try {
-                    var userId = CurrentProfile.Id;
+                    var userId = User.Identity.GetUserId();
 
                     if (string.IsNullOrWhiteSpace(userId))
                     {
@@ -169,159 +173,7 @@ namespace bank.web.Controllers
 
             Response.Cookies.Add(cookie);
         }
-
-        protected void PopulateReportsAndColumns(Organization org, IList<int> companies, Layout layout, DateTime? period = null)
-        {
-            var periodStart = org.ReportImports.Select(x => x.Period).Min();
-            var periodEnd = period.HasValue ? period.Value : org.ReportImports.Select(x => x.Period).Max();
-
-            var orgRepo = new OrganizationRepository();
-
-            var columns = GetColumns(org, companies);
-            layout.DataColumns = columns;
-
-            var tasks = new List<Task>();
-
-            //var populateTask = Task.Run(() => Report.PopulateReports(model.Reports, columns, periodStart, periodEnd));
-            var populateTask = Task.Run(() => layout.Populate(periodEnd));
-            var orgTask = Task.Run(() => orgRepo.GetOrganizations(companies));
-
-            tasks.Add(orgTask);
-            tasks.Add(populateTask);
-
-
-            Task.WaitAll(tasks.ToArray());
-
-
-            foreach (var column in columns)
-            {
-                var companyColumn = column as CompanyColumn;
-
-                if (companyColumn != null)
-                {
-                    if (companies != null)
-                    {
-                        companyColumn.Organization = orgTask.Result.Single(x => x.OrganizationId == companyColumn.OrganizationId);
-                    }
-                }
-            }
-        }
-
-        protected IList<Column> GetColumns(Organization org, IList<int> companies)
-        {
-            var columns = new List<Column>();
-
-            foreach (var companyId in companies)
-            {
-                columns.Add(new CompanyColumn
-                {
-                    OrganizationId = companyId
-                });
-            }
-
-            var statepg = Global.PeerGroups[org.StatePeerGroup];
-
-            columns.Add(new PeerGroupColumn
-            {
-                PeerGroup = statepg.Code,
-                HeaderText = string.Format("Peer Group {0}", statepg.Code)
-            });
-
-            foreach (var pg in org.CustomPeerGroups)
-            {
-                columns.Add(new PeerGroupCustomColumn
-                {
-                    PeerGroupCustom = pg,
-                    HeaderText = string.Format("Peer Group {0}", pg.PeerGroupCode)
-                });
-            }
-
-            return columns;
-        }
-
-        //protected void PopulateReportsAndColumns(Organization org, IList<int> companies, IReports model, DateTime? period = null)
-        //{
-        //    var orgRepo = new OrganizationRepository();
-        //    //var org = orgRepo.GetOrganization(orgId, true, true);
-
-        //    var periodStart = org.ReportImports.Select(x => x.Period).Min();
-        //    var periodEnd = period.HasValue ? period.Value : org.ReportImports.Select(x => x.Period).Max();
-
-        //    var columns = new List<Column>();
-
-        //    foreach (var companyId in companies)
-        //    {
-        //        columns.Add(new CompanyColumn
-        //        {
-        //            OrganizationId = companyId
-        //        });
-        //    }
-
-        //    var statepg = Global.PeerGroups[org.StatePeerGroup];
-
-        //    columns.Add(new PeerGroupColumn
-        //    {
-        //        PeerGroup = statepg.Code,
-        //        HeaderText = string.Format("Peer Group {0}", statepg.Code)
-        //    });
-
-        //    foreach (var pg in org.CustomPeerGroups)
-        //    {
-        //        columns.Add(new PeerGroupCustomColumn
-        //        {
-        //            PeerGroupCustom = pg,
-        //            HeaderText = string.Format("Peer Group {0}", pg.PeerGroupCode)
-        //        });
-        //    }
-
-        //    foreach(var report in model.Reports)
-        //    {
-        //        report.Columns = columns;
-        //    }
-
-        //    var tasks = new List<Task>();
-
-        //    var populateTask = Task.Run(() => Report.PopulateReports(model.Reports, columns, periodStart, periodEnd));
-        //    var orgTask = Task.Run(() => orgRepo.GetOrganizations(companies));
-
-        //    tasks.Add(orgTask);
-        //    tasks.Add(populateTask);
-
-        //    //foreach (var column in columns)
-        //    //{
-        //    //    var companyColumn = column as CompanyColumn;
-
-        //    //    if (companyColumn != null)
-        //    //    {
-        //    //        if (companies != null)
-        //    //        {
-        //    //            companyColumn.Organization = orgTask.Result.Single(x => x.OrganizationId == companyColumn.OrganizationId);
-        //    //        }
-        //    //    }
-        //    //}
-
-
-        //    Task.WaitAll(tasks.ToArray());
-
-
-        //    foreach (var column in columns)
-        //    {
-        //        var companyColumn = column as CompanyColumn;
-
-        //        if (companyColumn != null)
-        //        {
-        //            if (companies != null)
-        //            {
-        //                companyColumn.Organization = orgTask.Result.Single(x => x.OrganizationId == companyColumn.OrganizationId);
-        //            }
-        //        }
-        //    }
-
-
-        //    model.Organization = org;
-
-        //}
-
+        
         protected void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)

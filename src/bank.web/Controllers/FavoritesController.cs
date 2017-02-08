@@ -22,6 +22,12 @@ namespace bank.web.Controllers
         [ActionName("Default")]
         public async Task<ActionResult> Get(string id)
         {
+            var model = new DataMessageViewModel
+            {
+                Header = "Favorite added to your dashboard",
+                Icon = "fa-star",
+                IconClass = "gold"
+            };
 
             var repo = new UserFavoriteRepository();
             var fav = new UserFavorite
@@ -31,13 +37,31 @@ namespace bank.web.Controllers
                 FavoriteType = FavoriteTypes.User
             };
 
+            var existing = repo.Get(fav);
 
-            repo.Save(fav);
-
-            var model = new DataMessageViewModel
+            if (existing != null)
             {
-                Header = "Favorite added to your dashboard"
-            };
+                switch(existing.FavoriteType)
+                {
+                    case FavoriteTypes.User:
+                        existing.FavoriteType = FavoriteTypes.Visit;
+                        repo.Update(existing);
+                        model.Icon = "fa-star-o";
+                        model.Header = "It's not you, it's me. Favorite removed.";
+                        break;
+                    case FavoriteTypes.Visit:
+                        existing.FavoriteType = FavoriteTypes.User;
+                        repo.Update(existing);
+                        break;
+                }
+                
+            }
+            else
+            {
+                repo.Insert(fav);
+            }
+
+
 
             var controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 

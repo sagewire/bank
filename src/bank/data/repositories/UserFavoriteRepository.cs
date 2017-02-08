@@ -32,6 +32,24 @@ namespace bank.data.repositories
             }
         }
 
+        public override void Delete(UserFavorite model)
+        {
+            var sql = new StringBuilder();
+            sql.AppendLine("delete from UserFavorite");
+            sql.AppendLine("where OrganizationID = @OrganizationID and UserId = @UserId");
+
+            using (var conn = new SqlConnection(Settings.ConnectionString))
+            {
+                conn.Open();
+                var obj = conn.Execute(sql.ToString(),
+                            new
+                            {
+                                OrganizationID = model.OrganizationId,
+                                UserId = model.UserId
+                            },
+                            commandType: CommandType.Text);
+            }
+        }
 
         public override void Save(UserFavorite model)
         {
@@ -50,6 +68,7 @@ namespace bank.data.repositories
                 Insert(model);
             }
         }
+
 
         public override void Update(UserFavorite model)
         {

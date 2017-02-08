@@ -12,6 +12,14 @@ namespace bank.web.models
         public Organization Organization { get; set; }
 
         public IList<ReportListViewModel> RawReports { get; set; } = new List<ReportListViewModel>();
+        public AppUser Profile { get; set; }
 
+        public bool IsFavorite
+        {
+            get
+            {
+                return Profile.Favorites.Any(x => x.OrganizationId == Organization.OrganizationId);
+            }
+        }
     }
 }
