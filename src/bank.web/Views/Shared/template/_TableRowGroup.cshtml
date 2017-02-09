@@ -11,7 +11,7 @@
         <td class="@Model.Level">
             @Model.RowGroup.Label
         </td>
-        @foreach (var column in Model.Table.Sum())
+        @foreach (var column in Model.RowGroup.Table.Sum())
         {
             <td>@column.ToString(Model.RowGroup.Format)</td>
         }
