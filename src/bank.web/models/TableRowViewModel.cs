@@ -12,6 +12,8 @@ namespace bank.web.models
         public IList<Column> Columns { get; set; }
         public TableElement Table { get; set; }
 
+        public TableRowGroup RowGroup { get; set; }
+
         public string Level
         {
             get

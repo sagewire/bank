@@ -29,43 +29,42 @@
       <row>
         <col>
           <table lookback="4" title="Assets">
-            <!--<group label="Total Assets beeotch" sum="true">-->
-            <header>Loans &amp; Leases</header>
-            <group label="Total Loans &amp; Leases" sum="true">
-              <concept name="UBPR1410" />
-              <concept name="UBPRE116" />
-              <concept name="UBPRD665" />
-              <concept name="UBPR1590" />
-              <concept name="UBPRE117" />
-              <concept name="UBPR3123" />
-              <concept name="UBPR2123" />
+            <group label="Total Assets" sum="true">
+              <header>Loans &amp; Leases</header>
+              <group label="Total Loans &amp; Leases" sum="true">
+                <concept name="UBPR1410" />
+                <concept name="UBPRE116" />
+                <concept name="UBPRD665" />
+                <concept name="UBPR1590" />
+                <concept name="UBPRE117" />
+                <concept name="UBPR3123" />
+                <concept name="UBPR2123" />
 
+              </group>
+
+              <header>Securities</header>
+              <group label="Total Securities" sum="true">
+                <concept name="UBPRE120" />
+                <concept name="UBPR8636" />
+                <concept name="UBPRD657" />
+                <concept name="UBPRE121" />
+              </group>
+
+              <header>Cash &amp; Balances due from depository institutions</header>
+              <group label="Total Cash &amp; Balances Due" sum="true">
+                <concept name="UBPR0081" />
+                <concept name="UBPR0071" />
+              </group>
+
+              <concept name="UBPRD493" />
+              <concept name="UBPR3545" />
+              <concept name="UBPR2145"/>
+              <concept name="UBPRE130" />
+              <concept name="UBPRD304" />
+              <concept name="UBPR2130" />
+              <concept name="UBPRE124" />
             </group>
-
-            <header>Securities</header>
-            <group label="Total Securities" sum="true">
-              <concept name="UBPRE120" />
-              <concept name="UBPR8636" />
-              <concept name="UBPRD657" />
-              <concept name="UBPRE121" />
-            </group>
-
-            <header>Cash &amp; Balances due from depository institutions</header>
-            <group label="Total Cash &amp; Balances Due" sum="true">
-              <concept name="UBPR0081" />
-              <concept name="UBPR0071" />
-            </group>
-
-            <concept name="UBPRD493" />
-            <concept name="UBPR3545" />
-            <concept name="UBPR2145"/>
-            <concept name="UBPRE130" />
-            <concept name="UBPRD304" />
-            <concept name="UBPR2130" />
-            <concept name="UBPRE124" />
-            <!--</group>-->
-            <concept name="UBPR2170" />
-            <concept name="UBPRE878" />
+            
           </table>
         </col>
       </row>

@@ -11,7 +11,7 @@
 
     @if (Model.Row.Concept != null)
     {
-        var counter = 0;
+
         foreach (var column in Model.Columns)
         {
             var fact = column.GetCell(Model.Row.Concept, column);
@@ -32,9 +32,7 @@
 
                     if (value == null)
                     {
-                        <text>
-                            &mdash;
-                        </text>
+                        <span>&mdash;</span>
                     }
                     else
                     {
@@ -46,6 +44,4 @@
             </td>
 
                         }
-
-
                     }

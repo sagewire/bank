@@ -13,7 +13,7 @@ namespace bank.reports
             {
                 return TableRowTypes.Table;
             }
-            
+
         }
 
         public object Orientation { get; internal set; }
@@ -23,47 +23,56 @@ namespace bank.reports
         {
         }
 
-        public IList<string> Sum()
+        private IList<decimal> _sum;
+        public IList<decimal> Sum()
         {
-            var list = new List<string>();
-
-            foreach(var column in DataColumns)
+            if (_sum == null)
             {
-                decimal sum = 0;
-                foreach(var row in Rows)
+                var list = new List<decimal>();
+                var columnIndex = 0;
+
+                foreach (var column in DataColumns)
                 {
-                    var tableRowGroup = row as TableRowGroup;
-
-                    if (tableRowGroup != null)
+                    decimal sum = 0;
+                    foreach (var row in Rows)
                     {
-                        continue;
-                    }
+                        var tableRowGroup = row as TableRowGroup;
 
-                    var tableRow = row as TableRow;
-                    if (tableRow != null)
-                    {
-                        var fact = column.GetCell(tableRow.Concept, column);
-
-                        if (fact != null && fact.NumericValue.HasValue)
+                        if (tableRowGroup != null)
                         {
-                            if (!tableRow.Concept.Negative.HasValue || !tableRow.Concept.Negative.Value)
+                            sum += tableRowGroup.Table.Sum()[columnIndex];
+                            continue;
+                        }
+
+                        var tableRow = row as TableRow;
+                        if (tableRow != null)
+                        {
+                            var fact = column.GetCell(tableRow.Concept, column);
+
+                            if (fact != null && fact.NumericValue.HasValue)
                             {
-                                sum += fact.NumericValue.Value;
-                            }
-                            else
-                            {
-                                sum -= fact.NumericValue.Value;
+                                if (!tableRow.Concept.Negative.HasValue || !tableRow.Concept.Negative.Value)
+                                {
+                                    sum += fact.NumericValue.Value;
+                                }
+                                else
+                                {
+                                    sum -= fact.NumericValue.Value;
+                                }
                             }
                         }
                     }
+
+                    columnIndex++;
+                    //var format = string.Format("N{0}", sum > 1000 ? 0 : 2);
+                    //list.Add(sum.ToString(format));
+                    list.Add(sum);
                 }
 
-                var format = string.Format("N{0}", sum > 1000 ? 0 : 2);
-                
-                list.Add(sum.ToString(format));
+                _sum = list;
             }
 
-            return list;
+            return _sum;
         }
     }
 }

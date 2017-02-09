@@ -21,10 +21,9 @@
 
     tr {
         &:hover {
-            font-weight: bold !important;
-
+            //font-weight: bold !important;
             td {
-                //border-bottom: 1px solid @dark !important;
+                border-bottom: 1px solid @dark !important;
             }
         }
     }
@@ -39,6 +38,27 @@
         max-width: 250px;
         width: 20%;
         border: 1px solid @darkish;
+        padding-left: @firstColumnPadding;
+
+        &.level-0 {
+            padding-left: @firstColumnPadding;
+        }
+
+        &.level-1 {
+            padding-left: @firstColumnPadding * 1.5;
+        }
+
+        &.level-2 {
+            padding-left: @firstColumnPadding * 2;
+        }
+
+        &.level-3 {
+            padding-left: @firstColumnPadding * 2.5;
+        }
+
+        &.level-4 {
+            padding-left: @firstColumnPadding * 3;
+        }
     }
 
     .header-row {
@@ -59,7 +79,7 @@
                 border-right: none;
                 background-color: @white;
                 text-align: left;
-                padding-left: @firstColumnPadding;
+                //padding-left: @firstColumnPadding;
             }
         }
     }
@@ -71,15 +91,17 @@
             font-weight: bold;
 
             &:first-of-type {
-                padding-left: @firstColumnPadding;
+                //padding-left: @firstColumnPadding;
             }
         }
     }
 
     .group-row-total {
         td {
-            border-top: 2px solid @dark !important;
+            //border-top: 2px solid @dark !important;
             //background-color: lighten(@accent-color, 30);
+            background: linear-gradient(@white, @darkish);
+
             font-weight: bold;
             text-align: right;
             padding-bottom: 23px;
@@ -87,7 +109,7 @@
             padding-top: 7px;
 
             &:first-of-type {
-                padding-left: @firstColumnPadding;
+                //padding-left: @firstColumnPadding;
                 text-align: left;
             }
         }
@@ -98,9 +120,8 @@
         td {
             text-align: right;
             font-size: 95%;
-            padding-left: @firstColumnPadding;
-
-            &.level-1 {
+            //padding-left: @firstColumnPadding;
+            /*&.level-1 {
                 padding-left: @firstColumnPadding * 1.5;
             }
 
@@ -114,8 +135,7 @@
 
             &.level-2 {
                 padding-left: @firstColumnPadding * 3;
-            }
-
+            }*/
             &:first-of-type {
                 text-align: left;
 

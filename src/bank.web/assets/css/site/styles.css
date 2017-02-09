@@ -672,8 +672,8 @@ svg {
 .table-horizontal thead {
   z-index: 250;
 }
-.table-horizontal tr:hover {
-  font-weight: bold !important;
+.table-horizontal tr:hover td {
+  border-bottom: 1px solid #bfbfbf !important;
 }
 .table-horizontal td {
   white-space: nowrap;
@@ -684,6 +684,22 @@ svg {
   max-width: 250px;
   width: 20%;
   border: 1px solid #e6e6e6;
+  padding-left: 1.2rem;
+}
+.table-horizontal td.level-0 {
+  padding-left: 1.2rem;
+}
+.table-horizontal td.level-1 {
+  padding-left: 1.8rem;
+}
+.table-horizontal td.level-2 {
+  padding-left: 2.4rem;
+}
+.table-horizontal td.level-3 {
+  padding-left: 3rem;
+}
+.table-horizontal td.level-4 {
+  padding-left: 3.6rem;
 }
 .table-horizontal .header-row td {
   overflow: hidden;
@@ -702,17 +718,13 @@ svg {
   border-right: none;
   background-color: #fff;
   text-align: left;
-  padding-left: 1.2rem;
 }
 .table-horizontal .group-row td {
   background: linear-gradient(#fff, #e6e6e6);
   font-weight: bold;
 }
-.table-horizontal .group-row td:first-of-type {
-  padding-left: 1.2rem;
-}
 .table-horizontal .group-row-total td {
-  border-top: 2px solid #bfbfbf !important;
+  background: linear-gradient(#fff, #e6e6e6);
   font-weight: bold;
   text-align: right;
   padding-bottom: 23px;
@@ -720,25 +732,26 @@ svg {
   padding-top: 7px;
 }
 .table-horizontal .group-row-total td:first-of-type {
-  padding-left: 1.2rem;
   text-align: left;
 }
 .table-horizontal .data-row td {
   text-align: right;
   font-size: 95%;
-  padding-left: 1.2rem;
-}
-.table-horizontal .data-row td.level-1 {
-  padding-left: 1.8rem;
-}
-.table-horizontal .data-row td.level-2 {
-  padding-left: 2.4rem;
-}
-.table-horizontal .data-row td.level-2 {
-  padding-left: 3rem;
-}
-.table-horizontal .data-row td.level-2 {
-  padding-left: 3.6rem;
+  /*&.level-1 {
+                padding-left: @firstColumnPadding * 1.5;
+            }
+
+            &.level-2 {
+                padding-left: @firstColumnPadding * 2;
+            }
+
+            &.level-2 {
+                padding-left: @firstColumnPadding * 2.5;
+            }
+
+            &.level-2 {
+                padding-left: @firstColumnPadding * 3;
+            }*/
 }
 .table-horizontal .data-row td:first-of-type {
   text-align: left;

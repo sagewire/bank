@@ -20,5 +20,7 @@ namespace bank.reports
 
         public string Label { get; set; }
         public bool Sum { get; set; }
+
+        public string Format { get; set; } = "N0";
     }
 }
