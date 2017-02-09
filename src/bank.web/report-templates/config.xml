@@ -33,7 +33,38 @@
     <concept name="RIAD4230" label="Provision: Loan &amp; Lease Losses" />
     <concept name="RIAD4302" label="Applicable Income Taxes" />
     <concept name="RIAD4300" label="Net Operating Income" />
-    <!--<concept name="" label="" />
+    <concept name="UBPR3123" negative="true" />
+    <concept name="UBPR2123" negative="true" />
+    <concept name="UBPR2145" label="Premises and fixed assets (including capitalized leases)" />
+
+    
+    <!--
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
+    <concept name="" label="" />
     <concept name="" label="" />
     <concept name="" label="" />
     <concept name="" label="" />-->

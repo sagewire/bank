@@ -74,17 +74,16 @@
                         </a>
 
                         <button id="sidenav-toggler" class="navbar-toggler event float-right hidden-xl-up" type="button" data-cat="Navigation" data-action="click" data-label="Main Menu">
-                                ☰
-                            </button>
+                            ☰
+                        </button>
                     </div>
                 </nav>
             </div>
         </div>
     }
-    @*<div id="flash" class="alert" role="alert"></div>*@
-    
+
     @Html.Partial("_Sidenav")
-    
+
     <div id="main-body">
         <div id="flash">
             <div class="close">
@@ -92,10 +91,7 @@
             </div>
             <div class="message"></div>
         </div>
-        
-        @*<div id="test" style="display:none;z-index:500;position:absolute;color:gold;background-color: #eee">
-            <i class="fa fa-fw fa-star" aria-hidden="true"></i>
-        </div>*@
+
         @RenderBody()
     </div>
 
@@ -108,52 +104,24 @@
         </footer>
 
         <div class="sub-footer text-xs-center p-1">
-            @*<a href="/privacy">Privacy Policy</a>
-                <a class="pl-1" href="https://www.facebook.com/RateYourLender/">
-                    <img src="~/assets/images/social/fb-29.png" />
-                </a>
-                <a class="pl-1" href="https://twitter.com/rateyourlender">
-                    <img src="~/assets/images/social/twitter-29.png" />
-                </a>*@
+            
         </div>
-
-        @*<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body text-xs-center">
-                        <i class="text-xs-center fa fa-circle-o-notch fa-spin fa-fw fa-2x"></i>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-
-
+        
         <div class="darken hidden-xl-up"></div>
         <div class="test hidden-lg-down"></div>
     }
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
-    @*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>*@
-
-
-    <script src="~/assets/dist/js/bootstrap.min.js"></script>
     
 
-
-    @*<script src="~/assets/scripts/jquery.typeahead.es5.min.js"></script>
-    <script src="~/assets/scripts/scrollreveal.min.js"></script>
-
-    <script src="~/assets/scripts/site.min.js"></script>*@
+    <script src="~/assets/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    @*<script src="~/assets/scripts/jquery.stickytableheaders.js"></script>*@
     <script src="~/assets/scripts/bundle.min.js"></script>
-    @*<script src="~/assets/scripts/highcharts-themes/grid.js"></script>*@
-
-    @*<script src="~/assets/scripts/charts.min.js"></script>*@
-
+    
     @RenderSection("Scripts", required: false)
     @Html.Partial("_GoogleAnalytics")
 

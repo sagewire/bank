@@ -22,5 +22,13 @@
   {
     "outputFile": "assets/scripts/json.es5.js",
     "inputFile": "assets/scripts/json.js"
+  },
+  {
+    "outputFile": "assets/css/site/table.css",
+    "inputFile": "assets/css/site/table.less"
+  },
+  {
+    "outputFile": "assets/scripts/jquery.stickytableheaders.es5.js",
+    "inputFile": "assets/scripts/jquery.stickytableheaders.js"
   }
 ]

@@ -20,8 +20,14 @@ namespace bank.reports.charts
                 var list = new Dictionary<DateTime, decimal>();
 
                 var facts = Column.GetFacts(Series.Concept.ConceptKeys);
-                var fact = Series.Concept.PrepareFact(facts);
 
+                if (!facts.Any())
+                {
+                    return new object[0];
+                }
+
+                var fact = Series.Concept.PrepareFact(facts);
+                
                 foreach (var datum in fact.HistoricalData)
                 {
                     list.Add(datum.Key, datum.Value.NumericValue.Value);

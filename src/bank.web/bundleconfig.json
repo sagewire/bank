@@ -1,36 +1,43 @@
 [
-    {
-        "outputFileName": "assets/scripts/site.min.js",
-        "inputFiles": [
-            "assets/scripts/site.js"
-        ]
-    },
-    {
-        "outputFileName": "assets/scripts/json.min.js",
-        "inputFiles": [
-            "assets/scripts/json.js"
-        ]
-    },
-    {
-        "outputFileName": "assets/css/jquery.typeahead.min.css",
-        "inputFiles": [
-            "assets/css/jquery.typeahead.css"
-        ]
-    },
-    {
-        "outputFileName": "assets/scripts/charts.min.js",
-        "inputFiles": [
-            "assets/scripts/charts.js"
-        ]
-    },
-    {
-        "outputFileName": "assets/scripts/bundle.js",
-        "inputFiles": [
-            "assets/scripts/jquery.typeahead.js",
-            "assets/scripts/scrollreveal.js",
-            "assets/scripts/site.js",
-            "assets/scripts/json.js",
-            "assets/scripts/charts.js"
-        ]
-    }
+  {
+    "outputFileName": "assets/scripts/site.min.js",
+    "inputFiles": [
+      "assets/scripts/site.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/scripts/json.min.js",
+    "inputFiles": [
+      "assets/scripts/json.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/css/jquery.typeahead.min.css",
+    "inputFiles": [
+      "assets/css/jquery.typeahead.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/scripts/charts.min.js",
+    "inputFiles": [
+      "assets/scripts/charts.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/scripts/bundle.js",
+    "inputFiles": [
+        "assets/scripts/jquery.typeahead.js",
+        "assets/scripts/scrollreveal.js",
+        "assets/scripts/jquery.stickytableheaders.js",
+        "assets/scripts/site.js",
+        "assets/scripts/json.js",
+        "assets/scripts/charts.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/scripts/jquery.stickytableheaders.min.js",
+    "inputFiles": [
+      "assets/scripts/jquery.stickytableheaders.js"
+    ]
+  }
 ]

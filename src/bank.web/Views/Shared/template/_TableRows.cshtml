@@ -1,0 +1,21 @@
+﻿@using bank.reports
+@using bank.reports.charts
+
+@model TableElement
+
+@foreach (ITableRow row in Model.Rows)
+{
+    switch (row.TableRowType)
+    {
+        case TableRowTypes.Header:
+            @Html.Partial("template/_TableRowHeader", new TableRowViewModel { Row = (TableRow)row, Columns = Model.DataColumns, Table = Model });
+            break;
+        case TableRowTypes.Concept:
+            @Html.Partial("template/_TableRowConcept", new TableRowViewModel { Row = (TableRow)row, Columns = Model.DataColumns, Table = Model });
+            break;
+        case TableRowTypes.Group:
+            @Html.Partial("template/_TableRowGroup", row)
+            break;
+    }
+
+}

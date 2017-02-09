@@ -1,0 +1,19 @@
+﻿@using bank.reports
+@using bank.reports.charts
+@model TableRowGroup
+
+
+@Html.Partial("template/_TableRows", ((TableRowGroup)Model).Table)
+
+@if (Model.Sum)
+{
+    <tr class="group-row-total">
+        <td>
+            @Model.Label
+        </td>
+        @foreach (var column in Model.Table.Sum())
+        {
+            <td>@column</td>
+        }
+    </tr>
+}

@@ -23,6 +23,10 @@ namespace bank.reports
 
         public Fact GetCell(Concept concept, Column column)
         {
+            //if (column == null || concept == null)
+            //{
+            //    return null;
+            //}
 
             var facts = column.GetFacts(concept.ConceptKeys);
             var fact = concept.PrepareFact(facts);

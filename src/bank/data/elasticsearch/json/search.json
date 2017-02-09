@@ -1,18 +1,32 @@
 ﻿{
-    "size":  10,
+    "size": 10,
     "query": {
         "function_score": {
             "query": {
-                "match": {
-                    "Name": {
-                        "query": "{{name}}",
-                        "boost": 4,
-                        "analyzer": "standard",
-                        "operator": "and",
-                        "fuzziness": "AUTO"
-                    }
+                "bool": {
+                    "must": [
+                        {
+                            "term": {
+                                "Active": {
+                                    "value": "true"
+                                }
+                            }
+                        },
+                        {
+                            "match": {
+                                "Name": {
+                                    "query": "{{name}}",
+                                    "boost": 4,
+                                    "analyzer": "standard",
+                                    "operator": "and",
+                                    "fuzziness": "AUTO"
+                                }
+                            }
+                        }
+                    ]
                 }
             },
+
             "functions": [
                 {
                     "field_value_factor": {

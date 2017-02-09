@@ -217,6 +217,7 @@
     <Compile Include="models\BanksViewModel.cs" />
     <Compile Include="models\RowsViewModel.cs" />
     <Compile Include="models\SearchViewModel.cs" />
+    <Compile Include="models\TableElementViewModel.cs" />
     <Compile Include="models\TableRowViewModel.cs" />
     <Compile Include="models\TemplateColumnViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -248,6 +249,12 @@
     <Content Include="assets\css\site\styles.min.css">
       <DependentUpon>styles.css</DependentUpon>
     </Content>
+    <Content Include="assets\css\site\table.css">
+      <DependentUpon>table.less</DependentUpon>
+    </Content>
+    <Content Include="assets\css\site\table.min.css">
+      <DependentUpon>table.css</DependentUpon>
+    </Content>
     <Content Include="assets\css\stately\stately.css" />
     <Content Include="assets\css\stately\stately.min.css" />
     <Content Include="assets\dist\css\bootstrap-grid.css" />
@@ -259,6 +266,7 @@
     <Content Include="assets\dist\js\bootstrap.js" />
     <Content Include="assets\dist\js\bootstrap.min.js" />
     <Content Include="assets\fonts\stately\stately-webfont.svg" />
+    <Content Include="assets\images\bank.png" />
     <Content Include="assets\images\social\fb-29.png" />
     <Content Include="assets\images\social\fb-40.png" />
     <Content Include="assets\images\social\linkedin-40.png" />
@@ -271,6 +279,12 @@
     <Content Include="assets\scripts\charts.js" />
     <Content Include="assets\scripts\charts.min.js">
       <DependentUpon>charts.js</DependentUpon>
+    </Content>
+    <Content Include="assets\scripts\jquery.stickytableheaders.es5.js">
+      <DependentUpon>jquery.stickytableheaders.js</DependentUpon>
+    </Content>
+    <Content Include="assets\scripts\jquery.stickytableheaders.es5.min.js">
+      <DependentUpon>jquery.stickytableheaders.es5.js</DependentUpon>
     </Content>
     <Content Include="assets\scripts\jquery.typeahead.es5.js">
       <DependentUpon>jquery.typeahead.js</DependentUpon>
@@ -302,6 +316,7 @@
     <Content Include="assets\scripts\site.min.js">
       <DependentUpon>site.js</DependentUpon>
     </Content>
+    <Content Include="assets\scripts\jquery.stickytableheaders.js" />
     <Content Include="browserconfig.xml" />
     <Content Include="Global.asax" />
     <Content Include="report-templates\income-statement.xml">
@@ -389,6 +404,7 @@
     <Content Include="assets\dist\css\bootstrap-reboot.min.css.map" />
     <Content Include="assets\dist\css\bootstrap.css.map" />
     <Content Include="assets\dist\css\bootstrap.min.css.map" />
+    <Content Include="assets\css\site\table.less" />
     <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
@@ -428,6 +444,8 @@
     <Content Include="Views\Shared\_SignIn.cshtml" />
     <Content Include="Views\Shared\_Register.cshtml" />
     <Content Include="Views\Shared\_DataMessage.cshtml" />
+    <Content Include="Views\Shared\template\_TableRows.cshtml" />
+    <Content Include="Views\Shared\template\_TableRowGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bank.reports\bank.reports.csproj">

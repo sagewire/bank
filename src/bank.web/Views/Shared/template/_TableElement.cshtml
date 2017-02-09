@@ -2,26 +2,23 @@
 @using bank.reports.charts
 @model TableElement
 
-<table class="table table-responsive report-table">
-
-    @foreach (ITableRow row in Model.Rows)
-    {
-        switch (row.TableRowType)
+<table class="table table-sm table-horizontal table-responsive">
+    <thead>
+        <tr class="header-row">
+            <td>
+                @Model.Title
+            @Html.Partial("_CardMenu")
+        </td>
+        @foreach (var column in Model.DataColumns)
         {
-            case TableRowTypes.Header:
-                @Html.Partial("template/_TableRowHeader", new TableRowViewModel { Row = (TableRow)row, Columns = Model.DataColumns });
-                break;
-            case TableRowTypes.Concept:
-                @Html.Partial("template/_TableRowConcept", new TableRowViewModel { Row = (TableRow)row, Columns = Model.DataColumns });
-                break;
-            case TableRowTypes.Group:
-                <tr>
-                    <td>
-                        @Html.Partial("template/_TableElement", (TableElement)row)
-                    </td>
-                </tr>
-                break;
+            <td>
+                @column.HeaderText
+            </td>
         }
+    </tr>
+</thead>
 
-    }
+    @Html.Partial("template/_TableRows", Model)
+
+
 </table>

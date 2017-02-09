@@ -41,6 +41,9 @@ namespace bank
         public static string ReportSchemas { get; set; }
             = ConfigurationManager.AppSettings.AllKeys.Contains("ReportSchemas") ? ConfigurationManager.AppSettings["ReportSchemas"] : null;
 
+        public static int PageCacheMinutes { get; set; }
+            = ConfigurationManager.AppSettings.AllKeys.Contains("PageCacheMinutes") ? int.Parse(ConfigurationManager.AppSettings["PageCacheMinutes"]) : 0;
+
 
         private static string _phantomJs = null;
         public static string PhantomJs

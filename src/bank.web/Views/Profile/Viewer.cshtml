@@ -4,17 +4,13 @@
 
 @{
     Layout = "~/Views/Shared/_LayoutSingle.cshtml";
+    
 }
 
 @section Header {
-
     @Html.Partial("_Header", new ProfileHeaderViewModel { Organization = Model.Organization, RawReports = Model.RawReports, Profile = Model.Profile })
-
-
 }
 
 <main class="first">
-
     @Html.Partial("template/_Rows", new RowsViewModel { Rows = Model.Layout.Rows })
-
 </main>

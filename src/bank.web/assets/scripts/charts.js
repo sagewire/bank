@@ -60,7 +60,21 @@ $(function () {
         },
         legend: {
             enabled: true,
-            layout: "vertical"
+            layout: "vertical",
+            itemWidth: 200,
+            itemStyle: {
+                fontWeight: 'bold',
+                width: '180%',
+                textOverflow: "ellipsis",
+                overflow: "hidden",
+                whiteSpace: "nowrap"
+            },
+            itemHoverStyle: {
+                overflow: "auto",
+                whiteSpace: "normal"
+
+            },
+            useHTML: true
         },
         //tooltip: {
         //    shared: true
@@ -204,7 +218,11 @@ $(function () {
     $("[data-chart-type='combo']").each(function (index, element) {
 
         $(this).highcharts('Combo', {
-
+            plotOptions: {
+                series: {
+                    stacking: "normal"
+                }
+            }
         });
 
     });

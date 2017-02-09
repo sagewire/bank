@@ -90,6 +90,60 @@ $(function () {
         return false;
     })
 
+
+    var preloaded = [];
+    var preloading = false;
+    var leavingPage = false;
+
+    $("a").on("click", "body", function () {
+        leavingPage = true;
+    });
+
+    $('a').hover(function () {
+        var href = $(this).attr("href");
+        preload(href);
+    });
+
+    function preload(href) {
+
+        if (preloading) {
+//            console.log('cancel preload ' + href);
+            return;
+        }
+  //      console.log('preloading ' + href);
+        //var href = $(this).attr("href");
+
+        if (href === undefined) {
+            return;
+        }
+
+        if (href.indexOf("http") > -1 || href.indexOf("tel") > -1) {
+            return;
+        }
+
+        //var url = $(this).attr("href");
+
+        if (href == window.location.pathname) {
+            return;
+        }
+
+        if ($.inArray(href, preloaded) === -1) {
+            preloading = true;
+            console.log('preloading ' + href);
+            $.get(href)
+                .done(function (html) {
+                    if (!leavingPage) {
+                        preloaded.push(href);
+                    }
+                })
+            .always(function () {
+                preloading = false;
+                console.log('done');
+            });
+        }
+    }
+
+
     $(".darken").click(function () {
         closeSidenav();
     });
@@ -393,12 +447,123 @@ $(function () {
         };
     }
 
+    //var target = $("thead").offset().top,
+    //timeout = null;
 
-});
+    //var targets = $("table");
+
+    
+    //$(window).scroll(function () {
+    //    if (!timeout) {
+    //        timeout = setTimeout(function () {
+    //            console.log('scroll');
+    //            clearTimeout(timeout);
+    //            timeout = null;
+
+    //            targets.each(function (index, elem) {
+
+    //                var table = $(elem);
+    //                var thead = table.find("thead");
+    //                var row = table.find("tr").first();
+
+    //                var columns = thead.find("td");
+
+    //                //console.log(table);
+    //                //console.log(thead);
+
+    //                var position = table.offset();
+    //                var visibleWidth = table.outerWidth();;
+    //                var actualWidth = thead.width();
+                    
+
+    //                if ($(window).scrollTop() >= position.top) {
+    //                    console.log('made it');
+    //                    var runningTotal = 0;
+
+    //                    //columns.each(function (index, value) {
+    //                    //    var column = $(value);
+    //                    //    var w = column.css("width");
+    //                    //    var h = column.css("height");
+    //                    //    var pos = column.offset();
+
+    //                    //    console.log(w);
+
+    //                    //    column.css("width", w);
+    //                    //    column.css("height", h);
+
+    //                    //    column.css({ left: runningTotal });
+    //                    //    runningTotal = runningTotal + new Number(w.replace("px", ""));
+    //                    //    console.log('running ' + runningTotal);
+
+    //                    //    if (runningTotal > visibleWidth) {
+    //                    //        console.log('fixing');
+                                
+    //                    //        //column.css("position", "relative");
+    //                    //        column.css("min-width", "0");
+    //                    //        column.css("overflow", "hidden");
+    //                    //        //column.css("width", "50px");
+    //                    //    }
+    //                    //});
+
+    //                    var row = table.find(".header-row");
+
+    //                    thead.css({ width: thead.css("width") });
+
+    //                    table.addClass("fixed");
+    //                    //row.width(actualWidth);
+    //                    //thead.width(visibleWidth);
+    //                    //thead.css({height: "200px" });
+    //                    //thead.width(visibleWidth);
 
 
-$(function () {
+    //                    //row.width(visibleWidth);
 
+    //                    table.scroll(function (e) {
+    //                        console.log('side scroll');
+    //                        //var table = $(table);
+    //                        var thead = table.find("thead");
+
+    //                        var scrollLeft = table.scrollLeft();
+
+    //                        thead.css({"left": table.offset().left - scrollLeft});
+    //                        //console.log(thead.offset());
+    //                    });
+    //                }
+    //            });
+
+                
+    //        }, 250);
+    //    }
+    //});
+
+    //$(window).scroll(function () {
+    //    if (!timeout) {
+    //        timeout = setTimeout(function () {
+    //            console.log('scroll');
+    //            clearTimeout(timeout);
+    //            timeout = null;
+    var lastPosition = 0;
+
+    $("table").scroll(function (e) {
+    
+        var table = $(this);
+        console.log('side scroll');
+
+        var thead = table.find("thead.tableFloatingHeaderOriginal");
+        var clone = table.find("thead.tableFloatingHeader");
+
+        //thead.scrollLeft($(this).scrollLeft());
+
+        thead.animate({
+            scrollLeft: $(this).scrollLeft()
+        }, 10);
+
+        clone.animate({
+            scrollLeft: $(this).scrollLeft()
+        }, 10);
+    });
+
+    $('table').stickyTableHeaders({ fixedOffset: $('.top-nav'), cacheHeaderHeight: true });
 
     $.typeahead({
         input: '.js-typeahead-name',
@@ -439,6 +604,15 @@ $(function () {
                 //setTimeout(function () {
                 //    $("#search-box").focus();
                 //}, 750);
+            },
+            onNavigateAfter: function(node, lis, a, item, query, event) {
+                var href = item.url;
+                preload(href);
+            },
+            onMouseEnter: function (node, a, item, event) {
+                var href = item.url;
+                preload(href);
+
             },
             onClick: function (node, a, item, event) {
                 window.location = item.url;

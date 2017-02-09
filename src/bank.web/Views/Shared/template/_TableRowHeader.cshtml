@@ -5,16 +5,16 @@
     var counter = 0;
 }
 
-<tr>
-    <th class="reveal table-header align-middle">
+<tr class="group-row">
+    <td colspan="@(Model.Columns.Count + 1)">
         @Model.Row.Label
-    </th>
+    </td>
 
-    @foreach (var column in Model.Columns)
+    @*@foreach (var column in Model.Columns)
     {
-        <td class="align-middle @(counter++ == 0 ? "reveal" : "") subsection-filler column-header">
+        <td class="@(counter++ == 0 ? "reveal" : "")">
             @column.HeaderText
         </td>
-    }
+    }*@
 
 </tr>

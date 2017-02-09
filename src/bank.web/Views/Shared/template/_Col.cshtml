@@ -8,23 +8,32 @@
 
     @foreach (TemplateElement element in Model.Elements)
     {
-        if (!string.IsNullOrWhiteSpace(element.Title))
+        if (element as TableElement == null)
         {
-            if (Model.IsInCard)
+            if (!string.IsNullOrWhiteSpace(element.Title))
             {
-                <div class="card-header">
-                    @element.Title
-                    @Html.Partial("_CardMenu")
-                </div>
-            }
-            else
-            {
-                <div class="child-title">
-                    @element.Title
-                </div>
+
+                if (Model.IsInCard)
+                {
+                    <div class="card-header">
+                        @element.Title
+                        @Html.Partial("_CardMenu")
+                    </div>
+                }
+                else
+                {
+                    <div class="child-title">
+                        @element.Title
+                    </div>
+                }
             }
         }
+        else
+        {
+        <div class="mask">
 
+        </div>
+        }
         @Html.Raw(Model.CardBlock(element, true))
 
 

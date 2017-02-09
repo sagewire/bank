@@ -6,9 +6,19 @@ using System.Threading.Tasks;
 
 namespace bank.reports
 {
-    public class TableRowGroup : TableElement, ITableRow
+    public class TableRowGroup : ITableRow
     {
-        public TableRowTypes TableRowType { get; set; }
+        public TableElement Table { get; internal set; }
 
+        public TableRowTypes TableRowType
+        {
+            get
+            {
+                return TableRowTypes.Group;
+            }
+        }
+
+        public string Label { get; set; }
+        public bool Sum { get; set; }
     }
 }

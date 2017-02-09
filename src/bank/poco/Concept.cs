@@ -49,6 +49,54 @@ namespace bank.poco
             }
         }
 
+        public string ValueFormatted(Fact fact)
+        {
+            if (fact == null)
+            {
+                return null;
+            }
+            if (!fact.NumericValue.HasValue)
+            {
+                return Value;
+            }
+
+            char? unit = this?.Unit ?? Unit;
+            string result;
+
+            switch (unit)
+            {
+                case 'P':
+                    result = fact.NumericValue.Value.ToString("#.##");
+                    break;
+                case 'U':
+                    result = fact.NumericValue.Value.ToString("N0");
+                    break;
+                case 'D':
+                    result = fact.NumericValue.Value.ToString();
+                    break;
+                default:
+                    result = "na";
+                    break;
+            }
+
+            if (Negative.HasValue && Negative.Value)
+            {
+                return string.Format("({0})", result);
+            }
+
+            return result;
+
+            //if (NumericValue >= 1000)
+            //{
+            //    return (NumericValue.Value / 1000).ToString("N0");
+            //}
+            //else
+            //{
+            //    return NumericValue.Value.ToString("N2");
+            //}
+
+        }
+
         public string Name { get; set; }
         public string ShortLabel { get; set; }
         public string Label { get; set; }
@@ -56,6 +104,7 @@ namespace bank.poco
         public string Value { get; set; }
         public char? Unit { get; set; }
         public List<string> ConceptKeys { get; set; }
+        public bool? Negative { get; internal set; }
 
         public Fact PrepareFact(Fact fact)
         {
@@ -168,6 +217,7 @@ namespace bank.poco
             Label = Label ?? def.Description;
             Narrative = Narrative ?? def.Narrative;
             Unit = Unit ?? def.Unit;
+            Negative = Negative ?? def.Negative;
         }
 
         public void SetValues(Concept concept)
@@ -176,6 +226,7 @@ namespace bank.poco
             Narrative = concept.Narrative ?? Narrative;
             Label = concept.Label ?? Label;
             Unit = concept.Unit ?? Unit;
+            Negative = concept.Negative ?? Negative;
         }
     }
 }

@@ -9,7 +9,8 @@
 }
 
 <h2 class="text-left">
-    @fact.ValueFormatted(concept)
+    @concept.ValueFormatted(fact)
+
     <small>
         @Html.Partial("_FactTrendArrow", fact)
     </small>

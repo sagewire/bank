@@ -4,13 +4,23 @@
     <col>    
       <row>
         <col>
-          <chart type="combo" css-classes="pie-chart" lookback="0" title="Assets">
-            <series type="pie" column="0">
+          <chart type="combo" lookback="0" title="Assets">
+            <series type="bar" column="0">
               <concept name="UBPRE119"/>
+            </series>
+            <series type="bar" column="0">
               <concept name="UBPRE122"/>
+            </series>
+            <series type="bar" column="0">
               <concept name="UBPR0081"/>
+            </series>
+            <series type="bar" column="0">
               <concept name="UBPRE130"/>
+            </series>
+            <series type="bar" column="0">
               <concept name="UBPR2130"/>
+            </series>
+            <series type="bar" column="0">
               <concept name="UBPRE124"/>
             </series>
           </chart>

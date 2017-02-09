@@ -8,59 +8,106 @@
 }
 
 
-
+@*<table class="table table-sm table-bordered table-horizontal table-responsive">
+    <thead>
+        <tr>
+            <td>Balance Sheet</td>
+            <th>Seaside National Bank</th>
+            <th>Wells Fargo National Association</th>
+            <th>Seaside National Bank</th>
+            <th>Wells Fargo National Association</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>This is a test</th>
+            <td>1,234,567</td>
+            <td>1,500,343,232</td>
+            <td>1,234,567</td>
+            <td>1,500,343,232</td>
+        </tr>
+        <tr>
+            <th>This is a test</th>
+            <td>1,234,567</td>
+            <td>1,500,343,232</td>
+            <td>1,234,567</td>
+            <td>1,500,343,232</td>
+        </tr>
+        <tr>
+            <th>This is a test of a long field name</th>
+            <td>1,234,567</td>
+            <td>1,500,343,232</td>
+            <td>1,234,567</td>
+            <td>1,500,343,232</td>
+        </tr>
+        <tr>
+            <th>This is a test</th>
+            <td>1,234,567</td>
+            <td>1,500,343,232</td>
+            <td>1,234,567</td>
+            <td>1,500,343,232</td>
+        </tr>
+        <tr>
+            <th>This is a test</th>
+            <td>1,234,567</td>
+            <td>1,500,343,232</td>
+            <td>1,234,567</td>
+            <td>1,500,343,232</td>
+        </tr>
+    </tbody>
+</table>*@
 
 @if (Model.IsNewDashboard)
-{
-    <div class="card">
-        <div class="card-block">
-            <div style="padding-top:15vh;padding-bottom: 50vh;">
-                <h1 class="text-center">
-                    Your dashboard isn't ready yet.
-                </h1>
-                <h4 class="text-center">
-                    Start searching for some banks and we'll create one for you. Check back soon.
-                </h4>
+    {
+        <div class="card">
+            <div class="card-block">
+                <div style="padding-top:15vh;padding-bottom: 50vh;">
+                    <h1 class="text-center">
+                        Your dashboard isn't ready yet.
+                    </h1>
+                    <h4 class="text-center">
+                        Start searching for some banks and we'll create one for you. Check back soon.
+                    </h4>
+                </div>
             </div>
         </div>
-    </div>
-}
-else
-{
-    @Html.Partial("template/_Rows", new RowsViewModel { Rows = Model.Layout.Rows })
+    }
+    else
+    {
+        @Html.Partial("template/_Rows", new RowsViewModel { Rows = Model.Layout.Rows })
 
-    <div class="card">
-        <div class="card-block">
-            <h4>Favorites</h4>
-            <ul class="list-group">
-                @foreach (var fav in Model.Profile.Favorites)
-                {
-                    <li class="list-group-item">
+        <div class="card">
+            <div class="card-block">
+                <h4>Favorites</h4>
+                <ul class="list-group">
+                    @foreach (var fav in Model.Profile.Favorites)
+                    {
+                        <li class="list-group-item">
 
-                        <a href="@Url.Url(fav)">
-                            @fav.Name
-                        </a>
+                            <a href="@Url.Url(fav)">
+                                @fav.Name
+                            </a>
 
-                    </li>
-                }
-            </ul>
+                        </li>
+                    }
+                </ul>
 
+            </div>
+
+            <div class="card-block">
+                <h4>Recently Visited</h4>
+                <ul class="list-group">
+                    @foreach (var fav in Model.Profile.RecentVisits)
+                    {
+                        <li class="list-group-item">
+                            <a href="@Url.Url(fav)">
+                                @fav.Name
+                            </a>
+                        </li>
+                    }
+                </ul>
+
+            </div>
         </div>
 
-        <div class="card-block">
-            <h4>Recently Visited</h4>
-            <ul class="list-group">
-                @foreach (var fav in Model.Profile.RecentVisits)
-                {
-                    <li class="list-group-item">
-                        <a href="@Url.Url(fav)">
-                            @fav.Name
-                        </a>
-                    </li>
-                }
-            </ul>
-
-        </div>
-    </div>
-
-}
+    }

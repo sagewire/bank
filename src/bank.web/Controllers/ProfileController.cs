@@ -78,8 +78,15 @@ namespace bank.web.Controllers
 
         }
         
+
         public ActionResult Viewer(string name, string id, DateTime? period, string section, string c = null, string template = "profile-layout")
         {
+            //Response.CacheControl = HttpCacheability.Public.ToString();
+            //Response.Expires = Settings.PageCacheMinutes;
+
+            Response.CacheControl = HttpCacheability.Private.ToString();
+            Response.Cache.SetMaxAge(new TimeSpan(0, 0, 10));
+
             var orgId = DecodeId(id);
             var companies = new List<int>();
             companies.Add(orgId);

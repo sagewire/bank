@@ -306,9 +306,11 @@ namespace bank.reports
 
         }
 
-        private TableElement ParseTable(XElement element)
+        private TableElement ParseTable(XElement element, int level = 0)
         {
             var table = new TableElement();
+            table.Level = level;
+
             table.Orientation = Enum.Parse(typeof(TableOrientation), element.SafeAttributeValue("orientation") ?? "vertical", true);
             TableElement current = table;
             
@@ -331,9 +333,12 @@ namespace bank.reports
                         break;
                     case "group":
                         var groupRow = new TableRowGroup();
-                        groupRow.TableRowType = TableRowTypes.Group;
-                        current.Rows.Add(groupRow);
-                        current = groupRow;
+                        groupRow.Label = item.SafeAttributeValue("label");
+                        groupRow.Sum = item.SafeBoolAttributeValue("sum") ?? false;
+                        groupRow.Table = ParseTable(item, level + 1);
+                        Elements.Add(groupRow.Table);
+                        tableRow = groupRow;
+                        //current = groupRow;
                         break;
                     case "header":
                         var headerRow = new TableRow();

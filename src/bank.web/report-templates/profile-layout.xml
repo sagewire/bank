@@ -73,7 +73,7 @@
     </col>
   </row>
   <row>
-    <col grid="col-xs-12 col-xl-9">
+    <col grid="col-xs-12 col-xl-8">
       <table title="Financial Highlights" lookback="4">
         <header>Balance Sheet</header>
         <concept name="UBPR2170" />
@@ -106,7 +106,7 @@
 
       </table>
     </col>
-    <col grid="col-xs-12 col-xl-3">
+    <col grid="col-xs-12 col-xl-4">
       <row>
         <col>
           <chart title="Assets" type="combo" css-classes="pie-chart" lookback="0">

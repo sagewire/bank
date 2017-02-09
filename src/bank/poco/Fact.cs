@@ -43,37 +43,37 @@ namespace bank.poco
             }
         }
 
-        public string ValueFormatted(Concept concept)
-        {
-            if (!NumericValue.HasValue)
-            {
-                return Value;
-            }
+        //public string ValueFormatted(Concept concept)
+        //{
+        //    if (!NumericValue.HasValue)
+        //    {
+        //        return Value;
+        //    }
 
-            char? unit = concept?.Unit ?? Unit;
+        //    char? unit = concept?.Unit ?? Unit;
 
-            switch (unit)
-            {
-                case 'P':
-                    return NumericValue.Value.ToString("#.##");
-                case 'U':
-                    return NumericValue.Value.ToString("N0");
-                case 'D':
-                    return NumericValue.Value.ToString();
-                default:
-                    return "na";
-            }
+        //    switch (unit)
+        //    {
+        //        case 'P':
+        //            return NumericValue.Value.ToString("#.##");
+        //        case 'U':
+        //            return NumericValue.Value.ToString("N0");
+        //        case 'D':
+        //            return NumericValue.Value.ToString();
+        //        default:
+        //            return "na";
+        //    }
 
-            //if (NumericValue >= 1000)
-            //{
-            //    return (NumericValue.Value / 1000).ToString("N0");
-            //}
-            //else
-            //{
-            //    return NumericValue.Value.ToString("N2");
-            //}
+        //    //if (NumericValue >= 1000)
+        //    //{
+        //    //    return (NumericValue.Value / 1000).ToString("N0");
+        //    //}
+        //    //else
+        //    //{
+        //    //    return NumericValue.Value.ToString("N2");
+        //    //}
 
-        }
+        //}
 
         //public string Series
         //{
