@@ -18,6 +18,10 @@ namespace bank.poco
 
         public Concept(string value)
         {
+            if (value == null)
+            {
+                throw new Exception();
+            }
             value = value.ToUpper();
             Value = value;
             MatchCollection matches = _concepts.Matches(value);
@@ -104,7 +108,7 @@ namespace bank.poco
         public string Value { get; set; }
         public char? Unit { get; set; }
         public List<string> ConceptKeys { get; set; }
-        public bool? Negative { get; internal set; }
+        public bool? Negative { get; set; }
 
         public Fact PrepareFact(Fact fact)
         {

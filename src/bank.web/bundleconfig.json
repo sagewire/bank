@@ -29,6 +29,10 @@
         "assets/scripts/jquery.typeahead.js",
         "assets/scripts/scrollreveal.js",
         "assets/scripts/jquery.stickytableheaders.js",
+        "assets/scripts/tether.js",
+        "assets/scripts/highcharts.js",
+        "assets/scripts/highcharts-more.js",
+        "assets/dist/js/bootstrap.min.js",
         "assets/scripts/site.js",
         "assets/scripts/json.js",
         "assets/scripts/charts.js"
@@ -38,6 +42,24 @@
     "outputFileName": "assets/scripts/jquery.stickytableheaders.min.js",
     "inputFiles": [
       "assets/scripts/jquery.stickytableheaders.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/scripts/tether.min.js",
+    "inputFiles": [
+      "assets/scripts/tether.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/scripts/highcharts-more.min.js",
+    "inputFiles": [
+      "assets/scripts/highcharts-more.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/scripts/highcharts.min.js",
+    "inputFiles": [
+      "assets/scripts/highcharts.js"
     ]
   }
 ]

@@ -3,7 +3,6 @@
 @model TableRowViewModel
 
 
-@Html.Partial("template/_TableRows", Model.RowGroup.Table)
 
 @if (Model.RowGroup.Sum)
 {
@@ -13,7 +12,9 @@
         </td>
         @foreach (var column in Model.RowGroup.Table.Sum())
         {
-            <td>@column.ToString(Model.RowGroup.Format)</td>
+            <td class="@Model.Level">@column.ToString(Model.RowGroup.Format)</td>
         }
     </tr>
 }
+
+@Html.Partial("template/_TableRows", Model.RowGroup.Table)

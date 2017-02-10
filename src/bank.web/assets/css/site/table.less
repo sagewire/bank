@@ -14,6 +14,10 @@
     margin-bottom: 0;
     position: relative;
 
+    ::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
 
     thead {
         z-index: 250;
@@ -40,24 +44,28 @@
         border: 1px solid @darkish;
         padding-left: @firstColumnPadding;
 
-        &.level-0 {
-            padding-left: @firstColumnPadding;
-        }
+        &:first-of-type {
+            max-width: 700px;
+            width:100%;
+            &.level-0 {
+                padding-left: @firstColumnPadding;
+            }
 
-        &.level-1 {
-            padding-left: @firstColumnPadding * 1.5;
-        }
+            &.level-1 {
+                padding-left: @firstColumnPadding * 1.5;
+            }
 
-        &.level-2 {
-            padding-left: @firstColumnPadding * 2;
-        }
+            &.level-2 {
+                padding-left: @firstColumnPadding * 2;
+            }
 
-        &.level-3 {
-            padding-left: @firstColumnPadding * 2.5;
-        }
+            &.level-3 {
+                padding-left: @firstColumnPadding * 2.5;
+            }
 
-        &.level-4 {
-            padding-left: @firstColumnPadding * 3;
+            &.level-4 {
+                padding-left: @firstColumnPadding * 3;
+            }
         }
     }
 
@@ -87,8 +95,9 @@
     .group-row {
         td {
             //background-color: lighten(@accent-color, 30);
-            background: linear-gradient(@white, @darkish);
+            background: linear-gradient(lighten(@darkish, 10), @darkish);
             font-weight: bold;
+            background-color: @darkish;
 
             &:first-of-type {
                 //padding-left: @firstColumnPadding;
@@ -100,17 +109,26 @@
         td {
             //border-top: 2px solid @dark !important;
             //background-color: lighten(@accent-color, 30);
-            background: linear-gradient(@white, @darkish);
-
+            background: linear-gradient(lighten(@darkish, 10), @darkish);
+            border-bottom: 1px solid @darkest;
             font-weight: bold;
             text-align: right;
-            padding-bottom: 23px;
+            //background-color: @darkish;
             border: none;
-            padding-top: 7px;
+
 
             &:first-of-type {
                 //padding-left: @firstColumnPadding;
                 text-align: left;
+                font-size: 110%;
+            }
+
+            &.level-0 {
+                background: none;
+                background-color: @accent-color !important;
+                padding-top: 15px;
+                padding-bottom: 15px;
+                vertical-align: middle;
             }
         }
     }

@@ -280,6 +280,14 @@
     <Content Include="assets\scripts\charts.min.js">
       <DependentUpon>charts.js</DependentUpon>
     </Content>
+    <Content Include="assets\scripts\highcharts-more.js" />
+    <Content Include="assets\scripts\highcharts-more.min.js">
+      <DependentUpon>highcharts-more.js</DependentUpon>
+    </Content>
+    <Content Include="assets\scripts\highcharts.js" />
+    <Content Include="assets\scripts\highcharts.min.js">
+      <DependentUpon>highcharts.js</DependentUpon>
+    </Content>
     <Content Include="assets\scripts\jquery.stickytableheaders.es5.js">
       <DependentUpon>jquery.stickytableheaders.js</DependentUpon>
     </Content>
@@ -320,6 +328,10 @@
       <DependentUpon>site.js</DependentUpon>
     </Content>
     <Content Include="assets\scripts\jquery.stickytableheaders.js" />
+    <Content Include="assets\scripts\tether.js" />
+    <Content Include="assets\scripts\tether.min.js">
+      <DependentUpon>tether.js</DependentUpon>
+    </Content>
     <Content Include="browserconfig.xml" />
     <Content Include="Global.asax" />
     <Content Include="report-templates\income-statement.xml">

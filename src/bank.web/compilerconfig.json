@@ -1,34 +1,42 @@
-﻿[
+[
   {
     "outputFile": "assets/css/stately/stately.css",
-    "inputFile": "assets/css/stately/stately.scss"
+    "inputFile": "assets/css/stately/stately.scss",
+    "sourceMap": false
   },
   {
     "outputFile": "assets/css/site/site.css",
-    "inputFile": "assets/css/site/site.less"
+    "inputFile": "assets/css/site/site.less",
+    "sourceMap": false
   },
   {
     "outputFile": "assets/css/site/styles.css",
-    "inputFile": "assets/css/site/styles.less"
+    "inputFile": "assets/css/site/styles.less",
+    "sourceMap": false
   },
   {
     "outputFile": "assets/css/jquery.typeahead.css",
-    "inputFile": "assets/css/jquery.typeahead.scss"
+    "inputFile": "assets/css/jquery.typeahead.scss",
+    "sourceMap": false
   },
   {
     "outputFile": "assets/scripts/jquery.typeahead.es5.js",
-    "inputFile": "assets/scripts/jquery.typeahead.js"
+    "inputFile": "assets/scripts/jquery.typeahead.js",
+    "sourceMap": false
   },
   {
     "outputFile": "assets/scripts/json.es5.js",
-    "inputFile": "assets/scripts/json.js"
+    "inputFile": "assets/scripts/json.js",
+    "sourceMap": false
   },
   {
     "outputFile": "assets/css/site/table.css",
-    "inputFile": "assets/css/site/table.less"
+    "inputFile": "assets/css/site/table.less",
+    "sourceMap": false
   },
   {
     "outputFile": "assets/scripts/jquery.stickytableheaders.es5.js",
-    "inputFile": "assets/scripts/jquery.stickytableheaders.js"
+    "inputFile": "assets/scripts/jquery.stickytableheaders.js",
+    "sourceMap": false
   }
 ]

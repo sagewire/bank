@@ -669,6 +669,10 @@ svg {
   margin-bottom: 0;
   position: relative;
 }
+.table-horizontal ::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
 .table-horizontal thead {
   z-index: 250;
 }
@@ -686,19 +690,23 @@ svg {
   border: 1px solid #e6e6e6;
   padding-left: 1.2rem;
 }
-.table-horizontal td.level-0 {
+.table-horizontal td:first-of-type {
+  max-width: 700px;
+  width: 100%;
+}
+.table-horizontal td:first-of-type.level-0 {
   padding-left: 1.2rem;
 }
-.table-horizontal td.level-1 {
+.table-horizontal td:first-of-type.level-1 {
   padding-left: 1.8rem;
 }
-.table-horizontal td.level-2 {
+.table-horizontal td:first-of-type.level-2 {
   padding-left: 2.4rem;
 }
-.table-horizontal td.level-3 {
+.table-horizontal td:first-of-type.level-3 {
   padding-left: 3rem;
 }
-.table-horizontal td.level-4 {
+.table-horizontal td:first-of-type.level-4 {
   padding-left: 3.6rem;
 }
 .table-horizontal .header-row td {
@@ -720,19 +728,27 @@ svg {
   text-align: left;
 }
 .table-horizontal .group-row td {
-  background: linear-gradient(#fff, #e6e6e6);
+  background: linear-gradient(#ffffff, #e6e6e6);
   font-weight: bold;
+  background-color: #e6e6e6;
 }
 .table-horizontal .group-row-total td {
-  background: linear-gradient(#fff, #e6e6e6);
+  background: linear-gradient(#ffffff, #e6e6e6);
+  border-bottom: 1px solid #404040;
   font-weight: bold;
   text-align: right;
-  padding-bottom: 23px;
   border: none;
-  padding-top: 7px;
 }
 .table-horizontal .group-row-total td:first-of-type {
   text-align: left;
+  font-size: 110%;
+}
+.table-horizontal .group-row-total td.level-0 {
+  background: none;
+  background-color: #30C8CA !important;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  vertical-align: middle;
 }
 .table-horizontal .data-row td {
   text-align: right;
@@ -813,8 +829,8 @@ svg {
             margin-top: -69px;
         }
     }*/
-  .table-horizontal {
-    font-size: 90%;
+  .table-horizontal td:first-of-type {
+    max-width: 250px;
   }
   .card {
     margin-top: 15px;

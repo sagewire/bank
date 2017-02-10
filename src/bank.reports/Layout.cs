@@ -310,8 +310,7 @@ namespace bank.reports
         {
             var table = new TableElement();
             table.Level = level;
-
-            table.Orientation = Enum.Parse(typeof(TableOrientation), element.SafeAttributeValue("orientation") ?? "vertical", true);
+                        table.Orientation = Enum.Parse(typeof(TableOrientation), element.SafeAttributeValue("orientation") ?? "vertical", true);
             TableElement current = table;
             
 
@@ -327,6 +326,7 @@ namespace bank.reports
                         conceptRow.Concept = new Concept(item.SafeAttributeValue("name"));
                         conceptRow.Concept.Label = item.SafeAttributeValue("label") ?? conceptRow.Concept.Label;
                         conceptRow.Concept.Unit = item.SafeCharAttributeValue("unit");
+                        conceptRow.Concept.Negative = item.SafeBoolAttributeValue("negative");
 
                         current.Concepts.Add(conceptRow.Concept);
                         tableRow = conceptRow;
