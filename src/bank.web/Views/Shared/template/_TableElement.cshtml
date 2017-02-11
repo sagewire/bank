@@ -2,23 +2,11 @@
 @using bank.reports.charts
 @model TableElement
 
-<table class="table table-sm table-horizontal table-responsive">
-    <thead>
-        <tr class="header-row">
-            <td>
-                @Model.Title
-            @Html.Partial("_CardMenu")
-        </td>
-        @foreach (var column in Model.DataColumns)
-        {
-            <td>
-                @column.HeaderText
-            </td>
-        }
-    </tr>
-</thead>
-
-    @Html.Partial("template/_TableRows", Model)
-
-
-</table>
+@if (Model.Orientation == TableOrientation.Horizontal)
+{
+    @Html.Partial("template/table-horizontal/_TableElement", Model)
+}
+else
+{
+    @Html.Partial("template/table-vertical/_TableElement", Model)
+}

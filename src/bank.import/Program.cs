@@ -26,6 +26,7 @@ namespace bank.import
                     crawl.Import.Start();
                     break;
                 case "ffiec":
+                    ffiec.Spider.Start();
                     ffiec.Import.Start();
                     break;
                 case "fdic":

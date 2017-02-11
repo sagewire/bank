@@ -40,7 +40,7 @@ namespace bank.reports
             }
         }
 
-        public override void SetFacts(IList<Fact> facts)
+        public override void SetFacts(IList<Fact> facts, IList<Concept> concepts)
         {
             //var existing = Facts.Select(x => x..Name).Distinct().ToList();
             var filtered = facts.Where(x => x.FactType == enums.FactTypes.PeerGroup && ((PeerGroupFact)x).PeerGroup == PeerGroupCustom.PeerGroupCode);

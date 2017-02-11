@@ -6517,6 +6517,7 @@ $(function () {
     })
 
 
+    var disablePreload = false;
     var preloaded = [];
     var preloading = false;
     var leavingPage = false;
@@ -6531,6 +6532,10 @@ $(function () {
     });
 
     function preload(href) {
+
+        if (disablePreload) {
+            return;
+        }
 
         if (preloading) {
 //            console.log('cancel preload ' + href);
@@ -7377,7 +7382,7 @@ $(function () {
             },
             legend: {
                 enabled: true,
-                layout: "horizontal"
+                layout: "vertical"
             },
             tooltip: {
                 //shared: true,

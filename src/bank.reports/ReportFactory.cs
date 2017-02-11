@@ -18,6 +18,8 @@ namespace bank.reports
         public string SectionFilter { get; set; }
         public DateTime Period { get; set; }
 
+        private List<Column> Columns { get; set; } = new List<Column>();
+
         public Layout Build()
         {
             var layout = new Layout();
@@ -32,17 +34,31 @@ namespace bank.reports
 
 
             var populateTask = Task.Run(() => layout.Populate(Period));
-            var orgTask = Task.Run(() => GetOrganizations());
+            //var orgTask = Task.Run(() => GetOrganizations());
 
 
-            tasks.Add(orgTask);
+            //tasks.Add(orgTask);
             tasks.Add(populateTask);
 
 
             Task.WaitAll(tasks.ToArray());
 
-            SetColumns(layout);
+            var ranks = layout.DataColumns.Where(x => x.ColumnType == ColumnTypes.CompanyRank).ToList();
 
+            if (ranks.Any())
+            {
+                foreach(var rank in ranks)
+                {
+                    if (rank.ChildColumns != null)
+                    {
+                        OrganizationIds.AddRange(
+                            rank.ChildColumns.Select(x => ((CompanyColumn)x).OrganizationId));
+                    }
+                }
+            }
+            GetOrganizations();
+            
+            SetColumns(layout);
 
             //set columns
             return layout;
@@ -50,13 +66,18 @@ namespace bank.reports
 
         private void GetOrganizations()
         {
-            
+
             if (OrganizationIds.Any()) {
                 var orgRepo = new OrganizationRepository();
                 var orgs = orgRepo.GetOrganizations(OrganizationIds);
                 Organizations.AddRange(orgs);
             }
 
+        }
+
+        public void SetColumn(Column column)
+        {
+            Columns.Add(column);
         }
 
         private void SetColumns(Layout layout)
@@ -76,9 +97,10 @@ namespace bank.reports
             }
         }
 
-        private IList<Column> GetColumns()
+        private List<Column> GetColumns()
         {
             var columns = new List<Column>();
+            columns.AddRange(Columns);
 
             var orgIds = new List<int>();
             orgIds.AddRange(OrganizationIds);

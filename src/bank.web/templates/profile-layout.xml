@@ -1,54 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+  <parameters>
+    <param key="" type="" />
+    <param key="" type="" />
+    <param key="" type="" />
+    <param key="" type="" />
+  </parameters>
+  <header partial="_OrganizationHeader">
+    
+  </header>
   <row>
     <col>
       <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="ROAA">
-        <series type="line" column="0">
+        <!--<series type="line" column="0">
           <concept name="UBPRE010" />
-        </series>
-        <series type="line" column="1" visible="false">
+        </series>-->
+        <!--<series type="line" column="1">
           <concept name="UBPRE010" />
-        </series>
-        <series type="areaspline" column="2">
+        </series>-->
+        <series type="areaspline">
           <concept name="UBPRE010" />
         </series>
       </chart>
     </col>
     <col>
       <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="ROAE">
-        <series type="line" column="0">
+        <!--<series type="line" column="0">
           <concept name="UBPRE630" />
         </series>
         <series type="line" column="1" visible="false">
           <concept name="UBPRE630" />
-        </series>
-        <series type="areaspline" column="2">
+        </series>-->
+        <series type="areaspline">
           <concept name="UBPRE630" />
         </series>
       </chart>
     </col>
     <col>
       <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="Efficiency Ratio">
-        <series type="line" column="0">
+        <!--<series type="line" column="0">
           <concept name="UBPRE088" />
         </series>
         <series type="line" column="1" visible="false">
           <concept name="UBPRE088" />
-        </series>
-        <series type="areaspline" column="2">
+        </series>-->
+        <series type="areaspline">
           <concept name="UBPRE088" />
         </series>
       </chart>
     </col>
     <col>
       <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="Net Interest Margin">
-        <series type="line" column="0">
+        <!--<series type="line" column="0">
           <concept name="UBPRE018" />
         </series>
         <series type="line" column="1" visible="false">
           <concept name="UBPRE018" />
-        </series>
-        <series type="areaspline" column="2">
+        </series>-->
+        <series type="areaspline">
           <concept name="UBPRE018" />
         </series>
       </chart>

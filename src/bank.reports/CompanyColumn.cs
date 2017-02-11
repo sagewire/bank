@@ -9,6 +9,7 @@ namespace bank.reports
 {
     public class CompanyColumn : Column
     {
+        public int? Rank { get; set; }
         public override ColumnTypes ColumnType
         {
             get
@@ -42,7 +43,7 @@ namespace bank.reports
 
         public Organization Organization { get; set; }
         
-        public override void SetFacts(IList<Fact> facts)
+        public override void SetFacts(IList<Fact> facts, IList<Concept> concepts)
         {
             //var existing = Facts.Select(x => x..Name).Distinct().ToList();
             var filtered = facts.Where(x => x.FactType == enums.FactTypes.Company && ((CompanyFact)x).OrganizationId == OrganizationId);

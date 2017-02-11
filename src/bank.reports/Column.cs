@@ -13,7 +13,7 @@ namespace bank.reports
         public abstract string Key { get; }
         public abstract ColumnTypes ColumnType { get; }
 
-        public abstract void SetFacts(IList<Fact> facts);
+        public abstract void SetFacts(IList<Fact> facts, IList<Concept> concepts);
 
         public List<Fact> GetFacts(IList<string> keys)
         {
@@ -41,8 +41,10 @@ namespace bank.reports
         {
             get
             {
-                return Facts != null && Facts.Any();
+                return Facts != null && Facts.Any() ;
             }
         }
+
+        public IEnumerable<Column> ChildColumns { get; protected set; }
     }
 }

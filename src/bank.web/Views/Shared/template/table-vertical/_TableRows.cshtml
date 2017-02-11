@@ -1,0 +1,43 @@
+﻿
+@*##################### Vertical #####################*@
+@using bank.reports
+@using bank.reports.charts
+@model TableElement
+
+@foreach(var column in Model.VisibleColumns)
+{
+    var companyColumn = column as CompanyColumn;
+
+    <tr class="data-row">
+        <td>
+
+            @if (companyColumn != null)
+            {
+                if (Model.ShowRank && companyColumn.Rank.HasValue)
+                {
+                    <span class="rank">@companyColumn.Rank</span>
+                }
+                <a href="@Url.Url(companyColumn.Organization)">@companyColumn.Organization.Name</a>
+            }
+            else
+            {
+                @column.HeaderText
+            }
+        </td>
+        @foreach (var row in Model.Rows)
+        {
+            var rowConcept = row as TableRow;
+            <td>
+                @if (rowConcept != null)
+                {
+                    var fact = column.GetCell(rowConcept.Concept, column);
+
+                    var value = rowConcept.Concept.ValueFormatted(fact);
+
+                    @value;
+                }
+
+            </td>
+        }
+    </tr>
+}

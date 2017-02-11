@@ -1,0 +1,34 @@
+﻿@*##################### Vertical #####################*@
+
+@using bank.reports
+@using bank.reports.charts
+@model TableElement
+
+<table class="table table-sm table-responsive table-vertical table-base">
+    <thead>
+        <tr class="header-row">
+            <td>
+                @Model.Title
+
+                @*<small class="pl-3 text-muted">(millions)</small>*@
+
+                @Html.Partial("_CardMenu")
+            </td>
+            @foreach (var row in Model.Rows)
+            {
+                var rowConcept = row as TableRow;
+                <td>
+                    @if (rowConcept != null)
+                    {
+                        @rowConcept.Concept.ShortLabel
+                    }
+
+                </td>
+            }
+
+        </tr>
+    </thead>
+
+    @Html.Partial("template/table-vertical/_TableRows", Model)
+
+</table>

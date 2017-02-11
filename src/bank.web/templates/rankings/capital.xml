@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+  <row>
+    <col>
+      <table lookback="4" show-rank="true" title="Bank Rankings by Total Capital" orientation="vertical">
+        <concept name="UBPRG105" />
+        <concept name="UBPR2170" />
+        <concept name="UBPR2200" />
+        <concept name="UBPRE119" />
+        <concept name="UBPRE018" />
+        <concept name="_LOANDEP" />
+      </table>
+    </col>
+  </row>
+</layout>

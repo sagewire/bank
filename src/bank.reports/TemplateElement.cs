@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using bank.poco;
 
 namespace bank.reports
@@ -10,11 +11,12 @@ namespace bank.reports
 
         public IList<Column> DataColumns { get; set; }
 
+        private List<Column> _visibleColumns;
         public virtual IList<Column> VisibleColumns
         {
             get
             {
-                return DataColumns;
+                return _visibleColumns = DataColumns.Where(x => x.ShowColumn).ToList();
             }
         }
         public int? Lookback { get; set; }
@@ -37,7 +39,7 @@ namespace bank.reports
                 {
                     var factLookup = new FactLookup
                     {
-                        Columns = VisibleColumns,
+                        Columns = DataColumns,
                         ConceptKeys = Concept.GetConceptKeys(Concepts),
                         Lookback = this.Lookback
                     };

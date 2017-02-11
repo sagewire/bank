@@ -31,7 +31,12 @@ namespace bank.web
                 defaults: new { controller = "Pages", action = "Privacy" }
             );
 
-            
+            routes.MapRoute(
+                name: "home",
+                url: "",
+                defaults: new { controller = "Pages", action = "Placeholder", id = UrlParameter.Optional }
+            );
+
             //routes.MapRoute(
             //    name: "organization",
             //    url: "org/{name}.{id}",
@@ -50,12 +55,12 @@ namespace bank.web
                 defaults: new { controller = "Profile", action = "Viewer", template = UrlParameter.Optional, section = UrlParameter.Optional, period = UrlParameter.Optional }
             );
 
-            routes.MapRoute(
-                name: "orgs",
-                url: "org",
-                defaults: new { controller = "Directory", action = "Index", id = UrlParameter.Optional }
-            );
-            
+            //routes.MapRoute(
+            //    name: "orgs",
+            //    url: "org",
+            //    defaults: new { controller = "Directory", action = "Index", id = UrlParameter.Optional }
+            //);
+
             routes.MapRoute(
                 name: "fact",
                 url: "fact/{id}/{text}/{companies}",
@@ -67,6 +72,19 @@ namespace bank.web
                 name: "dashboard",
                 url: "dashboard/{action}/{id}",
                 defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }
+            );
+
+
+            routes.MapRoute(
+                name: "account",
+                url: "account/{action}/{id}",
+                defaults: new { controller = "Account", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "report-gen",
+                url: "{*segment}",
+                defaults: new { controller = "Report", action = "Index", segment = UrlParameter.Optional }
             );
 
             routes.MapRoute(

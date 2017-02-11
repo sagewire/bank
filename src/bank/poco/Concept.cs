@@ -73,6 +73,8 @@ namespace bank.poco
                     result = fact.NumericValue.Value.ToString("#.##");
                     break;
                 case 'U':
+                    //var format = "N0";
+                    //result = Math.Round(fact.NumericValue.Value / 1000, 0).ToString(format);
                     result = fact.NumericValue.Value.ToString("N0");
                     break;
                 case 'D':

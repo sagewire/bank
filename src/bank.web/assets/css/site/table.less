@@ -5,7 +5,7 @@
     overflow-x: auto;
 }
 
-.table-horizontal {
+.table-base {
     display: inline-block;
     width: 100%;
     background-color: #fff;
@@ -14,14 +14,46 @@
     margin-bottom: 0;
     position: relative;
 
+    thead {
+        z-index: 250;
+    }
+
+    .header-row {
+        td {
+            overflow: hidden;
+            white-space: normal;
+            background-color: lighten(@accent-color, 35);
+            border-right: 1px solid @dark;
+            text-align: center;
+            font-size: 95%;
+            font-weight: bold;
+            vertical-align: middle;
+            padding: .3rem;
+            height: 45px;
+            //padding-bottom: .1rem;
+            &:first-of-type {
+                overflow: visible;
+                border-right: none;
+                background-color: @white;
+                text-align: left;
+                padding-left: @firstColumnPadding;
+            }
+        }
+    }
+
+    .rank {
+        display: inline-block;
+        width: 60px;
+        padding-right: 15px;
+        font-weight: bold;
+        text-align: center;
+    }
+
     ::-webkit-scrollbar {
         width: 0;
         height: 0;
     }
 
-    thead {
-        z-index: 250;
-    }
 
     tr {
         &:hover {
@@ -32,6 +64,7 @@
         }
     }
 
+
     td {
         white-space: nowrap;
         overflow: hidden;
@@ -39,6 +72,7 @@
         //width: 100%;
         /*min-width: 150px;
         ;*/
+        min-width: 125px;
         max-width: 250px;
         width: 20%;
         border: 1px solid @darkish;
@@ -46,7 +80,8 @@
 
         &:first-of-type {
             max-width: 700px;
-            width:100%;
+            width: 100%;
+
             &.level-0 {
                 padding-left: @firstColumnPadding;
             }
@@ -69,28 +104,7 @@
         }
     }
 
-    .header-row {
-        td {
-            overflow: hidden;
-            white-space: normal;
-            background-color: lighten(@accent-color, 35);
-            border-right: 1px solid @dark;
-            text-align: center;
-            font-size: 95%;
-            font-weight: bold;
-            vertical-align: middle;
-            padding-top: .1rem;
-            padding-bottom: .1rem;
 
-            &:first-of-type {
-                overflow: visible;
-                border-right: none;
-                background-color: @white;
-                text-align: left;
-                //padding-left: @firstColumnPadding;
-            }
-        }
-    }
 
     .group-row {
         td {
@@ -164,4 +178,13 @@
             }
         }
     }
+}
+
+.table-horizontal {
+    //.table-base;
+}
+
+
+.table-vertical {
+    //.table-base;
 }

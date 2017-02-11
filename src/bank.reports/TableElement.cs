@@ -16,8 +16,9 @@ namespace bank.reports
 
         }
 
-        public object Orientation { get; internal set; }
+        public TableOrientation Orientation { get; internal set; }
         public int Level { get; internal set; }
+        public bool ShowRank { get; internal set; }
 
         public TableElement()
         {

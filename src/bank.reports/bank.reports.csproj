@@ -66,6 +66,7 @@
     <Compile Include="HtmlElement.cs" />
     <Compile Include="ITableRow.cs" />
     <Compile Include="Layout.cs" />
+    <Compile Include="CompanyRankColumn.cs" />
     <Compile Include="PeerGroupCustomColumn.cs" />
     <Compile Include="PeerGroupColumn.cs" />
     <Compile Include="ReportFactory.cs" />

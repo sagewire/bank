@@ -1,0 +1,31 @@
+﻿@*##################### Horizontal #####################*@
+
+@using bank.reports
+@using bank.reports.charts
+@model TableElement
+
+<table class="table table-sm table-responsive table-horizontal table-base">
+    <thead>
+        <tr class="header-row">
+            <td>
+                @Model.Title
+                @*<small class="pl-3 text-muted">(millions)</small>*@
+                @Html.Partial("_CardMenu")
+            </td>
+            @foreach (var column in Model.DataColumns)
+            {
+                if (!column.ShowColumn)
+                {
+                    continue;
+                }
+                <td>
+                    @column.HeaderText
+                </td>
+            }
+
+        </tr>
+    </thead>
+
+        @Html.Partial("template/table-horizontal/_TableRows", Model)
+
+</table>

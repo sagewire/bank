@@ -9,6 +9,7 @@ namespace bank.reports
     public class FactLookup
     {
         //public IList<int> OrganizationIds { get; set; } = new List<int>();
+
         public IList<string> ConceptKeys = new List<string>();
         public int? Lookback { get; set; }
         public IList<Column> Columns { get; set; }

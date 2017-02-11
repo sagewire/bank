@@ -22,7 +22,8 @@ namespace bank.reports
         public IList<TemplateRow> Rows { get; set; }
         public IDictionary<string, string> Placeholders { get; private set; }
 
-        public IList<Column> DataColumns { get; set; }
+        public List<Column> DataColumns { get; set; }
+
         public List<Concept> Concepts { get; set; } = new List<Concept>();
 
         public List<FactLookup> FactLookups { get; set; } = new List<FactLookup>();
@@ -46,16 +47,23 @@ namespace bank.reports
                 Concepts.AddRange(element.Concepts);
             }
 
-
-
             var factTask = Task.Run(() =>
             {
                 var facts = GetFacts(FactLookups, periodEnd);
 
+                var childColumns = new List<Column>();
+
                 foreach (var column in DataColumns)
                 {
-                    column.SetFacts(facts);
+                    column.SetFacts(facts, Concepts);
+
+                    if (column.ChildColumns != null && column.ChildColumns.Any())
+                    {
+                        childColumns.AddRange(column.ChildColumns);
+                    }
                 }
+
+                DataColumns.AddRange(childColumns);
 
             });
 
@@ -67,17 +75,32 @@ namespace bank.reports
             }));
 
             Task.WaitAll(tasks.ToArray());
-            
-            foreach(var task in tasks)
+
+            foreach (var task in tasks)
             {
                 if (task.IsFaulted)
                 {
                     throw task.Exception;
                 }
             }
-                        
+
+            //foreach (var element in Elements)
+            //{
+            //    element.SetDataColumns(DataColumns);
+            //}
+
         }
-        
+
+        //private List<Column> _visibleColumns;
+        //public List<Column> VisibleColumns
+        //{
+        //    get
+        //    {
+        //        return _visibleColumns = DataColumns.Where(x => x.ShowColumn).ToList();
+        //    }
+        //}
+
+
         private void SetDefinitions()
         {
             var conceptRepo = new ConceptDefinitionRepository();
@@ -139,6 +162,16 @@ namespace bank.reports
 
                         var factRepo = new FactRepository();
                         return factRepo.GetPeerGroupCustomFacts(lookup.ConceptKeys, column.PeerGroupCustom, period, lookup.Lookback);//, lookback: DateTime.Now.AddQuarters(-12));
+                    }));
+                }
+
+
+                if (lookup.Columns.Any(x => x.ColumnType == ColumnTypes.CompanyRank))
+                {
+                    tasks.Add(Task.Run(() =>
+                    {
+                        var factRepo = new FactRepository();
+                        return factRepo.GetFacts(lookup.ConceptKeys, period, 0);//, lookback: DateTime.Now.AddQuarters(-12));
                     }));
                 }
             }
@@ -286,7 +319,7 @@ namespace bank.reports
             item.Title = title;
             item.Partial = partial;
             item.Lookback = lookback;
-            
+
 
             return item;
 
@@ -299,7 +332,7 @@ namespace bank.reports
             chart.ChartConfig = ChartConfig.Build(element, Placeholders);
 
             chart.Concepts.AddRange(chart.ChartConfig.Concepts);
-            
+
             //this.Elements.Add(chart);
 
             return chart;
@@ -310,15 +343,17 @@ namespace bank.reports
         {
             var table = new TableElement();
             table.Level = level;
-                        table.Orientation = Enum.Parse(typeof(TableOrientation), element.SafeAttributeValue("orientation") ?? "vertical", true);
-            TableElement current = table;
-            
+            table.Orientation = (TableOrientation)Enum.Parse(typeof(TableOrientation), element.SafeAttributeValue("orientation") ?? "horizontal", true);
+            table.ShowRank = element.SafeBoolAttributeValue("show-rank") ?? false;
 
-            foreach(var item in element.Elements())
+            TableElement current = table;
+
+
+            foreach (var item in element.Elements())
             {
                 ITableRow tableRow = null;
 
-                switch(item.Name.ToString().ToLower())
+                switch (item.Name.ToString().ToLower())
                 {
                     case "concept":
                         var conceptRow = new TableRow();

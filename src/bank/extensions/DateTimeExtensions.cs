@@ -43,7 +43,8 @@ namespace bank.extensions
             var diff = daysInMonth - candidate.Day;
 
             candidate = candidate.AddDays(diff);
-            
+
+            candidate = new DateTime(candidate.Year, candidate.Month, candidate.Day);
 
             return candidate;
         }

@@ -103,7 +103,14 @@ namespace bank.web.Controllers
             reportFactory.SectionFilter = section;
             reportFactory.Period = periodEnd;
             reportFactory.OrganizationIds = companies;
-            reportFactory.PeerGroups.Add(Global.PeerGroups[org.StatePeerGroup]);
+
+            if (!string.IsNullOrWhiteSpace(org.StatePeerGroup))
+            {
+                if (Global.PeerGroups.ContainsKey(org.StatePeerGroup))
+                {
+                    reportFactory.PeerGroups.Add(Global.PeerGroups[org.StatePeerGroup]);
+                }
+            }
             reportFactory.CustomPeerGroups.AddRange(org.CustomPeerGroups);
 
             var layout = reportFactory.Build();

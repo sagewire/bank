@@ -27,29 +27,29 @@ namespace bank.import.ffiec
             Console.WriteLine("starting download");
 
             InitializeTaskPool();
-                        
+
             _taskPool.Start();
 
             var repo = new ReportImportRepository();
 
             var lastRun = repo.LastReportDate();
-            var periodStart = DateTime.Parse("2002-12-31");
+            var periodStart = DateTime.Now.LastQuarterDate();
+            var periodEnd = DateTime.Parse("2002-12-31");
             //var periodStart = DateTime.Parse("2008-03-31");
 
             if (!lastRun.HasValue)
             {
-                lastRun = periodStart;
+                lastRun = periodEnd;
             }
 
+            //lastRun = periodStart;
 
-            lastRun = periodStart;
-
-            while(periodStart <= DateTime.Now)
+            while (periodStart >= periodEnd)
             {
                 _taskPool.Enqueue(new TaskData { period = periodStart, lastRun = lastRun.Value });
-                periodStart = periodStart.AddQuarters(1);
+                periodStart = periodStart.AddQuarters(-1);
             }
-            
+
         }
         static void RetrieveFilers(DateTime period, DateTime lastRun)
         {
@@ -60,7 +60,7 @@ namespace bank.import.ffiec
 
             var result = ffiec.RetrieveFilersSubmissionDateTime(
                 gov.ffiec.cdr.ReportingDataSeriesName.Call,
-                period.ToString(), 
+                period.ToString(),
                 lastRun.ToString());
 
             //var result = ffiec.RetrieveFacsimile(
@@ -72,7 +72,7 @@ namespace bank.import.ffiec
 
             //var result = ffiec.RetrieveUBPRXBRLFacsimile("2002-12-31", gov.ffiec.cdr.FinancialInstitutionIDType.ID_RSSD, 688556);
 
-            foreach(var item in result)
+            foreach (var item in result)
             {
                 var orgRepo = new OrganizationRepository();
                 var org = orgRepo.LookupByRssd(item.ID_RSSD);
@@ -91,43 +91,43 @@ namespace bank.import.ffiec
                     ubprReportItem.ReportType = ReportTypes.UBPR;
                     ubprReportItem.OrganizationId = org.OrganizationId;
 
-                    
-                    if (_initialImport)
-                    {
-                        Console.WriteLine("Inserting {0} {1} {2}", callReportItem.Period, callReportItem.ReportTypeAsString, callReportItem.OrganizationId);
-                        Repository<ReportImport>.New().Insert(callReportItem);
-                        Repository<ReportImport>.New().Insert(ubprReportItem);
-                    }
-                    else
-                    {
 
-                        var existingCall = Repository<ReportImport>.New().Get(callReportItem);
+                    //if (_initialImport)
+                    //{
+                    //    Console.WriteLine("Inserting {0} {1} {2}", callReportItem.Period, callReportItem.ReportTypeAsString, callReportItem.OrganizationId);
+                    //    Repository<ReportImport>.New().Insert(callReportItem);
+                    //    Repository<ReportImport>.New().Insert(ubprReportItem);
+                    //}
+                    //else
+                    //{
 
-                        if (existingCall != null)
+                    var existingCall = Repository<ReportImport>.New().Get(callReportItem);
+
+                    if (existingCall != null)
+                    {
+                        if (existingCall.Filed != callReportItem.Filed)
                         {
-                            if (existingCall.Filed != callReportItem.Filed)
-                            {
-                                Console.WriteLine("Updated filing {0} {1} {2}", callReportItem.Period, callReportItem.ReportTypeAsString, callReportItem.OrganizationId);
-                                Repository<ReportImport>.New().Update(callReportItem);
-                                Repository<ReportImport>.New().Update(ubprReportItem);
-                            }
-                            else
-                            {
-                                Console.WriteLine("No change {0} {1} {2}", callReportItem.Period, callReportItem.ReportTypeAsString, callReportItem.OrganizationId);
-                            }
+                            Console.WriteLine("Updated filing {0} {1} {2}", callReportItem.Period, callReportItem.ReportTypeAsString, callReportItem.OrganizationId);
+                            Repository<ReportImport>.New().Update(callReportItem);
+                            Repository<ReportImport>.New().Update(ubprReportItem);
                         }
                         else
                         {
-                            Console.WriteLine("Inserting {0} {1} {2}", callReportItem.Period, callReportItem.ReportTypeAsString, callReportItem.OrganizationId);
-                            Repository<ReportImport>.New().Insert(callReportItem);
-                            Repository<ReportImport>.New().Save(ubprReportItem);
+                            Console.WriteLine("No change {0} {1} {2}", callReportItem.Period, callReportItem.ReportTypeAsString, callReportItem.OrganizationId);
                         }
-                        
+                    }
+                    else
+                    {
+                        Console.WriteLine("Inserting {0} {1} {2}", callReportItem.Period, callReportItem.ReportTypeAsString, callReportItem.OrganizationId);
+                        Repository<ReportImport>.New().Insert(callReportItem);
+                        Repository<ReportImport>.New().Save(ubprReportItem);
                     }
 
                 }
+
+                //}
             }
-            
+
         }
 
         static void InitializeTaskPool()
@@ -191,7 +191,7 @@ namespace bank.import.ffiec
         {
             var note = "";
 
-            for(int i = 0; i <= level; i++)
+            for (int i = 0; i <= level; i++)
             {
                 note += ".o";
             }
@@ -208,7 +208,7 @@ namespace bank.import.ffiec
             sb.AppendLine(line);
             Console.WriteLine(line);
 
-            foreach(var child in node.ChildNodes)
+            foreach (var child in node.ChildNodes)
             {
                 WriteLine(sb, child, level + 1);
             }
@@ -231,7 +231,7 @@ namespace bank.import.ffiec
 
             element.Add(child);
 
-            foreach(var childnode in node.ChildNodes)
+            foreach (var childnode in node.ChildNodes)
             {
                 SerializeNode(child, childnode);
             }
@@ -258,10 +258,10 @@ namespace bank.import.ffiec
 
                 //var tree = doc.XbrlFragments[0].GetPresentableFactTree();
 
-//                Serialize(tree);
+                //                Serialize(tree);
 
                 //WriteTemplate(tree);
-                
+
                 if (!doc.IsValid)
                 {
                     //throw new Exception(string.Format("Invalid XBRL {0}", file));

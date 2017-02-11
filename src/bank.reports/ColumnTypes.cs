@@ -10,6 +10,7 @@ namespace bank.reports
     {
         Company,
         PeerGroup,
-        PeerGroupCustom
+        PeerGroupCustom,
+        CompanyRank
     }
 }

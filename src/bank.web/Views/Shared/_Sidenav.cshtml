@@ -133,19 +133,41 @@
                 </li>
             }
         }
-        <li class="nav-item">
-            <a class="nav-link" href="#">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" onclick="return false;" data-toggle="dropdown">
                 <i class="fa fa-fw fa-line-chart" aria-hidden="true"></i>
                 Rankings
             </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="@Url.ReportUrl("rankings/assets")">
+                    <i class="fa fa-fw fa-hashtag" aria-hidden="true"></i>
+                    By Total Assets
+                </a>
+                <a class="dropdown-item" href="@Url.ReportUrl("rankings/deposits")">
+                    <i class="fa fa-fw fa-hashtag" aria-hidden="true"></i>
+                    By Total Deposits
+                </a>
+                <a class="dropdown-item" href="@Url.ReportUrl("rankings/loans")">
+                    <i class="fa fa-fw fa-hashtag" aria-hidden="true"></i>
+                    By Total Loans
+                </a>
+                <a class="dropdown-item" href="@Url.ReportUrl("rankings/capital")">
+                    <i class="fa fa-fw fa-hashtag" aria-hidden="true"></i>
+                    By Total Capital
+                </a>
+                <a class="dropdown-item" href="@Url.ReportUrl("rankings/net-interest-margin")">
+                    <i class="fa fa-fw fa-hashtag" aria-hidden="true"></i>
+                    By Net Interest Margin
+                </a>
+            </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="@Url.RouteUrl("orgs")">
+            <a class="nav-link" href="@Url.ReportUrl("org")">
                 <i class="fa fa-fw fa-building-o" aria-hidden="true"></i>
                 Bank Directory
             </a>
         </li>
-        <li class="nav-item">
+        @*<li class="nav-item">
             <a class="nav-link active" href="#">
                 <i class="fa fa-fw fa-newspaper-o" aria-hidden="true"></i>
                 News
@@ -156,7 +178,7 @@
                 <i class="fa fa-fw fa-snowflake-o" aria-hidden="true"></i>
                 Community
             </a>
-        </li>
+        </li>*@
         <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="fa fa-fw fa-envelope-o" aria-hidden="true"></i>

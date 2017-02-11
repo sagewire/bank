@@ -241,7 +241,7 @@ $(function () {
             },
             legend: {
                 enabled: true,
-                layout: "horizontal"
+                layout: "vertical"
             },
             tooltip: {
                 //shared: true,

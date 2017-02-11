@@ -1,0 +1,21 @@
+﻿@using bank.reports
+@using bank.reports.charts
+
+@model TableElement
+
+@foreach (ITableRow row in Model.Rows)
+{
+    switch (row.TableRowType)
+    {
+        case TableRowTypes.Header:
+            @Html.Partial("template/table-horizontal/_TableRowHeader", new TableRowViewModel { Row = (TableRow)row, Columns = Model.VisibleColumns, Table = Model })
+            break;
+        case TableRowTypes.Concept:
+            @Html.Partial("template/table-horizontal/_TableRowConcept", new TableRowViewModel { Row = (TableRow)row, Columns = Model.VisibleColumns, Table = Model })
+            break;
+        case TableRowTypes.Group:
+            @Html.Partial("template/table-horizontal/_TableRowGroup", new TableRowViewModel { RowGroup = (TableRowGroup)row, Columns = Model.VisibleColumns, Table = Model })
+            break;
+    }
+
+}

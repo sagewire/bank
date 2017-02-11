@@ -94,13 +94,13 @@ namespace bank.data.repositories
                 //orgs is intentionally created as a string instead of a param due to some weird query plan decisions by SQL
 
                 facts = conn.Query<PeerGroupFact>(sql, new
-                                                {
-                                                    PeerGroupCustomId = peerGroupCustom.PeerGroupCustomId,
-                                                    Names = names.Distinct(),
-                                                    PeriodEnd = periodEnd,
-                                                    PeriodStart = periodStart,
-                                                    PeerGroup = peerGroupCustom.PeerGroupCode
-                                                },
+                {
+                    PeerGroupCustomId = peerGroupCustom.PeerGroupCustomId,
+                    Names = names.Distinct(),
+                    PeriodEnd = periodEnd,
+                    PeriodStart = periodStart,
+                    PeerGroup = peerGroupCustom.PeerGroupCode
+                },
                                                 commandType: CommandType.Text)
                                                 .ToList();
 
@@ -207,8 +207,92 @@ namespace bank.data.repositories
                 return consolidatedFacts;
 
             }
+        }
 
+        public IList<Fact> GetFacts(IList<string> names, DateTime period, int? lookback = null)
+        {
+            if (!lookback.HasValue)
+            {
+                lookback = 0;
+            }
+            var periodStart = period.AddQuarters(-lookback.Value);
 
+            return GetFacts(names, periodStart, period);
+        }
+
+        public IList<Fact> GetFacts(IList<string> names, DateTime periodStart, DateTime periodEnd)
+        {
+            var sql = new StringBuilder();
+            sql.AppendLine("select * from Fact");
+            sql.AppendLine("where Name in @Names and Period between @PeriodStart");
+            sql.AppendLine("and @PeriodEnd order by Period desc");
+
+            using (var conn = new SqlConnection(Settings.ConnectionString))
+            {
+                conn.Open();
+                
+                var facts = conn.Query<CompanyFact>(sql.ToString(), new
+                                                {
+                                                    Names = names.Distinct(),
+                                                    PeriodEnd = periodEnd,
+                                                    PeriodStart = periodStart
+                                                },
+                                                commandType: CommandType.Text)
+                                                .ToList();
+
+                return ConsolidateCompanyFacts(facts);
+            }
+        }
+
+        private IList<Fact> ConsolidateCompanyFacts(IList<CompanyFact> facts)
+        {
+            var maxPeriod = facts.Select(x => x.Period.Value).Max();
+
+            var orgs = new Dictionary<string, Fact>();
+
+            var keyFormat = "{0}-{1}";
+
+            foreach (var fact in facts)
+            {
+                Fact combinedFact;
+                var key = string.Format(keyFormat, fact.OrganizationId, fact.Name);
+                if (orgs.ContainsKey(key))
+                {
+                    combinedFact = orgs[key];
+                    combinedFact.HistoricalData.Add(fact.Period.Value, fact);
+                }
+                else
+                {
+                    orgs.Add(key, fact);
+                }
+            }
+
+            var consolidatedFacts = orgs.Values.ToList();
+
+            //var organizationIds = facts.Select(x => x.OrganizationId).Distinct().ToList();
+
+            //foreach (var orgId in organizationIds.Distinct())
+            //{
+            //    //var maxPeriod = facts.Where(x => x.OrganizationId == orgId).Select(x => x.Period.Value).Max();
+            //    //pack older facts into most recent fact
+            //    var current = facts.Where(x => x.Period == maxPeriod && x.OrganizationId == orgId).ToList();
+
+            //    foreach (var fact in current)
+            //    {
+            //        var d = facts.Where(x => x.Name == fact.Name &&
+            //                                    x.Period <= fact.Period &&
+            //                                    x.OrganizationId == orgId &&
+            //                                    x.NumericValue.HasValue)
+            //                                    .ToDictionary(x => x.Period.Value, x => (Fact)x);
+
+            //        fact.HistoricalData = new SortedDictionary<DateTime, Fact>(d);
+            //    }
+
+            //    consolidatedFacts.AddRange(current);
+
+            //}
+
+            return consolidatedFacts;
         }
 
         public IList<Fact> GetFacts(IList<string> names, IList<int> organizationIds, DateTime period, int? lookback = null)
@@ -277,6 +361,7 @@ namespace bank.data.repositories
                 return consolidatedFacts;
             }
         }
+
 
 
         //public IList<Fact> GetFacts(string[] names, int[] organizationIds)

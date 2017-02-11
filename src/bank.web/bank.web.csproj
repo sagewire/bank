@@ -334,35 +334,53 @@
     </Content>
     <Content Include="browserconfig.xml" />
     <Content Include="Global.asax" />
-    <Content Include="report-templates\income-statement.xml">
+    <Content Include="templates\income-statement.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="report-templates\call.patch.xml" />
-    <Content Include="report-templates\config.xml">
+    <Content Include="templates\call.patch.xml" />
+    <Content Include="templates\config.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="report-templates\concept-definition.xml" />
-    <Content Include="report-templates\balance-sheet.xml" />
-    <Content Include="report-templates\dashboard.xml">
+    <Content Include="templates\concept-definition.xml" />
+    <Content Include="templates\balance-sheet.xml" />
+    <Content Include="templates\dashboard.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="report-templates\test.xml">
+    <Content Include="templates\org.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="report-templates\profile-layout.xml">
+    <Content Include="templates\rankings\net-interest-margin.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="report-templates\peer-groups.xml" />
-    <Content Include="report-templates\call.xml">
+    <Content Include="templates\rankings\loans.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="report-templates\deposit-composition.xml" />
-    <Content Include="report-templates\financial-highlights.xml" />
-    <Content Include="report-templates\assets-piechart.xml" />
-    <Content Include="report-templates\loan-composition.xml" />
-    <Content Include="report-templates\ubpr.mdrm.txt" />
-    <Content Include="report-templates\ubpr.patch.xml" />
-    <Content Include="report-templates\ubpr.xml" />
+    <Content Include="templates\rankings\capital.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\rankings\deposits.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\rankings\assets.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\test.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\profile-layout.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\peer-groups.xml" />
+    <Content Include="templates\call.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\deposit-composition.xml" />
+    <Content Include="templates\financial-highlights.xml" />
+    <Content Include="templates\assets-piechart.xml" />
+    <Content Include="templates\loan-composition.xml" />
+    <Content Include="templates\ubpr.mdrm.txt" />
+    <Content Include="templates\ubpr.patch.xml" />
+    <Content Include="templates\ubpr.xml" />
     <Content Include="robots.txt" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\iFrame.cshtml" />
@@ -395,6 +413,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\images\headers\" />
+    <Folder Include="Views\Report\" />
     <Folder Include="Views\Shared\ImageGen\" />
   </ItemGroup>
   <ItemGroup>
@@ -426,17 +445,13 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <None Include="Properties\PublishProfiles\bank.pubxml" />
-    <Content Include="Views\Profile\Viewer.cshtml" />
+    <Content Include="Views\Shared\Viewer.cshtml" />
     <Content Include="Views\Shared\Avatar.cshtml" />
     <Content Include="Views\Directory\Index.cshtml" />
-    <Content Include="Views\Report\_Sidebar.cshtml" />
     <Content Include="Views\Shared\_BankBasics.cshtml" />
     <Content Include="Views\Shared\Modals\Search.cshtml" />
     <Content Include="Views\Shared\_States.cshtml" />
     <Content Include="Views\Shared\Modals\Definition.cshtml" />
-    <Content Include="Views\Profile\_HeaderSidebar.cshtml" />
-    <Content Include="Views\Profile\_SidebarReport.cshtml" />
-    <Content Include="Views\Profile\_SecondaryReport.cshtml" />
     <Content Include="Views\Profile\_Header.cshtml" />
     <Content Include="Views\Shared\_CardMenu.cshtml" />
     <Content Include="Views\Shared\_FactTrendArrow.cshtml" />
@@ -448,8 +463,8 @@
     <Content Include="Views\Shared\template\_ChartElement.cshtml" />
     <Content Include="Views\Shared\template\_KeyRatio.cshtml" />
     <Content Include="Views\Shared\template\_TableElement.cshtml" />
-    <Content Include="Views\Shared\template\_TableRowConcept.cshtml" />
-    <Content Include="Views\Shared\template\_TableRowHeader.cshtml" />
+    <Content Include="Views\Shared\template\table-horizontal\_TableRowConcept.cshtml" />
+    <Content Include="Views\Shared\template\table-horizontal\_TableRowHeader.cshtml" />
     <Content Include="Views\Shared\_Sidenav.cshtml" />
     <Content Include="Views\Pages\Placeholder.cshtml" />
     <Content Include="Views\Account\Signin.cshtml" />
@@ -459,8 +474,11 @@
     <Content Include="Views\Shared\_SignIn.cshtml" />
     <Content Include="Views\Shared\_Register.cshtml" />
     <Content Include="Views\Shared\_DataMessage.cshtml" />
-    <Content Include="Views\Shared\template\_TableRows.cshtml" />
-    <Content Include="Views\Shared\template\_TableRowGroup.cshtml" />
+    <Content Include="Views\Shared\template\table-horizontal\_TableRows.cshtml" />
+    <Content Include="Views\Shared\template\table-horizontal\_TableRowGroup.cshtml" />
+    <Content Include="Views\Shared\template\table-vertical\_TableElement.cshtml" />
+    <Content Include="Views\Shared\template\table-horizontal\_TableElement.cshtml" />
+    <Content Include="Views\Shared\template\table-vertical\_TableRows.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bank.reports\bank.reports.csproj">

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,32 +17,51 @@ namespace bank.web.Controllers
     public class ReportController : ApplicationController
     {
 
-        //public ActionResult Viewer(string name, string id, DateTime? period, string template, string section, string c = null)
-        //{
-        //    var orgId = DecodeId(id);
-        //    var companies = new List<int>();
-        //    companies.Add(orgId);
-        //    var model = new ReportViewModel();
-        //    companies.AddRange(DecodeIds(c));
+        public ActionResult Index(string segment)
+        {
+            var template = GetTemplate(segment);
+            var id = "UBPR2170";
 
-        //    var orgRepo = new OrganizationRepository();
-        //    model.Organization = orgRepo.GetOrganization(orgId, true, true);
+            var model = new ReportViewModel();
+            model.Profile = CurrentProfile;
 
-        //    model.Report = new Report(template, section: section);
+            var reportFactory = new ReportFactory();
+            reportFactory.Template = template;
+            reportFactory.Period = DateTime.Now.LastQuarterDate();
 
+            var companyRank = new CompanyRankColumn();
+            //companyRank.OrderBy = id ?? "UBPR2170";
 
-        //    var tasks = new List<Task>();
-
-        //    var modelTask = Task.Run(() => PopulateReportsAndColumns(model.Organization, companies, model));
-
-        //    tasks.Add(modelTask);
-
-        //    Task.WaitAll(tasks.ToArray());
+            reportFactory.SetColumn(companyRank);
             
-        //    return View(model);
 
+            model.Layout = reportFactory.Build();
+            //model.IsNewDashboard = !reportFactory.Organizations.Any();
 
-        //}
+            return View("viewer", model);
+        }
+
+        private string GetTemplate(string segments)
+        {
+            while(!string.IsNullOrWhiteSpace(segments))
+            {
+                var testFile = Path.Combine(Settings.ReportTemplatePath, segments + ".xml");
+
+                if (System.IO.File.Exists(testFile))
+                {
+                    return segments;
+                }
+
+                if (!segments.Contains("/"))
+                {
+                    throw new FileNotFoundException(Request.RawUrl);
+                }
+
+                segments = segments.Substring(0, segments.LastIndexOf("/"));
+            }
+
+            return null;
+        }
 
     }
 

@@ -45,7 +45,7 @@ namespace bank.web.Controllers
                         DefaultAuthenticationTypes.ApplicationCookie);
 
                     AuthenticationManager.SignIn(
-                        new AuthenticationProperties { IsPersistent = false }, ident);
+                        new AuthenticationProperties { IsPersistent = true, ExpiresUtc  = DateTimeOffset.UtcNow.AddDays(3) }, ident);
 
 
                     return Redirect(login.ReturnUrl ?? Url.RouteUrl("dashboard", new { action = "Index" } ));
@@ -101,7 +101,7 @@ namespace bank.web.Controllers
 
                     var ident = UserManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
 
-                    AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = false }, ident);
+                    AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true, ExpiresUtc = DateTimeOffset.UtcNow.AddDays(3) }, ident);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
