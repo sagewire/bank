@@ -5,5 +5,6 @@
 <div id="@Model.ChartConfig.ChartId"
      class="reveal-slow chart-responsive @Model.ChartConfig.CssClasses"
      data-chart-type="@Model.ChartDataType"
+     data-annotations="@Model.ChartConfig.Annotations.ToJson()"
      data-series="@Model.ChartConfig.GetSeriesData().ToJson()"></div>
 

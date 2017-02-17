@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+  <row>
+    <col>
+      <chart type="combo" chart-override="primary" css-classes="main-chart" lookback="200" title="Balance Sheet Highlights">
+        <series type="areaspline" column="0" z-index="10" focus="last">
+          <concept name="BHCK2170"/>
+        </series>
+        <series type="areaspline" column="0" z-index="10" focus="last">
+          <concept name="BHCKE119"/>
+        </series>
+        <series type="areaspline" column="0" z-index="10" focus="last">
+          <concept name="BHCKK434"/>
+        </series>
+        <series type="areaspline" column="0" z-index="10" focus="last">
+          <concept name="BHCK3210"/>
+        </series>
+      </chart>
+    </col>
+  </row>
+  <row>
+    <col>
+      <element partial="ChildRelationships" data-source="Relationships" />
+    </col>
+  </row>
+  <row>
+    <col>
+      <table title="Financial Highlights" lookback="4">
+        <concept name="BHCK2170" />
+        <concept name="BHCK0081" />
+      </table>
+    </col>
+  </row>
+</layout>

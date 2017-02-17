@@ -13,8 +13,11 @@ using XmlTransform;
 
 namespace bank.reports
 {
+    public delegate void DataSourceNeededEventHandler(TemplateElement element);
+
     public class Layout
     {
+        public event DataSourceNeededEventHandler DataSourceNeeded;
         public string Template { get; set; }
         public string Name { get; set; }
         public string SectionFilter { get; set; }
@@ -35,16 +38,27 @@ namespace bank.reports
             Template = template;
         }
 
+        protected virtual void OnDataSourceNeeded(TemplateElement element)
+        {
+            if (DataSourceNeeded != null)
+                DataSourceNeeded(element);
+        }
 
         public void Populate(DateTime periodEnd)
         {
             var tasks = new List<Task>();
+            var dataSourceElements = new List<TemplateElement>();
 
             foreach (var element in Elements)
             {
                 element.SetDataColumns(DataColumns);
                 FactLookups = FactLookup.Merge(element.FactLookups, this.FactLookups);
                 Concepts.AddRange(element.Concepts);
+
+                if(!string.IsNullOrWhiteSpace(element.DataSource))
+                {
+                    dataSourceElements.Add(element);
+                }
             }
 
             var factTask = Task.Run(() =>
@@ -65,6 +79,14 @@ namespace bank.reports
 
                 DataColumns.AddRange(childColumns);
 
+            });
+
+            var dataSourcesTask = Task.Run(() =>
+            {
+                foreach(var element in dataSourceElements)
+                {
+                    OnDataSourceNeeded(element);
+                }
             });
 
             tasks.Add(factTask);
@@ -112,7 +134,7 @@ namespace bank.reports
 
             foreach (var concept in Concepts)
             {
-                var definition = definitions.SingleOrDefault(x => x.Mdrm == concept.Value);
+                var definition = definitions.SingleOrDefault(x => x.ItemNumber == concept.ItemNumber);
 
                 if (definition != null)
                 {
@@ -296,6 +318,7 @@ namespace bank.reports
             var partial = element.SafeAttributeValue("partial");
             var title = element.SafeAttributeValue("title");
             var lookback = element.SafeIntAttributeValue("lookback");
+            var dataSource = element.SafeAttributeValue("data-source");
 
             TemplateElement item;
 
@@ -312,6 +335,9 @@ namespace bank.reports
                 case "table":
                     item = ParseTable(element);
                     break;
+                case "element":
+                    item = new TemplateElement();
+                    break;
                 default:
                     throw new NotSupportedException(string.Format("The element [{0}] is not supported", name));
             }
@@ -319,7 +345,7 @@ namespace bank.reports
             item.Title = title;
             item.Partial = partial;
             item.Lookback = lookback;
-
+            item.DataSource = dataSource;
 
             return item;
 

@@ -168,7 +168,7 @@ namespace bank.import.ffiec
                 org = new Organization
                 {
                     Name = "",
-                    FFIEC = id
+                    ID_RSSD = id
                 };
 
                 Repository<Organization>.New().Insert(org);

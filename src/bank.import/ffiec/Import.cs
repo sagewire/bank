@@ -91,7 +91,7 @@ namespace bank.import.ffiec
                 org = new Organization
                 {
                     Name = "",
-                    FFIEC = id
+                    ID_RSSD = id
                 };
 
                 Repository<Organization>.New().Insert(org);
@@ -173,7 +173,7 @@ namespace bank.import.ffiec
                     gov.ffiec.cdr.ReportingDataSeriesName.Call,
                     reportImport.Period.ToShortDateString(), 
                     gov.ffiec.cdr.FinancialInstitutionIDType.ID_RSSD,
-                    org.FFIEC,
+                    org.ID_RSSD,
                     gov.ffiec.cdr.FacsimileFormat.XBRL);
 
                 return null;
@@ -183,7 +183,7 @@ namespace bank.import.ffiec
                 var result = ffiec.RetrieveUBPRXBRLFacsimile(
                     reportImport.Period.ToShortDateString(),
                     gov.ffiec.cdr.FinancialInstitutionIDType.ID_RSSD,
-                    org.FFIEC);
+                    org.ID_RSSD);
 
                 var text = UTF8Encoding.UTF8.GetString(result);
 

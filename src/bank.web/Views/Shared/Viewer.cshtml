@@ -17,3 +17,21 @@
 <main class="@(Model.Organization == null ? "" : "first")">
     @Html.Partial("template/_Rows", new RowsViewModel { Rows = Model.Layout.Rows })
 </main>
+
+
+
+@*<div class="card first" style="background-color: red;">
+    <div class="card-block">
+
+        @foreach (var transformation in Model.Organization.Transformations.Where(x => x.PredecessorOrganization != null))
+        {
+            <div>
+                [ @transformation.RoundedToQuarter ]  @transformation.D_DT_TRANS.Value
+                <a href="@Url.Url(@transformation.PredecessorOrganization)">
+                    @transformation.PredecessorOrganization.Name
+                </a>
+            </div>
+        }
+    </div>
+    <br /><br /><br /><br /><br /><br />
+</div>*@

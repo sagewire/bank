@@ -19,6 +19,8 @@ namespace bank.app
     {
         static void Main(string[] args)
         {
+            var threads = args.Length > 1 ? int.Parse(args[1]) : 8;
+
             switch (args[0])
             {
                 case "fbauth":
@@ -27,8 +29,20 @@ namespace bank.app
                 case "crawl":
                     Import.Start();
                     break;
+                case "ffiec-orgs":
+                    bank.import.ffiec.ImportOrganizations.Start();
+                    //bank.import.ffiec.ImportTransformations.Start();
+                    //bank.import.ffiec.ImportRelationships.Start();
+
+                    break;
+                case "fdic-branches":
+                    bank.import.fdic.ImportBranches.Start();
+                    break;
                 case "ffiec-spider":
                     bank.import.ffiec.Spider.Start();
+                    break;
+                case "y9":
+                    bank.import.fdic.ImportBankHoldingData.Start(threads);
                     break;
                 case "ffiec":
                     bank.import.ffiec.Import.Start();

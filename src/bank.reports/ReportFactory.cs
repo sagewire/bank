@@ -5,11 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using bank.data.repositories;
 using bank.poco;
+using bank.reports.charts;
 
 namespace bank.reports
 {
     public class ReportFactory
     {
+        public event DataSourceNeededEventHandler DataSourceNeeded;
+
         public List<Organization> Organizations { get; set; } = new List<Organization>();
         public List<int> OrganizationIds { get; set; } = new List<int>();
         public List<PeerGroupStandard> PeerGroups { get; set; } = new List<PeerGroupStandard>();
@@ -20,12 +23,20 @@ namespace bank.reports
 
         private List<Column> Columns { get; set; } = new List<Column>();
 
+
+
+        protected void OnDataSourceNeeded(TemplateElement element)
+        {
+            if (DataSourceNeeded != null)
+                DataSourceNeeded(element);
+        }
+
         public Layout Build()
         {
             var layout = new Layout();
             layout.SectionFilter = SectionFilter;
             layout.Load(Template);
-            
+            layout.DataSourceNeeded += OnDataSourceNeeded;
             //get columns
             layout.DataColumns = GetColumns();
 
@@ -56,6 +67,7 @@ namespace bank.reports
                     }
                 }
             }
+
             GetOrganizations();
             
             SetColumns(layout);
@@ -63,6 +75,7 @@ namespace bank.reports
             //set columns
             return layout;
         }
+
 
         private void GetOrganizations()
         {

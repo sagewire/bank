@@ -27,6 +27,11 @@ namespace bank.web
             Database.SetInitializer<AuthDbContext>(null);
         }
 
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(HttpContext.Current.Request.RawUrl);
+        }
+
         protected void Application_EndRequest(object sender, EventArgs e)
         {
             try

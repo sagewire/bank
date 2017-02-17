@@ -1,0 +1,62 @@
+﻿@using bank.reports
+@using bank.poco;
+
+@model TemplateElement
+
+@{
+    var org = (Organization)Model.Data;
+}
+
+<table class="table table-sm table-responsive table-horizontal table-base">
+
+    <thead>
+        <tr class="header-row">
+            <td>
+                Acquisitions &amp; Mergers
+                @Html.Partial("_CardMenu")
+            </td>
+            <td>
+                Transaction Date
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transformation in org.SucessorTransformations)
+        {
+            <tr>
+                <td>
+                    @if (transformation.PredecessorOrganization != null)
+                    {
+                        <a href="@Url.Url(transformation.PredecessorOrganization)">
+                            @transformation.PredecessorOrganization.Name
+                        </a>
+                    }
+                    else
+                    {
+                        <text>Unknown</text>
+                    }
+                </td>
+                <td>@transformation.D_DT_TRANS.Value.ToShortDateString()</td>
+            </tr>
+        }
+
+        @foreach (var transformation in org.PredecessorTransformations)
+        {
+            <tr>
+                <td>
+                    @if (transformation.SuccessorOrganization != null)
+                    {
+                        <a href="@Url.Url(transformation.SuccessorOrganization)">
+                            @transformation.SuccessorOrganization.Name
+                        </a>
+                    }
+                    else
+                    {
+                        <text>Unknown</text>
+                    }
+                </td>
+                <td>@transformation.D_DT_TRANS.Value.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>

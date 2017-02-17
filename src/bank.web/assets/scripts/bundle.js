@@ -7315,8 +7315,8 @@ $(function () {
                 chartDiv.className = "lineitem-sparkline";
                 $(chartDiv).data("series", series);
                 $(thisHover).prepend(chartDiv);
-                
-                
+
+
                 $(chartDiv).highcharts('SparkLine', {
                     plotOptions: {
                         series: {
@@ -7480,6 +7480,7 @@ $(function () {
             labels: {
                 enabled: true
             },
+
         },
         yAxis: {
             gridLineWidth: 0,
@@ -7569,7 +7570,7 @@ Highcharts.SparkLine = function (elem, b, c) {
         tooltip: {
             enabled: false
         },
-        legend:{
+        legend: {
             enabled: false
         },
         series: [],
@@ -7589,14 +7590,18 @@ Highcharts.Combo = function (elem, b, c) {
             renderTo: (options.chart && options.chart.renderTo) || this,
         },
         series: [],
-
+        xAxis: {
+            plotLines: []
+        }
     };
+
+
 
     return DefaultChart(elem, b, c, defaultOptions);
 };
 
 
-function DefaultChart (elem, b, c, defaultOptions) {
+function DefaultChart(elem, b, c, defaultOptions) {
 
     var hasRenderToArg = typeof elem === 'string' || elem.nodeName,
     options = arguments[hasRenderToArg ? 1 : 0],
@@ -7605,6 +7610,7 @@ function DefaultChart (elem, b, c, defaultOptions) {
     options = Highcharts.merge(defaultOptions, options);
 
     var seriesData = $(elem).data("series");
+    var annotations = $(elem).data("annotations");
 
     var counter = 0;
     $.each(seriesData, function (index, value) {
@@ -7612,6 +7618,21 @@ function DefaultChart (elem, b, c, defaultOptions) {
         $.extend(true, value, def);
     });
 
+    var plotlines = options.xAxis.plotLines;
+
+    $.each(annotations, function (index, value) {
+        var item = {
+            color: '#FF0000',
+            width: 2,
+            zIndex: 5,
+            value: value.value,
+            label: {
+                text: value.text
+            }
+        };
+
+        plotlines.push(item);
+    });
 
     options.series = seriesData;
 

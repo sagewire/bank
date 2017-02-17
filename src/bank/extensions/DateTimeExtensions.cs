@@ -36,7 +36,7 @@ namespace bank.extensions
 
         public static DateTime LastQuarterDate(this DateTime date)
         {
-            var candidate = date.AddMonths(-(DateTime.Now.Month % 3));
+            var candidate = date.AddMonths(-(date.Month % 3));
 
             var daysInMonth = DateTime.DaysInMonth(candidate.Year, candidate.Month);
 

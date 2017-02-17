@@ -82,6 +82,7 @@ namespace bank.reports.charts
             seriesData.zIndex = this.zIndex;
             seriesData.Focus = this.Focus;
             seriesData.Visible = this.Visible;
+            
             seriesData.Init();
 
             return seriesData;

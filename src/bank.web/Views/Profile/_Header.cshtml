@@ -8,28 +8,30 @@
             <h1>
                 @if (Request.IsAuthenticated)
                 {
-                <small class="float-right">
-                    @if (Model.IsFavorite)
-                    {
-                        <i title="Remove from favorites"
-                           data-send="json"
-                           data-name="favorites"
-                           data-value="@Model.Organization.OrganizationId"
-                           class="favorite float-right fa fa-star gold" aria-hidden="true"></i>
-                    }
-                    else
-                    {
-                        <i title="Add to favorites"
-                           data-send="json"
-                           data-name="favorites"
-                           data-value="@Model.Organization.OrganizationId"
-                           class="not-favorite float-right fa fa-star-o gold" aria-hidden="true"></i>
-                    }
-                </small>
+                    <small class="float-right">
+                        @if (Model.IsFavorite)
+                        {
+                            <i title="Remove from favorites"
+                               data-send="json"
+                               data-name="favorites"
+                               data-value="@Model.Organization.OrganizationId"
+                               class="favorite float-right fa fa-star gold" aria-hidden="true"></i>
+                        }
+                        else
+                        {
+                            <i title="Add to favorites"
+                               data-send="json"
+                               data-name="favorites"
+                               data-value="@Model.Organization.OrganizationId"
+                               class="not-favorite float-right fa fa-star-o gold" aria-hidden="true"></i>
+                        }
+                    </small>
                 }
                 @Model.Organization.Name
             </h1>
             <h4>@Model.Organization.City, @Model.Organization.State</h4>
+
+
         </div>
     </div>
 </div>

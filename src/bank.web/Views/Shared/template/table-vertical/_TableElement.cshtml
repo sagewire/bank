@@ -18,7 +18,7 @@
             {
                 var rowConcept = row as TableRow;
                 <td>
-                    @if (rowConcept != null)
+                    @if (rowConcept != null && rowConcept.TableRowType == TableRowTypes.Concept)
                     {
                         @rowConcept.Concept.ShortLabel
                     }

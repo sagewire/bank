@@ -16,7 +16,9 @@
                 if (Model.IsInCard)
                 {
                     <div class="card-header">
-                        @element.Title
+                        <div class="card-header-text">
+                            @element.Title
+                        </div>
                         @Html.Partial("_CardMenu")
                     </div>
                 }
@@ -28,12 +30,7 @@
                 }
             }
         }
-        else
-        {
-        <div class="mask">
-
-        </div>
-        }
+        
         @Html.Raw(Model.CardBlock(element, true))
 
 

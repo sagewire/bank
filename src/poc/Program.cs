@@ -18,6 +18,7 @@ using System.ServiceModel;
 using System.Web.Services.Protocols;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace poc
 {
@@ -26,7 +27,23 @@ namespace poc
         //private const string ConnString = @"Data Source=.\SQL2014;Initial Catalog=BankData;Integrated Security=True";
         static void Main(string[] args)
         {
-            FormatXml(@"c:\temp\20161231_ATTRIBUTES_ACTIVE.xml");
+
+            //OrganizationCollection orgs = null;
+            //string path = @"c:\temp\20161231_ATTRIBUTES_ACTIVE.xml";
+
+            //XmlSerializer serializer = new XmlSerializer(typeof(OrganizationCollection));
+
+            //StreamReader reader = new StreamReader(path);
+            //orgs = (OrganizationCollection)serializer.Deserialize(reader);
+            //reader.Close();
+
+
+            //foreach(var org in orgs)
+            //{
+
+            //}
+
+            //FormatXml(@"c:\temp\20161231_ATTRIBUTES_ACTIVE.xml");
             //TestFfiecWebservice();
             Console.ReadKey();
         }

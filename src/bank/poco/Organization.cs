@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using bank.enums;
 using bank.extensions;
 using bank.utilities;
 using DapperExtensions.Mapper;
@@ -14,14 +15,18 @@ namespace bank.poco
     {
         public IList<PeerGroupCustom> CustomPeerGroups { get; set; }
         public int OrganizationId { get; set; }
+        public string EntityType { get; set; }
+
+        public string EntityCategory { get; set; }
         //NAME
+        public string ShortName { get; set; }
         public string Name { get; set; }
         //CERT
         public int FDIC_Cert { get; set; }
         //UNINUM
         public int FDIC_UniqueNumber { get; set; }
         //FED_RSSD
-        public int FFIEC { get; set; }
+        public int ID_RSSD { get; set; }
         public DateTime? Created { get; set; }
         //CHARTER
         public int OccCharterNumber { get; set; }
@@ -89,17 +94,17 @@ namespace bank.poco
         //MSA_NO
         public int MSA_Number { get; set; }
         //DATEUPDT
-        public DateTime LastUpdate { get; set; }
+        public DateTime? LastUpdate { get; set; }
         //ENDEFYMD
-        public DateTime EndUpdate { get; set; }
+        public DateTime? EndUpdate { get; set; }
         //EFFDATE
-        public DateTime EffectiveStartDate { get; set; }
+        public DateTime? EffectiveStartDate { get; set; }
         // PROCDATE
-        public DateTime LastStructureChangeProcessDate { get; set; }
+        public DateTime? LastStructureChangeProcessDate { get; set; }
         //ESTYMD
-        public DateTime Established { get; set; }
+        public DateTime? Established { get; set; }
         //RISDATE
-        public DateTime LastReportDate { get; set; }
+        public DateTime? LastReportDate { get; set; }
         //FDICDBS
         public int FDICDBS { get; set; }
         //FDICSUPV
@@ -115,7 +120,7 @@ namespace bank.poco
         //INSAGNT1
         public string InsuranceFundMembership { get; set; }
         //INSDATE
-        public DateTime InsuranceObtained { get; set; }
+        public DateTime? InsuranceObtained { get; set; }
         //INSCOML
         public bool InsuredCommercialBank { get; set; }
         //STCHRTR
@@ -180,7 +185,7 @@ namespace bank.poco
             {
                 var bankType = "COM";
 
-                switch(BankClass)
+                switch (BankClass)
                 {
                     case "SA":
                     case "SB":
@@ -228,6 +233,24 @@ namespace bank.poco
         }
 
         public List<ReportImport> ReportImports { get; internal set; }
+
+        public List<OrganizationFfiecTransformation> SucessorTransformations { get; internal set; }
+
+        public List<OrganizationFfiecTransformation> FilteredTransformations
+        {
+            get
+            {
+                if (SucessorTransformations == null) return null;
+
+                return SucessorTransformations
+                    .Where(x => x.PredecessorOrganization != null && x.D_DT_TRANS.Value.Year >= 2002)
+                    .OrderByDescending(x => x.PredecessorOrganization.TotalAssets).Take(5).ToList();
+            }
+        }
+
+        public List<OrganizationFfiecRelationship> ChildRelationships { get; internal set; }
+        public List<OrganizationFfiecRelationship> ParentRelationships { get; internal set; }
+        public List<OrganizationFfiecTransformation> PredecessorTransformations { get; internal set; }
 
         //public string AvatarImageUrl
         //{

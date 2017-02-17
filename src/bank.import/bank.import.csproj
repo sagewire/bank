@@ -76,7 +76,12 @@
     <Compile Include="crawl\Import.cs" />
     <Compile Include="crawl\Page.cs" />
     <Compile Include="crawl\Web.cs" />
+    <Compile Include="fdic\ImportBankHoldingData.cs" />
+    <Compile Include="fdic\ImportBranches.cs" />
     <Compile Include="fdic\ImportInstitutions.cs" />
+    <Compile Include="ffiec\ImportOrganizations.cs" />
+    <Compile Include="ffiec\ImportRelationships.cs" />
+    <Compile Include="ffiec\ImportTransformations.cs" />
     <Compile Include="ffiec\Spider.cs" />
     <Compile Include="ffiec\Import.cs" />
     <Compile Include="index\IndexOrganization.cs" />

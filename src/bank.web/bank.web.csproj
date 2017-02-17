@@ -334,6 +334,9 @@
     </Content>
     <Content Include="browserconfig.xml" />
     <Content Include="Global.asax" />
+    <Content Include="templates\holding-layout.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="templates\income-statement.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -367,7 +370,7 @@
     <Content Include="templates\test.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="templates\profile-layout.xml">
+    <Content Include="templates\bank-layout.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="templates\peer-groups.xml" />
@@ -479,6 +482,9 @@
     <Content Include="Views\Shared\template\table-vertical\_TableElement.cshtml" />
     <Content Include="Views\Shared\template\table-horizontal\_TableElement.cshtml" />
     <Content Include="Views\Shared\template\table-vertical\_TableRows.cshtml" />
+    <Content Include="Views\Shared\template\_Transformations.cshtml" />
+    <Content Include="Views\Shared\template\_ChildRelationships.cshtml" />
+    <Content Include="Views\Shared\template\_ParentRelationships.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bank.reports\bank.reports.csproj">

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using bank.poco;
 using bank.reports;
+using bank.reports.charts;
 
 namespace bank.web.models
 {

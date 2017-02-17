@@ -50,5 +50,9 @@ namespace bank.reports
                 return lookups;
             }
         }
+
+        public string DataSource { get; internal set; }
+
+        public object Data { get; set; }
     }
 }

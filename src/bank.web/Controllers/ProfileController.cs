@@ -12,6 +12,7 @@ using bank.extensions;
 using bank.enums;
 using Microsoft.AspNet.Identity;
 using bank.web.helpers;
+using bank.reports.extensions;
 
 namespace bank.web.Controllers
 {
@@ -79,7 +80,7 @@ namespace bank.web.Controllers
         }
         
 
-        public ActionResult Viewer(string name, string id, DateTime? period, string section, string c = null, string template = "profile-layout")
+        public ActionResult Viewer(string name, string id, DateTime? period, string section, string c = null, string template = "bank-layout")
         {
             //Response.CacheControl = HttpCacheability.Public.ToString();
             //Response.Expires = Settings.PageCacheMinutes;
@@ -95,13 +96,29 @@ namespace bank.web.Controllers
             var orgRepo = new OrganizationRepository();
             var org = orgRepo.GetOrganization(orgId, true, true);
 
+            switch(org.EntityCategory.ToLower())
+            {
+                case "holding":
+                    template = "holding-layout";
+                    break;
+            }
+
             //var periodStart = org.ReportImports.Select(x => x.Period).Min();
-            var periodEnd = period.HasValue ? period.Value : org.ReportImports.Select(x => x.Period).Max();
+            //var periodEnd = period.HasValue ? period.Value : org.ReportImports.Select(x => x.Period).Max();
 
             var reportFactory = new ReportFactory();
             reportFactory.Template = template;
             reportFactory.SectionFilter = section;
-            reportFactory.Period = periodEnd;
+
+            if (org.LastReportDate.HasValue)
+            {
+                reportFactory.Period = org.LastReportDate.Value;
+            }
+            else
+            {
+                reportFactory.Period = DateTime.Now.LastQuarterDate();
+            }
+
             reportFactory.OrganizationIds = companies;
 
             if (!string.IsNullOrWhiteSpace(org.StatePeerGroup))
@@ -111,7 +128,12 @@ namespace bank.web.Controllers
                     reportFactory.PeerGroups.Add(Global.PeerGroups[org.StatePeerGroup]);
                 }
             }
+
             reportFactory.CustomPeerGroups.AddRange(org.CustomPeerGroups);
+            reportFactory.DataSourceNeeded += (element) =>
+            {
+                element.Data = org;
+            };
 
             var layout = reportFactory.Build();
 
@@ -119,7 +141,17 @@ namespace bank.web.Controllers
             model.Layout = layout;
             model.Organization = org;
             model.Profile = CurrentProfile;
-            
+
+            var charts = layout.Elements.Where(x => x as ChartElement != null);
+
+            foreach(ChartElement chart in charts)
+            {
+                chart.ChartConfig.Annotations = org.FilteredTransformations.ToAnnotations();
+                //chart.ChartConfig.Annotations = org.SucessorTransformations.ToAnnotations();
+
+            }
+
+
             SetProfileVisit(model.Organization.OrganizationId);
 
             ViewBag.Title = model.Title;

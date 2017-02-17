@@ -35,7 +35,7 @@ namespace bank.import.fdic
                 {
                     Console.Write(record.Name);
 
-                    var existing = repo.LookupByRssd(record.FFIEC);
+                    var existing = repo.LookupByRssd(record.ID_RSSD);
 
                     if (existing != null)
                     {
@@ -77,7 +77,7 @@ namespace bank.import.fdic
             Map(m => m.FDIC_Cert).Name("CERT");
             Map(m => m.Name).Name("NAME");
             Map(m => m.FDIC_UniqueNumber).Name("UNINUM");
-            Map(m => m.FFIEC).Name("FED_RSSD");
+            Map(m => m.ID_RSSD).Name("FED_RSSD");
 
             Map(m => m.Street1).Name("ADDRESS");
             Map(m => m.City).Name("CITY");

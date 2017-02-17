@@ -22,7 +22,23 @@ namespace bank.poco
         public char? Unit { get; set; }
 
         //public Concept Concept { get; set; }
+        public void SetValue(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return;
+            }
 
+            decimal n;
+            if (decimal.TryParse(value, out n))
+            {
+                NumericValue = n;
+            }
+            else
+            {
+                Value = value.SafeSubstring(30);
+            }
+        }
         public virtual FactTypes FactType { get; }
         /// <summary>
         /// Number of quarters in the past to compare too.

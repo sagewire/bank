@@ -18,9 +18,9 @@ namespace bank.data.repositories
             using (var conn = new SqlConnection(Settings.ConnectionString))
             {
                 conn.Open();
-                var definitions = conn.Query<ConceptDefinition>("select * from ConceptDefinition where Mdrm in @names", new
+                var definitions = conn.Query<ConceptDefinition>("select * from ConceptDefinition where ItemNumber in @names", new
                 {
-                    names = names
+                    names = names.Select(x=>x.SafeSubstring(4,4)).ToList()
                 },
                 commandType: CommandType.Text)
                 .ToList();

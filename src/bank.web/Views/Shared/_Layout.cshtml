@@ -41,6 +41,18 @@
         <link rel="canonical" href="@ViewBag.Canonical" />
     }
 
+    <link rel="icon" type="image/x-icon" href="~/assets/images/favicons/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" href="~/assets/images/favicons/yin-yang-152-1271.png" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="~/assets/images/favicons/yin-yang-144-1271.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="~/assets/images/favicons/yin-yang-152-1271.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/assets/images/favicons/yin-yang-144-1271.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="~/assets/images/favicons/yin-yang-120-1271.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/assets/images/favicons/yin-yang-114-1271.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/assets/images/favicons/yin-yang-72-1271.png" />
+    <link rel="apple-touch-icon-precomposed" href="~/assets/images/favicons/yin-yang-57-1271.png" />
+    <link rel="icon" href="~/assets/images/favicons/yin-yang-32-1271.png" sizes="32x32" />
+
     @*<!-- icons -->
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
@@ -104,24 +116,24 @@
         </footer>
 
         <div class="sub-footer text-xs-center p-1">
-            
+
         </div>
-        
+
         <div class="darken hidden-xl-up"></div>
         <div class="test hidden-lg-down"></div>
     }
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
     @*<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>*@
-    
+
 
     @*<script src="~/assets/dist/js/bootstrap.min.js"></script>*@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     @*<script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/highcharts-more.js"></script>*@
+        <script src="https://code.highcharts.com/highcharts-more.js"></script>*@
     @*<script src="~/assets/scripts/jquery.stickytableheaders.js"></script>*@
     <script src="~/assets/scripts/bundle.min.js"></script>
-    
+
     @RenderSection("Scripts", required: false)
     @Html.Partial("_GoogleAnalytics")
 

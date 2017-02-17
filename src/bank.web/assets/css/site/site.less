@@ -217,10 +217,18 @@ footer {
     margin-top: 30px;
     .box-shadow;
 
-    .card-header {
+    .card-header { 
         background-color: transparent;
         font-size: 1.1rem;
         font-weight: bold;
+
+        .card-header-text {
+            display: inline-block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            max-width: 70%;
+        }
     }
 
 

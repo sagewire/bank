@@ -18,7 +18,7 @@ namespace bank.data.repositories
             using (var conn = new SqlConnection(Settings.ConnectionString))
             {
                 conn.Open();
-                var predicate = Predicates.Field<Organization>(x => x.FFIEC, Operator.Eq, id);
+                var predicate = Predicates.Field<Organization>(x => x.ID_RSSD, Operator.Eq, id);
 
                 var results = conn.GetList<Organization>(predicate);
 
@@ -46,6 +46,11 @@ namespace bank.data.repositories
             }
         }
 
+        public override void Update(Organization model)
+        {
+            base.Update(model);
+        }
+
         public override void Save(Organization model)
         {
             var existing = Get(model.OrganizationId);
@@ -70,7 +75,13 @@ namespace bank.data.repositories
             const string orgSql = "select * from Organization where OrganizationID in @OrganizationIDs ";
             const string peerSql = "select * from PeerGroupCustom where OrganizationID in @OrganizationIDs ";
             const string peerMemberSql = "select * from PeerGroupCustomMember where PeerGroupCustomID in (select PeerGroupCustomID from PeerGroupCustom where OrganizationID in @OrganizationIDs) ";
+            const string transformList = "select * from OrganizationFfiecTransformation where SuccessorOrganizationID in @OrganizationIds or PredecessorOrganizationID in @OrganizationIds order by D_DT_TRANS desc";
+            const string transformOrgList = "select * from Organization where OrganizationID in ( select PredecessorOrganizationID from OrganizationFfiecTransformation where SuccessorOrganizationID in @OrganizationIds union select SuccessorOrganizationId from OrganizationFfiecTransformation where PredecessorOrganizationID in @OrganizationIds)";
             const string reportListSql = "select * from ReportImport where OrganizationID in @OrganizationIds and Processed is not null";
+            const string relationshipChildrenSql = "select * from OrganizationFfiecRelationship where ParentOrganizationID in @OrganizationIds";
+            const string relationshipChildrenOrgSql = "select * from Organization where OrganizationID in ( select OffspringOrganizationID from OrganizationFfiecRelationship where ParentOrganizationID in @OrganizationIds )";
+            const string relationshipParentSql = "select * from OrganizationFfiecRelationship where OffspringOrganizationID in @OrganizationIds";
+            const string relationshipParentOrgSql = "select * from Organization where OrganizationID in ( select ParentOrganizationID from OrganizationFfiecRelationship where OffspringOrganizationID in @OrganizationIds )";
 
             var sb = new StringBuilder();
 
@@ -84,6 +95,12 @@ namespace bank.data.repositories
 
             if (loadReportList)
             {
+                sb.AppendLine(transformList);
+                sb.AppendLine(transformOrgList);
+                sb.AppendLine(relationshipChildrenSql);
+                sb.AppendLine(relationshipChildrenOrgSql);
+                sb.AppendLine(relationshipParentSql);
+                sb.AppendLine(relationshipParentOrgSql);
                 sb.AppendLine(reportListSql);
             }
 
@@ -115,10 +132,38 @@ namespace bank.data.repositories
 
                     if (loadReportList)
                     {
+                        var transformations = multi.Read<OrganizationFfiecTransformation>().ToList();
+                        var transformOrgs = multi.Read<Organization>().ToList();
+                        var relationshipsChildren = multi.Read<OrganizationFfiecRelationship>().ToList();
+                        var relationshipsChildrenOrgs = multi.Read<Organization>().ToList();
+                        var relationshipsParent = multi.Read<OrganizationFfiecRelationship>().ToList();
+                        var relationshipsParentOrgs = multi.Read<Organization>().ToList();
+
                         var reportList = multi.Read<ReportImport>().ToList();
+
+                        foreach (var transformation in transformations)
+                        {
+                            transformation.PredecessorOrganization = transformOrgs.SingleOrDefault(x => x.OrganizationId == transformation.PredecessorOrganizationId);
+                            transformation.SuccessorOrganization = transformOrgs.SingleOrDefault(x => x.OrganizationId == transformation.SuccessorOrganizationId);
+
+                        }
+
+                        foreach (var relationship in relationshipsChildren)
+                        {
+                            relationship.OffspringOrganization = relationshipsChildrenOrgs.SingleOrDefault(x => x.OrganizationId == relationship.OffspringOrganizationId);
+                        }
+
+                        foreach (var relationship in relationshipsParent)
+                        {
+                            relationship.ParentOrganization = relationshipsParentOrgs.SingleOrDefault(x => x.OrganizationId == relationship.ParentOrganizationId);
+                        }
 
                         foreach (var org in orgs)
                         {
+                            org.SucessorTransformations = transformations.Where(x => x.SuccessorOrganizationId == org.OrganizationId).ToList();
+                            org.PredecessorTransformations = transformations.Where(x => x.PredecessorOrganizationId == org.OrganizationId).ToList();
+                            org.ChildRelationships = relationshipsChildren.Where(x => x.ParentOrganizationId == org.OrganizationId).OrderByDescending(x=>x.D_DT_END).ToList();
+                            org.ParentRelationships = relationshipsParent.Where(x => x.OffspringOrganizationId == org.OrganizationId).OrderByDescending(x=>x.D_DT_END).ToList();
                             org.ReportImports = reportList.Where(x => x.OrganizationId == org.OrganizationId).ToList();
                         }
                     }

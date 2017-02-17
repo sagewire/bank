@@ -21,6 +21,12 @@ namespace bank.data.maps
             Map(x => x.CustomPeerGroups).Ignore();
             Map(x => x.StatePeerGroup).Ignore();
             Map(x => x.ReportImports).Ignore();
+            Map(x => x.FilteredTransformations).Ignore();
+            Map(x => x.SucessorTransformations).Ignore();
+            Map(x => x.PredecessorTransformations).Ignore();
+            Map(x => x.ChildRelationships).Ignore();
+            Map(x => x.ParentRelationships).Ignore();
+
             //Map(x => x.AvatarImageUrl).Ignore();
 
             AutoMap();

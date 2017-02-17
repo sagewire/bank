@@ -144,6 +144,13 @@ footer {
   font-size: 1.1rem;
   font-weight: bold;
 }
+.card .card-header .card-header-text {
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 70%;
+}
 .card .card-menu .dropdown-item {
   font-size: 15px;
 }

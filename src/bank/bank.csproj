@@ -79,6 +79,9 @@
     <Compile Include="data\elasticsearch\responses\BaseResponse.cs" />
     <Compile Include="data\elasticsearch\responses\DeleteResponse.cs" />
     <Compile Include="data\elasticsearch\responses\IndexResponse.cs" />
+    <Compile Include="data\maps\OrganizationFfiecTransformationMap.cs" />
+    <Compile Include="data\maps\OrganizationFfiecMap.cs" />
+    <Compile Include="data\maps\BranchFdicMap.cs" />
     <Compile Include="data\maps\UserFavoriteMap.cs" />
     <Compile Include="data\maps\ReportImport.cs" />
     <Compile Include="data\maps\CompanyFactMap.cs" />
@@ -94,6 +97,7 @@
     <Compile Include="data\repositories\ReportImportRepository.cs" />
     <Compile Include="data\repositories\TwitterFriendRepository.cs" />
     <Compile Include="data\repositories\UserFavoriteRepository.cs" />
+    <Compile Include="enums\EntityTypes.cs" />
     <Compile Include="enums\FactTypes.cs" />
     <Compile Include="enums\HorizontalAlignment.cs" />
     <Compile Include="enums\ReportTypes.cs" />
@@ -104,12 +108,15 @@
     <Compile Include="extensions\StringExtensions.cs" />
     <Compile Include="extensions\XElementExtensions.cs" />
     <Compile Include="poco\Address.cs" />
+    <Compile Include="poco\BranchFdic.cs" />
     <Compile Include="poco\CompanyFact.cs" />
     <Compile Include="poco\Concept.cs" />
     <Compile Include="poco\Fact.cs" />
     <Compile Include="poco\ConceptDefinition.cs" />
     <Compile Include="poco\Global.cs" />
     <Compile Include="poco\Organization.cs" />
+    <Compile Include="poco\OrganizationFfiec.cs" />
+    <Compile Include="poco\OrganizationFfiecRelationship.cs" />
     <Compile Include="poco\PeerGroupCustom.cs" />
     <Compile Include="poco\PeerGroupCustomMember.cs" />
     <Compile Include="poco\PeerGroupFact.cs" />
@@ -131,6 +138,7 @@
   <ItemGroup>
     <None Include="data\elasticsearch\json\search.json" />
     <None Include="packages.config" />
+    <Compile Include="poco\OrganizationFfiecTransformation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Repositories\git\bank\lib\xml-transform-master\XmlTransform\XmlTransform.csproj">

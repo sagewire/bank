@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using bank.extensions;
 using bank.poco;
 //using bank.reports.formulas;
 using bank.utilities;
@@ -81,7 +82,8 @@ namespace bank.poco
                     result = fact.NumericValue.Value.ToString();
                     break;
                 default:
-                    result = "na";
+                    // result = "na";
+                    result = fact.NumericValue.Value.ToString("N0");
                     break;
             }
 
@@ -104,13 +106,33 @@ namespace bank.poco
         }
 
         public string Name { get; set; }
-        public string ShortLabel { get; set; }
         public string Label { get; set; }
         public string Narrative { get; set; }
         public string Value { get; set; }
         public char? Unit { get; set; }
         public List<string> ConceptKeys { get; set; }
         public bool? Negative { get; set; }
+
+        public string ItemNumber
+        {
+            get
+            {
+                return Value.SafeSubstring(4, 4);
+            }
+        }
+
+        private string _shortLabel;
+        public string ShortLabel {
+            get
+            {
+                return _shortLabel ?? Label;
+            }
+            set
+            {
+                _shortLabel = value;
+            }
+        }
+
 
         public Fact PrepareFact(Fact fact)
         {

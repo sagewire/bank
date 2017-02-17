@@ -157,14 +157,18 @@ namespace bank.web.models
             var table = element as TableElement;
             var html = element as HtmlElement;
             var empty = element as EmptyElement;
+            var custom = element as TemplateElement != null
+                && !string.IsNullOrWhiteSpace(element.Partial)
+                && !string.IsNullOrWhiteSpace(element.DataSource);
 
-            var show =  table != null || 
+            var suppress =  custom ||
+                        table != null || 
                         empty != null ||
                         (html != null && !string.IsNullOrWhiteSpace(html.Content));
 
             var snippet = isStart ? "<div class='card-block'>" : "</div>";
 
-            return new MvcHtmlString(show ? "" : snippet);
+            return new MvcHtmlString(suppress ? "" : snippet);
 
         }
 
