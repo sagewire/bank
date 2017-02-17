@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using System.Globalization;
 using bank.data.repositories;
+using bank.extensions;
 using bank.poco;
 
 namespace bank.import.ffiec
@@ -14,10 +16,12 @@ namespace bank.import.ffiec
     {
         private static TaskPool<OrganizationFfiec> _taskPool = new TaskPool<OrganizationFfiec>();
 
-        public static void Start()
+        public static void Start(int threads)
         {
-            InitializeTaskPool();
-            
+            //https://www.ffiec.gov/nicpubweb/nicweb/DataDownload.aspx
+
+            InitializeTaskPool(threads);
+
             string active = @"c:\data\orgs\20161231_ATTRIBUTES_ACTIVE.xml";
             string inactive = @"c:\data\orgs\20161231_ATTRIBUTES_INACTIVE.xml";
             string branch = @"c:\data\orgs\20161231_ATTRIBUTES_BRANCH.xml";
@@ -25,7 +29,7 @@ namespace bank.import.ffiec
             Enqueue(active);
             Enqueue(inactive);
             Enqueue(branch);
-            
+
         }
 
         static void Enqueue(string path)
@@ -42,10 +46,10 @@ namespace bank.import.ffiec
             _taskPool.Enqueue(orgs.Organization.ToList());
         }
 
-        static void InitializeTaskPool()
+        static void InitializeTaskPool(int threads)
         {
             Console.WriteLine("Starting ffiec org import pool");
-            _taskPool.MaxWorkers = 8;
+            _taskPool.MaxWorkers = threads;
             //_taskPool.MinimumQueueSize = 50;
             _taskPool.RefillQueue += _taskPool_RefillQueue;
             _taskPool.QueueEmpty += _taskPool_QueueEmpty;
@@ -54,7 +58,7 @@ namespace bank.import.ffiec
 
         private static void _taskPool_NextTask(OrganizationFfiec task)
         {
-            Console.WriteLine("Processing {0}", task.NM_LGL);
+            //Console.WriteLine("Processing {0}", task.NM_LGL);
 
             var orgRepo = new OrganizationRepository();
             var ffiecRepo = Repository<OrganizationFfiec>.New();
@@ -67,6 +71,15 @@ namespace bank.import.ffiec
                 ffiec.OrganizationId = existing.OrganizationId;
                 ffiecRepo.Save(ffiec);
 
+                existing.Name = existing.Name.ToTitleCase(true);
+                existing.City = existing.City?.ToTitleCase(true) ?? ffiec.CITY.SafeSubstring(50).ToTitleCase(true);
+                existing.State = existing.State ?? ffiec.STATE_ABBR_NM.SafeSubstring(2);
+                existing.ZIP = existing.ZIP ?? ffiec.ZIP_CD.SafeSubstring(11);
+                existing.Street1 = existing.Street1?.ToTitleCase(true) ?? ffiec.STREET_LINE1.SafeSubstring(80).ToTitleCase(true);
+                existing.Street2 = existing.Street2?.ToTitleCase(true) ?? ffiec.STREET_LINE2.SafeSubstring(20).ToTitleCase(true);
+                existing.Url = existing.Url ?? ffiec.URL.SafeSubstring(100);
+                existing.EntityType = existing.EntityType ?? ffiec.ENTITY_TYPE;
+
                 existing.ShortName = ffiec.NM_SHORT;
                 orgRepo.Update(existing);
             }
@@ -74,8 +87,14 @@ namespace bank.import.ffiec
             {
                 var org = new Organization
                 {
-                    Name = ffiec.NM_LGL,
+                    Name = ffiec.NM_LGL.SafeSubstring(100).ToTitleCase(true),
+                    City = ffiec.CITY.SafeSubstring(50).ToTitleCase(true),
+                    State = ffiec.STATE_ABBR_NM,
+                    Street1 = ffiec.STREET_LINE1.SafeSubstring(80).ToTitleCase(true),
+                    Street2 = ffiec.STREET_LINE2.SafeSubstring(20).ToTitleCase(true),
                     ID_RSSD = ffiec.ID_RSSD.Value,
+                    EntityType = ffiec.ENTITY_TYPE,
+                    Url = ffiec.URL.SafeSubstring(100),
                     Created = DateTime.Now
                 };
 
@@ -84,7 +103,7 @@ namespace bank.import.ffiec
                 ffiecRepo.Insert(ffiec);
             }
 
-            Console.WriteLine("Finished {0}", task.NM_LGL);
+            Console.WriteLine("Finished {0}", task.NM_LGL.ToTitleCase(true));
 
         }
 

@@ -12,14 +12,31 @@ namespace bank.import.fdic
 {
     public class ImportBankHoldingData
     {
-        private static TaskPool<string[]> _taskPool = new TaskPool<string[]>();
-        private static string[] _fields;
+        private static TaskPool<Job> _taskPool = new TaskPool<Job>();
+        private static Queue<string> _files = new Queue<string>();
+        internal class Job
+        {
+            public string[] Fields { get; set; }
+            public string[] Record { get; set; }
+        }
 
         public static void Start(int threads)
         {
             InitializeTaskPool(threads);
 
-            var filename = @"C:\Data\y9\bhcf1603.txt";
+            var files = Directory.GetFiles(@"c:\data\y9\", "*.txt");
+            
+            foreach (var file in files)
+            {
+                _files.Enqueue(file);
+            }
+
+            Enqueue(_files.Dequeue());
+        }
+
+        private static void Enqueue(string filename)
+        {
+
 
             var reader = new StreamReader(filename);
 
@@ -28,17 +45,12 @@ namespace bank.import.fdic
             csv.Configuration.Delimiter = "^";
             csv.ReadHeader();
 
-            _fields = csv.FieldHeaders;
-
             while (csv.Read())
             {
-                _taskPool.Enqueue(csv.CurrentRecord);
+                _taskPool.Enqueue(new Job { Fields = csv.FieldHeaders, Record = csv.CurrentRecord });
 
             }
-
         }
-
-
 
         static void InitializeTaskPool(int threads)
         {
@@ -51,15 +63,26 @@ namespace bank.import.fdic
 
         private static int _taskPool_RefillQueue(int queueCount)
         {
-            return 0;
+            if (_files.Count > 0)
+            {
+                var file = _files.Dequeue();
+
+                Enqueue(file);
+
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         private static void _taskPool_QueueEmpty()
         {
-
+            Console.WriteLine("Empty");
         }
 
-        private static void _taskPool_NextTask(string[] task)
+        private static void _taskPool_NextTask(Job task)
         {
             int? id_rssd = null;
             DateTime? reportingDate = null;
@@ -67,9 +90,9 @@ namespace bank.import.fdic
             var facts = new Dictionary<string, string>();
 
             var index = 0;
-            foreach (var header in _fields)
+            foreach (var header in task.Fields)
             {
-                var datum = task[index++].Trim();
+                var datum = task.Record[index++].Trim();
 
                 if (datum.StartsWith("---")) return;
 
@@ -93,23 +116,30 @@ namespace bank.import.fdic
 
             var orgRepo = new OrganizationRepository();
             var org = orgRepo.LookupByRssd(id_rssd.Value);
+
+            if (org == null)
+            {
+                Console.WriteLine("No Org found for {0}", id_rssd);
+                return;
+            }
+
             var factRepo = new FactRepository();
 
-            foreach(var item in facts)
+            foreach (var item in facts)
             {
                 if (item.Key.Length > 8) continue;
 
                 var factObj = new CompanyFact
                 {
-                    OrganizationId =org.OrganizationId,
+                    OrganizationId = org.OrganizationId,
                     Name = item.Key,
                     Period = reportingDate.Value
-                   
+
                 };
 
                 factObj.SetValue(item.Value);
 
-                factRepo.Save(factObj);   
+                factRepo.Save(factObj);
             }
 
         }

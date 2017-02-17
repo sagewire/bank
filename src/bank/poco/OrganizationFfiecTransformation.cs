@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using bank.extensions;
 
 namespace bank.poco
@@ -10,9 +11,12 @@ namespace bank.poco
     [Serializable()]
     public class OrganizationFfiecTransformation
     {
+        [XmlIgnore()]
         public Organization PredecessorOrganization { get; set; }
-        public int PredecessorOrganizationId { get; set; }
-        public int SuccessorOrganizationId { get; set; }
+        [XmlIgnore()]
+        public Organization SuccessorOrganization { get; internal set; }
+        public int? PredecessorOrganizationId { get; set; }
+        public int? SuccessorOrganizationId { get; set; }
         public int? ACCT_METHOD { get; set; }
 
         public DateTime? D_DT_TRANS { get; set; }
@@ -42,8 +46,7 @@ namespace bank.poco
 
             }
         }
-
-        public Organization SuccessorOrganization { get; internal set; }
+        
     }
 
 }

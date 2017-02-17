@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+  <row>
+    <col>
+      <element partial="ChildRelationships" data-source="Relationships" />
+    </col>
+  </row>
+  <row>
+    <col>
+      <element partial="ParentRelationships" data-source="Relationships" />
+    </col>
+  </row>
+  <row>
+    <col>
+      <element partial="Transformations" data-source="Transformations" />
+    </col>
+  </row>
+  
+
+</layout>

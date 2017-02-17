@@ -12,6 +12,14 @@ namespace bank.reports.charts
     {
         public LineSeriesData() : base(SeriesTypes.Line) { }
 
+        public override bool HasFacts
+        {
+            get
+            {
+                return Column.GetFacts(Series.Concept.ConceptKeys).Any();
+            }
+        }
+
         [JsonProperty(PropertyName = "data")]
         public IList<object> Data
         {

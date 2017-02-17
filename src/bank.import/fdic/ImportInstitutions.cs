@@ -16,8 +16,12 @@ namespace bank.import.fdic
 {
     public class ImportInstitutions
     {
-        public static void Start()
+        private static TaskPool<Organization> _taskPool = new TaskPool<Organization>();
+
+        public static void Start(int threads)
         {
+            InitializeTaskPool(threads);
+
             var filename = @"c:/data/institutions2.csv";
 
             var reader = new StreamReader(filename);
@@ -28,34 +32,7 @@ namespace bank.import.fdic
 
             try {
                 var records = csv.GetRecords<Organization>().ToList();
-
-                var repo = new OrganizationRepository();
-
-                foreach (var record in records)
-                {
-                    Console.Write(record.Name);
-
-                    var existing = repo.LookupByRssd(record.ID_RSSD);
-
-                    if (existing != null)
-                    {
-                        record.OrganizationId = existing.OrganizationId;
-                        record.VerifiedUrl = existing.VerifiedUrl;
-                        record.Twitter = existing.Twitter;
-                        record.Facebook = existing.Facebook;
-                        record.ProfileBanner = existing.ProfileBanner;
-                        record.Avatar = existing.Avatar;
-
-                        repo.Update(record);
-                        Console.WriteLine("... updated");
-                    }
-                    else
-                    {
-                        repo.Insert(record);
-                        Console.WriteLine("... inserted");
-                    }
-
-                }
+                _taskPool.Enqueue(records);
             }
             catch(CsvHelper.TypeConversion.CsvTypeConverterException csve)
             {
@@ -65,6 +42,38 @@ namespace bank.import.fdic
                 {
                     Console.WriteLine(item.Value);
                 }
+            }
+        }
+
+        static void InitializeTaskPool(int threads)
+        {
+            Console.WriteLine("Starting fdic institution import pool");
+            _taskPool.MaxWorkers = threads;
+            _taskPool.NextTask += _taskPool_NextTask;
+        }
+
+        private static void _taskPool_NextTask(Organization record)
+        {
+            var orgRepo = new OrganizationRepository();
+
+            var existing = orgRepo.LookupByRssd(record.ID_RSSD);
+
+            if (existing != null)
+            {
+                record.OrganizationId = existing.OrganizationId;
+                record.VerifiedUrl = existing.VerifiedUrl;
+                record.Twitter = existing.Twitter;
+                record.Facebook = existing.Facebook;
+                record.ProfileBanner = existing.ProfileBanner;
+                record.Avatar = existing.Avatar;
+
+                orgRepo.Update(record);
+                Console.WriteLine("Updated {0}", record.Name);
+            }
+            else
+            {
+                orgRepo.Insert(record);
+                Console.WriteLine("Inserted {0}", record.Name);
             }
         }
     }

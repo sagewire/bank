@@ -79,6 +79,7 @@
     <Compile Include="data\elasticsearch\responses\BaseResponse.cs" />
     <Compile Include="data\elasticsearch\responses\DeleteResponse.cs" />
     <Compile Include="data\elasticsearch\responses\IndexResponse.cs" />
+    <Compile Include="data\maps\OrganizationFfiecRelationshipMap.cs" />
     <Compile Include="data\maps\OrganizationFfiecTransformationMap.cs" />
     <Compile Include="data\maps\OrganizationFfiecMap.cs" />
     <Compile Include="data\maps\BranchFdicMap.cs" />
@@ -89,6 +90,8 @@
     <Compile Include="data\maps\OrganizationMap.cs" />
     <Compile Include="data\maps\TwitterFriendMap.cs" />
     <Compile Include="data\repositories\BaseRepository.cs" />
+    <Compile Include="data\repositories\OrganizationFfiecRelationshipRepository.cs" />
+    <Compile Include="data\repositories\OrganizationFfiecTransformationRepository.cs" />
     <Compile Include="data\repositories\ConceptDefinitionRepository.cs" />
     <Compile Include="data\repositories\OrganizationRepository.cs" />
     <Compile Include="data\repositories\Repository.cs" />

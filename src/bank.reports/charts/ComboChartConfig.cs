@@ -154,7 +154,10 @@ namespace bank.reports.charts
                             seriesData.Name = series.Concept.Label;
                         }
 
-                        list.Add(seriesData);
+                        if (seriesData.HasFacts)
+                        {
+                            list.Add(seriesData);
+                        }
 
                         if (seriesData.IsRange)
                         {

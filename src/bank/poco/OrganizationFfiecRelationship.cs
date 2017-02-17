@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace bank.poco
 {
     public class OrganizationFfiecRelationship
     {
-        public int ParentOrganizationId { get; set; }
-        public int OffspringOrganizationId { get; set; }
+        public int? ParentOrganizationId { get; set; }
+        public int? OffspringOrganizationId { get; set; }
 
+        [XmlIgnore]
         public Organization ParentOrganization { get; set; }
+
+        [XmlIgnore]
         public Organization OffspringOrganization { get; set; }
 
         public DateTime? DateRelationshipStart

@@ -332,6 +332,11 @@ namespace bank.data.repositories
                                                 commandType: CommandType.Text)
                                                 .ToList();
 
+                if (!facts.Any())
+                {
+                    return new List<Fact>();
+                }
+
 
                 var maxPeriod = facts.Select(x => x.Period.Value).Max();
 

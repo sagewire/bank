@@ -30,10 +30,13 @@ namespace bank.app
                     Import.Start();
                     break;
                 case "ffiec-orgs":
-                    bank.import.ffiec.ImportOrganizations.Start();
-                    //bank.import.ffiec.ImportTransformations.Start();
-                    //bank.import.ffiec.ImportRelationships.Start();
-
+                    bank.import.ffiec.ImportOrganizations.Start(threads);
+                    break;
+                case "ffiec-transformations":
+                    bank.import.ffiec.ImportTransformations.Start(threads);
+                    break;
+                case "ffiec-relationships":
+                    bank.import.ffiec.ImportRelationships.Start(threads);
                     break;
                 case "fdic-branches":
                     bank.import.fdic.ImportBranches.Start();
@@ -48,7 +51,7 @@ namespace bank.app
                     bank.import.ffiec.Import.Start();
                     break;
                 case "fdic":
-                    bank.import.fdic.ImportInstitutions.Start();
+                    bank.import.fdic.ImportInstitutions.Start(threads);
                     break;
                 case "form":
                     form();

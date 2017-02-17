@@ -3,17 +3,8 @@
   <row>
     <col>
       <chart type="combo" chart-override="primary" css-classes="main-chart" lookback="200" title="Balance Sheet Highlights">
-        <series type="areaspline" column="0" z-index="10" focus="last">
-          <concept name="BHCK2170"/>
-        </series>
-        <series type="areaspline" column="0" z-index="10" focus="last">
-          <concept name="BHCKE119"/>
-        </series>
-        <series type="areaspline" column="0" z-index="10" focus="last">
-          <concept name="BHCKK434"/>
-        </series>
-        <series type="areaspline" column="0" z-index="10" focus="last">
-          <concept name="BHCK3210"/>
+        <series type="areaspline" column="0">
+          <concept name="BHCP2170|BHSP2170"/>
         </series>
       </chart>
     </col>
@@ -26,8 +17,8 @@
   <row>
     <col>
       <table title="Financial Highlights" lookback="4">
-        <concept name="BHCK2170" />
-        <concept name="BHCK0081" />
+        <concept name="BHCP2170|BHSP2170" />
+        
       </table>
     </col>
   </row>

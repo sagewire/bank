@@ -80,7 +80,7 @@ namespace bank.web.Controllers
         }
         
 
-        public ActionResult Viewer(string name, string id, DateTime? period, string section, string c = null, string template = "bank-layout")
+        public ActionResult Viewer(string name, string id, DateTime? period, string section, string c = null, string template = "org-layout")
         {
             //Response.CacheControl = HttpCacheability.Public.ToString();
             //Response.Expires = Settings.PageCacheMinutes;
@@ -96,11 +96,9 @@ namespace bank.web.Controllers
             var orgRepo = new OrganizationRepository();
             var org = orgRepo.GetOrganization(orgId, true, true);
 
-            switch(org.EntityCategory.ToLower())
+            if (!string.IsNullOrWhiteSpace(org.EntityCategory))
             {
-                case "holding":
-                    template = "holding-layout";
-                    break;
+                template = string.Format("{0}-layout", org.EntityCategory);
             }
 
             //var periodStart = org.ReportImports.Select(x => x.Period).Min();

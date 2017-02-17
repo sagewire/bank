@@ -11,6 +11,7 @@ namespace bank.utilities
 {
     public class FactResolver
     {
+        private static Regex _nameList = new Regex(@"((?<name>\w{8})\|*)+", RegexOptions.Compiled);
         //private static Regex _concepts = new Regex(@"\$(?<concept>[\w\d]{8})(?=\W)", RegexOptions.Compiled);
 
         //public IList<string> ParseConcepts(string text)
@@ -29,7 +30,14 @@ namespace bank.utilities
 
             if (text.Length > 8)
             {
-                return EvaluateFormula(text, facts);
+                if (_nameList.IsMatch(text))
+                {
+                    return EvaluateList(text, facts);
+                }
+                else
+                {
+                    return EvaluateFormula(text, facts);
+                }
             }
             else if (facts.ContainsKey(text))
             {
@@ -41,6 +49,20 @@ namespace bank.utilities
                 return null;
                 //throw new Exception(string.Format("Fact not found {0}", text));
             }
+        }
+
+        public object EvaluateList(string text, IDictionary<string, Fact> facts)
+        {
+            foreach (Capture name in _nameList.Match(text).Groups["name"].Captures)
+            {
+                if (facts.ContainsKey(name.Value))
+                {
+                    var fact = facts[name.Value];
+                    return fact.NumericValue.Value;
+                }
+            }
+
+            return null;
         }
 
         public object EvaluateFormula(string text, IDictionary<string, Fact> facts)

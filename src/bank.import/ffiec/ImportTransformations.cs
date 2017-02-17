@@ -14,11 +14,11 @@ namespace bank.import.ffiec
     {
         private static TaskPool<OrganizationFfiecTransformation> _taskPool = new TaskPool<OrganizationFfiecTransformation>();
 
-        public static void Start()
+        public static void Start(int threads)
         {
-            InitializeTaskPool();
+            InitializeTaskPool(threads);
 
-            string path = @"c:\temp\20161231_TRANSFORMATIONS.xml";
+            string path = @"c:\data\orgs\20161231_TRANSFORMATIONS.xml";
 
             XmlSerializer serializer = new XmlSerializer(typeof(TransformationCollection));
 
@@ -31,10 +31,10 @@ namespace bank.import.ffiec
             _taskPool.Enqueue(orgs.Transformations.ToList());
         }
 
-        static void InitializeTaskPool()
+        static void InitializeTaskPool(int threads)
         {
             Console.WriteLine("Starting ffiec transformations import pool");
-            _taskPool.MaxWorkers = 8;
+            _taskPool.MaxWorkers = threads;
             _taskPool.NextTask += _taskPool_NextTask; ;
         }
 
@@ -43,36 +43,26 @@ namespace bank.import.ffiec
             Console.WriteLine("Processing {0} -> {1}", task.ID_RSSD_PREDECESSOR, task.ID_RSSD_SUCCESSOR);
 
             var orgRepo = new OrganizationRepository();
-            var ffiecRepo = Repository<OrganizationFfiecTransformation>.New();
-            var ffiec = task;
+            var ffiecRepo = new OrganizationFfiecTransformationRepository();
 
-            ffiecRepo.Insert(ffiec);
+            var existing = ffiecRepo.Get(task);
 
-            //var existing = orgRepo.LookupByRssd(ffiec.ID_RSSD.Value);
 
-            //if (existing != null)
-            //{
-            //    ffiec.OrganizationId = existing.OrganizationId;
-            //    ffiecRepo.Save(ffiec);
+            if (existing != null)
+            {
+                return;
+            }
+            else
+            {
+                var predecessor = orgRepo.LookupByRssd(task.ID_RSSD_PREDECESSOR.Value);
+                var successor = orgRepo.LookupByRssd(task.ID_RSSD_SUCCESSOR.Value);
 
-            //    existing.ShortName = ffiec.NM_SHORT;
-            //    orgRepo.Update(existing);
-            //}
-            //else
-            //{
-            //    var org = new Organization
-            //    {
-            //        Name = ffiec.NM_LGL,
-            //        ID_RSSD = ffiec.ID_RSSD.Value,
-            //        Created = DateTime.Now
-            //    };
+                task.PredecessorOrganizationId = predecessor?.OrganizationId;
 
-            //    orgRepo.Insert(org);
-            //    ffiec.OrganizationId = org.OrganizationId;
-            //    ffiecRepo.Insert(ffiec);
-            //}
+                ffiecRepo.Insert(task);
+            }
 
-            //Console.WriteLine("Finished {0}", task.NM_LGL);
+            Console.WriteLine("Transformation {0} -> {1}", task.ID_RSSD_PREDECESSOR, task.ID_RSSD_SUCCESSOR);
         }
 
     }

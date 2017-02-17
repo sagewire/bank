@@ -12,12 +12,14 @@ namespace bank.poco
     public static class Global
     {
         private static IDictionary<string, Concept> _concepts = new Dictionary<string, Concept>();
+        private static IDictionary<string, string> _entityTypes = new Dictionary<string, string>();
         private static IDictionary<string, PeerGroupStandard> _peerGroups = new Dictionary<string, PeerGroupStandard>();
 
         static Global()
         {
             InitConcepts();
             InitPeerGroups();
+            InitEntityTypes();
         }
 
 
@@ -55,6 +57,26 @@ namespace bank.poco
             }
         }
 
+        private static void InitEntityTypes()
+        {
+            var configLocation = Path.Combine(Settings.ReportTemplatePath, "entity-types.xml");
+
+            var xmlText = File.ReadAllText(configLocation);
+
+            var xml = XDocument.Parse(xmlText);
+
+            var entityTypes = xml.Element("configuration").Element("entityTypes").Elements("entityType");
+
+            foreach (var entityType in entityTypes)
+            {
+                var name = entityType.SafeAttributeValue("name").ToUpper();
+                var value = entityType.SafeAttributeValue("value");
+
+                _entityTypes.Add(name, value);
+
+            }
+        }
+
         public static IDictionary<string, Concept> Concepts
         {
             get
@@ -69,6 +91,15 @@ namespace bank.poco
             get
             {
                 return _peerGroups;
+            }
+        }
+
+
+        public static IDictionary<string, string> EntityTypes
+        {
+            get
+            {
+                return _entityTypes;
             }
         }
 

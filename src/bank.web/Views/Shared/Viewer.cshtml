@@ -8,9 +8,13 @@
 }
 
 @section Header {
-    @if (Model.Organization != null)
+    @if (Model.Layout.Header != null)
     {
-        @Html.Partial("_Header", new ProfileHeaderViewModel { Organization = Model.Organization, RawReports = Model.RawReports, Profile = Model.Profile })
+        @Html.Partial("_" + Model.Layout.Header.Partial, new ProfileHeaderViewModel { Organization = Model.Organization, RawReports = Model.RawReports, Profile = Model.Profile })
+    }
+    else if (Model.Organization != null)
+    {
+        @Html.Partial("_OrgHeader", new ProfileHeaderViewModel { Organization = Model.Organization, RawReports = Model.RawReports, Profile = Model.Profile })
     }
 }
 

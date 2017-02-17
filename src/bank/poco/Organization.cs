@@ -13,11 +13,32 @@ namespace bank.poco
 {
     public class Organization : Address
     {
+        private static string[] _banks = new string[] { "NMB", "NAT", "SMB", "SSB", "FSB", "SAL", "MTC", "CPB", "FBO" };
+
         public IList<PeerGroupCustom> CustomPeerGroups { get; set; }
         public int OrganizationId { get; set; }
-        public string EntityType { get; set; }
 
-        public string EntityCategory { get; set; }
+        private string _entityCategory;
+        public string EntityCategory
+        {
+            get
+            {
+                if (_entityCategory == null)
+                {
+                    if (_banks.Contains(EntityType.ToUpper()))
+                    {
+                        return "bank";
+                    }
+                }
+                return _entityCategory;
+            }
+            set
+            {
+                _entityCategory = value;
+            }
+        }
+        
+        public string EntityType { get; set; }
         //NAME
         public string ShortName { get; set; }
         public string Name { get; set; }

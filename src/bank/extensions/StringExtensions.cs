@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -15,6 +16,16 @@ namespace bank.extensions
         {
             // Note: Using proper case right now
             return source.Trim().Replace("-", " ");
+        }
+
+        public static string ToTitleCase(this string text, bool force = false)
+        {
+            TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
+            if (force)
+            {
+                text = text.ToLower();
+            }
+            return myTI.ToTitleCase(text);
         }
 
         public static string CreateSlug(this string source, int? maxLength = null, bool breakOnWord = false)

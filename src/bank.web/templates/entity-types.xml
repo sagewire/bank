@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <entityTypes>
+    <entityType name="AGB" value="Agreement Corporation - Banking" />
+    <entityType name="AGI" value="Agreement Corporation - Investment" />
+    <entityType name="BHC" value="Bank Holding Company" />
+    <entityType name="CPB" value="Cooperative Bank" />
+    <entityType name="DBR" value="Domestic Branch of a Domestic Bank" />
+    <entityType name="DEO" value="Domestic Entity Other" />
+    <entityType name="DPS" value="Data Processing Servicer" />
+    <entityType name="EBR" value="Edge Corporation - Domestic Branch" />
+    <entityType name="EDB" value="Edge Corporation - Banking" />
+    <entityType name="EDI" value="Edge Corporation - Investment" />
+    <entityType name="FBH" value="Foreign Banking Organization as a BHC" />
+    <entityType name="FBK" value="Foreign Bank" />
+    <entityType name="FBO" value="Foreign Banking Organization" />
+    <entityType name="FCU" value="Federal Credit Union" />
+    <entityType name="FEO" value="Foreign Entity Other" />
+    <entityType name="FHD" value="Financial Holding Company" />
+    <entityType name="FHF" value="Financial Holding Company" />
+    <entityType name="FNC" value="Finance Company" />
+    <entityType name="FSB" value="Federal Savings Bank" />
+    <entityType name="IBK" value="International Bank of a U.S. Depository - Edge or Trust Co." />
+    <entityType name="IBR" value="Foreign Branch of a U.S. Bank" />
+    <entityType name="IFB" value="Insured Federal Branch of an FBO" />
+    <entityType name="INB" value="International Non-bank Subs of Domestic Entities" />
+    <entityType name="ISB" value="Insured State Branch of an FBO" />
+    <entityType name="MTC" value="Non-deposit Trust Company - Member" />
+    <entityType name="NAT" value="National Bank" />
+    <entityType name="NMB" value="Non-member Bank" />
+    <entityType name="NTC" value="Non-deposit Trust Company - Non-member" />
+    <entityType name="NYI" value="New York Investment Company" />
+    <entityType name="PST" value="Non-U.S. Branch managed by a U.S. Branch/Agency of a Foreign Bank" />
+    <entityType name="REP" value="Representative Office" />
+    <entityType name="SAL" value="Savings &amp; Loan Association" />
+    <entityType name="SBD" value="Securities Broker/Dealer" />
+    <entityType name="SCU" value="State Credit Union" />
+    <entityType name="SLHC" value="Savings and Loan Holding Company" />
+    <entityType name="SMB" value="State Member Bank" />
+    <entityType name="SSB" value="State Savings Bank" />
+    <entityType name="TWG" value="Non-U.S. Branch managed by a U.S. Branch/Agency of a Foreign Bank" />
+    <entityType name="UFA" value="Uninsured Federal Agency of an FBO" />
+    <entityType name="UFB" value="Uninsured Federal Branch of an FBO " />
+    <entityType name="USA" value="Uninsured State Agency of an FBO" />
+    <entityType name="USB" value="Uninsured State Branch of an FBO" />
+  </entityTypes>
+</configuration>

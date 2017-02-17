@@ -6,7 +6,7 @@
     <param key="" type="" />
     <param key="" type="" />
   </parameters>
-  <header partial="_OrganizationHeader">
+  <header partial="BankHeader">
 
   </header>
   <row>

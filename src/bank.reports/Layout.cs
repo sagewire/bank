@@ -32,6 +32,7 @@ namespace bank.reports
         public List<FactLookup> FactLookups { get; set; } = new List<FactLookup>();
 
         public List<TemplateElement> Elements { get; set; } = new List<TemplateElement>();
+        public Header Header { get; private set; }
 
         public Layout(string template = null)
         {
@@ -228,9 +229,23 @@ namespace bank.reports
         {
             sectionName = sectionName?.ToLower();
 
+            var header = layout.Elements("header").FirstOrDefault();
+
+            this.Header = ParseHeader(header);
+
             var rows = layout.Elements("row");
 
             this.Rows = ParseRows(rows);
+        }
+
+        private Header ParseHeader(XElement headerElement)
+        {
+            if (headerElement == null) return null;
+
+            var header = new Header();
+            header.Partial = headerElement.SafeAttributeValue("partial");
+
+            return header;
         }
 
         private IList<TemplateRow> ParseRows(IEnumerable<XElement> rows)

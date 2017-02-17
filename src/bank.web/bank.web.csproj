@@ -334,6 +334,12 @@
     </Content>
     <Content Include="browserconfig.xml" />
     <Content Include="Global.asax" />
+    <Content Include="templates\entity-types.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\org-layout.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="templates\holding-layout.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -455,7 +461,7 @@
     <Content Include="Views\Shared\Modals\Search.cshtml" />
     <Content Include="Views\Shared\_States.cshtml" />
     <Content Include="Views\Shared\Modals\Definition.cshtml" />
-    <Content Include="Views\Profile\_Header.cshtml" />
+    <Content Include="Views\Profile\_BankHeader.cshtml" />
     <Content Include="Views\Shared\_CardMenu.cshtml" />
     <Content Include="Views\Shared\_FactTrendArrow.cshtml" />
     <Content Include="Views\Shared\template\_Rows.cshtml" />
@@ -485,6 +491,7 @@
     <Content Include="Views\Shared\template\_Transformations.cshtml" />
     <Content Include="Views\Shared\template\_ChildRelationships.cshtml" />
     <Content Include="Views\Shared\template\_ParentRelationships.cshtml" />
+    <Content Include="Views\Profile\_OrgHeader.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bank.reports\bank.reports.csproj">

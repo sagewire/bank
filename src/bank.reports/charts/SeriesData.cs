@@ -18,7 +18,9 @@ namespace bank.reports.charts
 
         [JsonProperty(PropertyName = "name", NullValueHandling = NullValueHandling.Ignore)]
         public virtual string Name { get; set; }
-        
+
+        [JsonIgnore]
+        public virtual bool HasFacts { get; } = true;
 
         public virtual bool IsRange
         {
