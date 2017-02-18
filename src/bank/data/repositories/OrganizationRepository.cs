@@ -46,6 +46,26 @@ namespace bank.data.repositories
             }
         }
 
+        public List<Organization> GetOrganizationsForGraph()
+        {
+            var sql = new StringBuilder();
+            //sql.AppendLine("select * from Organization where OrganizationID in (");
+            //sql.AppendLine("select  PredecessorOrganizationID from OrganizationFfiecTransformation where PredecessorOrganizationID is not null");
+            //sql.AppendLine("union");
+            //sql.AppendLine("select SuccessorOrganizationID from OrganizationFfiecTransformation where SuccessorOrganizationID is not null)");
+
+            sql.AppendLine("select * from Organization");
+
+            using (var conn = new SqlConnection(Settings.ConnectionString))
+            {
+                conn.Open();
+                var org = conn.Query<Organization>(sql.ToString(),
+                                                commandType: CommandType.Text);
+
+                return org.ToList();
+            }
+        }
+
         public override void Update(Organization model)
         {
             base.Update(model);

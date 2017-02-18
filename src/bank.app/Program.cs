@@ -29,6 +29,9 @@ namespace bank.app
                 case "crawl":
                     Import.Start();
                     break;
+                case "graph":
+                    bank.import.graph.ImportGraph.Start(threads);
+                    break;
                 case "ffiec-orgs":
                     bank.import.ffiec.ImportOrganizations.Start(threads);
                     break;

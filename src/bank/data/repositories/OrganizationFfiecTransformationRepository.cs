@@ -32,5 +32,22 @@ namespace bank.data.repositories
 
             }
         }
+
+        public List<OrganizationFfiecTransformation> GetTransformationsForGraph()
+        {
+            var sql = new StringBuilder();
+            sql.AppendLine("select * from OrganizationFfiecTransformation");
+            //sql.AppendLine("where PredecessorOrganizationID is not null and SuccessorOrganizationID is not null");
+
+            using (var conn = new SqlConnection(Settings.ConnectionString))
+            {
+                conn.Open();
+                var org = conn.Query<OrganizationFfiecTransformation>(sql.ToString(),
+                                                commandType: CommandType.Text);
+
+                return org.ToList();
+            }
+
+        }
     }
 }

@@ -35,5 +35,22 @@ namespace bank.data.repositories
 
             }
         }
+
+
+        public List<OrganizationFfiecRelationship> GetRelationshipsForGraph()
+        {
+            var sql = new StringBuilder();
+            sql.AppendLine("select * from OrganizationFfiecRelationship");
+            //sql.AppendLine("where ParentOrganizationID in (64348)");
+
+            using (var conn = new SqlConnection(Settings.ConnectionString))
+            {
+                conn.Open();
+                var org = conn.Query<OrganizationFfiecRelationship>(sql.ToString(),
+                                                commandType: CommandType.Text);
+
+                return org.ToList();
+            }
+        }
     }
 }
