@@ -231,6 +231,8 @@
     <Content Include="assets\css\jquery.typeahead.min.css">
       <DependentUpon>jquery.typeahead.css</DependentUpon>
     </Content>
+    <Content Include="assets\css\jsplumb\jsPlumbToolkit-defaults.css" />
+    <Content Include="assets\css\jsplumb\jsPlumbToolkit-demo.css" />
     <Content Include="assets\css\site\responsive.css">
       <DependentUpon>responsive.less</DependentUpon>
     </Content>
@@ -314,6 +316,8 @@
     <Content Include="assets\scripts\json.min.js">
       <DependentUpon>json.js</DependentUpon>
     </Content>
+    <Content Include="assets\scripts\jsplumb\jsPlumb-2.1.4.js" />
+    <Content Include="assets\scripts\jsplumb\jsPlumbToolkit-1.0.24.js" />
     <Content Include="assets\scripts\rasterize.js" />
     <Content Include="assets\scripts\scrollreveal.js" />
     <Content Include="assets\scripts\scrollreveal.min.js" />
@@ -332,9 +336,13 @@
     <Content Include="assets\scripts\tether.min.js">
       <DependentUpon>tether.js</DependentUpon>
     </Content>
+    <Content Include="assets\scripts\viz.js" />
     <Content Include="browserconfig.xml" />
     <Content Include="Global.asax" />
     <Content Include="templates\entity-types.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\acquisitions.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="templates\org-layout.xml">
@@ -492,6 +500,7 @@
     <Content Include="Views\Shared\template\_ChildRelationships.cshtml" />
     <Content Include="Views\Shared\template\_ParentRelationships.cshtml" />
     <Content Include="Views\Profile\_OrgHeader.cshtml" />
+    <Content Include="Views\Shared\template\_Acquisitions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bank.reports\bank.reports.csproj">

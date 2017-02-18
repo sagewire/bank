@@ -80,7 +80,7 @@ namespace bank.web.Controllers
         }
         
 
-        public ActionResult Viewer(string name, string id, DateTime? period, string section, string c = null, string template = "org-layout")
+        public ActionResult Viewer(string name, string id, DateTime? period, string section, string c = null, string template = null)
         {
             //Response.CacheControl = HttpCacheability.Public.ToString();
             //Response.Expires = Settings.PageCacheMinutes;
@@ -96,7 +96,7 @@ namespace bank.web.Controllers
             var orgRepo = new OrganizationRepository();
             var org = orgRepo.GetOrganization(orgId, true, true);
 
-            if (!string.IsNullOrWhiteSpace(org.EntityCategory))
+            if (!string.IsNullOrWhiteSpace(org.EntityCategory) && template == null)
             {
                 template = string.Format("{0}-layout", org.EntityCategory);
             }
