@@ -142,6 +142,7 @@ body {
 
     h3, h4, h5, h6 {
         color: @white;
+
         a {
             color: @white;
         }
@@ -176,6 +177,34 @@ body {
 .alert {
     border-radius: 0;
 }
+
+#viz {
+    height: 63vh;
+    width: 100%;
+}
+
+
+.fullscreen #viz {
+    height: 100vh;
+}
+
+
+#spinner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 10%;
+    display: block;
+
+    .progress {
+        position: relative;
+        width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
 
 #flash {
     position: absolute;
@@ -220,7 +249,7 @@ footer {
     margin-top: 30px;
     .box-shadow;
 
-    .card-header { 
+    .card-header {
         background-color: transparent;
         font-size: 1.1rem;
         font-weight: bold;

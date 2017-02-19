@@ -15,6 +15,16 @@ namespace bank.poco.graph
         [JsonProperty(PropertyName = "label")]
         public string Name { get; set; }
 
+
+        [JsonProperty(PropertyName = "title")]
+        public string Title
+        {
+            get
+            {
+                return Name;
+            }
+        }
+
         [JsonProperty(PropertyName = "type")]
         public string Type { get; set; } = "Organization";
 

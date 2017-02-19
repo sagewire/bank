@@ -7106,11 +7106,11 @@ $(function () {
 
     // create a network
     var container = document.getElementById('viz');
-    
+
     if (container != null) {
 
         var options = {
-            nodes: {
+            nodes: { 
                 shape: 'dot',
                 scaling: {
                     min: 20,
@@ -7131,7 +7131,7 @@ $(function () {
                 shadow: true
             },
             interaction: {
-                zoomView: false
+                //zoomView: false
             },
             layout: {
                 improvedLayout: true
@@ -7159,9 +7159,12 @@ $(function () {
             physics: {
                 adaptiveTimestep: true,
                 barnesHut: {
-                    springLength: 200,
-                    avoidOverlap: .1,
-                    damping: 1
+                    //centralGravity: 0.1,
+                    //springLength: 1,
+                    //springConstant: .3,
+                    //avoidOverlap: .1,
+                    //damping: 1,
+                    gravitationalConstant: -50000
                 },
                 stabilization: {
                     fit: true,
@@ -7171,12 +7174,48 @@ $(function () {
             }
         };
 
+
+        //var clusterIndex = 0;
+        //var clusters = [];
+
+        //var clusterOptions = {
+        //    //joinCondition: function (nodeOptions) {
+        //    //    if (nodeOptions.amountOfConnections === 1) {
+        //    //        console.log(nodeOptions);
+        //    //    }
+
+        //    //    return nodeOptions.amountOfConnections === 1;
+        //    //},
+        //    processProperties: function (clusterOptions, childNodes) {
+        //        console.log(childNodes);
+        //        clusterIndex = clusterIndex + 1;
+        //        var childrenCount = 0;
+        //        for (var i = 0; i < childNodes.length; i++) {
+        //            childrenCount += childNodes[i].childrenCount || 1;
+        //        }
+        //        clusterOptions.childrenCount = childrenCount;
+        //        clusterOptions.label = "# " + childrenCount + "";
+        //        clusterOptions.font = { size: childrenCount * 5 + 30 }
+        //        clusterOptions.id = 'cluster:' + clusterIndex;
+        //        clusters.push({ id: 'cluster:' + clusterIndex});
+        //        return clusterOptions;
+        //    },
+        //    clusterNodeProperties: {
+        //        allowSingleNodeCluster: true,
+        //        shape: "square",
+        //        color: {
+        //            background: "#ff0000"
+        //        }
+        //    }
+        //};
+
         var network = new vis.Network(container, data, options);
+        //network.clusterOutliers(clusterOptions);
 
         network.on('click', function (params) {
 
-            options.interaction.zoomView = true;
-            network.setOptions(options);
+            //options.interaction.zoomView = true;
+            //network.setOptions(options);
 
         });
 
@@ -7190,9 +7229,9 @@ $(function () {
             }
 
             var id = params.nodes[0];
-            
+
             var result = $.grep(data.nodes, function (e) { return e.id == id; });
-            
+
             if (result.length >= 0) {
                 var href = result[0].url;
             }
@@ -7220,6 +7259,35 @@ $(function () {
             $("#spinner").hide();
         });
 
+
+        var timeout = null;
+        var lastPosition = null;
+        var zoomView = true;
+
+        $(window).scroll(function () {
+            //if (!timeout) {
+            clearTimeout(timeout);
+            //lastPosition = $(window).scrollTop();
+
+            if (zoomView) {
+                options.interaction.zoomView = false;
+                network.setOptions(options);
+                zoomView = false;
+            }
+
+            timeout = setTimeout(function () {
+                //var currentPosition = $(window).scrollTop();
+                console.log('scroll stop');
+                
+                options.interaction.zoomView = true;
+                network.setOptions(options);
+                zoomView = true;
+
+                clearTimeout(timeout);
+                timeout = null;
+            }, 1000);
+            //}
+        });
     }
 
 

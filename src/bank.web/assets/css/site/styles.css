@@ -107,6 +107,26 @@ body.noscroll {
 .alert {
   border-radius: 0;
 }
+#viz {
+  height: 63vh;
+  width: 100%;
+}
+.fullscreen #viz {
+  height: 100vh;
+}
+#spinner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 10%;
+  display: block;
+}
+#spinner .progress {
+  position: relative;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
 #flash {
   position: absolute;
   z-index: 100;
