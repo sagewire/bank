@@ -6749,6 +6749,21 @@ $(function () {
     });
 
 
+    $(".concept").on("click", function (e) {
+        var name = $(this).data("concept");
+
+        if (name === null) {
+            return;
+        }
+
+        name = name.toLowerCase();
+
+        var parts = window.location.pathname.split("/");
+
+        console.log(parts);
+
+        window.location = "/" + parts[1] + "/" + parts[2] + "/concept/" + name;
+    });
 
     $("body").on("click", ".inline-report .close", function (e) {
         var target = $(e.currentTarget).parents(".inline-report");
@@ -7629,7 +7644,7 @@ $(function () {
                 valueDecimals: 2,
                 borderWidth: 0,
                 headerFormat: "<table class='table'>",
-                pointFormat: "<tr><td><b>${point.y}    </b></td><td> {point.x:%b %Y}</td></tr>",
+                pointFormat: "<tr><td><b>{point.y}    </b></td><td> {point.x:%b %Y}</td></tr>",
                 footerFormat: "</table>",
                 //footerFormat: "<b>${point.y}</b> {point.x:%b %Y}",
                 formatter: null,

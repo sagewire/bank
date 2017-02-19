@@ -2,7 +2,7 @@
 <layout>
   <row>
     <col>
-      <table lookback="4" show-rank="true" title="Bank Rankings by Total Loans" orientation="vertical">
+      <table lookback="5" show-rank="true" title="Bank Rankings by Total Loans" orientation="vertical">
         <concept name="UBPRE119" />
         <concept name="UBPR2170" />
         <concept name="UBPR2200" />

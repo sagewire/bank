@@ -7,8 +7,8 @@
     var concept = chartConfig.Series.First().Concept;
     var fact = chartConfig.VisibleColumns.First().Facts.Single(x => x.Key == concept.Name).Value;
 }
+<h2 class="text-left concept" data-concept="@concept.Name">
 
-<h2 class="text-left">
     @concept.ValueFormatted(fact)
 
     <small>

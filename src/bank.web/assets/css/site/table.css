@@ -261,6 +261,9 @@ footer {
 .sankey {
   height: 500px;
 }
+.concept {
+  cursor: pointer;
+}
 .avatar {
   border: 1px solid #ddd;
   background-repeat: no-repeat;

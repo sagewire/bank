@@ -64,6 +64,7 @@
     <Compile Include="CompanyColumn.cs" />
     <Compile Include="Column.cs" />
     <Compile Include="EmptyElement.cs" />
+    <Compile Include="extensions\StringExtensions.cs" />
     <Compile Include="FactLookup.cs" />
     <Compile Include="Header.cs" />
     <Compile Include="HtmlElement.cs" />

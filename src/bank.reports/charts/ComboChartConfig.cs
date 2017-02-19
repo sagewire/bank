@@ -43,7 +43,7 @@ namespace bank.reports.charts
                         }
 
 
-                        if (series.ColumnStart.HasValue && series.ColumnStart >= counter)
+                        if (series.ColumnStart.HasValue && counter >= series.ColumnStart)
                         {
                             addColumn = true;
                         }
@@ -202,13 +202,13 @@ namespace bank.reports.charts
 
                 foreach (var conceptElement in concepts)
                 {
-                    var name = conceptElement.SafeAttributeValue("name");
-                    var placeholder = conceptElement.SafeAttributeValue("placeholder");
+                    var name = conceptElement.SafeAttributeValue("name").ParameterReplace(Parameters).ToUpper();
+                    //var placeholder = conceptElement.SafeAttributeValue("placeholder");
 
-                    if (!string.IsNullOrWhiteSpace(placeholder))
-                    {
-                        name = Placeholders[placeholder];
-                    }
+                    //if (!string.IsNullOrWhiteSpace(placeholder))
+                    //{
+                    //    name = Parameters[placeholder];
+                    //}
 
                     var concept = new Concept(name);
                     series.Concepts.Add(concept);

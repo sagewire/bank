@@ -148,7 +148,7 @@
   </row>
   <row>
     <col>
-      <table lookback="4">
+      <table lookback="5">
         <header>Loan Composition &amp; Ratios</header>
         <concept name="UBPR1410" />
         <concept name="UBPRE116" />

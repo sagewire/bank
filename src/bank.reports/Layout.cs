@@ -9,6 +9,7 @@ using bank.data.repositories;
 using bank.extensions;
 using bank.poco;
 using bank.reports.charts;
+using bank.reports.extensions;
 using XmlTransform;
 
 namespace bank.reports
@@ -33,6 +34,7 @@ namespace bank.reports
 
         public List<TemplateElement> Elements { get; set; } = new List<TemplateElement>();
         public Header Header { get; private set; }
+        public Dictionary<string, object> Parameters { get; internal set; }
 
         public Layout(string template = null)
         {
@@ -147,6 +149,12 @@ namespace bank.reports
                     var global = Global.Concepts[concept.Name];
                     concept.SetValues(global);
                 }
+            }
+
+            var titles = Elements.Where(x => x.Title != null && x.Title.Contains(".concept."));
+            foreach(var title in titles)
+            {
+                title.Title = title.Title.ConceptReplace(Concepts);
             }
         }
 
@@ -331,7 +339,7 @@ namespace bank.reports
         {
             var name = element.Name.ToString().ToLower();
             var partial = element.SafeAttributeValue("partial");
-            var title = element.SafeAttributeValue("title");
+            var title = element.SafeAttributeValue("title").ParameterReplace(Parameters);
             var lookback = element.SafeIntAttributeValue("lookback");
             var dataSource = element.SafeAttributeValue("data-source");
 
@@ -370,7 +378,7 @@ namespace bank.reports
         {
             var chart = new ChartElement();
 
-            chart.ChartConfig = ChartConfig.Build(element, Placeholders);
+            chart.ChartConfig = ChartConfig.Build(element, Parameters);
 
             chart.Concepts.AddRange(chart.ChartConfig.Concepts);
 
@@ -399,7 +407,15 @@ namespace bank.reports
                     case "concept":
                         var conceptRow = new TableRow();
                         conceptRow.TableRowType = TableRowTypes.Concept;
-                        conceptRow.Concept = new Concept(item.SafeAttributeValue("name"));
+                        var name = item.SafeAttributeValue("name").ParameterReplace(Parameters).ToUpper();
+                        var link = item.SafeBoolAttributeValue("link");
+
+                        if (link.HasValue) {
+                            conceptRow.Link = link.Value;
+                        }
+
+                        conceptRow.Concept = new Concept(name);
+
                         conceptRow.Concept.Label = item.SafeAttributeValue("label") ?? conceptRow.Concept.Label;
                         conceptRow.Concept.Unit = item.SafeCharAttributeValue("unit");
                         conceptRow.Concept.Negative = item.SafeBoolAttributeValue("negative");

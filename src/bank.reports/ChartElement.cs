@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using bank.poco;
 using bank.reports.charts;
+using bank.reports.extensions;
 
 namespace bank.reports
 {
@@ -13,7 +14,7 @@ namespace bank.reports
         {
             get
             {
-                return ChartConfig.Title;
+                return ChartConfig.Title.ConceptReplace(Concepts);
             }
         }
 

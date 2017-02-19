@@ -267,6 +267,18 @@
     <Content Include="assets\dist\js\bootstrap.min.js" />
     <Content Include="assets\fonts\stately\stately-webfont.svg" />
     <Content Include="assets\images\bank.png" />
+    <Content Include="assets\images\favicons\favicon.ico" />
+    <Content Include="assets\images\favicons\yin-yang-114-1271.png" />
+    <Content Include="assets\images\favicons\yin-yang-120-1271.png" />
+    <Content Include="assets\images\favicons\yin-yang-144-1271.png" />
+    <Content Include="assets\images\favicons\yin-yang-152-1271.png" />
+    <Content Include="assets\images\favicons\yin-yang-16-1271.png" />
+    <Content Include="assets\images\favicons\yin-yang-24-1271.png" />
+    <Content Include="assets\images\favicons\yin-yang-32-1271.png" />
+    <Content Include="assets\images\favicons\yin-yang-48-1271.png" />
+    <Content Include="assets\images\favicons\yin-yang-57-1271.png" />
+    <Content Include="assets\images\favicons\yin-yang-64-1271.png" />
+    <Content Include="assets\images\favicons\yin-yang-72-1271.png" />
     <Content Include="assets\images\social\fb-29.png" />
     <Content Include="assets\images\social\fb-40.png" />
     <Content Include="assets\images\social\linkedin-40.png" />
@@ -353,6 +365,9 @@
     <Content Include="templates\acquisitions.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="templates\concept.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="templates\org-layout.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -366,8 +381,12 @@
     <Content Include="templates\config.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="templates\concept-definition.xml" />
-    <Content Include="templates\balance-sheet.xml" />
+    <Content Include="templates\concept-definition.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\balance-sheet.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="templates\dashboard.xml">
       <SubType>Designer</SubType>
     </Content>

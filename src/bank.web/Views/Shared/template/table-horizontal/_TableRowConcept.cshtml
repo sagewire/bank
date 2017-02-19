@@ -2,10 +2,10 @@
 @using bank.reports.charts
 @model TableRowViewModel
 
-<tr class="data-row">
+<tr class="data-row @(Model.Row.Link ? "concept" : "")" data-concept="@(Model.Row.Link ? Model.Row.Concept?.Name : "")">
 
     <td class="@Model.Level">
-        <a title="@Model.Row.Concept.Label @(Model.Row.Concept?.Name)">@Model.Row.Label</a>
+        <a title="@Model.Row.Link ? Model.Row.Concept?.Name : "")">@Model.Row.Label</a>
     </td>
 
 
@@ -21,8 +21,8 @@
             {
                 seriesJson = ComboChartConfig.GetSparklineData(fact, Model.Row.Concept, column).ToJson();
             }
-            <td data-chart-type="sparkline"
-                data-series="@seriesJson"
+            <td @*data-chart-type="sparkline"*@
+                @*data-series="@seriesJson"*@
                 style="@General.TrendingColor(fact)"
                 class="@Model.Level @General.TrendingClass(fact)">
 

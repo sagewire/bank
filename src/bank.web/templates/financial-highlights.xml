@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<report lookback="4">
+<report lookback="5">
 	<line type="section" name="top" alias="top" label="Financial Highlights">
 		<!--
 		<charts>

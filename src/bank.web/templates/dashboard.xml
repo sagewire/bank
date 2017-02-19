@@ -11,7 +11,7 @@
   </row>
   <row>
     <col>
-      <table title="Financial Highlights" lookback="4">
+      <table title="Financial Highlights" lookback="5">
         <header>Balance Sheet</header>
         <concept name="UBPR2170" />
         <concept name="UBPRE119" />

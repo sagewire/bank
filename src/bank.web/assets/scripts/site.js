@@ -323,6 +323,21 @@ $(function () {
     });
 
 
+    $(".concept").on("click", function (e) {
+        var name = $(this).data("concept");
+
+        if (name === null) {
+            return;
+        }
+
+        name = name.toLowerCase();
+
+        var parts = window.location.pathname.split("/");
+
+        console.log(parts);
+
+        window.location = "/" + parts[1] + "/" + parts[2] + "/concept/" + name;
+    });
 
     $("body").on("click", ".inline-report .close", function (e) {
         var target = $(e.currentTarget).parents(".inline-report");

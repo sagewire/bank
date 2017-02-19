@@ -3,7 +3,7 @@
   <header partial="BankHeader" />
   <row>
     <col>
-      <table lookback="4" title="Income Statement">
+      <table lookback="5" title="Income Statement">
 
         <header></header>
         <!--<concept name="UBPR4010" />

@@ -122,6 +122,14 @@ namespace bank.web.Controllers
             reportFactory.Template = template;
             reportFactory.SectionFilter = section;
 
+            reportFactory.Parameters.Add("section", section);
+            
+            foreach(var key in Request.QueryString.AllKeys)
+            {
+                reportFactory.Parameters.Add(key, Request.QueryString[key]);
+            }
+
+
             if (org.LastReportDate.HasValue)
             {
                 reportFactory.Period = org.LastReportDate.Value;

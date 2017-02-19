@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+  <header partial="BankHeader" />
+  <row>
+    <col>
+      <chart type="combo" chart-override="primary" css-classes="main-chart" lookback="20" title="{section.concept.label} Over Time">
+        <series type="column" column="0">
+          <concept name="{section}"/>
+        </series>
+        <series type="areaspline" column-start="1">
+          <concept name="{section}"/>
+        </series>
+      </chart>
+    </col>
+  </row>
+  <row>
+    <col>
+      <table lookback="5" title="{section.concept.label}">
+        <concept name="{section}" link="false" />
+      </table>
+    </col>
+  </row>
+</layout>

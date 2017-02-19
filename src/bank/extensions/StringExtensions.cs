@@ -12,6 +12,8 @@ namespace bank.extensions
     {
         private static Regex _cleanRegex = new Regex("[^0-9 \\w]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static Regex _removeExtraSpaces = new Regex("[ ]{2,}", RegexOptions.Compiled);
+        private static Regex _parameters = new Regex(@"{(?<key>[\w]+?)[\.}]", RegexOptions.Compiled);
+
         public static string DeSlugfiy(this string source)
         {
             // Note: Using proper case right now
@@ -56,7 +58,31 @@ namespace bank.extensions
             return source.ToLower();
         }
 
+        public static string ParameterReplace(this string text, Dictionary<string, object> parameters)
+        {
+            if (text == null || parameters == null || !parameters.Any())
+            {
+                return text;
+            }
 
+            var matches = _parameters.Matches(text);
+
+            foreach(Match match in matches)
+            {
+                var key = match.Groups["key"].Value;
+                var keepBraces = match.Value.Contains(".");
+                
+                if (parameters.ContainsKey(key))
+                {
+                    var p = parameters[key];
+                    text = text.Replace(keepBraces ? key : match.Value, p.ToString());
+                }
+            }
+
+            return text;
+        }
+
+        
         public static string StripHTML(this string htmlString)
         {
             const string pattern = @"<(.|\n)*?>";

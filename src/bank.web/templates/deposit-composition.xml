@@ -118,7 +118,7 @@
   </row>
   <row>
     <col>
-      <table lookback="4">
+      <table lookback="5">
         <header>Deposit Composition</header>
         <concept name="RCON2210" />
         <concept name="UBPRE125" />

@@ -21,6 +21,8 @@ namespace bank.reports
         public string SectionFilter { get; set; }
         public DateTime Period { get; set; }
 
+        public Dictionary<string, object> Parameters { get; set; } = new Dictionary<string, object>();
+
         private List<Column> Columns { get; set; } = new List<Column>();
 
 
@@ -35,10 +37,12 @@ namespace bank.reports
         {
             var layout = new Layout();
             layout.SectionFilter = SectionFilter;
-            layout.Load(Template);
             layout.DataSourceNeeded += OnDataSourceNeeded;
+            layout.Parameters = Parameters;
             //get columns
             layout.DataColumns = GetColumns();
+
+            layout.Load(Template);
 
             //populate facts and orgs
             var tasks = new List<Task>();

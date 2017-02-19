@@ -10,12 +10,6 @@
   <row>
     <col>
       <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="ROAA">
-        <!--<series type="line" column="0">
-          <concept name="UBPRE010" />
-        </series>-->
-        <!--<series type="line" column="1">
-          <concept name="UBPRE010" />
-        </series>-->
         <series type="areaspline">
           <concept name="UBPRE010" />
         </series>
@@ -23,12 +17,6 @@
     </col>
     <col>
       <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="ROAE">
-        <!--<series type="line" column="0">
-          <concept name="UBPRE630" />
-        </series>
-        <series type="line" column="1" visible="false">
-          <concept name="UBPRE630" />
-        </series>-->
         <series type="areaspline">
           <concept name="UBPRE630" />
         </series>
@@ -36,12 +24,6 @@
     </col>
     <col>
       <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="Efficiency Ratio">
-        <!--<series type="line" column="0">
-          <concept name="UBPRE088" />
-        </series>
-        <series type="line" column="1" visible="false">
-          <concept name="UBPRE088" />
-        </series>-->
         <series type="areaspline">
           <concept name="UBPRE088" />
         </series>
@@ -49,12 +31,6 @@
     </col>
     <col>
       <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="Net Interest Margin">
-        <!--<series type="line" column="0">
-          <concept name="UBPRE018" />
-        </series>
-        <series type="line" column="1" visible="false">
-          <concept name="UBPRE018" />
-        </series>-->
         <series type="areaspline">
           <concept name="UBPRE018" />
         </series>
@@ -83,7 +59,7 @@
     <col grid="col-xs-12 col-xl-8">
       <row>
         <col>
-          <table title="Financial Highlights" lookback="4">
+          <table title="Financial Highlights" lookback="5">
             <header>Balance Sheet</header>
             <concept name="UBPR2170" />
             <concept name="UBPRE119" />

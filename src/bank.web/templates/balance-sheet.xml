@@ -19,7 +19,7 @@
       </row>
       <row>
         <col>
-          <table lookback="4" title="Assets">
+          <table lookback="5" title="Assets">
             <group label="Total Assets" sum="true">
               <!--<header>Loans &amp; Leases</header>-->
               <group label="Loans &amp; Leases" sum="true">
@@ -75,7 +75,7 @@
       </row>
       <row>
         <col>
-          <table lookback="4" title="Liabilities">
+          <table lookback="5" title="Liabilities">
             <group label="Total Liabilities" sum="true">
               <group label="Deposits" sum="true">
                 <concept name="RCON2210" />

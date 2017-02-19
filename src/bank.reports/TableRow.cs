@@ -30,5 +30,25 @@ namespace bank.reports
 
         }
 
+        private bool? _link = null;
+        public bool Link
+        {
+            get
+            {
+                if (_link.HasValue)
+                {
+                    return _link.Value;
+                }
+                else
+                {
+                    return Concept.ConceptKeys.Count == 1;
+                }
+
+            }
+            set
+            {
+                _link = value;
+            }
+        }
     }
 }

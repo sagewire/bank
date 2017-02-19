@@ -251,7 +251,7 @@ $(function () {
                 valueDecimals: 2,
                 borderWidth: 0,
                 headerFormat: "<table class='table'>",
-                pointFormat: "<tr><td><b>${point.y}    </b></td><td> {point.x:%b %Y}</td></tr>",
+                pointFormat: "<tr><td><b>{point.y}    </b></td><td> {point.x:%b %Y}</td></tr>",
                 footerFormat: "</table>",
                 //footerFormat: "<b>${point.y}</b> {point.x:%b %Y}",
                 formatter: null,
