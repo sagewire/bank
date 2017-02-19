@@ -16,6 +16,18 @@ namespace bank.extensions
             return (long)Math.Floor(diff.TotalMilliseconds);
         }
 
+
+        public static DateTime FromMillisecondsSince1970(this int milliseconds)
+        {
+            return ((long)milliseconds).FromMillisecondsSince1970();
+        }
+
+        public static DateTime FromMillisecondsSince1970(this long milliseconds)
+        {
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            return origin.AddMilliseconds(milliseconds);
+        }
+
         public static DateTime AddQuarters(this DateTime date, int quarters)
         {
             var candidate = date.AddMonths(quarters * 3);

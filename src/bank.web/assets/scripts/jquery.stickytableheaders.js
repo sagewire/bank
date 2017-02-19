@@ -130,7 +130,7 @@
         };
 
         base.toggleHeaders = base.debounce(function () {
-            console.log('toggle');
+            
             if (base.$el) {
                 base.$el.each(function () {
                     var $this = $(this),

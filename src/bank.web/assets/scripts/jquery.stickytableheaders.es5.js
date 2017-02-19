@@ -129,7 +129,7 @@ MIT license info: https://github.com/jmosbech/StickyTableHeaders/blob/master/lic
         };
 
         base.toggleHeaders = base.debounce(function () {
-            console.log('toggle');
+
             if (base.$el) {
                 base.$el.each(function () {
                     var $this = $(this),

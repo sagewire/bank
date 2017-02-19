@@ -5,6 +5,15 @@
 <div id="header" class="header-wrap">
     <div class="container-fluid">
         <div class="pt-3">
+            @if (Model.Organization.Successor != null)
+            {
+                <div class="alert alert-success align-middle">
+                    <i class="fa fa-fw fa-exclamation-circle" aria-hidden="true"></i>
+                    Acquired by <a href="@Url.Url(Model.Organization.Successor.SuccessorOrganization)">@Model.Organization.Successor.SuccessorOrganization.Name</a> on @Model.Organization.Successor.D_DT_TRANS.Value.ToShortDateString()
+
+                </div>
+            }
+
             <h1>
                 @if (Request.IsAuthenticated)
                 {
@@ -29,9 +38,30 @@
                 }
                 @Model.Organization.Name
             </h1>
-            <h4>@Model.Organization.City, @Model.Organization.State</h4>
-            <h6>@bank.poco.Global.EntityTypes[Model.Organization.EntityType]</h6>
 
+            <h4>@Model.Organization.City, @Model.Organization.State</h4>
+            @if (Model.Organization.HoldingCompany != null)
+            {
+                <div class="mb-1">
+                    <a class="btn btn-primary" href="@Url.Url(Model.Organization.HoldingCompany.ParentOrganization)">Holding Company &mdash; @Model.Organization.HoldingCompany.ParentOrganization.Name</a>
+                </div>
+            }
+                    <h6>@bank.poco.Global.EntityTypes[Model.Organization.EntityType]</h6>
+                    <h6>RSSD ID @Model.Organization.ID_RSSD</h6>
+                    <h6>Active: @Model.Organization.Active</h6>
+
+
+
+                    @if (Model.Organization.Established.HasValue)
+                    {
+                        <h6>Established: @Model.Organization.Established.Value.ToShortDateString()</h6>
+                    }
+
+                    @if (!Model.Organization.Active && Model.Organization.LastUpdate.HasValue)
+                    {
+                        <h6>Closed: @Model.Organization.LastUpdate.Value.ToShortDateString()</h6>
+                    }
+
+                </div>
+            </div>
         </div>
-    </div>
-</div>

@@ -6,9 +6,7 @@
     <param key="" type="" />
     <param key="" type="" />
   </parameters>
-  <header partial="BankHeader">
-
-  </header>
+  <header partial="BankHeader" />
   <row>
     <col>
       <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="ROAA">

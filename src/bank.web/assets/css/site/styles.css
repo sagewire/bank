@@ -73,7 +73,16 @@ body.noscroll {
   font-size: 3rem;
   margin-bottom: 0;
 }
-#header h4 {
+#header h3,
+#header h4,
+#header h5,
+#header h6 {
+  color: #fff;
+}
+#header h3 a,
+#header h4 a,
+#header h5 a,
+#header h6 a {
   color: #fff;
 }
 .skirt {

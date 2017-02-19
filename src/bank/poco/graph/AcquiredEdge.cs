@@ -10,7 +10,7 @@ namespace bank.poco.graph
     public class AcquiredEdge : IEdge
     {
 
-        [JsonProperty(PropertyName = "source")]
+        [JsonProperty(PropertyName = "from")]
         public string Source
         {
             get
@@ -22,8 +22,8 @@ namespace bank.poco.graph
         [JsonIgnore]
         public long SourceId { get; set; }
 
-        
-        [JsonProperty(PropertyName = "target")]
+
+        [JsonProperty(PropertyName = "to")]
         public string Target
         {
             get
@@ -31,6 +31,10 @@ namespace bank.poco.graph
                 return TargetId.ToString();
             }
         }
+
+
+        [JsonProperty(PropertyName = "label")]
+        public string Label { get; set; }
 
         [JsonIgnore]
         public long TargetId { get; set; }

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+  <header partial="BankHeader" />
   <row>
     <col>
-      <element partial="Acquisitions" data-source="Acquisitions" />
+      <element title="Acquisitions" partial="Acquisitions" data-source="Acquisitions" />
+
+      <element partial="Transformations" data-source="Transformations" />
     </col>
   </row>
 </layout>

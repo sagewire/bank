@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using bank.poco.graph;
+using bank.extensions;
 using Neo4j.Driver.V1;
 
 namespace bank.data.graph
 {
     public class Cypher
     {
-        public static Data Acquisitions()
+        public static Data Acquisitions(int organizationId)
         {
 
             using (var driver = GraphDatabase.Driver("bolt://localhost:7687",
@@ -24,10 +25,10 @@ namespace bank.data.graph
                 using (var session = driver.Session())
                 {
                     var cypher = new StringBuilder();
-                    cypher.AppendLine("MATCH p=(n:Organization { id: {id} })-[r:Acquired*1..20]-() RETURN p LIMIT 50");
+                    cypher.AppendLine("MATCH p=(n:Organization { id: {id} })-[r:Acquired*1..20 { type: 1 }]-() RETURN p LIMIT 200");
 
                     var props = new Dictionary<string, object>();
-                    props.Add("id", 24359);
+                    props.Add("id", organizationId);
                     
                     var result = session.Run(cypher.ToString(), props);
 
@@ -43,8 +44,12 @@ namespace bank.data.graph
                                 {
                                     NodeId = node.Id,
                                     OrganizationId = int.Parse(node.Properties["id"].ToString()),
-                                    Name = node.Properties["name"].ToString()
+                                    Url = node.Properties.ContainsKey("url") ? node.Properties["url"].ToString() : null,
+                                    Name = node.Properties["name"].ToString(),
+                                    TotalAssets = node.Properties.ContainsKey("assets") ? (long)node.Properties["assets"] : 10
                                 };
+
+                                nodeObj.IsTarget = (nodeObj.OrganizationId == organizationId);
 
                                 if (!nodes.ContainsKey(nodeObj.NodeId))
                                 {
@@ -59,7 +64,8 @@ namespace bank.data.graph
                                 var edgeObj = new AcquiredEdge
                                 {
                                     SourceId = relationship.StartNodeId,
-                                    TargetId = relationship.EndNodeId
+                                    TargetId = relationship.EndNodeId,
+                                    Label = relationship.Properties.ContainsKey("date") ? ((long)relationship.Properties["date"]).FromMillisecondsSince1970().Year.ToString() : ""
                                 };
 
                                 if (!edges.ContainsKey(edgeObj.Key))

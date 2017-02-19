@@ -5,56 +5,51 @@
 
 @{
     var org = (Organization)Model.Data;
-    var data = bank.data.graph.Cypher.Acquisitions();
+    var data = bank.data.graph.Cypher.Acquisitions(org.OrganizationId);
 }
 
-<link rel="stylesheet" href="~/assets/css/jsplumb/jsPlumbToolkit-defaults.css" />
-<link rel="stylesheet" href="~/assets/css/jsplumb/jsPlumbToolkit-demo.css" />
+
+<link rel="stylesheet" href="~/assets/visjs/vis-network.min.css">
 
 <style>
-    .org-node {
-        background-color: aquamarine;
-        max-width: 150px;
+    #viz {
+        height: 63vh;
+        width: 100%;
+    }
+
+    .fullscreen #viz {
+        height: 100vh;
+    }
+
+    #spinner {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 10%;
+        display: block;
+    }
+
+    #spinner .progress {
+        position: relative;
+        width: 200px;
+        margin-left: auto;
+        margin-right: auto;
     }
 </style>
 
-<script type="jtk" id="tmplFocus">
-    <div>
-        <div class="name name-focus active-${isActive}">
-            <span>${name}</span>
-        </div>
-    </div>
-</script>
-<script type="jtk" id="Organization">
-    <div>
-        <div data-source="graph-node" class="org-node active-${isActive}">
-            <a target="_top" href="${url}">${name}</a>
-        </div>
-    </div>
-</script>
-<script type="jtk" id="tmplLocked">
-    <div>
-        <div class="name name-locked active-${isActive}">
-            <span class="glyphicon glyphicon-lock"></span>
-        </div>
-    </div>
-</script>
-
-<div id="viz-container">
-    <div style="height:500px;" class="viz-canvas canvas-wide">
-        <div class="viz-close">
-            <i class="fa fa-arrows selected-mode" mode="pan" title="Pan Mode"></i>
-            <i class="fa fa-pencil" mode="select" title="Select Mode"></i>
-            <i class="fa fa-home" reset title="Zoom To Fit"></i>
-        </div>
+<div id="spinner">
+    @*<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>*@
+    <div class="progress text-center">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 3%"></div>
     </div>
 </div>
+
+<div id="viz"></div>
 
 
 <script>
     var data = @(Html.Raw(data.ToJson()));
 </script>
 
-<script src="~/assets/scripts/jsplumb/jsPlumb-2.1.4.js"></script>
-<script src="~/assets/scripts/jsplumb/jsPlumbToolkit-1.0.24.js"></script>
-<script src="~/assets/scripts/viz.js"></script>
+
+

@@ -78,7 +78,7 @@ namespace bank.web.Controllers
             return list.OrderByDescending(x => x.Key).Select(x => x.Value).ToList();
 
         }
-        
+
 
         public ActionResult Viewer(string name, string id, DateTime? period, string section, string c = null, string template = null)
         {
@@ -96,9 +96,23 @@ namespace bank.web.Controllers
             var orgRepo = new OrganizationRepository();
             var org = orgRepo.GetOrganization(orgId, true, true);
 
-            if (!string.IsNullOrWhiteSpace(org.EntityCategory) && template == null)
+            if (template == null)
             {
-                template = string.Format("{0}-layout", org.EntityCategory);
+                if (!string.IsNullOrWhiteSpace(org.EntityCategory))
+                {
+                    if (org.EntityCategory == "Bank" && !org.ReportImports.Any())
+                    {
+                        template = "org-layout";
+                    }
+                    else
+                    {
+                        template = string.Format("{0}-layout", org.EntityCategory);
+                    }
+                }
+                else
+                {
+                    template = "org-layout";
+                }
             }
 
             //var periodStart = org.ReportImports.Select(x => x.Period).Min();
@@ -142,7 +156,7 @@ namespace bank.web.Controllers
 
             var charts = layout.Elements.Where(x => x as ChartElement != null);
 
-            foreach(ChartElement chart in charts)
+            foreach (ChartElement chart in charts)
             {
                 chart.ChartConfig.Annotations = org.FilteredTransformations.ToAnnotations();
                 //chart.ChartConfig.Annotations = org.SucessorTransformations.ToAnnotations();

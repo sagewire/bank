@@ -231,8 +231,6 @@
     <Content Include="assets\css\jquery.typeahead.min.css">
       <DependentUpon>jquery.typeahead.css</DependentUpon>
     </Content>
-    <Content Include="assets\css\jsplumb\jsPlumbToolkit-defaults.css" />
-    <Content Include="assets\css\jsplumb\jsPlumbToolkit-demo.css" />
     <Content Include="assets\css\site\responsive.css">
       <DependentUpon>responsive.less</DependentUpon>
     </Content>
@@ -316,8 +314,6 @@
     <Content Include="assets\scripts\json.min.js">
       <DependentUpon>json.js</DependentUpon>
     </Content>
-    <Content Include="assets\scripts\jsplumb\jsPlumb-2.1.4.js" />
-    <Content Include="assets\scripts\jsplumb\jsPlumbToolkit-1.0.24.js" />
     <Content Include="assets\scripts\rasterize.js" />
     <Content Include="assets\scripts\scrollreveal.js" />
     <Content Include="assets\scripts\scrollreveal.min.js" />
@@ -337,6 +333,18 @@
       <DependentUpon>tether.js</DependentUpon>
     </Content>
     <Content Include="assets\scripts\viz.js" />
+    <Content Include="assets\scripts\viz.min.js">
+      <DependentUpon>viz.js</DependentUpon>
+    </Content>
+    <Content Include="assets\visjs\vis-graph3d.min.js" />
+    <Content Include="assets\visjs\vis-network.min.css" />
+    <Content Include="assets\visjs\vis-network.min.js" />
+    <Content Include="assets\visjs\vis-timeline-graph2d.min.css" />
+    <Content Include="assets\visjs\vis-timeline-graph2d.min.js" />
+    <Content Include="assets\visjs\vis.css" />
+    <Content Include="assets\visjs\vis.js" />
+    <Content Include="assets\visjs\vis.min.css" />
+    <Content Include="assets\visjs\vis.min.js" />
     <Content Include="browserconfig.xml" />
     <Content Include="Global.asax" />
     <Content Include="templates\entity-types.xml">
@@ -430,6 +438,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\images\headers\" />
+    <Folder Include="assets\visjs\img\" />
     <Folder Include="Views\Report\" />
     <Folder Include="Views\Shared\ImageGen\" />
   </ItemGroup>
@@ -456,6 +465,8 @@
     <Content Include="assets\dist\css\bootstrap.css.map" />
     <Content Include="assets\dist\css\bootstrap.min.css.map" />
     <Content Include="assets\css\site\table.less" />
+    <Content Include="assets\visjs\vis.js.map" />
+    <Content Include="assets\visjs\vis.map" />
     <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">

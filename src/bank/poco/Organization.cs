@@ -253,6 +253,30 @@ namespace bank.poco
             }
         }
 
+        public OrganizationFfiecTransformation Successor
+        {
+            get
+            {
+                if (PredecessorTransformations.Any())
+                {
+                    return PredecessorTransformations.OrderByDescending(x => x.D_DT_TRANS).FirstOrDefault();
+                }
+                return null;
+            }
+        }
+        
+        public OrganizationFfiecRelationship HoldingCompany
+        {
+            get
+            {
+                if (ParentRelationships.Any())
+                {
+                    return ParentRelationships.OrderByDescending(x => x.D_DT_START.Value).FirstOrDefault();
+                }
+                return null;
+            }
+        }
+
         public List<ReportImport> ReportImports { get; internal set; }
 
         public List<OrganizationFfiecTransformation> SucessorTransformations { get; internal set; }

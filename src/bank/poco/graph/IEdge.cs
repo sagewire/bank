@@ -12,5 +12,6 @@ namespace bank.poco.graph
         long TargetId { get; set; }
 
         string Key { get; }
+        string Label { get; set; }
     }
 }

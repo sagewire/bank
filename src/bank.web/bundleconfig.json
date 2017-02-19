@@ -34,6 +34,8 @@
         "assets/scripts/highcharts-more.js",
         "assets/dist/js/bootstrap.min.js",
         "assets/scripts/site.js",
+        "assets/visjs/vis.min.js",
+        "assets/scripts/viz.js",
         "assets/scripts/json.js",
         "assets/scripts/charts.js"
     ]
@@ -60,6 +62,36 @@
     "outputFileName": "assets/scripts/highcharts.min.js",
     "inputFiles": [
       "assets/scripts/highcharts.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/scripts/alchemy.min.js",
+    "inputFiles": [
+      "assets/scripts/alchemy.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/css/alchemy.min.css",
+    "inputFiles": [
+      "assets/css/alchemy.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/scripts/vendor.min.js",
+    "inputFiles": [
+      "assets/scripts/vendor.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/css/vendor.min.css",
+    "inputFiles": [
+      "assets/css/vendor.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/scripts/viz.min.js",
+    "inputFiles": [
+      "assets/scripts/viz.js"
     ]
   }
 ]

@@ -81,7 +81,16 @@
                             <span class="hidden-xs-down">Deposits</span>
                         </a>
                     </li>
-                    <li class="nav-item dropdown reveal">
+                    @if (Model.Organization.PredecessorTransformations.Any() || Model.Organization.SucessorTransformations.Any())
+                    {
+                    <li class="nav-item reveal">
+                        <a class="nav-link" href="@Url.Url(Model.Organization, DateTime.Now, "acquisitions", null)">
+                            <i class="fa fa-fw fa-money" aria-hidden="true"></i>
+                            <span class="hidden-xs-down">Acquisitions</span>
+                        </a>
+                    </li>
+                    }
+                    @*<li class="nav-item dropdown reveal">
                         <a class="nav-link dropdown-toggle" href="#" onclick="return false;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-fw fa-file-text-o" aria-hidden="true"></i>
                             <span class="hidden-sm-down">Call Reports</span>
@@ -130,7 +139,7 @@
                                 &lt; more &gt;
                             </div>
                         </div>
-                    </li>
+                    </li>*@
                 </ul>
 
             </div>

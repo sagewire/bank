@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+  <header partial="BankHeader" />
   <row>
     <col>
       <chart type="sankey" css-classes="sankey" lookback="0" title="Loan Composition &amp; Ratios">

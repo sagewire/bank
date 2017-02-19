@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using bank.data.repositories;
 using bank.poco;
+using bank.extensions;
 using Neo4j.Driver.V1;
 
 namespace bank.import.graph
@@ -23,7 +24,7 @@ namespace bank.import.graph
 
             //var all = orgRepo.GetOrganizationsForGraph();
             var orgs = orgRepo.GetOrganizationsForGraph();
-            var relationships = relationshipRepo.GetRelationshipsForGraph();
+            //var relationships = relationshipRepo.GetRelationshipsForGraph();
             var transformations = transformationRepo.GetTransformationsForGraph();
 
             using (var driver = GraphDatabase.Driver("bolt://localhost:7687",
@@ -40,14 +41,16 @@ namespace bank.import.graph
                     {
                         var orgSql = new StringBuilder();
                         orgSql.AppendLine("MERGE (a:Organization { id: {id} })");
-                        orgSql.AppendLine("ON CREATE SET a.id = {id}, a.title = {name}, a.name = {name}, a.assets = {assets}");
-                        orgSql.AppendLine("ON MATCH SET a.title = {name}, a.name = {name}, a.assets = {assets}");
+                        orgSql.AppendLine("ON CREATE SET a.id = {id}, a.title = {name}, a.name = {name}, a.assets = {assets}, a.url = {url}, a.active = {active}");
+                        orgSql.AppendLine("ON MATCH SET a.title = {name}, a.name = {name}, a.assets = {assets}, a.url = {url}, a.active = {active}");
 
                         var props = new Dictionary<string, object>();
                         props.Add("id", org.OrganizationId);
                         props.Add("name", org.Name);
                         props.Add("title", org.Name);
                         props.Add("assets", org.TotalAssets);
+                        props.Add("url", org.ProfileUrl);
+                        props.Add("active", org.Active);
 
                         var result = session.Run(orgSql.ToString(), props);
 
@@ -55,28 +58,30 @@ namespace bank.import.graph
                     }
                 }
 
+                return;
 
 
-                foreach (var relationship in relationships)
-                {
-                    using (var session = driver.Session())
-                    {
-                        var props = new Dictionary<string, object>();
-                        props.Add("parent", relationship.ParentOrganizationId);
-                        props.Add("offspring", relationship.OffspringOrganizationId);
+                //foreach (var relationship in relationships)
+                //{
+                //    using (var session = driver.Session())
+                //    {
+                //        var props = new Dictionary<string, object>();
+                //        props.Add("parent", relationship.ParentOrganizationId);
+                //        props.Add("offspring", relationship.OffspringOrganizationId);
 
-                        var sql = new StringBuilder();
-                        sql.AppendLine("MATCH(parent:Organization { id: {parent} }), (offspring:Organization { id: {offspring} })");
-                        sql.AppendLine("MERGE (parent)-[:IS_PARENT]->(offspring)");
+                //        var sql = new StringBuilder();
+                //        sql.AppendLine("MATCH(parent:Organization { id: {parent} }), (offspring:Organization { id: {offspring} })");
+                //        sql.AppendLine("MERGE (parent)-[:IS_PARENT]->(offspring)");
 
-                        var result = session.Run(sql.ToString(), props);
-                    }
-                }
+                //        var result = session.Run(sql.ToString(), props);
+                //    }
+                //}
 
                 var transformationSql = new StringBuilder();
                 transformationSql.AppendLine("MATCH(predecessor:Organization { id: {predecessor} }), (successor:Organization { id: {successor} })");
-                transformationSql.AppendLine("MERGE (successor)-[:Acquired]->(predecessor)");
-
+                transformationSql.AppendLine("MERGE (successor)-[a:Acquired]->(predecessor)");
+                transformationSql.AppendLine("ON CREATE SET a.date = {date}, a.type = {type}");
+                transformationSql.AppendLine("ON MATCH SET a.date = {date}, a.type = {type}");
 
                 foreach (var transformation in transformations)
                 {
@@ -86,6 +91,8 @@ namespace bank.import.graph
                         var props = new Dictionary<string, object>();
                         props.Add("predecessor", transformation.PredecessorOrganizationId);
                         props.Add("successor", transformation.SuccessorOrganizationId);
+                        props.Add("date", transformation.D_DT_TRANS.Value.ToMillisecondsSince1970());
+                        props.Add("type", transformation.TRNSFM_CD);
 
                         var result = session.Run(transformationSql.ToString(), props);
 
