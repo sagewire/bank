@@ -402,11 +402,13 @@ namespace bank.reports
             {
                 ITableRow tableRow = null;
 
-                switch (item.Name.ToString().ToLower())
+                var n = item.Name.ToString().ToLower();
+                switch (n)
                 {
+                    case "date":
                     case "concept":
                         var conceptRow = new TableRow();
-                        conceptRow.TableRowType = TableRowTypes.Concept;
+                        conceptRow.TableRowType = n == "concept" ? TableRowTypes.Concept : TableRowTypes.Date;
                         var name = item.SafeAttributeValue("name").ParameterReplace(Parameters).ToUpper();
                         var link = item.SafeBoolAttributeValue("link");
 
@@ -439,6 +441,7 @@ namespace bank.reports
 
                         tableRow = headerRow;
                         break;
+                    
                 }
 
                 if (tableRow != null)

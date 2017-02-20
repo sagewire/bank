@@ -14,7 +14,7 @@
 
         foreach (var column in Model.Columns)
         {
-            var fact = column.GetCell(Model.Row.Concept, column);
+            var fact = column.GetCell(Model.Row.Concept);
             var seriesJson = "";
 
             if (fact != null)

@@ -1,5 +1,7 @@
 ﻿var sidenavTimer = null;
 var sidenavState = null;
+var mainBodyHtml = null;
+var lastScrollPosition = null;
 
 function openSidenav(delay) {
 
@@ -53,6 +55,25 @@ function toggleSidenav(delay) {
     }
 }
 
+function restoreBody() {
+    if (mainBodyHtml !== null) {
+        $("#main-body").html(mainBodyHtml);
+
+        
+        window.scrollTo(0, lastScrollPosition);
+        $("body").removeClass("modal-open");
+
+        $("#modal").fadeOut("slow", function () {
+            $("#modal").remove();
+        });
+
+        $("#main-body").fadeIn("slow");
+
+
+        mainBodyHtml = null;
+    }
+}
+
 $(function () {
 
     $(document).keyup(function (e) {
@@ -66,9 +87,13 @@ $(function () {
                 toggleFullscreen($(value));
             })
 
+            restoreBody();
         }
     });
 
+    $(".close-modal").click(function () {
+        restoreBody();
+    });
 
     $("#global-sidenav").on("click", function () {
         if (!isSidenavOpen()) {
@@ -153,7 +178,7 @@ $(function () {
         closeSidenav();
     });
 
-    $("[data-toggle=fullscreen]").click(function () {
+    $("body").on("click", "[data-toggle=fullscreen]", function () {
 
         toggleFullscreen($(this));
     });
@@ -190,6 +215,7 @@ $(function () {
             charts.highcharts().reflow();
         }
 
+        renderCharts();
     }
 
     $(".favorite, .not-favorite").on("mouseenter", function () {
@@ -323,8 +349,11 @@ $(function () {
     });
 
 
-    $(".concept").on("click", function (e) {
+    $("body").on("click", ".concept", function (e) {
         var name = $(this).data("concept");
+        $("body").append("<div id='modal'></div>");
+
+        var modal = $("#modal");
 
         if (name === null) {
             return;
@@ -334,9 +363,41 @@ $(function () {
 
         var parts = window.location.pathname.split("/");
 
-        console.log(parts);
+        url = "/" + parts[1] + "/" + parts[2] + "/concept/" + name;
 
-        window.location = "/" + parts[1] + "/" + parts[2] + "/concept/" + name;
+        var jqxhr = $.ajax({
+            url: url,
+            method: "GET",
+            data: {
+                m: true
+            }
+        })
+      .done(function (data) {
+          var mainBody = $("#main-body");
+          mainBodyHtml = mainBody.html();
+
+          $("body").addClass("modal-open");
+          
+          lastScrollPosition = document.body.scrollTop;
+
+          modal.hide();
+          modal.html(data);
+
+          mainBody.hide();
+          mainBody.html("");
+
+          setTimeout(function () {
+              window.scrollTo(0, 0);
+          }, 150);
+
+          modal.fadeIn("slow", function () {
+              
+              renderCharts();
+
+          });
+
+      })
+
     });
 
     $("body").on("click", ".inline-report .close", function (e) {

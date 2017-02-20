@@ -18,6 +18,7 @@ namespace bank.web.models
         public AppUser Profile { get; set; }
 
         public string Companies { get; set; }
+        public bool IsModal { get; set; } = false;
 
         public IList<ReportListViewModel> RawReports { get; set; } = new List<ReportListViewModel>();
 

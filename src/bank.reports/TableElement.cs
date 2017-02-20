@@ -48,7 +48,7 @@ namespace bank.reports
                         var tableRow = row as TableRow;
                         if (tableRow != null)
                         {
-                            var fact = column.GetCell(tableRow.Concept, column);
+                            var fact = column.GetCell(tableRow.Concept);
 
                             if (fact != null && fact.NumericValue.HasValue)
                             {

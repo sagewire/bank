@@ -9,6 +9,26 @@
 body.noscroll {
   overflow-y: hidden;
 }
+body.modal-open {
+  overflow: auto;
+}
+body.modal-open .top-nav {
+  z-index: 1100;
+}
+body.modal-open .close-modal {
+  display: inline-block;
+}
+.close-modal {
+  display: none;
+  cursor: pointer;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  margin-left: 15px !important;
+  background-color: #FFD700 !important;
+}
+.close-modal:hover {
+  background-color: #808080 !important;
+}
 .fullscreen-chart {
   position: absolute;
   height: 90% !important;
@@ -30,30 +50,42 @@ body.noscroll {
 }
 .logo {
   text-decoration: none !important;
-  display: inline-block;
-}
-.logo a,
-.logo h1 {
+  /*display: inline-block;*/
+  display: table;
   color: #fff !important;
+  /*img {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    a, h1, .company {
+        color: #fff !important;
+        //display: inline-block;
+        font-size: 1rem;
+    }
+
+    h1 {
+        display: inline-block;
+        font-size: 2rem;
+        
+    }*/
 }
-.logo h1 {
-  font-size: 2rem;
-  margin: 0;
-  padding: 0;
+.logo .top {
+  display: table-cell;
+  height: 46px;
+  vertical-align: middle;
 }
-.logo h1 .b {
-  display: inline-block;
-  background-color: #30C8CA;
-  padding: 0 4px !important;
-  border-radius: 4px;
+.logo .company {
+  font-size: 31px;
 }
 .top-nav {
   background-color: #404040;
   z-index: 70;
 }
 .top-nav .navbar {
-  padding-left: 15px;
+  padding-left: 26px;
   padding-right: 8px;
+  padding-top: 4px;
 }
 .bg-faded {
   background-color: transparent;
@@ -260,6 +292,15 @@ footer {
 }
 .sankey {
   height: 500px;
+}
+#modal {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  right: 0;
+  padding: 0 30px 30px 30px;
+  z-index: 1000;
+  background-color: #eeeeee;
 }
 .concept {
   cursor: pointer;

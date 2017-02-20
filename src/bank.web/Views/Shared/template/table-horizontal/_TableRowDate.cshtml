@@ -1,0 +1,66 @@
+﻿@using bank.reports
+@using bank.reports.charts
+@model TableRowViewModel
+
+@{
+    var facts = Model.Columns.Select(x => x.GetCell(Model.Row.Concept)).Select(x => x.HistoricalData).ToList();
+    var historicalData = facts.Select(x => x.Keys);
+    var max = facts.First().Keys.Last();
+
+    var dates = new List<DateTime>();
+
+    foreach (var item in historicalData)
+    {
+        foreach (var d in item)
+        {
+            if (!dates.Contains(d))
+            {
+                dates.Add(d);
+            }
+        }
+    }
+
+    dates.Sort();
+    //var max = facts.Select(x => x.HistoricalData).Max(y => y.Keys);
+}
+
+
+@foreach (var item in dates)
+{
+    <tr>
+        <td>@item.ToString("MM-dd-yyyy")</td>
+
+        @foreach (var column in Model.Columns)
+        {
+            var fact = column.GetCell(Model.Row.Concept);
+
+            if (fact == null || fact.HistoricalData == null || !fact.HistoricalData.ContainsKey(item))
+            {
+                continue;
+            }
+
+            var factTime = fact.HistoricalData[item];
+
+            <td class="@Model.Level">
+
+
+                @{
+                    var value = Model.Row.Concept.ValueFormatted(factTime);//?.ValueFormatted(Model.Row.Concept);
+
+                    if (value == null)
+                    {
+                        <span>&mdash;</span>
+                    }
+                    else
+                    {
+                        @value
+                    }
+                }
+
+
+            </td>
+
+                    }
+
+    </tr>
+                    }

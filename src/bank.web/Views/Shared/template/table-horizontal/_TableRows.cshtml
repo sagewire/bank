@@ -16,6 +16,9 @@
         case TableRowTypes.Group:
             @Html.Partial("template/table-horizontal/_TableRowGroup", new TableRowViewModel { RowGroup = (TableRowGroup)row, Columns = Model.VisibleColumns, Table = Model })
             break;
+        case TableRowTypes.Date:
+            @Html.Partial("template/table-horizontal/_TableRowDate", new TableRowViewModel { Row = (TableRow)row, Columns = Model.VisibleColumns, Table = Model })
+            break;
     }
 
 }

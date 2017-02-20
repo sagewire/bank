@@ -16,6 +16,7 @@ namespace bank.reports
         Concept,
         Header,
         Group,
-        Table
+        Table,
+        Date
     }
 }

@@ -419,7 +419,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="templates\deposit-composition.xml" />
-    <Content Include="templates\financial-highlights.xml" />
+    <Content Include="templates\financial-highlights.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="templates\assets-piechart.xml" />
     <Content Include="templates\loan-composition.xml" />
     <Content Include="templates\ubpr.mdrm.txt" />
@@ -531,6 +533,8 @@
     <Content Include="Views\Shared\template\_ParentRelationships.cshtml" />
     <Content Include="Views\Profile\_OrgHeader.cshtml" />
     <Content Include="Views\Shared\template\_Acquisitions.cshtml" />
+    <Content Include="Views\Shared\template\table-horizontal\_TableRowDate.cshtml" />
+    <Content Include="Views\Shared\_LayoutNone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bank.reports\bank.reports.csproj">

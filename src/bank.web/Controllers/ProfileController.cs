@@ -85,6 +85,8 @@ namespace bank.web.Controllers
             //Response.CacheControl = HttpCacheability.Public.ToString();
             //Response.Expires = Settings.PageCacheMinutes;
 
+            
+
             Response.CacheControl = HttpCacheability.Private.ToString();
             Response.Cache.SetMaxAge(new TimeSpan(0, 0, 10));
 
@@ -158,6 +160,8 @@ namespace bank.web.Controllers
             var layout = reportFactory.Build();
 
             var model = new ReportViewModel();
+
+            model.IsModal = Request.QueryString["m"] != null;
             model.Layout = layout;
             model.Organization = org;
             model.Profile = CurrentProfile;

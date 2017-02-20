@@ -3,7 +3,7 @@
   <header partial="BankHeader" />
   <row>
     <col>
-      <chart type="combo" chart-override="primary" css-classes="main-chart" lookback="20" title="{section.concept.label} Over Time">
+      <chart type="combo" chart-override="primary" css-classes="main-chart" lookback="200" title="{section.concept.label} Over Time">
         <series type="column" column="0">
           <concept name="{section}"/>
         </series>
@@ -16,7 +16,7 @@
   <row>
     <col>
       <table lookback="5" title="{section.concept.label}">
-        <concept name="{section}" link="false" />
+        <date name="{section}" link="false" />
       </table>
     </col>
   </row>

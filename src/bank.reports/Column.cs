@@ -21,14 +21,15 @@ namespace bank.reports
             return facts.Select(x => x.Value).ToList();
         }
 
-        public Fact GetCell(Concept concept, Column column)
+        public Fact GetCell(Concept concept)//, Column column)
         {
-            if (column == null || concept == null)
+            //if (column == null || concept == null)
+            if (concept == null)
             {
                 return null;
             }
 
-            var facts = column.GetFacts(concept.ConceptKeys);
+            var facts = GetFacts(concept.ConceptKeys);
             var fact = concept.PrepareFact(facts);
 
             return fact;

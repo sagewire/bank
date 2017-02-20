@@ -203,8 +203,9 @@ $(function () {
 
 });
 
-$(function () {
 
+function renderCharts() {
+    console.log('rendering charts...');
 
     $("[data-chart-type='sankey']").each(function (index, element) {
 
@@ -214,6 +215,7 @@ $(function () {
         });
 
     });
+
 
     $("[data-chart-type='combo']").each(function (index, element) {
 
@@ -301,6 +303,7 @@ $(function () {
 
     });
 
+
     $('[data-chart-type="primary"]').highcharts('Combo', {
         chart: {
             marginBottom: 85,
@@ -358,59 +361,61 @@ $(function () {
             }
         ]
     });
+}
 
+function drawSankeyChart(element) {
+    var d = $(element).data("series")
 
-    function drawSankeyChart(element) {
-        var d = $(element).data("series")
+    console.log(d);
 
-        console.log(d);
+    var data = google.visualization.arrayToDataTable(d[0].data);
 
-        var data = google.visualization.arrayToDataTable(d[0].data);
+    var view = new google.visualization.DataView(data);
 
-        var view = new google.visualization.DataView(data);
+    var max = google.visualization.data.max(view.getDistinctValues(2));
 
-        var max = google.visualization.data.max(view.getDistinctValues(2));
+    var filteredRows = view.getFilteredRows([{ column: 2, minValue: max * 0.008 }]);
 
-        var filteredRows = view.getFilteredRows([{ column: 2, minValue: max * 0.008 }]);
+    view.setRows(filteredRows);
 
-        view.setRows(filteredRows);
+    var colors = ['#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f',
+          '#cab2d6', '#ffff99', '#1f78b4', '#33a02c'];
 
-        var colors = ['#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f',
-              '#cab2d6', '#ffff99', '#1f78b4', '#33a02c'];
-
-        // Sets chart options.
-        var options = {
-            //width: 600,
-            tooltip: {
-                isHtml: true
-            },
-            sankey: {
-                iterations: 128,
-                node: {
-                    interactivity: true,
-                    nodePadding: 15,
-                    width: 15,
-                    colors: colors,
-                    label: {
-                        fontSize: 12
-                    }
-                },
-                link: {
-                    colorMode: 'source',
-                    colors: colors
+    // Sets chart options.
+    var options = {
+        //width: 600,
+        tooltip: {
+            isHtml: true
+        },
+        sankey: {
+            iterations: 128,
+            node: {
+                interactivity: true,
+                nodePadding: 15,
+                width: 15,
+                colors: colors,
+                label: {
+                    fontSize: 12
                 }
+            },
+            link: {
+                colorMode: 'source',
+                colors: colors
             }
-        };
+        }
+    };
 
-        // Instantiates and draws our chart, passing in some options.
-        var chart = new google.visualization.Sankey(element);
-        chart.draw(view, options);
-    }
+    // Instantiates and draws our chart, passing in some options.
+    var chart = new google.visualization.Sankey(element);
+    chart.draw(view, options);
+}
 
-    function tooltip(from, to, value) {
-        return "<div style='background-color:red'>" + value + "</div>";
-    }
+function tooltip(from, to, value) {
+    return "<div style='background-color:red'>" + value + "</div>";
+}
 
+$(function () {
+    renderCharts();
 });
 
 jQuery.fn.exists = function () { return this.length > 0; }
@@ -440,7 +445,7 @@ Highcharts.SparkLine = function (elem, b, c) {
 };
 
 Highcharts.Combo = function (elem, b, c) {
-
+    
     var hasRenderToArg = typeof elem === 'string' || elem.nodeName,
     options = arguments[hasRenderToArg ? 1 : 0],
     defaultOptions = {
