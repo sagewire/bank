@@ -69,77 +69,83 @@
                             <span class="hidden-xs-down">Income</span>
                         </a>
                     </li>
-                    <li class="nav-item reveal">
-                        <a class="nav-link" href="@Url.Url(Model.Organization, DateTime.Now, "loan-composition", null)">
-                            <i class="fa fa-fw fa-handshake-o" aria-hidden="true"></i>
-                            <span class="hidden-xs-down">Loans</span>
-                        </a>
-                    </li>
-                    <li class="nav-item reveal">
-                        <a class="nav-link" href="@Url.Url(Model.Organization, DateTime.Now, "deposit-composition", null)">
-                            <i class="fa fa-fw fa-money" aria-hidden="true"></i>
-                            <span class="hidden-xs-down">Deposits</span>
-                        </a>
-                    </li>
+
+                    @if (Model.Organization.EntityCategory == "bank")
+                    {
+                        <li class="nav-item reveal">
+                            <a class="nav-link" href="@Url.Url(Model.Organization, DateTime.Now, "loan-composition", null)">
+                                <i class="fa fa-fw fa-handshake-o" aria-hidden="true"></i>
+                                <span class="hidden-xs-down">Loans</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item reveal">
+                            <a class="nav-link" href="@Url.Url(Model.Organization, DateTime.Now, "deposit-composition", null)">
+                                <i class="fa fa-fw fa-money" aria-hidden="true"></i>
+                                <span class="hidden-xs-down">Deposits</span>
+                            </a>
+                        </li>
+                    }
+
                     @if (Model.Organization.PredecessorTransformations.Any() || Model.Organization.SucessorTransformations.Any())
                     {
-                    <li class="nav-item reveal">
-                        <a class="nav-link" href="@Url.Url(Model.Organization, DateTime.Now, "acquisitions", null)">
-                            <i class="fa fa-fw fa-money" aria-hidden="true"></i>
-                            <span class="hidden-xs-down">Acquisitions</span>
-                        </a>
-                    </li>
+                        <li class="nav-item reveal">
+                            <a class="nav-link" href="@Url.Url(Model.Organization, DateTime.Now, "acquisitions", null)">
+                                <i class="fa fa-fw fa-money" aria-hidden="true"></i>
+                                <span class="hidden-xs-down">Acquisitions</span>
+                            </a>
+                        </li>
                     }
                     @*<li class="nav-item dropdown reveal">
-                        <a class="nav-link dropdown-toggle" href="#" onclick="return false;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-fw fa-file-text-o" aria-hidden="true"></i>
-                            <span class="hidden-sm-down">Call Reports</span>
-                        </a>
-                        <div class="dropdown-menu reports-dropdown-menu dropdown-menu-right" aria-labelledby="Call reports">
-                            @{
-                                var isCurrentPeriod = true;
-                            }
-                            @foreach (var report in Model.RawReports.Take(10))
-                            {
-                                <div class="dropdown-item">
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            @report.Period.ToString("yyyy")
-                                            @string.Format("Q{0}", report.Period.Quarter())
-                                        </div>
-                                        <div class="col-xs-4 px-2 text-xs-center">
-                                            @if (report.ReportsAvailable.Contains(ReportTypes.Call))
-                                            {
-                                                <a href="@Url.Url(Model.Organization, report.Period, @ReportTypes.Call.ToString(), "pres-rc", isCurrentPeriod)">
-                                                    @ReportTypes.Call
-                                                </a>
-                                            }
-                                            else
-                                            {
-                                                <span>&nbsp;</span>
-                                            }
-                                        </div>
-                                        <div class="col-xs-4 px-2 text-xs-center">
-                                            @if (report.ReportsAvailable.Contains(ReportTypes.UBPR))
-                                            {
-                                                <a href="@Url.Url(Model.Organization, report.Period, @ReportTypes.UBPR.ToString(), "balance-sheet", isCurrentPeriod)">
-                                                    @ReportTypes.UBPR
-                                                </a>
-                                            }
+                            <a class="nav-link dropdown-toggle" href="#" onclick="return false;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-fw fa-file-text-o" aria-hidden="true"></i>
+                                <span class="hidden-sm-down">Call Reports</span>
+                            </a>
+                            <div class="dropdown-menu reports-dropdown-menu dropdown-menu-right" aria-labelledby="Call reports">
+                                @{
+                                    var isCurrentPeriod = true;
+                                }
+                                @foreach (var report in Model.RawReports.Take(10))
+                                {
+                                    <div class="dropdown-item">
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                @report.Period.ToString("yyyy")
+                                                @string.Format("Q{0}", report.Period.Quarter())
+                                            </div>
+                                            <div class="col-xs-4 px-2 text-xs-center">
+                                                @if (report.ReportsAvailable.Contains(ReportTypes.Call))
+                                                {
+                                                    <a href="@Url.Url(Model.Organization, report.Period, @ReportTypes.Call.ToString(), "pres-rc", isCurrentPeriod)">
+                                                        @ReportTypes.Call
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <span>&nbsp;</span>
+                                                }
+                                            </div>
+                                            <div class="col-xs-4 px-2 text-xs-center">
+                                                @if (report.ReportsAvailable.Contains(ReportTypes.UBPR))
+                                                {
+                                                    <a href="@Url.Url(Model.Organization, report.Period, @ReportTypes.UBPR.ToString(), "balance-sheet", isCurrentPeriod)">
+                                                        @ReportTypes.UBPR
+                                                    </a>
+                                                }
+                                            </div>
                                         </div>
                                     </div>
+
+                                    isCurrentPeriod = false;
+
+                                }
+                                <div class="dropdown-divider"></div>
+
+                                <div class="dropdown-item text-center">
+                                    &lt; more &gt;
                                 </div>
-
-                                isCurrentPeriod = false;
-
-                            }
-                            <div class="dropdown-divider"></div>
-
-                            <div class="dropdown-item text-center">
-                                &lt; more &gt;
                             </div>
-                        </div>
-                    </li>*@
+                        </li>*@
                 </ul>
 
             </div>

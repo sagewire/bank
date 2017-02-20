@@ -6431,15 +6431,15 @@ var lastScrollPosition = null;
 
 function openSidenav(delay) {
 
-    
+
     if (isSidenavOpen()) {
         return;
     }
-    
+
     sidenavTimer = setTimeout(function () {
         var nav = $("#global-sidenav");
         nav.addClass("open");
-        console.log('open');
+        
         $(".darken").fadeIn();
         $(".top-nav").addClass("sidenav-open");
         //$("#search-box").focus();
@@ -6452,8 +6452,7 @@ function closeSidenav() {
     if (!isSidenavOpen()) {
         return;
     }
-    
-    console.log('close');
+
 
     clearTimeout(sidenavTimer);
 
@@ -6461,7 +6460,7 @@ function closeSidenav() {
     nav.removeClass("open");
 
     $(".darken").fadeOut();
-    
+
     $(".account").hide();
     $(".top-nav").removeClass("sidenav-open");
 
@@ -6472,7 +6471,7 @@ function isSidenavOpen() {
 }
 
 function toggleSidenav(delay) {
-    
+
     if (isSidenavOpen()) {
         closeSidenav();
     }
@@ -6482,25 +6481,23 @@ function toggleSidenav(delay) {
 }
 
 function restoreBody() {
-    if (mainBodyHtml !== null) {
-        $("#main-body").html(mainBodyHtml);
 
-        
-        window.scrollTo(0, lastScrollPosition);
-        $("body").removeClass("modal-open");
+    window.scrollTo(0, lastScrollPosition);
+    $("body").removeClass("modal-open");
 
-        $("#modal").fadeOut("slow", function () {
-            $("#modal").remove();
-        });
+    $("#modal").fadeOut("slow", function () {
+        $("#modal").remove();
+    });
 
-        $("#main-body").fadeIn("slow");
+    $("#main-body").fadeIn("slow");
 
+    mainBodyHtml = null;
 
-        mainBodyHtml = null;
-    }
 }
 
 $(function () {
+
+    stickyTableHeaders();
 
     $(document).keyup(function (e) {
         if (e.keyCode == 27) { // escape key maps to keycode `27`
@@ -6513,12 +6510,14 @@ $(function () {
                 toggleFullscreen($(value));
             })
 
-            restoreBody();
+            window.history.back();
+            //restoreBody();
         }
     });
 
     $(".close-modal").click(function () {
-        restoreBody();
+        //restoreBody();
+        window.history.back();
     });
 
     $("#global-sidenav").on("click", function () {
@@ -6563,10 +6562,10 @@ $(function () {
         }
 
         if (preloading) {
-//            console.log('cancel preload ' + href);
+            //            console.log('cancel preload ' + href);
             return;
         }
-  //      console.log('preloading ' + href);
+        //      console.log('preloading ' + href);
         //var href = $(this).attr("href");
 
         if (href === undefined) {
@@ -6610,7 +6609,7 @@ $(function () {
     });
 
     function toggleFullscreen(target) {
-        
+
         var card = target.closest(".card");
         var charts = card.find(".chart-responsive");
 
@@ -6641,7 +6640,7 @@ $(function () {
             charts.highcharts().reflow();
         }
 
-        renderCharts();
+        //renderCharts();
     }
 
     $(".favorite, .not-favorite").on("mouseenter", function () {
@@ -6662,7 +6661,7 @@ $(function () {
 
 
     function toggleStar(star) {
-        
+
         if (star.hasClass("fa-star")) {
             console.log('star');
             star.addClass("fa-star-o");
@@ -6713,7 +6712,7 @@ $(function () {
             $(target).show();
         }
         return false;
-        
+
     })
 
 
@@ -6771,9 +6770,12 @@ $(function () {
     });
 
     $("body").on("show.bs.popover", function (e) {
-        
+
     });
 
+    window.onpopstate = function (event) {
+        restoreBody();
+    }
 
     $("body").on("click", ".concept", function (e) {
         var name = $(this).data("concept");
@@ -6800,26 +6802,28 @@ $(function () {
         })
       .done(function (data) {
           var mainBody = $("#main-body");
-          mainBodyHtml = mainBody.html();
+          //mainBodyHtml = mainBody.html();
+
+          history.pushState(null, null, "#" + name);
 
           $("body").addClass("modal-open");
-          
+
           lastScrollPosition = document.body.scrollTop;
 
           modal.hide();
           modal.html(data);
 
           mainBody.hide();
-          mainBody.html("");
+          //mainBody.html("");
 
           setTimeout(function () {
               window.scrollTo(0, 0);
           }, 150);
 
           modal.fadeIn("slow", function () {
-              
-              renderCharts();
 
+              renderCharts();
+              stickyTableHeaders();
           });
 
       })
@@ -6831,86 +6835,6 @@ $(function () {
         target.remove();
     });
 
-    $(".mdrm-row").on("click", function (e) {
-
-        var row = $(e.currentTarget);
-
-        var url = row.data("url").toLowerCase();
-        var organizationCells = row.parents("table").find("th[data-organization]");
-
-        var organizations = [];
-
-        $.each(organizationCells, function (index, value) {
-            organizations.push($(value).data("organization"));
-        });
-
-        if (!row.next().hasClass("inline-report")) {
-
-            var newRow = $("<tr style='display:none;' class='inline-report'><td class='no-border' colspan='20'><div class='inside'><div class='p-1 text-xs-center'><i class='fa fa-circle-o-notch fa-spin fa-3x fa-fw'></i></div></div></td></tr>").insertAfter($(e.currentTarget));
-            var inside = newRow.find(".inside");
-
-            newRow.show("slow");
-
-            var jqxhr = $.ajax({
-                url: url,
-                method: "GET",
-                data: {
-                    c: organizations.join(",")
-                }
-            })
-              .done(function (data) {
-
-                  inside.html(data);
-
-              })
-        }
-        //else {
-        //    console.log(row.next(".inline-report"));
-        //    row.next().show(".inline-report");
-        //}
-    });
-
-    
-    
-    
-
-    //$('[data-toggle="popover"]').popover({
-
-    //    trigger: 'click',
-    //    placement: "top",
-    //    html: true,
-    //    content: '<div class="fact-options">' +
-    //                    '<i class="fa fa-line-chart" aria-hidden="true"></i>' +
-    //                    '<i class="fa fa-star-o" aria-hidden="true"></i>' +
-    //                    //'<i class="fa fa-bell-o" aria-hidden="true"></i>' +
-    //                '</div>'
-    //})
-
-
-
-    //$("#modal").on("show.bs.modal", function (e) {
-    //    var content = $(e.relatedTarget).data("content");
-    //    var html = $(e.relatedTarget).data("html");
-    //    var modalBody = $(".modal-body");
-
-    //    if (content !== undefined) {
-
-    //        var jqxhr = $.ajax(content)
-    //                          .done(function (data) {
-    //                              modalBody.html(data);
-    //                          })
-    //                          .fail(function () {
-    //                              console.log("error");
-    //                          })
-    //                          .always(function () {
-
-    //                          });
-    //    }
-    //    else if (html !== undefined) {
-    //        modalBody.html(html);
-    //    }
-
-    //});
 
     function sidebarPosition() {
         if (lastSize !== "lg") {
@@ -6954,123 +6878,31 @@ $(function () {
         };
     }
 
-    //var target = $("thead").offset().top,
-    //timeout = null;
-
-    //var targets = $("table");
-
-    
-    //$(window).scroll(function () {
-    //    if (!timeout) {
-    //        timeout = setTimeout(function () {
-    //            console.log('scroll');
-    //            clearTimeout(timeout);
-    //            timeout = null;
-
-    //            targets.each(function (index, elem) {
-
-    //                var table = $(elem);
-    //                var thead = table.find("thead");
-    //                var row = table.find("tr").first();
-
-    //                var columns = thead.find("td");
-
-    //                //console.log(table);
-    //                //console.log(thead);
-
-    //                var position = table.offset();
-    //                var visibleWidth = table.outerWidth();;
-    //                var actualWidth = thead.width();
-                    
-
-    //                if ($(window).scrollTop() >= position.top) {
-    //                    console.log('made it');
-    //                    var runningTotal = 0;
-
-    //                    //columns.each(function (index, value) {
-    //                    //    var column = $(value);
-    //                    //    var w = column.css("width");
-    //                    //    var h = column.css("height");
-    //                    //    var pos = column.offset();
-
-    //                    //    console.log(w);
-
-    //                    //    column.css("width", w);
-    //                    //    column.css("height", h);
-
-    //                    //    column.css({ left: runningTotal });
-    //                    //    runningTotal = runningTotal + new Number(w.replace("px", ""));
-    //                    //    console.log('running ' + runningTotal);
-
-    //                    //    if (runningTotal > visibleWidth) {
-    //                    //        console.log('fixing');
-                                
-    //                    //        //column.css("position", "relative");
-    //                    //        column.css("min-width", "0");
-    //                    //        column.css("overflow", "hidden");
-    //                    //        //column.css("width", "50px");
-    //                    //    }
-    //                    //});
-
-    //                    var row = table.find(".header-row");
-
-    //                    thead.css({ width: thead.css("width") });
-
-    //                    table.addClass("fixed");
-    //                    //row.width(actualWidth);
-    //                    //thead.width(visibleWidth);
-    //                    //thead.css({height: "200px" });
-    //                    //thead.width(visibleWidth);
-
-
-    //                    //row.width(visibleWidth);
-
-    //                    table.scroll(function (e) {
-    //                        console.log('side scroll');
-    //                        //var table = $(table);
-    //                        var thead = table.find("thead");
-
-    //                        var scrollLeft = table.scrollLeft();
-
-    //                        thead.css({"left": table.offset().left - scrollLeft});
-    //                        //console.log(thead.offset());
-    //                    });
-    //                }
-    //            });
-
-                
-    //        }, 250);
-    //    }
-    //});
-
-    //$(window).scroll(function () {
-    //    if (!timeout) {
-    //        timeout = setTimeout(function () {
-    //            console.log('scroll');
-    //            clearTimeout(timeout);
-    //            timeout = null;
     var lastPosition = 0;
 
-    $("table").scroll(function (e) {
-    
-        var table = $(this);
-        console.log('side scroll');
+    function stickyTableHeaders() {
 
-        var thead = table.find("thead.tableFloatingHeaderOriginal");
-        var clone = table.find("thead.tableFloatingHeader");
+        $("body").on("scroll", "table", function (e) {
 
-        //thead.scrollLeft($(this).scrollLeft());
+            var table = $(this);
+            console.log('side scroll');
 
-        thead.animate({
-            scrollLeft: $(this).scrollLeft()
-        }, 10);
+            var thead = table.find("thead.tableFloatingHeaderOriginal");
+            var clone = table.find("thead.tableFloatingHeader");
 
-        clone.animate({
-            scrollLeft: $(this).scrollLeft()
-        }, 10);
-    });
+            //thead.scrollLeft($(this).scrollLeft());
 
-    $('table').stickyTableHeaders({ fixedOffset: $('.top-nav'), cacheHeaderHeight: true });
+            thead.animate({
+                scrollLeft: $(this).scrollLeft()
+            }, 10);
+
+            clone.animate({
+                scrollLeft: $(this).scrollLeft()
+            }, 10);
+        });
+
+        $('table').stickyTableHeaders({ fixedOffset: $('.top-nav'), cacheHeaderHeight: true });
+    }
 
     $.typeahead({
         input: '.js-typeahead-name',
@@ -7082,11 +6914,11 @@ $(function () {
         maxItem: 20,
         //order: "desc",
         template: function (query, item) {
-         //   <a href="@Model.Organization.ProfileUrl"
-         //   class="preload avatar avatar-md media-object img-responsive"
-         //   style="background-image: url('@Model.Organization.Avatar')">
+            //   <a href="@Model.Organization.ProfileUrl"
+            //   class="preload avatar avatar-md media-object img-responsive"
+            //   style="background-image: url('@Model.Organization.Avatar')">
 
-         //</a>
+            //</a>
             return '<div class="search-result"><div class="media"><i class="media-left"><a href="{{url}}" class="media-object avatar avatar-sm img-responsive" style="background-image: url({{avatar}})"></a></i><div class="name">{{name}}<br/><small>{{city}}, {{state}} <div class="float-right"><b>{{assets}} Assets</b></div></small></div></div>';
         },
         emptyTemplate: "No results for {{query}}",
@@ -7112,7 +6944,7 @@ $(function () {
                 //    $("#search-box").focus();
                 //}, 750);
             },
-            onNavigateAfter: function(node, lis, a, item, query, event) {
+            onNavigateAfter: function (node, lis, a, item, query, event) {
                 var href = item.url;
                 preload(href);
             },
@@ -7758,62 +7590,68 @@ function renderCharts() {
     });
 
 
-    $('[data-chart-type="primary"]').highcharts('Combo', {
-        chart: {
-            marginBottom: 85,
-            spacingBottom: 0
-        },
-        plotOptions: {
-            areaspline: {
-                lineWidth: 0,
-            }
-        },
-        lang: {
-            thousandsSep: ','
-        },
-        legend: {
-            enabled: true,
-            layout: "horizontal"
-        },
-        tooltip: {
-            shared: true,
-            //split: true,
-            borderWidth: 0,
-            shadow: false,
-            useHTML: true,
-            valueDecimals: 0,
-            headerFormat: "<table class='primary-tooltip table table-sm table-striped'><tr><th colspan='2'>{point.x:%b %e %Y}</th></th>",
-            pointFormat: "<tr><td style='border-left: 10px solid {point.series.color}'>{point.series.name}</td><td style='text-align: right;'>{point.y}</td></tr>",
-            footerFormat: "</table>",
-            formatter: null,
-            positioner: function () {
-                return { x: 0, y: 0 };
-            },
-        },
-        xAxis: {
-            gridLineWidth: 1,
-            tickPositions: null,
-            labels: {
-                enabled: true
-            },
+    $("[data-chart-type='primary']").each(function (index, element) {
 
-        },
-        yAxis: {
-            gridLineWidth: 0,
-            tickPositions: null
-        },
-        series: [
-            {
-                fillColor: {
-                    linearGradient: { x1: .2, x2: 0, y1: 0, y2: .75 },
 
-                    stops: [
-                        [0, Highcharts.Color('#2E96EA').setOpacity(.70).get('rgba')],
-                        [1, Highcharts.Color('#30C8CA').setOpacity(.70).get('rgba')]
-                    ]
+        //$('[data-chart-type="primary"]').highcharts('Combo', {
+        $(this).highcharts("Combo", {
+            chart: {
+                marginBottom: 85,
+                spacingBottom: 0
+            },
+            plotOptions: {
+                areaspline: {
+                    lineWidth: 0,
                 }
-            }
-        ]
+            },
+            lang: {
+                thousandsSep: ','
+            },
+            legend: {
+                enabled: true,
+                layout: "horizontal"
+            },
+            tooltip: {
+                shared: true,
+                //split: true,
+                borderWidth: 0,
+                shadow: false,
+                useHTML: true,
+                valueDecimals: 0,
+                headerFormat: "<table class='primary-tooltip table table-sm table-striped'><tr><th colspan='2'>{point.x:%b %e %Y}</th></th>",
+                pointFormat: "<tr><td style='border-left: 10px solid {point.series.color}'>{point.series.name}</td><td style='text-align: right;'>{point.y}</td></tr>",
+                footerFormat: "</table>",
+                formatter: null,
+                positioner: function () {
+                    return { x: 0, y: 0 };
+                },
+            },
+            xAxis: {
+                gridLineWidth: 1,
+                tickPositions: null,
+                labels: {
+                    enabled: true
+                },
+
+            },
+            yAxis: {
+                gridLineWidth: 0,
+                tickPositions: null
+            },
+            series: [
+                {
+                    fillColor: {
+                        linearGradient: { x1: .2, x2: 0, y1: 0, y2: .75 },
+
+                        stops: [
+                            [0, Highcharts.Color('#2E96EA').setOpacity(.70).get('rgba')],
+                            [1, Highcharts.Color('#30C8CA').setOpacity(.70).get('rgba')]
+                        ]
+                    }
+                }
+            ]
+        });
+        
     });
 }
 
@@ -7900,6 +7738,14 @@ Highcharts.SparkLine = function (elem, b, c) {
 
 Highcharts.Combo = function (elem, b, c) {
     
+    var existing = $(elem).data("highchartsChart");
+    var id = $(elem).attr("id");
+
+    
+    if (existing > -1) {
+        return;
+    }
+
     var hasRenderToArg = typeof elem === 'string' || elem.nodeName,
     options = arguments[hasRenderToArg ? 1 : 0],
     defaultOptions = {

@@ -13,7 +13,7 @@ namespace bank.poco
 {
     public class Organization : Address
     {
-        private static string[] _banks = new string[] { "NMB", "NAT", "SMB", "SSB", "FSB", "SAL", "MTC", "CPB", "FBO" };
+        private static string[] _banks = new string[] { "NMB", "NAT", "SMB", "SSB", "FSB", "SAL", "MTC", "CPB", "FBO", "SMB" };
 
         public IList<PeerGroupCustom> CustomPeerGroups { get; set; }
         public int OrganizationId { get; set; }
@@ -30,7 +30,7 @@ namespace bank.poco
                         return "bank";
                     }
                 }
-                return _entityCategory;
+                return _entityCategory.ToLower();
             }
             set
             {

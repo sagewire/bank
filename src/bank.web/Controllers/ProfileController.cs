@@ -102,7 +102,7 @@ namespace bank.web.Controllers
             {
                 if (!string.IsNullOrWhiteSpace(org.EntityCategory))
                 {
-                    if (org.EntityCategory == "Bank" && !org.ReportImports.Any())
+                    if (org.EntityCategory == "bank" && !org.ReportImports.Any())
                     {
                         template = "org-layout";
                     }

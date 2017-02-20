@@ -46,7 +46,10 @@
                     <a class="btn btn-primary" href="@Url.Url(Model.Organization.HoldingCompany.ParentOrganization)">Holding Company &mdash; @Model.Organization.HoldingCompany.ParentOrganization.Name</a>
                 </div>
             }
-                    <h6>@bank.poco.Global.EntityTypes[Model.Organization.EntityType]</h6>
+            <h6>
+                @bank.poco.Global.EntityTypes[Model.Organization.EntityType] : @Model.Organization.EntityType
+            </h6>
+
                     <h6>RSSD ID @Model.Organization.ID_RSSD</h6>
                     <h6>Active: @Model.Organization.Active</h6>
 

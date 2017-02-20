@@ -20,8 +20,7 @@ namespace bank.web.Controllers
         public ActionResult Index(string segment)
         {
             var template = GetTemplate(segment);
-            var id = "UBPR2170";
-
+            
             var model = new ReportViewModel();
             model.Profile = CurrentProfile;
 

@@ -78,6 +78,12 @@ body.modal-open .close-modal {
 .logo .company {
   font-size: 31px;
 }
+.logo a,
+.logo h1,
+.logo .company {
+  color: #fff !important;
+  text-decoration: none !important;
+}
 .top-nav {
   background-color: #404040;
   z-index: 70;

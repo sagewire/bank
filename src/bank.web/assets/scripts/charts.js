@@ -304,62 +304,68 @@ function renderCharts() {
     });
 
 
-    $('[data-chart-type="primary"]').highcharts('Combo', {
-        chart: {
-            marginBottom: 85,
-            spacingBottom: 0
-        },
-        plotOptions: {
-            areaspline: {
-                lineWidth: 0,
-            }
-        },
-        lang: {
-            thousandsSep: ','
-        },
-        legend: {
-            enabled: true,
-            layout: "horizontal"
-        },
-        tooltip: {
-            shared: true,
-            //split: true,
-            borderWidth: 0,
-            shadow: false,
-            useHTML: true,
-            valueDecimals: 0,
-            headerFormat: "<table class='primary-tooltip table table-sm table-striped'><tr><th colspan='2'>{point.x:%b %e %Y}</th></th>",
-            pointFormat: "<tr><td style='border-left: 10px solid {point.series.color}'>{point.series.name}</td><td style='text-align: right;'>{point.y}</td></tr>",
-            footerFormat: "</table>",
-            formatter: null,
-            positioner: function () {
-                return { x: 0, y: 0 };
-            },
-        },
-        xAxis: {
-            gridLineWidth: 1,
-            tickPositions: null,
-            labels: {
-                enabled: true
-            },
+    $("[data-chart-type='primary']").each(function (index, element) {
 
-        },
-        yAxis: {
-            gridLineWidth: 0,
-            tickPositions: null
-        },
-        series: [
-            {
-                fillColor: {
-                    linearGradient: { x1: .2, x2: 0, y1: 0, y2: .75 },
 
-                    stops: [
-                        [0, Highcharts.Color('#2E96EA').setOpacity(.70).get('rgba')],
-                        [1, Highcharts.Color('#30C8CA').setOpacity(.70).get('rgba')]
-                    ]
+        //$('[data-chart-type="primary"]').highcharts('Combo', {
+        $(this).highcharts("Combo", {
+            chart: {
+                marginBottom: 85,
+                spacingBottom: 0
+            },
+            plotOptions: {
+                areaspline: {
+                    lineWidth: 0,
                 }
-            }
-        ]
+            },
+            lang: {
+                thousandsSep: ','
+            },
+            legend: {
+                enabled: true,
+                layout: "horizontal"
+            },
+            tooltip: {
+                shared: true,
+                //split: true,
+                borderWidth: 0,
+                shadow: false,
+                useHTML: true,
+                valueDecimals: 0,
+                headerFormat: "<table class='primary-tooltip table table-sm table-striped'><tr><th colspan='2'>{point.x:%b %e %Y}</th></th>",
+                pointFormat: "<tr><td style='border-left: 10px solid {point.series.color}'>{point.series.name}</td><td style='text-align: right;'>{point.y}</td></tr>",
+                footerFormat: "</table>",
+                formatter: null,
+                positioner: function () {
+                    return { x: 0, y: 0 };
+                },
+            },
+            xAxis: {
+                gridLineWidth: 1,
+                tickPositions: null,
+                labels: {
+                    enabled: true
+                },
+
+            },
+            yAxis: {
+                gridLineWidth: 0,
+                tickPositions: null
+            },
+            series: [
+                {
+                    fillColor: {
+                        linearGradient: { x1: .2, x2: 0, y1: 0, y2: .75 },
+
+                        stops: [
+                            [0, Highcharts.Color('#2E96EA').setOpacity(.70).get('rgba')],
+                            [1, Highcharts.Color('#30C8CA').setOpacity(.70).get('rgba')]
+                        ]
+                    }
+                }
+            ]
+        });
+        
     });
 }
 
@@ -446,6 +452,14 @@ Highcharts.SparkLine = function (elem, b, c) {
 
 Highcharts.Combo = function (elem, b, c) {
     
+    var existing = $(elem).data("highchartsChart");
+    var id = $(elem).attr("id");
+
+    
+    if (existing > -1) {
+        return;
+    }
+
     var hasRenderToArg = typeof elem === 'string' || elem.nodeName,
     options = arguments[hasRenderToArg ? 1 : 0],
     defaultOptions = {

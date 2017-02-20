@@ -30,7 +30,7 @@
             <td>
                 @if (rowConcept != null)
                 {
-                    var fact = column.GetCell(rowConcept.Concept, column);
+                    var fact = column.GetCell(rowConcept.Concept);
 
                     var value = rowConcept.Concept.ValueFormatted(fact);
 
