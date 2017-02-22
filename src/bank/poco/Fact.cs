@@ -149,9 +149,9 @@ namespace bank.poco
                 if (HistoricalData.ContainsKey(previousPeriod))
                 {
                     var previousValue = HistoricalData[previousPeriod];
-                    if (NumericValue.HasValue && previousValue.NumericValue.Value > 0)
+                    if (NumericValue.HasValue && previousValue.NumericValue.Value != 0)
                     {
-                        return (NumericValue.Value - previousValue.NumericValue.Value) / previousValue.NumericValue.Value;
+                        return (NumericValue.Value - previousValue.NumericValue.Value) / Math.Abs(previousValue.NumericValue.Value);
                     }
                 }
 

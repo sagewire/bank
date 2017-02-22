@@ -47,7 +47,7 @@ namespace bank.web.Controllers
                         existing.FavoriteType = FavoriteTypes.Visit;
                         repo.Update(existing);
                         model.Icon = "fa-star-o";
-                        model.Header = "It's not you, it's me. Favorite removed.";
+                        model.Header = "Favorite removed.";
                         break;
                     case FavoriteTypes.Visit:
                         existing.FavoriteType = FavoriteTypes.User;

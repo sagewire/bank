@@ -1,13 +1,274 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-  <parameters>
-    <param key="" type="" />
-    <param key="" type="" />
-    <param key="" type="" />
-    <param key="" type="" />
-  </parameters>
-  <header partial="BankHeader" />
+  <!--<header partial="BankHeader" />-->
   <row>
+    <col grid="col-xs-12 col-lg-3">
+      <row>
+        <col css-classes="org-status">
+          <element partial="OrgStatus" data-source="Organization" lookback="5"/>
+        </col>
+      </row>
+      <row>
+        <col>
+          <element partial="OrgInfo" data-source="Organization" lookback="5" />
+        </col>
+      </row>
+      <row>
+        <col>
+          <element partial="ConceptList" data-source="Organization" lookback="5" title="Vitals">
+            <concept name="UBPR2170"/>
+            <concept name="UBPR2200"/>
+            <concept name="UBPRE119"/>
+            <concept name="UBPR4340"/>
+          </element>
+        </col>
+      </row>
+      <row>
+        <col>
+          <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="ROAA">
+            <series type="areaspline">
+              <concept name="UBPRE010" />
+            </series>
+          </chart>
+          <!--<element partial="OrgInfo"></element>-->
+        </col>
+      </row>
+      <row>
+        <col>
+          <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="ROAE">
+            <series type="areaspline">
+              <concept name="UBPRE630" />
+            </series>
+          </chart>
+        </col>
+      </row>
+      <row>
+        <col>
+          <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="Efficiency Ratio">
+            <series type="areaspline">
+              <concept name="UBPRE088" />
+            </series>
+          </chart>
+        </col>
+      </row>
+      <row>
+        <col>
+          <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="Net Interest Margin">
+            <series type="areaspline">
+              <concept name="UBPRE018" />
+            </series>
+          </chart>
+        </col>
+      </row>
+    </col>
+    <col grid="col-xs-12 col-lg-9">
+      <row>
+        <col>
+          <element partial="BankNav" data-source="Organization" lookback="5"/>
+        </col>
+      </row>
+      <row>
+        <col>
+          <chart type="combo" chart-override="primary" css-classes="main-chart" lookback="200" title="Balance Sheet Highlights">
+            <series type="areaspline" column="0" z-index="10" focus="last">
+              <concept name="UBPR2170"/>
+            </series>
+            <series type="areaspline" column="0" z-index="10" focus="last">
+              <concept name="UBPRE119"/>
+            </series>
+            <series type="areaspline" column="0" z-index="10" focus="last">
+              <concept name="UBPRK434"/>
+            </series>
+            <series type="areaspline" column="0" z-index="10" focus="last">
+              <concept name="UBPR3210"/>
+            </series>
+          </chart>
+        </col>
+      </row>
+      <row>
+        <col>
+          <table title="Financial Highlights" lookback="5">
+            <header>Balance Sheet</header>
+            <concept name="UBPR2170" />
+            <concept name="UBPRE119" />
+            <concept name="UBPR2200" />
+            <concept name="UBPRG105" />
+            <concept name="UBPRE117" />
+            <concept name="_loandep" />
+            <concept name="(UBPRE120+UBPR8636+UBPRD657+UBPRE121)/UBPR2170*100" label="Securities/Assets"  unit="P"/>
+            <concept name="UBPRG105/UBPR2170*100" label="Total Equity/Total Assets" unit="P"/>
+
+            <header>Profitability</header>
+            <concept name="UBPR4340" />
+            <concept name="UBPRE010" />
+            <concept name="UBPRE630" />
+            <concept name="UBPRE018" />
+            <concept name="UBPRE088" />
+            <concept name="RIAD4079/(UBPR4107+RIAD4079)*100" label="Noninterest Income/Revenue" unit="P" />
+
+            <header>Capital Adequacy</header>
+            <concept name="UBPRP859" />
+            <concept name="UBPR8274" />
+            <concept name="UBPR8275" />
+            <concept name="UBPR3792" />
+            <concept name="UBPRE660" />
+            <concept name="UBPRD486" />
+            <concept name="UBPRR029" />
+            <concept name="UBPRD487" />
+            <concept name="UBPRD488" />
+
+          </table>
+        </col>
+      </row>
+      <row>
+        <col>
+          <element partial="Transformations" data-source="Transformations" />
+        </col>
+      </row>
+      <row>
+        <col>
+          <element partial="ParentRelationships" data-source="Relationships" />
+        </col>
+      </row>
+    </col>
+  </row>
+  <!--<row>-->
+  <!--<col grid="col-xs-12 col-lg-3">
+      <row>
+        <col>
+          <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="ROAA">
+            <series type="areaspline">
+              <concept name="UBPRE010" />
+            </series>
+          </chart>
+          -->
+  <!--<element partial="OrgInfo"></element>-->
+  <!--
+        </col>
+        <col>
+          <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="ROAE">
+            <series type="areaspline">
+              <concept name="UBPRE630" />
+            </series>
+          </chart>
+        </col>
+        <col>
+          <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="Efficiency Ratio">
+            <series type="areaspline">
+              <concept name="UBPRE088" />
+            </series>
+          </chart>
+        </col>
+        <col>
+          <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="Net Interest Margin">
+            <series type="areaspline">
+              <concept name="UBPRE018" />
+            </series>
+          </chart>
+        </col>
+      </row>
+    </col>-->
+  <!--<col grid="col-xs-12 col-xl-9">
+      <row>
+        <col>
+          <table title="Financial Highlights" lookback="5">
+            <header>Balance Sheet</header>
+            <concept name="UBPR2170" />
+            <concept name="UBPRE119" />
+            <concept name="UBPR2200" />
+            <concept name="UBPRG105" />
+            <concept name="UBPRE117" />
+            <concept name="_loandep" />
+            <concept name="(UBPRE120+UBPR8636+UBPRD657+UBPRE121)/UBPR2170*100" label="Securities/Assets"  unit="P"/>
+            <concept name="UBPRG105/UBPR2170*100" label="Total Equity/Total Assets" unit="P"/>
+
+            <header>Profitability</header>
+            <concept name="UBPR4340" />
+            <concept name="UBPRE010" />
+            <concept name="UBPRE630" />
+            <concept name="UBPRE018" />
+            <concept name="UBPRE088" />
+            <concept name="RIAD4079/(UBPR4107+RIAD4079)*100" label="Noninterest Income/Revenue" unit="P" />
+
+            <header>Capital Adequacy</header>
+            <concept name="UBPRP859" />
+            <concept name="UBPR8274" />
+            <concept name="UBPR8275" />
+            <concept name="UBPR3792" />
+            <concept name="UBPRE660" />
+            <concept name="UBPRD486" />
+            <concept name="UBPRR029" />
+            <concept name="UBPRD487" />
+            <concept name="UBPRD488" />
+
+          </table>
+        </col>
+      </row>
+      <row>
+        <col>
+          <element partial="Transformations" data-source="Transformations" />
+        </col>
+      </row>
+      <row>
+        <col>
+          <element partial="ParentRelationships" data-source="Relationships" />
+        </col>
+      </row>
+    </col>
+
+  </row>-->
+  <!--<row>
+    <col>
+      <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="ROAA">
+        <series type="areaspline">
+          <concept name="UBPRE010" />
+        </series>
+      </chart>
+      -->
+  <!--<element partial="OrgInfo"></element>-->
+  <!--
+    </col>
+    <col>
+      <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="ROAE">
+        <series type="areaspline">
+          <concept name="UBPRE630" />
+        </series>
+      </chart>
+    </col>
+    <col>
+      <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="Efficiency Ratio">
+        <series type="areaspline">
+          <concept name="UBPRE088" />
+        </series>
+      </chart>
+    </col>
+    <col>
+      <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="Net Interest Margin">
+        <series type="areaspline">
+          <concept name="UBPRE018" />
+        </series>
+      </chart>
+    </col>
+  </row>-->
+  <!--<row>
+    <col>
+      <chart type="combo" chart-override="primary" css-classes="main-chart" lookback="200" title="Balance Sheet Highlights">
+        <series type="areaspline" column="0" z-index="10" focus="last">
+          <concept name="UBPR2170"/>
+        </series>
+        <series type="areaspline" column="0" z-index="10" focus="last">
+          <concept name="UBPRE119"/>
+        </series>
+        <series type="areaspline" column="0" z-index="10" focus="last">
+          <concept name="UBPRK434"/>
+        </series>
+        <series type="areaspline" column="0" z-index="10" focus="last">
+          <concept name="UBPR3210"/>
+        </series>
+      </chart>
+    </col>
+  </row>-->
+  <!--<row>
     <col>
       <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="ROAA">
         <series type="areaspline">
@@ -36,27 +297,9 @@
         </series>
       </chart>
     </col>
-  </row>
-  <row>
-    <col>
-      <chart type="combo" chart-override="primary" css-classes="main-chart" lookback="200" title="Balance Sheet Highlights">
-        <series type="areaspline" column="0" z-index="10" focus="last">
-          <concept name="UBPR2170"/>
-        </series>
-        <series type="areaspline" column="0" z-index="10" focus="last">
-          <concept name="UBPRE119"/>
-        </series>
-        <series type="areaspline" column="0" z-index="10" focus="last">
-          <concept name="UBPRK434"/>
-        </series>
-        <series type="areaspline" column="0" z-index="10" focus="last">
-          <concept name="UBPR3210"/>
-        </series>
-      </chart>
-    </col>
-  </row>
-  <row>
-    <col grid="col-xs-12 col-xl-8">
+  </row>-->
+  <!--<row>
+    <col grid="col-xs-12 col-xl-9">
       <row>
         <col>
           <table title="Financial Highlights" lookback="5">
@@ -104,7 +347,7 @@
       </row>
 
     </col>
-    <col grid="col-xs-12 col-xl-4">
+    <col grid="col-xs-12 col-xl-3">
       <row>
         <col>
           <chart title="Assets" type="combo" css-classes="pie-chart" lookback="0">
@@ -143,5 +386,5 @@
         </col>
       </row>
     </col>
-  </row>
+  </row>-->
 </layout>

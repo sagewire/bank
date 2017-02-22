@@ -1,23 +1,42 @@
 ﻿var sidenavTimer = null;
+var sidenavCloseTimer = null;
 var sidenavState = null;
 var mainBodyHtml = null;
 var lastScrollPosition = null;
 
 function openSidenav(delay) {
 
-
+    console.log(delay);
     if (isSidenavOpen()) {
         return;
     }
 
     sidenavTimer = setTimeout(function () {
         var nav = $("#global-sidenav");
+        var toggler = $("#sidenav-toggler");
+
+        console.log(toggler.is(':visible'));
+
+        if (!nav.is(':hover') && !toggler.is(':visible')) {
+            return;
+        }
+
         nav.addClass("open");
         
         $(".darken").fadeIn();
         $(".top-nav").addClass("sidenav-open");
         //$("#search-box").focus();
     }, delay);
+
+    sidenavCloseTimer = setTimeout(function () {
+        var nav = $("#global-sidenav");
+        var toggler = $("#sidenav-toggler");
+
+        if (!nav.is(':hover') && !toggler.is(':visible')) {
+            closeSidenav();
+        }
+    }, 1000);
+
 }
 
 function closeSidenav() {

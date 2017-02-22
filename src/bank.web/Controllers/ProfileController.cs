@@ -92,7 +92,7 @@ namespace bank.web.Controllers
 
             var orgId = DecodeId(id);
             var companies = new List<int>();
-            companies.Add(orgId);
+            //companies.Add(orgId);
             companies.AddRange(DecodeIds(c));
 
             var orgRepo = new OrganizationRepository();
@@ -140,7 +140,7 @@ namespace bank.web.Controllers
             {
                 reportFactory.Period = DateTime.Now.LastQuarterDate();
             }
-
+            reportFactory.Organizations.Add(org);
             reportFactory.OrganizationIds = companies;
 
             if (!string.IsNullOrWhiteSpace(org.StatePeerGroup))
@@ -160,7 +160,7 @@ namespace bank.web.Controllers
             var layout = reportFactory.Build();
 
             var model = new ReportViewModel();
-
+            model.IsProfilePage = template == "bank-layout";
             model.IsModal = Request.QueryString["m"] != null;
             model.Layout = layout;
             model.Organization = org;

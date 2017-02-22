@@ -79,7 +79,8 @@ namespace bank.import.ffiec
                 existing.Street2 = existing.Street2?.ToTitleCase(true) ?? ffiec.STREET_LINE2.SafeSubstring(20).ToTitleCase(true);
                 existing.Url = existing.Url ?? ffiec.URL.SafeSubstring(100);
                 existing.EntityType = existing.EntityType ?? ffiec.ENTITY_TYPE;
-
+                existing.Active = ffiec.REASON_TERM_CD == 0;
+                existing.StatusCode = ffiec.REASON_TERM_CD;
                 existing.ShortName = ffiec.NM_SHORT;
                 orgRepo.Update(existing);
             }
@@ -95,6 +96,8 @@ namespace bank.import.ffiec
                     ID_RSSD = ffiec.ID_RSSD.Value,
                     EntityType = ffiec.ENTITY_TYPE,
                     Url = ffiec.URL.SafeSubstring(100),
+                    Active = ffiec.REASON_TERM_CD == 0,
+                    StatusCode = ffiec.REASON_TERM_CD,
                     Created = DateTime.Now
                 };
 

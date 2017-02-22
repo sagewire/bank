@@ -22,6 +22,11 @@
   </row>
   <row>
     <col>
+      <element partial="ChildRelationships" data-source="Relationships" />
+    </col>
+  </row>
+  <row>
+    <col>
       <table title="Financial Highlights" lookback="5">
         <concept name="BHCP2170|BHSP2170" />
         

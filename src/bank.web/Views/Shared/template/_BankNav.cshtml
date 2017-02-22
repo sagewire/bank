@@ -1,0 +1,100 @@
+﻿@using bank.reports
+@using bank.enums;
+@using bank.poco;
+
+@model TemplateElement
+@{
+    var companyColumn = Model.DataColumns.First() as CompanyColumn;
+    var org = companyColumn.Organization;
+}
+
+<ul class="nav nav-fill">
+    <li class="nav-item reveal">
+        <a class="nav-link" href="@Url.Url(org)">
+            <i class="fa fa-university" aria-hidden="true"></i>
+        </a>
+    </li>
+    <li class="nav-item reveal">
+        <a class="nav-link" href="#" onclick="return false;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i id="plus" class="fa fa-plus" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+            <button class="dropdown-item" type="button">
+                <i class="fa fa-fw fa-hashtag" aria-hidden="true"></i>
+                Add Bank to Dashboard
+            </button>
+            <button class="dropdown-item" type="button">
+                <i class="fa fa-fw fa-clone" aria-hidden="true"></i>
+                Add to Peer Group
+            </button>
+            <button class="dropdown-item" type="button">
+                <i class="fa fa-fw fa-line-chart" aria-hidden="true"></i>
+                New Report for Bank
+            </button>
+
+            <div class="dropdown-divider"></div>
+
+            <button class="dropdown-item" type="button">
+                <i class="fa fa-fw fa-link" aria-hidden="true"></i>
+                Link
+            </button>
+            <button class="dropdown-item" type="button">
+                <i class="fa fa-fw fa-code" aria-hidden="true"></i>
+                Embed
+            </button>
+            <button class="dropdown-item" type="button">
+                <i class="fa fa-fw fa-share-alt" aria-hidden="true"></i>
+                Share
+            </button>
+
+            <div class="dropdown-divider"></div>
+
+            <button class="dropdown-item" type="button">
+                <i class="fa fa-fw fa-question" aria-hidden="true"></i>
+                Help
+            </button>
+        </div>
+    </li>
+    <li class="nav-item reveal">
+        <a class="nav-link" href="@Url.Url(org, DateTime.Now, "balance-sheet")">
+            <i class="fa fa-fw fa-balance-scale" aria-hidden="true"></i>
+            <span class="hidden-xs-down">Balance Sheet</span>
+        </a>
+    </li>
+    <li class="nav-item reveal">
+        <a class="nav-link" href="@Url.Url(org, DateTime.Now, "income-statement")">
+            <i class="fa fa-fw fa-usd" aria-hidden="true"></i>
+            <span class="hidden-xs-down">Income</span>
+        </a>
+    </li>
+
+    @if (org.EntityCategory == "bank")
+    {
+        <li class="nav-item reveal">
+            <a class="nav-link" href="@Url.Url(org, DateTime.Now, "loan-composition", null)">
+                <i class="fa fa-fw fa-handshake-o" aria-hidden="true"></i>
+                <span class="hidden-xs-down">Loans</span>
+            </a>
+        </li>
+
+                        <li class="nav-item reveal">
+                            <a class="nav-link" href="@Url.Url(org, DateTime.Now, "deposit-composition", null)">
+                                <i class="fa fa-fw fa-money" aria-hidden="true"></i>
+                                <span class="hidden-xs-down">Deposits</span>
+                            </a>
+                        </li>
+    }
+
+    @if (org.SucessorTransformations.Any())
+    {
+        <li class="nav-item reveal">
+            <a class="nav-link" href="@Url.Url(org, DateTime.Now, "acquisitions", null)">
+                <i class="fa fa-fw fa-dot-circle-o" aria-hidden="true"></i>
+                <span class="hidden-xs-down">Acquisitions</span>
+                <span class="badge badge-pill badge-danger">
+                    @org.SucessorTransformations.Count
+                </span>
+            </a>
+        </li>
+    }
+</ul>

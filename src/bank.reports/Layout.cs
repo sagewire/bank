@@ -151,11 +151,12 @@ namespace bank.reports
                 }
             }
 
-            var titles = Elements.Where(x => x.Title != null && x.Title.Contains(".concept."));
-            foreach(var title in titles)
+            var conceptTitles = Elements.Where(x => x.Title != null && x.Title.Contains(".concept."));
+            foreach(var title in conceptTitles)
             {
                 title.Title = title.Title.ConceptReplace(Concepts);
             }
+            
         }
 
 
@@ -296,7 +297,7 @@ namespace bank.reports
         private TemplateColumn ParseCol(XElement col)
         {
             var templateColumn = new TemplateColumn();
-            templateColumn.CssClasses = col.SafeAttributeValue("css");
+            templateColumn.CssClasses = col.SafeAttributeValue("css-classes");
             templateColumn.GridOverride = col.SafeAttributeValue("grid");
 
             //var isChild = col.SafeBoolAttributeValue("child");
@@ -342,6 +343,7 @@ namespace bank.reports
             var title = element.SafeAttributeValue("title").ParameterReplace(Parameters);
             var lookback = element.SafeIntAttributeValue("lookback");
             var dataSource = element.SafeAttributeValue("data-source");
+            var css = element.SafeAttributeValue("css-classes");
 
             TemplateElement item;
 
@@ -359,7 +361,7 @@ namespace bank.reports
                     item = ParseTable(element);
                     break;
                 case "element":
-                    item = new TemplateElement();
+                    item = ParseElementChildren(element);// new TemplateElement();
                     break;
                 default:
                     throw new NotSupportedException(string.Format("The element [{0}] is not supported", name));
@@ -369,6 +371,7 @@ namespace bank.reports
             item.Partial = partial;
             item.Lookback = lookback;
             item.DataSource = dataSource;
+            item.CssClasses = css;
 
             return item;
 
@@ -386,6 +389,21 @@ namespace bank.reports
 
             return chart;
 
+        }
+
+        private TemplateElement ParseElementChildren(XElement element)
+        {
+            var elem = new TemplateElement();
+            var concepts = element.Elements("concept");
+
+            foreach(var conceptElem in concepts)
+            {
+                var name = conceptElem.SafeAttributeValue("name").ParameterReplace(Parameters).ToUpper();
+                var concept = new Concept(name);
+                elem.Concepts.Add(concept);
+            }
+
+            return elem;
         }
 
         private TableElement ParseTable(XElement element, int level = 0)

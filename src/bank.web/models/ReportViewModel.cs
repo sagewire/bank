@@ -39,5 +39,6 @@ namespace bank.web.models
         }
 
         public Layout Layout { get; internal set; }
+        public bool IsProfilePage { get; internal set; }
     }
 }

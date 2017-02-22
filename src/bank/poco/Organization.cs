@@ -37,7 +37,21 @@ namespace bank.poco
                 _entityCategory = value;
             }
         }
-        
+
+        public OrganizationStatuses Status
+        {
+            get
+            {
+                if (Active) return OrganizationStatuses.Active;
+
+                if (Successor != null) return OrganizationStatuses.Acquired;
+
+                if (!Active) return OrganizationStatuses.Inactive;
+
+                return OrganizationStatuses.Unknown;
+            }
+        }
+
         public string EntityType { get; set; }
         //NAME
         public string ShortName { get; set; }
@@ -257,14 +271,14 @@ namespace bank.poco
         {
             get
             {
-                if (PredecessorTransformations.Any())
+                if (PredecessorTransformations != null && PredecessorTransformations.Any())
                 {
                     return PredecessorTransformations.OrderByDescending(x => x.D_DT_TRANS).FirstOrDefault();
                 }
                 return null;
             }
         }
-        
+
         public OrganizationFfiecRelationship HoldingCompany
         {
             get
@@ -296,6 +310,7 @@ namespace bank.poco
         public List<OrganizationFfiecRelationship> ChildRelationships { get; internal set; }
         public List<OrganizationFfiecRelationship> ParentRelationships { get; internal set; }
         public List<OrganizationFfiecTransformation> PredecessorTransformations { get; internal set; }
+        public int? StatusCode { get; set; }
 
         //public string AvatarImageUrl
         //{

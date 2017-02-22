@@ -178,6 +178,7 @@
     <Compile Include="enums\EntityTypes.cs" />
     <Compile Include="enums\FactTypes.cs" />
     <Compile Include="enums\HorizontalAlignment.cs" />
+    <Compile Include="enums\OrganizationStatuses.cs" />
     <Compile Include="enums\ReportTypes.cs" />
     <Compile Include="enums\Sources.cs" />
     <Compile Include="extensions\DateTimeExtensions.cs" />

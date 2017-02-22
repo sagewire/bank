@@ -5,26 +5,30 @@
 <div id="header" class="header-wrap">
     <div class="container-fluid">
         <div class="pt-3">
-            @if (Model.Organization.Successor != null)
-            {
-                <div class="alert alert-success align-middle">
-                    <i class="fa fa-fw fa-exclamation-circle" aria-hidden="true"></i>
-                    Acquired by <a href="@Url.Url(Model.Organization.Successor.SuccessorOrganization)">@Model.Organization.Successor.SuccessorOrganization.Name</a> on @Model.Organization.Successor.D_DT_TRANS.Value.ToShortDateString()
+            @*@if (Model.Organization.Successor != null)
+                {
+                    <div class="alert alert-success align-middle">
+                        <i class="fa fa-fw fa-exclamation-circle" aria-hidden="true"></i>
+                        Acquired by <a href="@Url.Url(Model.Organization.Successor.SuccessorOrganization)">@Model.Organization.Successor.SuccessorOrganization.Name</a> on @Model.Organization.Successor.D_DT_TRANS.Value.ToShortDateString()
 
-                </div>
-            }
+                    </div>
+                }*@
+
 
             <h1>
+                @Model.Organization.Name
+
+
                 @if (Request.IsAuthenticated)
                 {
-                    <small class="float-right">
+                    <small class="ml-3">
                         @if (Model.IsFavorite)
                         {
                             <i title="Remove from favorites"
                                data-send="json"
                                data-name="favorites"
                                data-value="@Model.Organization.OrganizationId"
-                               class="favorite float-right fa fa-star gold" aria-hidden="true"></i>
+                               class="favorite fa fa-star gold" aria-hidden="true"></i>
                         }
                         else
                         {
@@ -32,39 +36,19 @@
                                data-send="json"
                                data-name="favorites"
                                data-value="@Model.Organization.OrganizationId"
-                               class="not-favorite float-right fa fa-star-o gold" aria-hidden="true"></i>
+                               class="not-favorite fa fa-star-o gold" aria-hidden="true"></i>
                         }
                     </small>
                 }
-                @Model.Organization.Name
             </h1>
 
-            <h4>@Model.Organization.City, @Model.Organization.State</h4>
-            @if (Model.Organization.HoldingCompany != null)
-            {
-                <div class="mb-1">
-                    <a class="btn btn-primary" href="@Url.Url(Model.Organization.HoldingCompany.ParentOrganization)">Holding Company &mdash; @Model.Organization.HoldingCompany.ParentOrganization.Name</a>
-                </div>
-            }
-            <h6>
-                @bank.poco.Global.EntityTypes[Model.Organization.EntityType] : @Model.Organization.EntityType
-            </h6>
-
-                    <h6>RSSD ID @Model.Organization.ID_RSSD</h6>
-                    <h6>Active: @Model.Organization.Active</h6>
+            <h4>
+                @Model.Organization.City, @Model.Organization.State
+                &mdash;
+                @bank.poco.Global.EntityTypes[Model.Organization.EntityType]
+            </h4>
 
 
-
-                    @if (Model.Organization.Established.HasValue)
-                    {
-                        <h6>Established: @Model.Organization.Established.Value.ToShortDateString()</h6>
-                    }
-
-                    @if (!Model.Organization.Active && Model.Organization.LastUpdate.HasValue)
-                    {
-                        <h6>Closed: @Model.Organization.LastUpdate.Value.ToShortDateString()</h6>
-                    }
-
-                </div>
-            </div>
         </div>
+    </div>
+</div>

@@ -1,0 +1,121 @@
+﻿@using bank.reports
+@using bank.enums;
+@using bank.poco;
+
+@model TemplateElement
+@{
+    var companyColumn = Model.DataColumns.First() as CompanyColumn;
+    var org = companyColumn.Organization;
+}
+
+
+<ul class="org-info list-group list-group-flush list-group-sm">
+
+
+    @if (org.Status == OrganizationStatuses.Acquired)
+    {
+        <li class="list-group-item">
+            <div class="d-flex w-100 justify-content-between">
+                <div class="super">
+                    Acquired By
+                </div>
+                <div class="text">
+                    <a href="@Url.Url(org.Successor.SuccessorOrganization)">
+                        @org.Successor.SuccessorOrganization.Name
+                    </a>
+                </div>
+            </div>
+        </li>
+    }
+    @if (org.HoldingCompany != null)
+    {
+        <li class="list-group-item">
+            <div class="d-flex w-100 justify-content-between">
+                <div class="super">
+                    Holding Company
+                </div>
+                <div class="text">
+                    <a href="@Url.Url(org.HoldingCompany.ParentOrganization)">
+                        @org.HoldingCompany.ParentOrganization.Name
+                    </a>
+                </div>
+            </div>
+        </li>
+    }
+    @*<li class="list-group-item">
+        <div class="d-flex w-100 justify-content-between" ">
+            <div class="super">
+                Type
+            </div>
+            <div class="text">
+                @bank.poco.Global.EntityTypes[org.EntityType]
+            </div>
+        </div>
+    </li>*@
+    <li class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+            <div class="super">
+                Established
+            </div>
+            <div class="text">
+                @org.Established.Value.ToString("MMM dd yyyy")
+            </div>
+        </div>
+    </li>
+
+    @if (!org.Active && org.LastUpdate.HasValue)
+    {
+        <li class="list-group-item">
+            <div class="d-flex w-100 justify-content-between">
+                <div class="super">
+                    Closed
+                </div>
+                <div class="text">
+                    @org.LastUpdate.Value.ToString("MMM dd yyyy")
+                </div>
+            </div>
+        </li>
+    }
+    <li class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+            <div class="super">
+                Headquarters
+            </div>
+            <div class="text">
+                @org.City, @org.State
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+            <div class="super">
+                RSS ID
+            </div>
+            <div class="text">
+                @org.ID_RSSD
+            </div>
+        </div>
+    </li>
+    @foreach (var concept in Model.Concepts)
+    {
+        var fact = companyColumn.GetCell(concept);
+
+        <li class="list-group-item concept" data-concept="@concept.Name">
+            <div class="d-flex w-100 justify-content-between">
+                <div class="super">
+                    @concept.Label
+                </div>
+                <div class="text">
+                    @concept.ValueFormatted(fact)
+                    @Html.Partial("_FactTrendArrow", fact)
+                    <span class="ratio">
+                        @fact.TrendRatio.Value.ToString("P1")
+                    </span>
+
+                </div>
+            </div>
+        </li>
+    }
+
+</ul>
+

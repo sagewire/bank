@@ -1,0 +1,36 @@
+﻿@using bank.reports
+@using bank.enums;
+@using bank.poco;
+
+@model TemplateElement
+@{
+    var companyColumn = Model.DataColumns.First() as CompanyColumn;
+    var org = companyColumn.Organization;
+}
+<ul class="org-info list-group list-group-flush list-group-sm">
+
+    @foreach (var concept in Model.Concepts)
+    {
+        var fact = companyColumn.GetCell(concept);
+
+        <li class="list-group-item concept" data-concept="@concept.Name">
+            <div class="d-flex w-100 justify-content-between">
+                <div class="super">
+                    @concept.Label
+                </div>
+                <div class="text">
+                    @concept.ValueFormatted(fact)
+                    @Html.Partial("_FactTrendArrow", fact)
+
+                    <span class="ratio">
+                        @if (fact.TrendRatio.HasValue)
+                        {
+                            @fact.TrendRatio.Value.ToString("P1")
+                        }
+                    </span>
+                </div>
+            </div>
+        </li>
+    }
+
+</ul>

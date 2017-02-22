@@ -27,6 +27,8 @@ namespace bank.data.graph
                     var cypher = new StringBuilder();
                     cypher.AppendLine("MATCH p=(n:Organization { id: {id} })-[r:Acquired*1..2]->() RETURN p LIMIT 200");
 
+                    //cypher.AppendLine("MATCH p=(n:Organization { id: {id} })-[:IS_PARENT|:Acquired*1..2]->(:Organization) RETURN p LIMIT 200");
+
                     var props = new Dictionary<string, object>();
                     props.Add("id", organizationId);
                     

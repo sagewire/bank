@@ -13,21 +13,31 @@
 
 }
 
+@section MetaProxy {
+       <meta name="mcp" value="@Model.Organization.OrganizationId" />
+}
+
 @if (!Model.IsModal)
 {
 <text>
     @section Header {
         @if (Model.Layout.Header != null)
         {
-            @Html.Partial("_" + Model.Layout.Header.Partial, new ProfileHeaderViewModel { Organization = Model.Organization, RawReports = Model.RawReports, Profile = Model.Profile })
+            @Html.Partial("_" + Model.Layout.Header.Partial, new ProfileHeaderViewModel { IsProfilePage = Model.IsProfilePage, Organization = Model.Organization, RawReports = Model.RawReports, Profile = Model.Profile })
         }
         else if (Model.Organization != null)
         {
-            @Html.Partial("_OrgHeader", new ProfileHeaderViewModel { Organization = Model.Organization, RawReports = Model.RawReports, Profile = Model.Profile })
+            @Html.Partial("_OrgHeader", new ProfileHeaderViewModel { IsProfilePage = Model.IsProfilePage, Organization = Model.Organization, RawReports = Model.RawReports, Profile = Model.Profile })
         }
+
+        <div class="skirt header-wrap"></div>
+        
     }
+
 </text>
 }
+
+
 
 <main class="@(Model.Organization == null ? "" : "first")">
     @Html.Partial("template/_Rows", new RowsViewModel { Rows = Model.Layout.Rows })

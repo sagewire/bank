@@ -1,0 +1,31 @@
+﻿@using bank.reports
+@using bank.enums;
+@using bank.poco;
+
+@model TemplateElement
+@{
+    var companyColumn = Model.DataColumns.First() as CompanyColumn;
+    var org = companyColumn.Organization;
+}
+
+@switch (org.Status)
+            {
+                case OrganizationStatuses.Active:
+        <div class="alert alert-success" role="alert">
+            <strong>Active</strong>
+        </div>
+        break;
+    case OrganizationStatuses.Inactive:
+        <div class="alert alert-warning" role="alert">
+            <strong>Not Active</strong>
+        </div>
+        break;
+    case OrganizationStatuses.Acquired:
+        <div class="alert alert-danger" role="alert">
+            <strong>
+                Acquired @org.Successor.D_DT_TRANS.Value.ToString("MMM yyyy")
+            </strong>
+        </div>
+        break;
+}
+

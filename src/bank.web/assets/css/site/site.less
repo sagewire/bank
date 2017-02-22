@@ -3,15 +3,15 @@
 @accent-color: #30C8CA; // FFE545;
 @accent-color-secondary: #FFD700;
 
-@body-color: #eeeeee; //#F0F1EE;
+@body-color: #f7f7f7; //#F0F1EE;
 @white: #fff;
 
-@darkish: darken(@white, 10);
+@darkish: #f7f7f7;// darken(@white, 10);
 @dark: darken(@white, 25);
 @darker: darken(@white, 50);
-@darkest: darken(@white, 75);
+@darkest: #1f1f1f;
 //@dark: #3E637D;
-
+ 
 @green: #3CC47C;
 @red: #f00;
 
@@ -156,7 +156,7 @@ body {
     z-index: 70;
 
     .navbar {
-        padding-left: 26px;
+        padding-left: 30px;
         padding-right: 8px;
         padding-top: 4px;
     }
@@ -175,11 +175,14 @@ body {
 #header {
     position: relative;
     background-color: @primary-color;
-    height: 300px;
+    //height: 300px;
+
+    padding: 60px 15px;
+    text-align: center;
 
     h1 {
         color: @white;
-        font-size: 3rem;
+        font-size: 4rem;
         margin-bottom: 0;
     }
 
@@ -193,7 +196,7 @@ body {
 }
 
 .skirt {
-    height: 75px;
+    height: 22px;//75px;
 }
 
 .signin {
@@ -213,7 +216,7 @@ body {
         }
     }*/
     .first {
-        margin-top: -84px;
+        margin-top: -52px;
     }
 }
 
@@ -290,12 +293,19 @@ footer {
 .card {
     border-radius: 0 !important;
     margin-top: 30px;
-    .box-shadow;
+    border: 1px solid @dark;
+    //.box-shadow;
 
     .card-header {
         background-color: transparent;
         font-size: 1.1rem;
         font-weight: bold;
+
+        &:hover {
+            .fa {
+                color: @darker;
+            }
+        }
 
         .card-header-text {
             display: inline-block;
@@ -314,11 +324,56 @@ footer {
         }
 
         .fa {
-            color: @darkest;
-
+            color: darken(@darkish,10);
+             
             &:hover {
                 color: @darkest;
             }
+        }
+    }
+}
+
+.org-status {
+    .alert {
+        margin-bottom: 0;
+        text-align: center;
+        padding: 7px;
+    }
+}
+
+.org-info {
+    color: @darkest;
+    .wrap {
+        overflow: hidden;
+    }
+    .super {
+        display: block;
+        //vertical-align: super;
+        font-size: .80rem;
+        //margin-top: -.2rem;
+        font-weight: bold;
+        float: left;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 300px;
+        overflow: hidden;
+        margin-right: 15px;
+    }
+     
+    .text {
+        display: block;
+        text-align: right;
+        //float: right;
+        white-space: nowrap;
+        //text-overflow: ellipsis;
+        //max-width: 180px;
+        //overflow: hidden;
+
+        .ratio {
+            display: inline-block;
+            min-width: 35px;
+            margin-left: -5px;
+            font-size: 70%;
         }
     }
 }
@@ -359,12 +414,18 @@ footer {
     padding-top: 8px;
     z-index: 80;
 
-    a {
+    /*a {
         color: @darkest;
-    }
+    }*/
 
     .nav {
         //padding-top: 8px;
+    }
+
+    .alert {
+        min-height: 40px;
+        text-align: center;
+        padding: 7px;
     }
 
     .reports-dropdown-menu {
@@ -426,7 +487,12 @@ footer {
 
 // run of site classes
 
-
+.list-group-sm {
+    .list-group-item {
+        padding-top:  .469rem ;
+        padding-bottom:  .469rem ;
+    }
+}
 
 #modal {
     position: absolute;

@@ -26,7 +26,7 @@ namespace bank.data.maps
             Map(x => x.PredecessorTransformations).Ignore();
             Map(x => x.ChildRelationships).Ignore();
             Map(x => x.ParentRelationships).Ignore();
-
+            Map(x => x.Status).Ignore();
             //Map(x => x.AvatarImageUrl).Ignore();
 
             AutoMap();
