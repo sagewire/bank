@@ -23,14 +23,27 @@ namespace bank.poco
         {
             get
             {
-                if (_entityCategory == null)
+                if (string.IsNullOrWhiteSpace(_entityCategory) && string.IsNullOrWhiteSpace(EntityType))
+                {
+                    return "org";
+
+                }
+
+                if (string.IsNullOrWhiteSpace(_entityCategory))
                 {
                     if (_banks.Contains(EntityType.ToUpper()))
                     {
                         return "bank";
                     }
+                    else
+                    {
+                        return "org";
+                    }
                 }
-                return _entityCategory.ToLower();
+                else
+                {
+                    return _entityCategory.ToLower();
+                }
             }
             set
             {
@@ -63,6 +76,7 @@ namespace bank.poco
         public int FDIC_UniqueNumber { get; set; }
         //FED_RSSD
         public int ID_RSSD { get; set; }
+        public DateTime? FirstReport { get; set; }
         public DateTime? Created { get; set; }
         //CHARTER
         public int OccCharterNumber { get; set; }
@@ -280,11 +294,12 @@ namespace bank.poco
             }
         }
 
+        [JsonIgnore]
         public OrganizationFfiecRelationship HoldingCompany
         {
             get
             {
-                if (ParentRelationships.Any())
+                if (ParentRelationships != null && ParentRelationships.Any())
                 {
                     return ParentRelationships.OrderByDescending(x => x.D_DT_START.Value).FirstOrDefault();
                 }
@@ -292,10 +307,13 @@ namespace bank.poco
             }
         }
 
+        [JsonIgnore]
         public List<ReportImport> ReportImports { get; internal set; }
 
+        [JsonIgnore]
         public List<OrganizationFfiecTransformation> SucessorTransformations { get; internal set; }
-
+        
+        [JsonIgnore]
         public List<OrganizationFfiecTransformation> FilteredTransformations
         {
             get
@@ -303,13 +321,65 @@ namespace bank.poco
                 if (SucessorTransformations == null) return null;
 
                 return SucessorTransformations
-                    .Where(x => x.PredecessorOrganization != null && x.D_DT_TRANS.Value.Year >= 2002)
-                    .OrderByDescending(x => x.PredecessorOrganization.TotalAssets).Take(5).ToList();
+                    .Where(x => x.PredecessorOrganization != null && x.D_DT_TRANS.Value >= FirstReport.Value)
+                    .OrderByDescending(x => x.PredecessorOrganization.TotalAssets).ToList();
             }
         }
 
+        [JsonIgnore]
+        public List<OrganizationFfiecTransformation> Transformations
+        {
+            get
+            {
+                return SucessorTransformations.Union(PredecessorTransformations).ToList();
+            }
+        }
+
+        [JsonIgnore]
+        public List<OrganizationFfiecRelationship> FilteredChildRelationships
+        {
+            get
+            {
+                if (ChildRelationships == null) return null;
+
+                return ChildRelationships.Where(x => x.OffspringOrganization != null && x.DateRelationshipStart.Value >= FirstReport.Value)
+                    .OrderByDescending(x => x.DateRelationshipStart)
+                    .Take(999)
+                    .ToList();
+
+            }
+        }
+
+        [JsonIgnore]
+        public List<OrganizationFfiecRelationship> FilteredParentRelationships
+        {
+            get
+            {
+                if (ParentRelationships == null) return null;
+
+                return ParentRelationships.Where(x => x.ParentOrganization != null && x.DateRelationshipStart.Value >= FirstReport.Value)
+                    .OrderByDescending(x => x.DateRelationshipStart)
+                    .Take(999)
+                    .ToList();
+
+            }
+        }
+
+
+        [JsonIgnore]
+        public List<OrganizationFfiecRelationship> Relationships
+        {
+            get
+            {
+                return ParentRelationships.Union(ChildRelationships).ToList();
+            }
+        }
+
+        [JsonIgnore]
         public List<OrganizationFfiecRelationship> ChildRelationships { get; internal set; }
+        [JsonIgnore]
         public List<OrganizationFfiecRelationship> ParentRelationships { get; internal set; }
+        [JsonIgnore]
         public List<OrganizationFfiecTransformation> PredecessorTransformations { get; internal set; }
         public int? StatusCode { get; set; }
 

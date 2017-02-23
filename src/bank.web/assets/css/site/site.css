@@ -156,7 +156,6 @@ body.modal-open .close-modal {
   margin-right: auto;
 }
 #flash {
-  position: absolute;
   z-index: 100;
   width: 100%;
   margin-bottom: 0;
@@ -332,9 +331,33 @@ footer {
 .sankey {
   height: 500px;
 }
+.nav-icon {
+  width: 75px;
+  text-align: center;
+  padding-top: 7px;
+  padding-left: 15px;
+}
+.nav-icon .dropdown-item {
+  color: #1f1f1f !important;
+}
+.nav-icon .dropdown-toggle:after {
+  display: none !important;
+}
+.tooltip.show {
+  opacity: 1;
+}
+.tooltip .tooltip-inner {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+  text-align: left;
+  background-color: #fff;
+  color: #1f1f1f;
+}
 .list-group-sm .list-group-item {
   padding-top: .469rem;
   padding-bottom: .469rem;
+}
+.text-muted {
+  color: #bfbfbf !important;
 }
 #modal {
   position: absolute;

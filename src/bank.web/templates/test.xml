@@ -2,20 +2,9 @@
 <layout>
   <row>
     <col>
-      <chart type="combo" chart-override="primary" css-classes="main-chart" lookback="200" title="Balance Sheet Highlights">
-        <series type="areaspline" column="0" z-index="10">
-          <concept name="UBPR2170"/>
-        </series>
-        <series type="areaspline" column="0" z-index="10">
-          <concept name="UBPRE119"/>
-        </series>
-        <series type="areaspline" column="0" z-index="10">
-          <concept name="UBPRK434"/>
-        </series>
-        <series type="areaspline" column="0" z-index="10">
-          <concept name="UBPR3210"/>
-        </series>
-      </chart>
+      <table title="Financial Highlights" lookback="5">
+        <concept name="_TCETAST" />
+      </table>
     </col>
   </row>
 

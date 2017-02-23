@@ -6448,7 +6448,7 @@ function openSidenav(delay) {
         }
 
         nav.addClass("open");
-        
+
         $(".darken").fadeIn();
         $(".top-nav").addClass("sidenav-open");
         //$("#search-box").focus();
@@ -6558,6 +6558,9 @@ $(function () {
         toggleSidenav(0);
         return false;
     })
+
+    $('[data-toggle="tooltip"]').tooltip({ delay: { "show": 0, "hide": 100000 } })
+    
 
 
     var disablePreload = false;
@@ -6945,7 +6948,9 @@ $(function () {
     });
 
     $(".js-typeahead-name").on("focus.typeahead", function (e) {
+        //$("#search-container").addClass("fixed-top");
         $(".search-group").addClass("search-mobile");
+        $("body").addClass("search-mobile");
     });
 
     $.typeahead({
@@ -6978,7 +6983,7 @@ $(function () {
             }
         },
         callback: {
-            
+
             onReady: function () {
 
                 //setTimeout(function () {
@@ -7003,12 +7008,17 @@ $(function () {
             onResult: function (node, query, result, resultCount, resultCountPerGroup) {
                 console.log('result');
                 $("body").addClass("search-results")
+                $("body").addClass("search-mobile");
                 $(".search-group").addClass("search-mobile");
+                //$("#search-container").addClass("fixed-top");
             },
             onHideLayout: function (node, query) {
                 console.log('hide layout');
                 $("body").removeClass("search-results");
+                $("body").removeClass("search-mobile");
                 $(".search-group").removeClass("search-mobile");
+                //$("#search-container").removeClass("fixed-top");
+
             }
         }
     });
@@ -7386,7 +7396,7 @@ $(function () {
             minPadding: 0,
             tickPositions: []
         },
-        yAxis: {
+        yAxis: [{
             gridLineWidth: 0,
             gridLineColor: '#eeeeee',
             endOnTick: false,
@@ -7398,10 +7408,14 @@ $(function () {
                 text: null
             },
             tickPositions: []
-        },
+        }, {
+            id: "annotations",
+            reversed: true,
+            visible: false
+        }],
         legend: {
             enabled: true,
-            layout: "vertical",
+            layout: "horizontal",
             itemWidth: 200,
             itemStyle: {
                 fontWeight: 'bold',
@@ -7410,31 +7424,31 @@ $(function () {
                 overflow: "hidden",
                 whiteSpace: "nowrap"
             },
-            itemHoverStyle: {
-                overflow: "auto",
-                whiteSpace: "normal"
+            //itemHoverStyle: {
+            //    overflow: "auto",
+            //    whiteSpace: "normal"
 
-            },
+            //},
             useHTML: true
         },
         //tooltip: {
         //    shared: true
         //},
-        tooltip: {
+        //tooltip: {
 
-            formatter: function () {
+        //    formatter: function () {
 
-                var name = this.series.name;
-                var key = this.key;
+        //        var name = this.series.name;
+        //        var key = this.key;
 
-                if ($.isNumeric(key)) {
-                    key = "";
-                }
+        //        if ($.isNumeric(key) || name === key) {
+        //            key = "";
+        //        }
 
-                return '<b>' + name + '</b><br/><i>' + key + "</i><br/>" +
-                    Highcharts.dateFormat('%e-%b-%Y', new Date(this.x)) + '<br/> Value: ' + Highcharts.numberFormat(this.y, 0, "", ",") + ' ';
-            }
-        },
+        //        return '<b>' + name + '</b><br/><i>' + key + "</i><br/>" +
+        //            Highcharts.dateFormat('%e-%b-%Y', new Date(this.x)) + '<br/> Value: ' + Highcharts.numberFormat(this.y, 0, "", ",") + ' ';
+        //    }
+        //},
         plotOptions: {
             pie: {
                 dataLabels: {
@@ -7443,14 +7457,30 @@ $(function () {
                 showInLegend: true
             },
             areaspline: {
-                pointPlacement: null
-
+                pointPlacement: null,
+                marker: {
+                    radius: 0
+                },
+                tooltip: {
+                    pointFormat: '<b>{point.y:,.0f}<br/>{point.x:%b %e %Y}'
+                }
             },
             column: {
                 pointPadding: 0
             },
             line: {
 
+            },
+            scatter: {
+                marker: {
+                    enabled: true,
+                    //fillColor: "#cccccc",
+                    symbol: "circle",
+                    radius: 5
+                },
+                tooltip: {
+                    pointFormat: '<b>{point.name}</b><br/>{point.x:%b %e %Y}'
+                }
             },
             series: {
                 enabledMouseTracking: false,
@@ -7466,7 +7496,7 @@ $(function () {
                     }
                 },
                 marker: {
-                    radius: 0,
+                    //radius: 0,
                     symbol: "circle",
                     states: {
                         hover: {
@@ -7587,21 +7617,36 @@ function renderCharts() {
                 layout: "vertical"
             },
             tooltip: {
-                //shared: true,
-                split: true,
-                useHTML: true,
-                padding: 0,
-                valueDecimals: 2,
-                borderWidth: 0,
-                headerFormat: "<table class='table'>",
-                pointFormat: "<tr><td><b>{point.y}    </b></td><td> {point.x:%b %Y}</td></tr>",
-                footerFormat: "</table>",
-                //footerFormat: "<b>${point.y}</b> {point.x:%b %Y}",
-                formatter: null,
-                positioner: function () {
-                    return { x: -5, y: -100 };
-                },
+
+                formatter: function () {
+
+                    var name = this.series.name;
+                    var key = this.key;
+
+                    if ($.isNumeric(key) || name === key) {
+                        key = "";
+                    }
+
+                    return '<b>' + name + '</b><br/><i>' + key + "</i><br/>" +
+                        Highcharts.dateFormat('%e-%b-%Y', new Date(this.x)) + '<br/> Value: ' + Highcharts.numberFormat(this.y, 2, ".", ",") + ' ';
+                }
             },
+            //tooltip: {
+            //    //shared: true,
+            //    split: true,
+            //    useHTML: true,
+            //    padding: 0,
+            //    valueDecimals: 2,
+            //    borderWidth: 0,
+            //    headerFormat: "<table class='table'>",
+            //    pointFormat: "<tr><td><b>{point.y}    </b></td><td> {point.x:%b %Y}</td></tr>",
+            //    footerFormat: "</table>",
+            //    //footerFormat: "<b>${point.y}</b> {point.x:%b %Y}",
+            //    formatter: null,
+            //    positioner: function () {
+            //        return { x: -5, y: -100 };
+            //    },
+            //},
             series: [
                 {},
                 { lineWidth: 0 }
@@ -7689,10 +7734,13 @@ function renderCharts() {
                 },
 
             },
-            yAxis: {
-                gridLineWidth: 0,
-                tickPositions: null
-            },
+            //yAxis: [{
+            //    gridLineWidth: 0,
+            //    tickPositions: null,
+            //    visible: false
+            //}, {
+            //    visible: false
+            //}],
             series: [
                 {
                     fillColor: {
@@ -7706,7 +7754,7 @@ function renderCharts() {
                 }
             ]
         });
-        
+
     });
 }
 
@@ -7792,11 +7840,11 @@ Highcharts.SparkLine = function (elem, b, c) {
 };
 
 Highcharts.Combo = function (elem, b, c) {
-    
+
     var existing = $(elem).data("highchartsChart");
     var id = $(elem).attr("id");
 
-    
+
     if (existing > -1) {
         return;
     }
@@ -7837,23 +7885,42 @@ function DefaultChart(elem, b, c, defaultOptions) {
         $.extend(true, value, def);
     });
 
-    var plotlines = options.xAxis.plotLines;
-
-    $.each(annotations, function (index, value) {
-        var item = {
-            color: '#FF0000',
-            width: 2,
-            zIndex: 5,
-            value: value.value,
-            label: {
-                text: value.text
-            }
-        };
-
-        plotlines.push(item);
-    });
-
     options.series = seriesData;
+
+    
+    if (annotations !== undefined && annotations.length > 0) {
+        
+        $.each(annotations, function (index, series) {
+
+            var annotationSeries = {
+                name: series.Name,
+                type: "scatter",
+                dashStyle: "Dot",
+                lineWidth: 0,
+                //color: "#cccccc",
+                yAxis: "annotations",
+                visible: series.Visible,
+                data: []
+            }
+
+            $.each(series.Items, function (index, value) {
+                var item = {
+                    x: value.value,
+                    y: 1,
+
+                    name: value.text
+                };
+
+                annotationSeries.data.push(item);
+            });
+
+            options.series.push(annotationSeries);
+            console.log(annotationSeries);
+            //console.log(JSON.stringify(options.series));
+
+        });
+
+    }
 
     var chart = hasRenderToArg ?
         new Highcharts.Chart(elem, options, c) :

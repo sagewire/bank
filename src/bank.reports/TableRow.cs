@@ -50,5 +50,7 @@ namespace bank.reports
                 _link = value;
             }
         }
+
+        public string SubText { get; internal set; }
     }
 }

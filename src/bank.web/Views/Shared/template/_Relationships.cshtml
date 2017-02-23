@@ -1,0 +1,47 @@
+﻿@using bank.reports
+@using bank.poco;
+
+@model TemplateElement
+
+@{
+    var org = (Organization)Model.Data;
+}
+
+<table class="table table-sm table-responsive table-horizontal table-base">
+
+    <thead>
+        <tr class="header-row">
+            <td>
+                Relationships
+                @Html.Partial("_CardMenu")
+            </td>
+            <td>Role</td>
+            <td>Relationship Start</td>
+            <td>Relationship End</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var relationship in org.Relationships)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Url(relationship.ParentOrganization ?? relationship.OffspringOrganization)">
+                        @((relationship.ParentOrganization ?? relationship.OffspringOrganization).Name)
+                    </a>
+                </td>
+                <td class="text-center">
+                    @if (relationship.ParentOrganization == null)
+                    {
+                        <span>Subsidary</span>
+                    }
+                    else
+                    {
+                        <span>Parent</span>
+                    }
+                </td>
+                <td class="text-center">@relationship.DateRelationshipStart.Value.ToShortDateString()</td>
+                <td class="text-center">@(relationship.DateRelationshipEnd.HasValue ? relationship.DateRelationshipEnd.Value.ToShortDateString() : "")</td>
+            </tr>
+        }
+    </tbody>
+</table>

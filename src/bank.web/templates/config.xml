@@ -3,14 +3,14 @@
 	<concepts>
     <concept name="UBPRE010" shortLabel="ROAA" label="Return on Average Assets" narrative="" />
     <concept name="UBPRE630" shortLabel="ROAE" label="Return on Average Equity" narrative="" />
-    <concept name="UBPRE088" shortLabel="Efficiency Ratio" />
-    <concept name="UBPR2170" shortLabel="Total Assets" />
-    <concept name="UBPRD662" shortLabel="Total Liabilities" />
-    <concept name="UBPRE119" shortLabel="Total Net Loans" />
-    <concept name="UBPR2200" shortLabel="Total Deposits" />
-    <concept name="UBPR4340" shortLabel="Net Income" />
-    <concept name="UBPRG105" shortLabel="Total Capital" />
-    <concept name="RCON0352" shortLabel="Other Nontransaction Savings" label="Other Savings Deposits"/>
+    <concept name="UBPRE088" label="Efficiency Ratio" />
+    <concept name="UBPR2170" label="Total Assets" />
+    <concept name="UBPRD662" label="Total Liabilities" />
+    <concept name="UBPRE119" label="Total Net Loans" />
+    <concept name="UBPR2200" label="Total Deposits" />
+    <concept name="UBPR4340" label="Net Income" />
+    <concept name="UBPRG105" label="Total Equity" />
+    <concept name="RCON0352" label="Other Nontransaction Savings" shortLabel="Other Savings Deposits"/>
     <concept name="UBPRK426" shortLabel="Deposits below Insurance Limit" />
     <concept name="RCON6810" label="Money Market Deposit Accounts" shortLabel="MMDA" />
     <concept name="UBPRE018" shortLabel="NIM" label="Net Interest Margin" />
@@ -29,7 +29,7 @@
     <concept name="UBPRD488" label="Total Capital Ratio" />
     <concept name="RCON2210" label="Demand Deposits" />
     <concept name="RIAD4073" label="Total Interest Expense" />
-    <concept name="RIAD4079" label="Non-Interest Income" />
+    <concept name="RIAD4079" label="Non-Interest Income" unit="U" />
     <concept name="RIAD4230" label="Provision: Loan &amp; Lease Losses" />
     <concept name="RIAD4302" label="Applicable Income Taxes" />
     <concept name="RIAD4300" label="Net Operating Income" />
@@ -38,13 +38,14 @@
     <concept name="UBPR2145" label="Premises and fixed assets (including capitalized leases)" />
     <concept name="UBPRE129" label="Acceptances &amp; Other Liabilities" />
     <concept name="UBPRE600" label="Loan-to-Deposit" />
+    <concept name="_SECASET" label="Securities/Assets" formula="(UBPR1754+UBPR1773)/UBPR2170" unit="P" />
+    <concept name="_EQUASET" label="Total Equity/Total Assets" formula="UBPRG105/UBPR2170" unit="P" />
+    <concept name="_TCETAST" label="Tangible Equity/Tangible Assets" formula="(UBPR3210-UBPR3163-UBPR0426-UBPR3838)/UBPR2170" unit="P" null="0" />
 
     <!--
     
     
     
-    <concept name="" label="" />
-    <concept name="" label="" />
     <concept name="" label="" />
     <concept name="" label="" />
     <concept name="" label="" />

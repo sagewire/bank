@@ -3,7 +3,7 @@
   <header partial="BankHeader" />
   <row>
     <col>
-      <chart type="combo" chart-override="primary" css-classes="main-chart" lookback="200" title="Balance Sheet Highlights">
+      <chart type="combo" css-classes="main-chart" lookback="200" title="Balance Sheet Highlights">
         <series type="areaspline" column="0">
           <concept name="BHCP2170|BHSP2170"/>
         </series>
@@ -17,12 +17,7 @@
   </row>
   <row>
     <col>
-      <element partial="ParentRelationships" data-source="Relationships" />
-    </col>
-  </row>
-  <row>
-    <col>
-      <element partial="ChildRelationships" data-source="Relationships" />
+      <element partial="Relationships" data-source="Relationships" />
     </col>
   </row>
   <row>

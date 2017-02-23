@@ -414,6 +414,7 @@ namespace bank.reports
             table.Level = level;
             table.Orientation = (TableOrientation)Enum.Parse(typeof(TableOrientation), element.SafeAttributeValue("orientation") ?? "horizontal", true);
             table.ShowRank = element.SafeBoolAttributeValue("show-rank") ?? false;
+            table.Thousands = element.SafeBoolAttributeValue("thousands") ?? true;
 
             TableElement current = table;
 
@@ -459,7 +460,7 @@ namespace bank.reports
                         var headerRow = new TableRow();
                         headerRow.TableRowType = TableRowTypes.Header;
                         headerRow.Label = item.Value;
-
+                        headerRow.SubText = item.SafeAttributeValue("subtext");
                         tableRow = headerRow;
                         break;
                     

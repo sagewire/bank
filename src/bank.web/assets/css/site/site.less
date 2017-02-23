@@ -241,7 +241,7 @@ body {
 
 
 #flash {
-    position: absolute;
+    //position: absolute;
     z-index: 100;
     width: 100%;
     margin-bottom: 0;
@@ -472,13 +472,47 @@ footer {
     height: 500px;
 }
 
+.nav-icon {
+    width: 75px;
+    text-align: center;
+    padding-top: 7px;
+    padding-left: 15px;
+
+    .dropdown-item {
+        color: @darkest !important;
+    }
+
+    .dropdown-toggle {
+        &:after {
+            display: none !important;
+        }
+    }
+}
 // run of site classes
+
+.tooltip {
+
+    &.show {
+        opacity: 1;
+    }
+
+    .tooltip-inner {
+        .box-shadow;
+        text-align: left;
+        background-color: @white;
+        color: @darkest;
+    }
+}
 
 .list-group-sm {
     .list-group-item {
         padding-top: .469rem;
         padding-bottom: .469rem;
     }
+}
+
+.text-muted {
+    color: @dark !important;
 }
 
 #modal {
@@ -781,7 +815,7 @@ svg {
 .search-group {
     position: relative;
     margin-left: 1vw;
-    //margin-right: 60px;
+    //margin-right: 1vw;
     width: 100%;
 
 

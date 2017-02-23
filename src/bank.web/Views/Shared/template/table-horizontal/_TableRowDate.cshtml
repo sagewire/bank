@@ -20,7 +20,8 @@
         }
     }
 
-    dates.Sort();
+    dates = dates.OrderByDescending(x => x).ToList();
+
     //var max = facts.Select(x => x.HistoricalData).Max(y => y.Keys);
 }
 

@@ -1,0 +1,58 @@
+﻿@{
+    var controller = ViewContext.Controller as bank.web.Controllers.ApplicationController;
+    var profile = controller.CurrentProfile;
+}
+
+
+@if (Request.IsAuthenticated)
+{
+    <div class="nav-icon">
+        <a id="sidenav-dashboard" href="@Url.DefaultUrl("dashboard")" title="Dashboard">
+            <i class="fa fa-2x fa-fw fa-tachometer" aria-hidden="true"></i>
+        </a>
+    </div>
+
+    if (profile.Favorites.Any() || profile.RecentVisits.Any())
+    {
+        <div class="dropdown nav-icon">
+            <a class="dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-2x fa-fw fa-star gold" aria-hidden="true"></i>
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right">
+                @if (profile.Favorites.Any())
+                {
+                    <h6 class="dropdown-header">Recent</h6>
+
+                    foreach (var fav in profile.Favorites)
+                    {
+                        <a class="dropdown-item" href="@fav.ProfileUrl">
+                            <i class="fa fa-fw fa-star gold" aria-hidden="true"></i>
+                            @fav.Name
+                        </a>
+                    }
+
+                    if (profile.RecentVisits.Any())
+                    {
+                        <div class="dropdown-divider"></div>
+                    }
+
+                }
+
+                @if (profile.RecentVisits.Any())
+                {
+
+                    <h6 class="dropdown-header">Recent</h6>
+                    foreach (var recent in profile.RecentVisits)
+                    {
+                        <a class="dropdown-item" href="@recent.ProfileUrl">
+                            <i class="fa fa-fw fa-bar-chart" aria-hidden="true"></i>
+                            @recent.Name
+                        </a>
+                    }
+                }
+
+            </div>
+        </div>
+    }
+}

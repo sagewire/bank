@@ -7,6 +7,7 @@
     var org = (Organization)Model.Data;
 }
 
+@if (!org.SucessorTransformations.Any() && !org.PredecessorTransformations.Any()) { return; }
 
 <table class="table table-sm table-responsive table-horizontal table-base">
 
@@ -16,48 +17,73 @@
                 Acquisitions &amp; Mergers
                 @Html.Partial("_CardMenu")
             </td>
+            <td>Role</td>
+            <td>Acct Method</td>
+            <td>Type</td>
+
             <td>
                 Transaction Date
             </td>
         </tr>
     </thead>
     <tbody>
-        @foreach (var transformation in org.SucessorTransformations)
+
+        @foreach (var transformation in org.Transformations.OrderByDescending(x => x.D_DT_TRANS.Value))
         {
-            <tr>
+            <tr class="data-row">
                 <td>
-                    @if (transformation.PredecessorOrganization != null)
+
+                    <a href="@Url.Url(transformation.PredecessorOrganization ?? transformation.SuccessorOrganization)">
+                        @((transformation.PredecessorOrganization ?? transformation.SuccessorOrganization).Name)
+                    </a>
+
+                </td>
+                <td class="text-center">
+                    @if (transformation.SuccessorOrganization == null)
                     {
-                        <a href="@Url.Url(transformation.PredecessorOrganization)">
-                            @transformation.PredecessorOrganization.Name
-                        </a>
+                        <span>Acquiree</span>
                     }
                     else
                     {
-                        <text>Unknown</text>
+                        <span>Acquirer</span>
                     }
                 </td>
-                <td>@transformation.D_DT_TRANS.Value.ToShortDateString()</td>
+                <td class="text-center">
+                    @switch (transformation.ACCT_METHOD)
+                    {
+                        case 1:
+                            <span>Pooling of Interests</span>
+                            break;
+                        case 2:
+                            <span>Purchase/Acquisition</span>
+                            break;
+                    }
+                </td>
+
+                <td class="text-center">
+                    @switch (transformation.TRNSFM_CD)
+                    {
+                        case 1:
+                            <span>Charter Discontinued</span>
+                            break;
+                        case 5:
+                            <span>Split</span>
+                            break;
+                        case 7:
+                            <span>Sale of Assets</span>
+                            break;
+                        case 9:
+                            <span>Charter Retained</span>
+                            break;
+                        case 50:
+                            <span>Failure</span>
+                            break;
+                    }
+                    
+                </td>
+                <td class="text-center">@transformation.D_DT_TRANS.Value.ToShortDateString()</td>
             </tr>
         }
 
-        @foreach (var transformation in org.PredecessorTransformations)
-        {
-            <tr>
-                <td>
-                    @if (transformation.SuccessorOrganization != null)
-                    {
-                        <a href="@Url.Url(transformation.SuccessorOrganization)">
-                            @transformation.SuccessorOrganization.Name
-                        </a>
-                    }
-                    else
-                    {
-                        <text>Unknown</text>
-                    }
-                </td>
-                <td>@transformation.D_DT_TRANS.Value.ToShortDateString()</td>
-            </tr>
-        }
     </tbody>
 </table>

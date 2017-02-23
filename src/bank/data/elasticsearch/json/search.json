@@ -2,7 +2,7 @@
     "size": 10,
     "query": {
         "function_score": {
-            "boost_mode": "multiply",
+            "boost_mode": "sum",
 
             "query": {
                 "bool": {

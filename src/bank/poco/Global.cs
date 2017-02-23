@@ -42,6 +42,7 @@ namespace bank.poco
                 var narrative = conceptElement.SafeAttributeValue("narrative");
                 var unit = conceptElement.SafeAttributeValue("unit");
                 var negative = conceptElement.SafeBoolAttributeValue("negative");
+                var nulls = conceptElement.SafeIntAttributeValue("null");
 
                 var concept = new Concept(formula);
                 concept.Name = name;
@@ -50,6 +51,7 @@ namespace bank.poco
                 concept.Narrative = narrative;
                 concept.Value = formula;
                 concept.Negative = negative;
+                concept.Nulls = nulls;
                 concept.Unit = !string.IsNullOrWhiteSpace(unit) ? (char?)unit.ToCharArray()[0] : null;
 
                 _concepts.Add(name, concept);

@@ -11,25 +11,48 @@ namespace bank.reports.extensions
 {
     public static class AnnotationExtensions
     {
-        public static List<Annotation> ToAnnotations(this List<OrganizationFfiecTransformation> list)
+        public static Annotations ToAnnotations(this List<OrganizationFfiecTransformation> list, string name, string id)
         {
-            var annotations = new List<Annotation>();
+            var annotations = new Annotations();
+            annotations.Items = new List<Annotation>();
+            annotations.Visible = list.Count < 100;
 
-            foreach(var item in list)
+            foreach (var item in list)
             {
                 var annotation = new Annotation();
                 annotation.Date = item.D_DT_TRANS.Value;
 
                 if (item.PredecessorOrganization != null)
                 {
-                    annotation.Text = string.Format("{0} Merger", item.PredecessorOrganization.Name);
+                    annotation.Text = item.PredecessorOrganization.Name;
                 }
                 else
                 {
                     annotation.Text = "Unknown Merger";
                 }
 
-                annotations.Add(annotation);
+                annotations.Name = name;
+                annotations.Items.Add(annotation);
+            }
+            return annotations;
+        }
+
+        public static Annotations ToAnnotations(this List<OrganizationFfiecRelationship> list, string name, string id)
+        {
+            var annotations = new Annotations();
+            annotations.Items = new List<Annotation>();
+            annotations.Visible = list.Count < 100;
+
+            foreach (var item in list)
+            {
+                var annotation = new Annotation();
+                annotation.Date = item.DateRelationshipStart.Value;
+
+                
+                annotation.Text = item.OffspringOrganization?.Name ?? item.ParentOrganization?.Name ?? "Unknown";
+            
+                annotations.Name = name;
+                annotations.Items.Add(annotation);
             }
             return annotations;
         }

@@ -25,18 +25,18 @@ namespace bank.utilities
         //    return results;
         //}
 
-        public object Evaluate(string text, IDictionary<string, Fact> facts)
+        public object Evaluate(string text, IDictionary<string, Fact> facts, decimal? nulls = null)
         {
 
             if (text.Length > 8)
             {
-                if (_nameList.IsMatch(text))
+                if (text.Contains("|"))
                 {
                     return EvaluateList(text, facts);
                 }
                 else
                 {
-                    return EvaluateFormula(text, facts);
+                    return EvaluateFormula(text, facts, nulls);
                 }
             }
             else if (facts.ContainsKey(text))
@@ -65,7 +65,7 @@ namespace bank.utilities
             return null;
         }
 
-        public object EvaluateFormula(string text, IDictionary<string, Fact> facts)
+        public object EvaluateFormula(string text, IDictionary<string, Fact> facts, decimal? nulls = null)
         {
             var candidate = text;
             var discardResult = false;
@@ -76,6 +76,10 @@ namespace bank.utilities
                 if (facts.ContainsKey(name))
                 {
                     args.Result = facts[name].NumericValue;
+                }
+                else if (nulls.HasValue)
+                {
+                    args.Result = nulls.Value;
                 }
                 else
                 {

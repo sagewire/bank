@@ -54,7 +54,7 @@ namespace bank.poco
             }
         }
 
-        public string ValueFormatted(Fact fact)
+        public string ValueFormatted(Fact fact, bool showInThousands = false)
         {
             if (fact == null)
             {
@@ -65,6 +65,8 @@ namespace bank.poco
                 return Value;
             }
 
+            var val = fact.NumericValue.Value;
+
             char? unit = this?.Unit ?? Unit;
             string result = null;
 
@@ -73,7 +75,7 @@ namespace bank.poco
                 switch(FormatHint)
                 {
                     case "abbr":
-                        result = fact.NumericValue.Value.ToAbbreviatedString().ToUpper();
+                        result = val.ToAbbreviatedString().ToUpper();
                         break;
                 }
             }
@@ -82,19 +84,23 @@ namespace bank.poco
                 switch (unit)
                 {
                     case 'P':
-                        result = fact.NumericValue.Value.ToString("#.##");
+                        result = val.ToString("#.###");
                         break;
                     case 'U':
                         //var format = "N0";
                         //result = Math.Round(fact.NumericValue.Value / 1000, 0).ToString(format);
-                        result = fact.NumericValue.Value.ToString("N0");
+                        if (showInThousands) val = val / 1000;
+                        result = val.ToString("N0");
                         break;
                     case 'D':
-                        result = fact.NumericValue.Value.ToString();
+                        if (showInThousands) val = val / 1000;
+                        result = val.ToString();
                         break;
                     default:
                         // result = "na";
-                        result = fact.NumericValue.Value.ToString("N0");
+                        if (showInThousands) val = val / 1000;
+                        
+                        result = val.ToString("N0");
                         break;
                 }
             }
@@ -146,6 +152,7 @@ namespace bank.poco
         }
 
         public string FormatHint { get; set; }
+        public int? Nulls { get; internal set; }
 
         public Fact PrepareFact(Fact fact)
         {
@@ -174,7 +181,7 @@ namespace bank.poco
             var resolver = new FactResolver();
             var factType = facts.First().FactType;
 
-            var result = resolver.Evaluate(Value, facts.ToDictionary(x => x.Name, x => x));
+            var result = resolver.Evaluate(Value, facts.ToDictionary(x => x.Name, x => x), Nulls);
 
             if (result == null)
             {
@@ -223,7 +230,7 @@ namespace bank.poco
 
                 if (refiltered.Count == facts.Count)
                 {
-                    result = resolver.Evaluate(Value, refiltered);
+                    result = resolver.Evaluate(Value, refiltered, Nulls);
 
                     var oldFact = Fact.Build(factType);
                     oldFact.Name = preparedFact.Name;
@@ -268,6 +275,7 @@ namespace bank.poco
             Label = concept.Label ?? Label;
             Unit = concept.Unit ?? Unit;
             Negative = concept.Negative ?? Negative;
+            Nulls = concept.Nulls?? Nulls;
         }
     }
 }

@@ -11,16 +11,28 @@ namespace bank.import.index
 {
     public static class IndexOrganization
     {
-        public static void Start()
+        private static TaskPool<Organization> _taskPool = new TaskPool<Organization>();
+
+        static void InitializeTaskPool(int threads)
         {
+            Console.WriteLine("Starting ffiec relationships import pool");
+            _taskPool.MaxWorkers = threads;
+            _taskPool.NextTask += _taskPool_NextTask;
+        }
+
+        private static void _taskPool_NextTask(Organization org)
+        {
+            Console.WriteLine(org.Name);
+            Database.Index(org, org.OrganizationId.ToString(), "banks", "organization");
+        }
+        public static void Start(int threads)
+        {
+            InitializeTaskPool(threads);
+
             var orgs = Repository<Organization>.New().All();
 
-            foreach (var org in orgs)
-            {
-                Console.WriteLine(org.Name);
-                Database.Index(org, org.OrganizationId.ToString(), "banks", "organization");
-            }
-
+            _taskPool.Enqueue(orgs.ToList());
+            
         }
     }
 }

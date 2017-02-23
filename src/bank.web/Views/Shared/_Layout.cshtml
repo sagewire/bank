@@ -85,10 +85,13 @@
                         <input id="search-box" type="text" class="form-control js-typeahead-name" />
                     </div>
 
+
                     <div class="close-modal nav-link">
                         <i class="fa fa-fw fa-arrow-left" aria-hidden="true"></i>
                         Return to previous report
                     </div>
+
+                    @Html.Partial("_AuthNav")
 
                     <button id="sidenav-toggler" class="navbar-toggler event " type="button" data-cat="Navigation" data-action="click" data-label="Main Menu">
                         ☰
@@ -125,7 +128,7 @@
     @Html.Partial("_Sidenav")
 
     <div id="main-body">
-        <div id="flash">
+        <div id="flash" class="fixed-bottom">
             <div class="close">
                 <i class="fa fa-times" aria-hidden="true"></i>
             </div>

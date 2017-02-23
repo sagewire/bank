@@ -18,7 +18,7 @@ namespace bank.reports.charts
         public string ChartOverride { get; private set; }
         public Dictionary<string, object> Parameters { get; set; }
         public int? Lookback { get; set; }
-        public List<Annotation> Annotations { get; set; }
+        public List<Annotations> AnnotationSeries { get; set; } = new List<Annotations>();
 
         private Guid _chartId = Guid.NewGuid();
         public Guid ChartId

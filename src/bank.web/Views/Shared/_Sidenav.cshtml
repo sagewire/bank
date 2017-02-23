@@ -73,58 +73,6 @@
     <ul class="nav flex-column">
 
 
-
-        @if (Request.IsAuthenticated)
-        {
-            <li class="nav-item">
-                <a id="sidenav-dashboard" class="nav-link" href="@Url.DefaultUrl("dashboard")">
-                    <i class="fa fa-fw fa-tachometer" aria-hidden="true"></i>
-                    Dashboard
-                </a>
-            </li>
-            if (profile.Favorites.Any() || profile.RecentVisits.Any())
-            {
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-fw fa-star-o" aria-hidden="true"></i>
-                        Favorites
-                    </a>
-
-                    <div class="dropdown-menu">
-                        @if (profile.Favorites.Any())
-                        {
-                            foreach (var fav in profile.Favorites)
-                            {
-                                <a class="dropdown-item" href="@fav.ProfileUrl">
-                                    <i class="fa fa-fw fa-star gold" aria-hidden="true"></i>
-                                    @fav.Name
-                                </a>
-                            }
-
-                            if (profile.RecentVisits.Any())
-                            {
-                                <div class="dropdown-divider"></div>
-                            }
-
-                        }
-
-                        @if (profile.RecentVisits.Any())
-                        {
-
-                            <h6 class="dropdown-header">Recent</h6>
-                            foreach (var recent in profile.RecentVisits)
-                            {
-                                <a class="dropdown-item" href="@recent.ProfileUrl">
-                                    <i class="fa fa-fw fa-bar-chart" aria-hidden="true"></i>
-                                    @recent.Name
-                                </a>
-                            }
-                        }
-
-                    </div>
-                </li>
-            }
-        }
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" onclick="return false;" data-toggle="dropdown">
                 <i class="fa fa-fw fa-line-chart" aria-hidden="true"></i>

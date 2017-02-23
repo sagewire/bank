@@ -13,6 +13,7 @@ namespace bank.data.maps
         public OrganizationMap()
         {
             Map(x => x.OrganizationId).Key(KeyType.Identity);
+            Map(x => x.HoldingCompany).Ignore();
             Map(x => x.Created).ReadOnly();
             Map(x => x.HasAvatar).Ignore();
             Map(x => x.ProfileUrl).Ignore();
@@ -27,6 +28,10 @@ namespace bank.data.maps
             Map(x => x.ChildRelationships).Ignore();
             Map(x => x.ParentRelationships).Ignore();
             Map(x => x.Status).Ignore();
+            Map(x => x.Successor).Ignore();
+            Map(x => x.FilteredChildRelationships).Ignore();
+            Map(x => x.FilteredParentRelationships).Ignore();
+
             //Map(x => x.AvatarImageUrl).Ignore();
 
             AutoMap();

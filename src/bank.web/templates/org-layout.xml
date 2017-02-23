@@ -2,12 +2,7 @@
 <layout>
   <row>
     <col>
-      <element partial="ChildRelationships" data-source="Relationships" />
-    </col>
-  </row>
-  <row>
-    <col>
-      <element partial="ParentRelationships" data-source="Relationships" />
+      <element partial="Relationships" data-source="Relationships" />
     </col>
   </row>
   <row>

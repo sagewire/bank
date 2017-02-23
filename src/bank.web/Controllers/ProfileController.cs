@@ -170,7 +170,20 @@ namespace bank.web.Controllers
 
             foreach (ChartElement chart in charts)
             {
-                chart.ChartConfig.Annotations = org.FilteredTransformations.ToAnnotations();
+                if (org.FilteredTransformations.Any())
+                {
+                    chart.ChartConfig.AnnotationSeries.Add(org.FilteredTransformations.ToAnnotations("Acquisitions", "acquisitions"));
+                }
+
+                if (org.FilteredChildRelationships.Any())
+                {
+                    chart.ChartConfig.AnnotationSeries.Add(org.FilteredChildRelationships.ToAnnotations("Child Relationships", "children"));
+                }
+
+                if (org.FilteredParentRelationships.Any())
+                {
+                    chart.ChartConfig.AnnotationSeries.Add(org.FilteredParentRelationships.ToAnnotations("Parent Relationships", "children"));
+                }
                 //chart.ChartConfig.Annotations = org.SucessorTransformations.ToAnnotations();
 
             }

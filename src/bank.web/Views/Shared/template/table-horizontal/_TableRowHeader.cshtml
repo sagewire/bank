@@ -8,13 +8,17 @@
 <tr class="group-row">
     <td class="@Model.Level" colspan="@(Model.Columns.Count + 1)">
         @Model.Row.Label
+        @if (!string.IsNullOrWhiteSpace(Model.Row.SubText))
+        {
+            <small class="pl-3 text-muted">@Model.Row.SubText</small>
+        }
     </td>
 
     @*@foreach (var column in Model.Columns)
-    {
-        <td class="@(counter++ == 0 ? "reveal" : "")">
-            @column.HeaderText
-        </td>
-    }*@
+        {
+            <td class="@(counter++ == 0 ? "reveal" : "")">
+                @column.HeaderText
+            </td>
+        }*@
 
 </tr>

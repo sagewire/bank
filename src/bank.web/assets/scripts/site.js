@@ -22,7 +22,7 @@ function openSidenav(delay) {
         }
 
         nav.addClass("open");
-        
+
         $(".darken").fadeIn();
         $(".top-nav").addClass("sidenav-open");
         //$("#search-box").focus();
@@ -132,6 +132,9 @@ $(function () {
         toggleSidenav(0);
         return false;
     })
+
+    $('[data-toggle="tooltip"]').tooltip({ delay: { "show": 0, "hide": 100000 } })
+    
 
 
     var disablePreload = false;
@@ -519,7 +522,9 @@ $(function () {
     });
 
     $(".js-typeahead-name").on("focus.typeahead", function (e) {
+        //$("#search-container").addClass("fixed-top");
         $(".search-group").addClass("search-mobile");
+        $("body").addClass("search-mobile");
     });
 
     $.typeahead({
@@ -552,7 +557,7 @@ $(function () {
             }
         },
         callback: {
-            
+
             onReady: function () {
 
                 //setTimeout(function () {
@@ -577,12 +582,17 @@ $(function () {
             onResult: function (node, query, result, resultCount, resultCountPerGroup) {
                 console.log('result');
                 $("body").addClass("search-results")
+                $("body").addClass("search-mobile");
                 $(".search-group").addClass("search-mobile");
+                //$("#search-container").addClass("fixed-top");
             },
             onHideLayout: function (node, query) {
                 console.log('hide layout');
                 $("body").removeClass("search-results");
+                $("body").removeClass("search-mobile");
                 $(".search-group").removeClass("search-mobile");
+                //$("#search-container").removeClass("fixed-top");
+
             }
         }
     });

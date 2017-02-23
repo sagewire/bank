@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="ChartElement.cs" />
     <Compile Include="charts\Annotation.cs" />
+    <Compile Include="charts\Annotations.cs" />
     <Compile Include="charts\ChartConfig.cs" />
     <Compile Include="charts\ChartTypes.cs" />
     <Compile Include="charts\ComboChartConfig.cs" />

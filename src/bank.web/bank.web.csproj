@@ -529,8 +529,7 @@
     <Content Include="Views\Shared\template\table-horizontal\_TableElement.cshtml" />
     <Content Include="Views\Shared\template\table-vertical\_TableRows.cshtml" />
     <Content Include="Views\Shared\template\_Transformations.cshtml" />
-    <Content Include="Views\Shared\template\_ChildRelationships.cshtml" />
-    <Content Include="Views\Shared\template\_ParentRelationships.cshtml" />
+    <Content Include="Views\Shared\template\_Relationships.cshtml" />
     <Content Include="Views\Profile\_OrgHeader.cshtml" />
     <Content Include="Views\Shared\template\_Acquisitions.cshtml" />
     <Content Include="Views\Shared\template\table-horizontal\_TableRowDate.cshtml" />
@@ -539,6 +538,7 @@
     <Content Include="Views\Shared\template\_BankNav.cshtml" />
     <Content Include="Views\Shared\template\_OrgStatus.cshtml" />
     <Content Include="Views\Shared\template\_ConceptList.cshtml" />
+    <Content Include="Views\Shared\_AuthNav.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bank.reports\bank.reports.csproj">

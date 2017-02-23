@@ -28,7 +28,7 @@
 
 
                 @{
-                    var value = Model.Row.Concept.ValueFormatted(fact);//?.ValueFormatted(Model.Row.Concept);
+                    var value = Model.Row.Concept.ValueFormatted(fact, Model.Table.Thousands);//?.ValueFormatted(Model.Row.Concept);
 
                     if (value == null)
                     {

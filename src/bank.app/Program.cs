@@ -60,7 +60,7 @@ namespace bank.app
                     form();
                     break;
                 case "indexorg":
-                    bank.import.index.IndexOrganization.Start();
+                    bank.import.index.IndexOrganization.Start(threads);
                     break;
                 case "ubprmdrm":
                     bank.import.mdrm.Ubpr.Start();

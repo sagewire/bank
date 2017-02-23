@@ -30,7 +30,7 @@
             background-color: @accent-color;// lighten(@accent-color, 35);
             border-right: 1px solid @dark;
             text-align: center;
-            font-size: .9rem;
+            //font-size: .9rem;
             //font-weight: bold;
             vertical-align: middle;
             padding: .3rem;
@@ -118,7 +118,7 @@
             background: linear-gradient(lighten(@darkish, 10), @darkish);
             font-weight: bold;
             background-color: @darkish;
-
+            
             &:first-of-type {
                 //padding-left: @firstColumnPadding;
             }
@@ -158,6 +158,11 @@
         td {
             text-align: right;
             font-size: 95%;
+
+            &.text-center {
+                padding-left: .3rem;
+            }
+
             //padding-left: @firstColumnPadding;
             /*&.level-1 {
                 padding-left: @firstColumnPadding * 1.5;

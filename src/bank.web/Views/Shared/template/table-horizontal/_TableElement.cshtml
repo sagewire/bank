@@ -9,6 +9,10 @@
         <tr class="header-row">
             <td>
                 @Model.Title
+                @*@if (Model.Thousands)
+                {
+                    <span class="text-muted ml-3">($000)</span>
+                }*@
                 @*<small class="pl-3 text-muted">(millions)</small>*@
                 @Html.Partial("_CardMenu")
             </td>
