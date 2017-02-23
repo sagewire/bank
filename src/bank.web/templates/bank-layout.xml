@@ -16,25 +16,24 @@
       <row>
         <col>
           <element partial="ConceptList" data-source="Organization" lookback="5" title="Vitals">
-            <concept name="UBPR2170"/>
-            <concept name="UBPR2200"/>
-            <concept name="UBPRE119"/>
-            <concept name="UBPR4340"/>
+            <concept name="UBPR2170" format="abbr"/>
+            <concept name="UBPR2200" format="abbr"/>
+            <concept name="UBPRE119" format="abbr"/>
+            <concept name="UBPR4340" format="abbr"/>
           </element>
         </col>
       </row>
       <row>
-        <col>
+        <col css-classes="hidden-xs-down">
           <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="ROAA">
             <series type="areaspline">
               <concept name="UBPRE010" />
             </series>
           </chart>
-          <!--<element partial="OrgInfo"></element>-->
         </col>
       </row>
       <row>
-        <col>
+        <col css-classes="hidden-xs-down">
           <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="ROAE">
             <series type="areaspline">
               <concept name="UBPRE630" />
@@ -43,7 +42,7 @@
         </col>
       </row>
       <row>
-        <col>
+        <col css-classes="hidden-xs-down">
           <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="Efficiency Ratio">
             <series type="areaspline">
               <concept name="UBPRE088" />
@@ -52,7 +51,7 @@
         </col>
       </row>
       <row>
-        <col>
+        <col css-classes="hidden-xs-down">
           <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="Net Interest Margin">
             <series type="areaspline">
               <concept name="UBPRE018" />
@@ -70,21 +69,22 @@
       <row>
         <col>
           <chart type="combo" chart-override="primary" css-classes="main-chart" lookback="200" title="Balance Sheet Highlights">
-            <series type="areaspline" column="0" z-index="10" focus="last">
+            <series type="areaspline" column="0" z-index="10">
               <concept name="UBPR2170"/>
             </series>
-            <series type="areaspline" column="0" z-index="10" focus="last">
+            <series type="areaspline" column="0" z-index="10">
               <concept name="UBPRE119"/>
             </series>
-            <series type="areaspline" column="0" z-index="10" focus="last">
+            <series type="areaspline" column="0" z-index="10">
               <concept name="UBPRK434"/>
             </series>
-            <series type="areaspline" column="0" z-index="10" focus="last">
+            <series type="areaspline" column="0" z-index="10">
               <concept name="UBPR3210"/>
             </series>
           </chart>
         </col>
       </row>
+
       <row>
         <col>
           <table title="Financial Highlights" lookback="5">
@@ -94,7 +94,7 @@
             <concept name="UBPR2200" />
             <concept name="UBPRG105" />
             <concept name="UBPRE117" />
-            <concept name="_loandep" />
+            <concept name="UBPRE600" />
             <concept name="(UBPRE120+UBPR8636+UBPRD657+UBPRE121)/UBPR2170*100" label="Securities/Assets"  unit="P"/>
             <concept name="UBPRG105/UBPR2170*100" label="Total Equity/Total Assets" unit="P"/>
 

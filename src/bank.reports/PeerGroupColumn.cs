@@ -51,8 +51,10 @@ namespace bank.reports
 
             foreach (var fact in distinct)
             {
-                Facts.TryAdd(fact.Name, fact);
-                //Facts.AddOrUpdate(fact.Name, fact, (key, oldValue) => fact);
+                Facts.AddOrUpdate(fact.Name, fact, (key, oldValue) =>
+                {
+                    return oldValue.HistoricalData.Count > fact.HistoricalData.Count ? oldValue : fact;
+                });
             }
         }
 

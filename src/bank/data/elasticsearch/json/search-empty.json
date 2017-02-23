@@ -1,0 +1,11 @@
+﻿{
+    "size": 10,
+    "sort": {
+        "TotalAssets": "desc"
+    },
+    "query": {
+        "term": {
+            "Active": true
+        }
+    }
+}

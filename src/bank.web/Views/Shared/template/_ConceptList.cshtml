@@ -11,7 +11,7 @@
 
     @foreach (var concept in Model.Concepts)
     {
-        var fact = companyColumn.GetCell(concept);
+        Fact fact = companyColumn.GetCell(concept);
 
         <li class="list-group-item concept" data-concept="@concept.Name">
             <div class="d-flex w-100 justify-content-between">
@@ -19,15 +19,22 @@
                     @concept.Label
                 </div>
                 <div class="text">
-                    @concept.ValueFormatted(fact)
-                    @Html.Partial("_FactTrendArrow", fact)
 
-                    <span class="ratio">
-                        @if (fact.TrendRatio.HasValue)
-                        {
-                            @fact.TrendRatio.Value.ToString("P1")
-                        }
-                    </span>
+                    @if (fact != null)
+                    {
+                        @concept.ValueFormatted(fact)
+
+                        @Html.Partial("_FactTrendArrow", fact)
+
+                        <span class="ratio">
+                            @if (fact.TrendRatio.HasValue)
+                            {
+                                @fact.TrendRatio.Value.ToString("P1")
+                            }
+                        </span>
+                    }
+
+
                 </div>
             </div>
         </li>

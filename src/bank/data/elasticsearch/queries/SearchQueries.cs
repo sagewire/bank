@@ -6,15 +6,27 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using bank.data.elasticsearch.responses;
 using bank.poco;
+using System.Text.RegularExpressions;
 
 namespace bank.data.elasticsearch.queries
 {
     public static class SearchQueries
     {
+        private static Regex _bankOf = new Regex(@"bank of \w+?(?=\s)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static IList<Organization> Search(string name)
         {
+            
             name = CleanSearchTerms(name);
-            var response = Database.ExecuteJsonResource("search", "banks", "organization", new { name = name });
+            var first = name.Split(' ').FirstOrDefault();
+
+            if (_bankOf.IsMatch(name + " "))
+            {
+                first = _bankOf.Match(name + " ").Value;
+            }
+
+            var template = string.IsNullOrWhiteSpace(name) ? "search-empty" : "search";
+
+            var response = Database.ExecuteJsonResource(template, "banks", "organization", new { first = first, phrase = name });
 
             var result = JsonConvert.DeserializeObject<BaseResponse<object>>(response);
 

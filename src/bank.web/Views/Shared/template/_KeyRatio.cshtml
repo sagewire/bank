@@ -5,16 +5,20 @@
 @{ 
     var chartConfig = Model.ChartConfig as ComboChartConfig;
     var concept = chartConfig.Series.First().Concept;
-    var fact = chartConfig.VisibleColumns.First().Facts.Single(x => x.Key == concept.Name).Value;
+    var fact = chartConfig.VisibleColumns.FirstOrDefault()?.Facts?.SingleOrDefault(x => x.Key == concept.Name).Value;
 }
 <h2 class="text-left concept" data-concept="@concept.Name">
 
     @concept.ValueFormatted(fact)
 
+    @if (fact != null)
+    {
     <small>
         @Html.Partial("_FactTrendArrow", fact)
     </small>
+    }
 </h2>
+
 
 <div id="@Model.ChartConfig.ChartId"
      class="reveal-slow chart-responsive @Model.ChartConfig.CssClasses"

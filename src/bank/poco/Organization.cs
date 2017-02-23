@@ -42,10 +42,11 @@ namespace bank.poco
         {
             get
             {
-                if (Active) return OrganizationStatuses.Active;
 
                 if (Successor != null) return OrganizationStatuses.Acquired;
 
+                if (Active) return OrganizationStatuses.Active;
+                
                 if (!Active) return OrganizationStatuses.Inactive;
 
                 return OrganizationStatuses.Unknown;

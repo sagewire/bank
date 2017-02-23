@@ -400,6 +400,8 @@ namespace bank.reports
             {
                 var name = conceptElem.SafeAttributeValue("name").ParameterReplace(Parameters).ToUpper();
                 var concept = new Concept(name);
+                concept.FormatHint = conceptElem.SafeAttributeValue("format");
+
                 elem.Concepts.Add(concept);
             }
 
@@ -433,12 +435,13 @@ namespace bank.reports
                         if (link.HasValue) {
                             conceptRow.Link = link.Value;
                         }
-
+                        
                         conceptRow.Concept = new Concept(name);
 
                         conceptRow.Concept.Label = item.SafeAttributeValue("label") ?? conceptRow.Concept.Label;
                         conceptRow.Concept.Unit = item.SafeCharAttributeValue("unit");
                         conceptRow.Concept.Negative = item.SafeBoolAttributeValue("negative");
+                        conceptRow.Concept.FormatHint = item.SafeAttributeValue("format");
 
                         current.Concepts.Add(conceptRow.Concept);
                         tableRow = conceptRow;

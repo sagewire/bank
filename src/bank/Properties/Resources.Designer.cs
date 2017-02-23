@@ -69,5 +69,15 @@ namespace bank.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] search_empty {
+            get {
+                object obj = ResourceManager.GetObject("search_empty", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

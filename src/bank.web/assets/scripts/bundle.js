@@ -6529,7 +6529,7 @@ $(function () {
                 toggleFullscreen($(value));
             })
 
-            window.history.back();
+            //window.history.back();
             //restoreBody();
         }
     });
@@ -6923,21 +6923,41 @@ $(function () {
         $('table').stickyTableHeaders({ fixedOffset: $('.top-nav'), cacheHeaderHeight: true });
     }
 
+    //$("#search-box").click(function (e) {
+    //    $(".search-group").addClass("search-mobile");
+    //})
+
+    //$('#search-box').focus(function () {
+    //    //selectedInput = this;
+    //    console.log('focused');
+    //    $(".search-group").removeClass("search-mobile");
+    //}).blur(function () {
+    //    console.log('lost focus');
+    //    //selectedInput = null;
+    //    $(".search-group").removeClass("search-mobile");
+    //}).click(function (e) {
+    //    console.log('clicked');
+    //    $(".search-group").addClass("search-mobile");
+    //});
+
+    $(".search-group .fa-search").click(function () {
+        $("#search-box").focus();
+    });
+
+    $(".js-typeahead-name").on("focus.typeahead", function (e) {
+        $(".search-group").addClass("search-mobile");
+    });
+
     $.typeahead({
         input: '.js-typeahead-name',
         filter: false,
         dynamic: true,
         minLength: 0,
-        searchOnFocus: true,
+        searchOnFocus: !is_touch_device(),
         delay: 250,
         maxItem: 20,
         //order: "desc",
         template: function (query, item) {
-            //   <a href="@Model.Organization.ProfileUrl"
-            //   class="preload avatar avatar-md media-object img-responsive"
-            //   style="background-image: url('@Model.Organization.Avatar')">
-
-            //</a>
             return '<div class="search-result"><div class="media"><i class="media-left"><a href="{{url}}" class="media-object avatar avatar-sm img-responsive" style="background-image: url({{avatar}})"></a></i><div class="name">{{name}}<br/><small>{{city}}, {{state}} <div class="float-right"><b>{{assets}} Assets</b></div></small></div></div>';
         },
         emptyTemplate: "No results for {{query}}",
@@ -6950,13 +6970,15 @@ $(function () {
                         url: "/data/search/data",
                         path: "data.snippets",
                         data: {
-                            q: "{{query}}"
+                            q: "{{query}}",
+                            t: is_touch_device()
                         }
                     }
                 }
             }
         },
         callback: {
+            
             onReady: function () {
 
                 //setTimeout(function () {
@@ -6977,11 +6999,25 @@ $(function () {
             },
             onSubmit: function (node, form, item, event) {
                 return false;
+            },
+            onResult: function (node, query, result, resultCount, resultCountPerGroup) {
+                console.log('result');
+                $("body").addClass("search-results")
+                $(".search-group").addClass("search-mobile");
+            },
+            onHideLayout: function (node, query) {
+                console.log('hide layout');
+                $("body").removeClass("search-results");
+                $(".search-group").removeClass("search-mobile");
             }
         }
     });
 });
 
+function is_touch_device() {
+    return 'ontouchstart' in window        // works on most browsers 
+        || navigator.maxTouchPoints;       // works on IE10/11 and Surface
+};
 /**
  * vis.js
  * https://github.com/almende/vis
@@ -7078,7 +7114,7 @@ $(function () {
                     }
                 },
                 arrows: {
-                    from: {
+                    to: {
                         enabled: true
                     }
                 }

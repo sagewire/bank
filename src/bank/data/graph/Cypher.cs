@@ -25,7 +25,7 @@ namespace bank.data.graph
                 using (var session = driver.Session())
                 {
                     var cypher = new StringBuilder();
-                    cypher.AppendLine("MATCH p=(n:Organization { id: {id} })-[r:Acquired*1..2]->() RETURN p LIMIT 200");
+                    cypher.AppendLine("MATCH p=(n:Organization { id: {id} })-[r:Acquired*1..2 { type: 1 }]-() RETURN p LIMIT 200");
 
                     //cypher.AppendLine("MATCH p=(n:Organization { id: {id} })-[:IS_PARENT|:Acquired*1..2]->(:Organization) RETURN p LIMIT 200");
 

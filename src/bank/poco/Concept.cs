@@ -66,25 +66,37 @@ namespace bank.poco
             }
 
             char? unit = this?.Unit ?? Unit;
-            string result;
+            string result = null;
 
-            switch (unit)
+            if (!string.IsNullOrWhiteSpace(FormatHint))
             {
-                case 'P':
-                    result = fact.NumericValue.Value.ToString("#.##");
-                    break;
-                case 'U':
-                    //var format = "N0";
-                    //result = Math.Round(fact.NumericValue.Value / 1000, 0).ToString(format);
-                    result = fact.NumericValue.Value.ToString("N0");
-                    break;
-                case 'D':
-                    result = fact.NumericValue.Value.ToString();
-                    break;
-                default:
-                    // result = "na";
-                    result = fact.NumericValue.Value.ToString("N0");
-                    break;
+                switch(FormatHint)
+                {
+                    case "abbr":
+                        result = fact.NumericValue.Value.ToAbbreviatedString().ToUpper();
+                        break;
+                }
+            }
+            else
+            {
+                switch (unit)
+                {
+                    case 'P':
+                        result = fact.NumericValue.Value.ToString("#.##");
+                        break;
+                    case 'U':
+                        //var format = "N0";
+                        //result = Math.Round(fact.NumericValue.Value / 1000, 0).ToString(format);
+                        result = fact.NumericValue.Value.ToString("N0");
+                        break;
+                    case 'D':
+                        result = fact.NumericValue.Value.ToString();
+                        break;
+                    default:
+                        // result = "na";
+                        result = fact.NumericValue.Value.ToString("N0");
+                        break;
+                }
             }
 
             if (Negative.HasValue && Negative.Value)
@@ -133,6 +145,7 @@ namespace bank.poco
             }
         }
 
+        public string FormatHint { get; set; }
 
         public Fact PrepareFact(Fact fact)
         {

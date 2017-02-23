@@ -42,23 +42,22 @@ namespace bank.reports
         public int OrganizationId { get; set; }
 
         public Organization Organization { get; set; }
-        
+
         public override void SetFacts(IList<Fact> facts, IList<Concept> concepts)
         {
             //var existing = Facts.Select(x => x..Name).Distinct().ToList();
             var filtered = facts.Where(x => x.FactType == enums.FactTypes.Company && ((CompanyFact)x).OrganizationId == OrganizationId);
-            
+
             var distinct = filtered.Distinct().ToList();
 
-            foreach(var fact in distinct)
+            foreach (var fact in distinct)
             {
-                Facts.TryAdd(fact.Name, fact);
-                Facts.AddOrUpdate(fact.Name, fact, (key, oldValue) => {
-                    
+                Facts.AddOrUpdate(fact.Name, fact, (key, oldValue) =>
+                {
                     return oldValue.HistoricalData.Count > fact.HistoricalData.Count ? oldValue : fact;
-                    });
+                });
             }
         }
-        
+
     }
 }

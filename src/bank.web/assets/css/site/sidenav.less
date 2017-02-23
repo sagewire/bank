@@ -1,8 +1,15 @@
 ﻿@import "site.less";
 
 #sidenav-toggler {
-    background-color: @darker;
+    color: rgba(255, 255, 255, .5);
+    font-size: 1.9rem;
+    margin-top: 4px;
     border-radius: 0;
+    margin-left: 5px;
+
+    &:hover {
+        color: @white;
+    }
 }
 
 .sidenav-open {
@@ -11,7 +18,7 @@
 
 .sidenav {
     height: 100%;
-    width: 60px;
+    width: 0;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -23,7 +30,8 @@
     text-align: center;
     z-index: 500;
     max-width: 350px;
-    margin-top: 56px;
+    margin-top: 70px;
+    margin-right: -2px;
     text-align: left;
     //box-shadow: 8px 0 19px 5px rgba(0,0,0,0.35);
     border: 1px solid @dark;
@@ -121,7 +129,7 @@
 
         .nav-link {
             background-color: @accent-color;
-            border-right: 1px solid darken(@accent-color,10);
+            //border-right: 1px solid darken(@accent-color,10);
             border-left: none;
 
             &:hover {

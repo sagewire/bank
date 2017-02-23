@@ -47,7 +47,7 @@
                     }
                 },
                 arrows: {
-                    from: {
+                    to: {
                         enabled: true
                     }
                 }

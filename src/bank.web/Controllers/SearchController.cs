@@ -21,10 +21,14 @@ namespace bank.web.Controllers
         }
 
 
-        public ActionResult Data(string q)
+        public ActionResult Data(string q, bool t = false)
         {
             if (string.IsNullOrWhiteSpace(q)) {
-                q = "bank";
+                q = "";
+            }
+
+            if (t && q == "") {
+                return Content(JsonConvert.SerializeObject(new { status = true }));
             }
 
             var entities = bank.data.elasticsearch.queries.SearchQueries.Search(q);
@@ -45,6 +49,7 @@ namespace bank.web.Controllers
             var model = new
             {
                 status = true,
+                defaultResults = true,
                 data = new
                 {
                     //entities = entities,
