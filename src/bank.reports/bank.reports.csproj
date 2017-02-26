@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HierarchyElement.cs" />
+    <Compile Include="TimelineElement.cs" />
     <Compile Include="ChartElement.cs" />
     <Compile Include="charts\Annotation.cs" />
     <Compile Include="charts\Annotations.cs" />

@@ -168,8 +168,11 @@ namespace bank.web.Controllers
 
             var charts = layout.Elements.Where(x => x as ChartElement != null);
 
+            
             foreach (ChartElement chart in charts)
             {
+                if (!chart.ChartConfig.ShowAnnotations) continue;
+
                 if (org.FilteredTransformations.Any())
                 {
                     chart.ChartConfig.AnnotationSeries.Add(org.FilteredTransformations.ToAnnotations("Acquisitions", "acquisitions"));
@@ -177,7 +180,7 @@ namespace bank.web.Controllers
 
                 if (org.FilteredChildRelationships.Any())
                 {
-                    chart.ChartConfig.AnnotationSeries.Add(org.FilteredChildRelationships.ToAnnotations("Child Relationships", "children"));
+                    chart.ChartConfig.AnnotationSeries.Add(org.FilteredChildRelationships.ToAnnotations("Subsidiary Relationships", "children"));
                 }
 
                 if (org.FilteredParentRelationships.Any())

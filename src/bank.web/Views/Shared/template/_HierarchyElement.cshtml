@@ -1,0 +1,19 @@
+﻿@using bank.reports
+@using bank.poco;
+
+@model HierarchyElement
+
+@{
+    var org = (Organization)Model.Data;
+}
+
+<ul id="ul-data" style="position: relative">
+    @foreach (var concept in Model.Concepts)
+    {
+        @Html.Partial("template/_HierarchyNode", new HierarchyNodeViewModel { Concept = concept, Organization = org, Element = Model })
+    }
+</ul>
+
+
+<div id="chart-container"></div>
+

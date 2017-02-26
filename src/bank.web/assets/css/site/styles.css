@@ -16,6 +16,7 @@ body.modal-open .top-nav {
 }
 body.modal-open .close-modal {
   display: inline-block;
+  padding-top: 12px;
 }
 .close-modal {
   display: none;
@@ -49,6 +50,9 @@ body.modal-open .close-modal {
 }
 .pointer {
   cursor: pointer;
+}
+.btn-secondary {
+  background-color: #f7f7f7;
 }
 .logo {
   position: relative;
@@ -1078,6 +1082,24 @@ body.search-results {
   .sidenav .nav-settings {
     padding-bottom: 100vh !important;
     overflow-y: hidden;
+  }
+  .nav-icon .dropdown-menu {
+    max-width: 260px;
+  }
+  .nav-icon .dropdown-menu .dropdown-item {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+  }
+  .cd-timeline-content h2 {
+    font-size: 1.1rem;
+  }
+  .cd-timeline-content .btn {
+    font-size: 80%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    max-width: 100%;
   }
   .sidenav-open {
     z-index: 200;

@@ -16,6 +16,7 @@ body.modal-open .top-nav {
 }
 body.modal-open .close-modal {
   display: inline-block;
+  padding-top: 12px;
 }
 .close-modal {
   display: none;
@@ -49,6 +50,9 @@ body.modal-open .close-modal {
 }
 .pointer {
   cursor: pointer;
+}
+.btn-secondary {
+  background-color: #f7f7f7;
 }
 .logo {
   position: relative;

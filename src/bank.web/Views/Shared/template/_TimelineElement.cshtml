@@ -1,0 +1,59 @@
+﻿@using bank.reports
+@using bank.poco;
+
+@model TimelineElement
+
+@{
+    var org = (Organization)Model.Data;
+    IEnumerable<TimelineItem> items = org.Timeline.OrderByDescending(x => x.Start);
+
+    var limit = Model.Limit.HasValue ? Model.Limit.Value : 100;
+    
+    items = items.Take(limit);
+    
+}
+
+<div class="mt-3 pt-3">
+    <h2 class="text-center">
+        Timeline for @org.Name
+    </h2>
+    <section id="cd-timeline">
+        @foreach (var item in items)
+        {
+            <div class="cd-timeline-block">
+                <div class="cd-timeline-img" style="background-color: green">
+                    <img src="~/assets/vertical-timeline/img/cd-icon-picture.svg">
+                </div>
+
+                <div class="cd-timeline-content">
+                    <h2>@item.Content</h2>
+
+                    @Html.Partial("template/timeline/_" + item.Type, new TimelineItemViewModel { Organization = org, Item = item })
+
+                    <span class="cd-date">@item.Start.ToString("MMM dd yyyy")</span>
+                </div>
+            </div>
+        }
+
+
+        @if (Model.Limit.HasValue && org.Timeline.Count() > Model.Limit.Value)
+        {
+            <div class="cd-timeline-block">
+                <div class="cd-timeline-img" style="background-color: green">
+                    <img src="~/assets/vertical-timeline/img/cd-icon-picture.svg">
+                </div>
+
+                <div class="cd-timeline-content">
+                    <h2>Want to see more?</h2>
+                    <p>
+                        Complete timeline for @org.Name is available.
+                    </p>
+                    <a class="btn btn-secondary" href="@org.ProfileUrl/timeline">View Complete Timeline</a>
+                    <span class="cd-date"></span>
+                </div>
+            </div>
+
+        }
+
+    </section>
+</div>

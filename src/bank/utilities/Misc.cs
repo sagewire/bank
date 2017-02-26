@@ -9,6 +9,16 @@ namespace bank.utilities
 {
     public static class Misc
     {
+        public static string Pluralizer(int counter, string single, string plural, string zero = null)
+        {
+            counter = Math.Abs(counter);
+
+            if (counter == 0) return zero ?? plural;
+
+            if (counter == 1) return single;
+
+            return plural;
+        }
         public static string GravatarHash(string text)
         {
             text = text.ToLower().Trim();

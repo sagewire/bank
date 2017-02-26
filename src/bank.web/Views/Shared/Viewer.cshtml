@@ -7,34 +7,56 @@
     {
         Layout = "~/Views/Shared/_LayoutNone.cshtml";
     }
-    else {
+    else
+    {
         Layout = "~/Views/Shared/_LayoutSingle.cshtml";
     }
 
 }
 
+
+@section ScriptsProxy {
+
+    @foreach (var script in Model.Layout.Scripts)
+    {
+        <script src="@script"></script>
+    }
+}
+
+
+@section StylesheetsProxy {
+
+    @foreach (var style in Model.Layout.Styles)
+    {
+        <link rel="stylesheet" href="@style" />
+    }
+}
+
+
+
+
 @section MetaProxy {
-       <meta name="mcp" value="@Model.Organization.OrganizationId" />
+    <meta name="mcp" value="@Model.Organization.OrganizationId" />
 }
 
 @if (!Model.IsModal)
 {
-<text>
-    @section Header {
-        @if (Model.Layout.Header != null)
-        {
-            @Html.Partial("_" + Model.Layout.Header.Partial, new ProfileHeaderViewModel { IsProfilePage = Model.IsProfilePage, Organization = Model.Organization, RawReports = Model.RawReports, Profile = Model.Profile })
-        }
-        else if (Model.Organization != null)
-        {
-            @Html.Partial("_OrgHeader", new ProfileHeaderViewModel { IsProfilePage = Model.IsProfilePage, Organization = Model.Organization, RawReports = Model.RawReports, Profile = Model.Profile })
+    <text>
+        @section Header {
+            @if (Model.Layout.Header != null)
+            {
+                @Html.Partial("_" + Model.Layout.Header.Partial, new ProfileHeaderViewModel { IsProfilePage = Model.IsProfilePage, Organization = Model.Organization, RawReports = Model.RawReports, Profile = Model.Profile })
+            }
+            else if (Model.Organization != null)
+            {
+                @Html.Partial("_OrgHeader", new ProfileHeaderViewModel { IsProfilePage = Model.IsProfilePage, Organization = Model.Organization, RawReports = Model.RawReports, Profile = Model.Profile })
+            }
+
+            <div class="skirt header-wrap"></div>
+
         }
 
-        <div class="skirt header-wrap"></div>
-        
-    }
-
-</text>
+    </text>
 }
 
 
@@ -46,17 +68,17 @@
 
 
 @*<div class="card first" style="background-color: red;">
-    <div class="card-block">
+        <div class="card-block">
 
-        @foreach (var transformation in Model.Organization.Transformations.Where(x => x.PredecessorOrganization != null))
-        {
-            <div>
-                [ @transformation.RoundedToQuarter ]  @transformation.D_DT_TRANS.Value
-                <a href="@Url.Url(@transformation.PredecessorOrganization)">
-                    @transformation.PredecessorOrganization.Name
-                </a>
-            </div>
-        }
-    </div>
-    <br /><br /><br /><br /><br /><br />
-</div>*@
+            @foreach (var transformation in Model.Organization.Transformations.Where(x => x.PredecessorOrganization != null))
+            {
+                <div>
+                    [ @transformation.RoundedToQuarter ]  @transformation.D_DT_TRANS.Value
+                    <a href="@Url.Url(@transformation.PredecessorOrganization)">
+                        @transformation.PredecessorOrganization.Name
+                    </a>
+                </div>
+            }
+        </div>
+        <br /><br /><br /><br /><br /><br />
+    </div>*@

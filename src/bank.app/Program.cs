@@ -51,7 +51,7 @@ namespace bank.app
                     bank.import.fdic.ImportBankHoldingData.Start(threads);
                     break;
                 case "ffiec":
-                    bank.import.ffiec.Import.Start();
+                    bank.import.ffiec.Import.Start(threads);
                     break;
                 case "fdic":
                     bank.import.fdic.ImportInstitutions.Start(threads);

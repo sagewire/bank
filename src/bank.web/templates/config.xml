@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
-	<concepts>
+  <concepts>
     <concept name="UBPRE010" shortLabel="ROAA" label="Return on Average Assets" narrative="" />
     <concept name="UBPRE630" shortLabel="ROAE" label="Return on Average Equity" narrative="" />
     <concept name="UBPRE088" label="Efficiency Ratio" />
@@ -41,19 +41,26 @@
     <concept name="_SECASET" label="Securities/Assets" formula="(UBPR1754+UBPR1773)/UBPR2170" unit="P" />
     <concept name="_EQUASET" label="Total Equity/Total Assets" formula="UBPRG105/UBPR2170" unit="P" />
     <concept name="_TCETAST" label="Tangible Equity/Tangible Assets" formula="(UBPR3210-UBPR3163-UBPR0426-UBPR3838)/UBPR2170" unit="P" null="0" />
+    <concept name="RIAD4093" label="Total Noninterest Expense" />
+    <concept name="RIADFT28" label="Net Extraordinary Items" />
+    <concept name="RIAD3521" label="Realized Gain/Loss Held-to-Maturity Securities" shortLabel="Realized G/L Held-to-Mat Sec" />
+    <concept name="RIAD3196" label="Realized Gain/Loss Available-for-Sale Securities" shortLabel="Realized G/L Avail-for-Sale Sec" />
+    <concept name="RIAD4070" label="Fiduciary Activities" />
+    <concept name="RIAD4080" label="Deposit Service Charges" />
+    <concept name="RIADA220" label="Trading Revenue" />
+    <concept name="RIADB497" label="Other Noninterest Income" />
+
+    <concept name="RIAD4135" label="Personnel Expense" />
+    <concept name="RIAD4217" label="Occupancy Expense" />
+    <concept name="RIAD4092" label="Other Noninterest Expense" />
+    <concept name="RIAD4150" label="Full-time Employees" />
+    <concept name="_ASTEMPL" label="Assets per Employee" formula="RCON2170/RIAD4150" unit="U"/>
+    <concept name="_EXPEMPL" label="Personnel Expense per Employee" formula="RIAD4135/RIAD4150" unit="U"/>
 
     <!--
     
     
-    
-    <concept name="" label="" />
-    <concept name="" label="" />
-    <concept name="" label="" />
-    <concept name="" label="" />
-    <concept name="" label="" />
-    <concept name="" label="" />
-    <concept name="" label="" />
-    <concept name="" label="" />
+
     <concept name="" label="" />
     <concept name="" label="" />
     <concept name="" label="" />

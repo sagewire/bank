@@ -1,0 +1,8 @@
+﻿@using bank.reports
+@using bank.poco;
+
+@model TimelineItemViewModel
+
+<p>
+    @Model.Organization.Name was established @Model.Item.Start.Age() ago and is currently headquartered in @Model.Organization.City, @Model.Organization.State.
+</p>

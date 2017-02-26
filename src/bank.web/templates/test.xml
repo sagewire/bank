@@ -1,10 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+  <script src="/assets/orgchart/dist/js/jquery.orgchart.min.js" />
+  <style src="/assets/orgchart/dist/css/jquery.orgchart.min.css" />
   <row>
     <col>
-      <table title="Financial Highlights" lookback="5">
-        <concept name="_TCETAST" />
-      </table>
+
+      <hierarchy>
+        
+        <concept name="RIAD4340">
+          <concept name="RIAD4074">
+            <concept name="RIAD4107" />
+            <concept name="RIAD4073" />
+          </concept>
+          <concept name="RIAD4079">
+            <concept name="RIAD4070" />
+            <concept name="RIAD4080" />
+            <concept name="RIADA220" />
+            <concept name="RIADB497" />
+          </concept>
+          <concept name="RIAD4093">
+            <concept name="RIAD4135">
+              <concept name="_ASTEMPL" />
+              <concept name="_EXPEMPL" />
+            </concept>
+            <concept name="RIAD4217">
+              <concept name="RCON2145" />
+            </concept>
+            <concept name="RIAD4092" />
+          </concept>
+          <concept name="RIAD4069"></concept>
+          <concept name="RIAD3521"></concept>
+          <concept name="RIAD3196"></concept>
+          <concept name="RIADFT28"></concept>
+          <concept name="RIAD4302"></concept>
+        </concept>
+        
+      </hierarchy>
     </col>
   </row>
 

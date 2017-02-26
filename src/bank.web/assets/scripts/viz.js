@@ -12,8 +12,8 @@
                     min: 20,
                     max: 90,
                     label: {
-                        min: 12,
-                        max: 20
+                        min: 20,
+                        max: 45
                     }
                 },
                 //widthConstraint: {
@@ -39,11 +39,11 @@
                 },
                 font: {
                     size: 8,
-                    color: "#c0c0c0"
+                    color: "#777777"
                 },
                 scaling: {
                     label: {
-                        drawThreshold: 16
+                        drawThreshold: 10
                     }
                 },
                 arrows: {

@@ -15,6 +15,7 @@ namespace bank.reports
         public IList<ChartConfig> Charts { get; set; }
         public IList<TemplateElement> Elements { get; set; }
         public string GridOverride { get; internal set; }
+        public bool UseContainer { get; internal set; }
 
         //public bool IsChild { get; set; } = false;
     }

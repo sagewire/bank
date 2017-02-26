@@ -18,7 +18,7 @@ namespace bank.data.repositories
         {
             Dapper.SqlMapper.AddTypeMap(typeof(string), System.Data.DbType.AnsiString);
         }
-
+        
         public override void Save(Fact model)
         {
             if (model.FactType == enums.FactTypes.Company)
@@ -31,7 +31,7 @@ namespace bank.data.repositories
             }
         }
 
-        public void Save(CompanyFact model)
+        public void Save(CompanyFact model, bool overwrite = true)
         {
             using (var conn = new SqlConnection(Settings.ConnectionString))
             {
@@ -43,7 +43,8 @@ namespace bank.data.repositories
                     Value = model.Value,
                     OrganizationID = model.OrganizationId,
                     Period = model.Period,
-                    Unit = model.Unit
+                    Unit = model.Unit,
+                    Overwrite = overwrite
                 },
                 commandType: CommandType.StoredProcedure);
             }

@@ -35,6 +35,8 @@ namespace bank.reports
         public List<TemplateElement> Elements { get; set; } = new List<TemplateElement>();
         public Header Header { get; private set; }
         public Dictionary<string, object> Parameters { get; internal set; }
+        public List<string> Scripts { get; private set; }
+        public List<string> Styles { get; private set; }
 
         public Layout(string template = null)
         {
@@ -47,6 +49,8 @@ namespace bank.reports
                 DataSourceNeeded(element);
         }
 
+
+
         public void Populate(DateTime periodEnd)
         {
             var tasks = new List<Task>();
@@ -56,7 +60,7 @@ namespace bank.reports
             {
                 element.SetDataColumns(DataColumns);
                 FactLookups = FactLookup.Merge(element.FactLookups, this.FactLookups);
-                Concepts.AddRange(element.Concepts);
+                Concepts.AddRange(element.AllConcepts);
 
                 if(!string.IsNullOrWhiteSpace(element.DataSource))
                 {
@@ -242,9 +246,46 @@ namespace bank.reports
 
             this.Header = ParseHeader(header);
 
+            this.Scripts = ParseScripts(layout);
+            this.Styles = ParseStyles(layout);
+
             var rows = layout.Elements("row");
 
             this.Rows = ParseRows(rows);
+        }
+
+        private List<string> ParseScripts(XElement layout)
+        {
+            var scripts = new List<string>();
+            var scriptElems = layout.Elements("script");
+
+            foreach (var item in scriptElems)
+            {
+                var src = item.SafeAttributeValue("src");
+                if (!string.IsNullOrWhiteSpace(src))
+                {
+                    scripts.Add(src);
+                }
+            }
+
+            return scripts;
+        }
+
+        private List<string> ParseStyles(XElement layout)
+        {
+            var styles = new List<string>();
+            var styleElems = layout.Elements("style");
+
+            foreach (var item in styleElems)
+            {
+                var src = item.SafeAttributeValue("src");
+                if (!string.IsNullOrWhiteSpace(src))
+                {
+                    styles.Add(src);
+                }
+            }
+
+            return styles;
         }
 
         private Header ParseHeader(XElement headerElement)
@@ -299,7 +340,7 @@ namespace bank.reports
             var templateColumn = new TemplateColumn();
             templateColumn.CssClasses = col.SafeAttributeValue("css-classes");
             templateColumn.GridOverride = col.SafeAttributeValue("grid");
-
+            templateColumn.UseContainer = col.SafeBoolAttributeValue("container") ?? true;
             //var isChild = col.SafeBoolAttributeValue("child");
 
             //if (isChild.HasValue)
@@ -360,8 +401,14 @@ namespace bank.reports
                 case "table":
                     item = ParseTable(element);
                     break;
+                case "timeline":
+                    item = ParseTimeline(element);
+                    break;
+                case "hierarchy":
+                    item = ParseHierarchy(element);
+                    break;
                 case "element":
-                    item = ParseElementChildren(element);// new TemplateElement();
+                    item = ParseElementChildren<TemplateElement>(element);// new TemplateElement();
                     break;
                 default:
                     throw new NotSupportedException(string.Format("The element [{0}] is not supported", name));
@@ -372,9 +419,24 @@ namespace bank.reports
             item.Lookback = lookback;
             item.DataSource = dataSource;
             item.CssClasses = css;
-
+            
             return item;
 
+        }
+
+        private TimelineElement ParseTimeline(XElement element)
+        {
+            var timeline = new TimelineElement();
+            timeline.Limit = (int?)element.SafeLongAttributeValue("limit");
+            return timeline;
+        }
+
+
+        private HierarchyElement ParseHierarchy(XElement element)
+        {
+            var hierarchy = ParseElementChildren<HierarchyElement>(element);
+            
+            return hierarchy;
         }
 
         private ChartElement ParseChart(XElement element)
@@ -391,21 +453,42 @@ namespace bank.reports
 
         }
 
-        private TemplateElement ParseElementChildren(XElement element)
+        private T ParseElementChildren<T>(XElement element) where T : TemplateElement, new()
         {
-            var elem = new TemplateElement();
+            var elem = new T();
+
+            elem.Concepts = ParseConcepts(element);
+
+            return elem;
+        }
+
+        private List<Concept> ParseConcepts(XElement element)
+        {
+            var result = new List<Concept>();
             var concepts = element.Elements("concept");
 
-            foreach(var conceptElem in concepts)
+            foreach (var conceptElem in concepts)
             {
                 var name = conceptElem.SafeAttributeValue("name").ParameterReplace(Parameters).ToUpper();
                 var concept = new Concept(name);
                 concept.FormatHint = conceptElem.SafeAttributeValue("format");
 
-                elem.Concepts.Add(concept);
+                concept.Children = ParseConcepts(conceptElem);
+
+                result.Add(concept);
+
+                //var childConcepts = element.Elements("concept");
+                //foreach(var childConcept in childConcepts)
+                //{
+                //    if (concept.Children == null) concept.Children = new List<Concept>();
+
+                //    var children = ParseConcepts(childConcept);
+                //    concept.Children.AddRange(children);
+                //}
+
             }
 
-            return elem;
+            return result;
         }
 
         private TableElement ParseTable(XElement element, int level = 0)

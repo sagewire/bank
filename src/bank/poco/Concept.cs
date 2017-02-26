@@ -153,6 +153,7 @@ namespace bank.poco
 
         public string FormatHint { get; set; }
         public int? Nulls { get; internal set; }
+        public List<Concept> Children { get; set; }
 
         public Fact PrepareFact(Fact fact)
         {

@@ -29,18 +29,58 @@ namespace bank.reports
         }
 
 
+        private List<Concept> _allConcepts = null;
+        public List<Concept> AllConcepts
+        {
+            get
+            {
+                return _allConcepts = GetConcepts(this.Concepts);
+            }
+        }
+
+        private List<Concept> GetConcepts(List<Concept> concepts)
+        {
+            var allConcepts = new List<Concept>();
+            allConcepts.AddRange(concepts);
+
+            foreach (var concept in concepts)
+            {
+                allConcepts.AddRange(GetChildConcepts(concept));
+            }
+
+            return allConcepts;
+        }
+
+        public List<Concept> GetChildConcepts(Concept concept)
+        {
+            var concepts = new List<Concept>();
+
+            if (concept.Children != null)
+            {
+                concepts.AddRange(concept.Children);
+
+                foreach (var child in concept.Children)
+                {
+                    concepts.AddRange(GetChildConcepts(child));
+                }
+            }
+
+            return concepts;
+        }
+
+
         public virtual IList<FactLookup> FactLookups
         {
             get
             {
                 var lookups = new List<FactLookup>();
 
-                foreach (var concept in Concepts)
+                foreach (var concept in AllConcepts)
                 {
                     var factLookup = new FactLookup
                     {
                         Columns = DataColumns,
-                        ConceptKeys = Concept.GetConceptKeys(Concepts),
+                        ConceptKeys = Concept.GetConceptKeys(AllConcepts),
                         Lookback = this.Lookback
                     };
 
@@ -55,5 +95,7 @@ namespace bank.reports
 
         public object Data { get; set; }
         public string CssClasses { get; internal set; }
+        
+
     }
 }

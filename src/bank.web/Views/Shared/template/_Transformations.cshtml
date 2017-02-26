@@ -18,9 +18,9 @@
                 @Html.Partial("_CardMenu")
             </td>
             <td>Role</td>
+            <td>Assets</td>
             <td>Acct Method</td>
             <td>Type</td>
-
             <td>
                 Transaction Date
             </td>
@@ -30,22 +30,29 @@
 
         @foreach (var transformation in org.Transformations.OrderByDescending(x => x.D_DT_TRANS.Value))
         {
+            var target = transformation.PredecessorOrganization ?? transformation.SuccessorOrganization;
+            if (target == null) { continue; }
+
             <tr class="data-row">
                 <td>
-
-                    <a href="@Url.Url(transformation.PredecessorOrganization ?? transformation.SuccessorOrganization)">
-                        @((transformation.PredecessorOrganization ?? transformation.SuccessorOrganization).Name)
+                    <a href="@Url.Url(target)">
+                        @target.Name
                     </a>
-
                 </td>
                 <td class="text-center">
                     @if (transformation.SuccessorOrganization == null)
                     {
-                        <span>Acquiree</span>
+                        <span>Seller</span>
                     }
                     else
                     {
-                        <span>Acquirer</span>
+                        <span>Buyer</span>
+                    }
+                </td>
+                <td>
+                    @if (target.TotalAssets.HasValue)
+                    {
+                    @(target.TotalAssets.Value.ToString("N0"))
                     }
                 </td>
                 <td class="text-center">
@@ -55,7 +62,7 @@
                             <span>Pooling of Interests</span>
                             break;
                         case 2:
-                            <span>Purchase/Acquisition</span>
+                            <span>Acquisition</span>
                             break;
                     }
                 </td>
@@ -64,7 +71,7 @@
                     @switch (transformation.TRNSFM_CD)
                     {
                         case 1:
-                            <span>Charter Discontinued</span>
+                            <span>Discontinued</span>
                             break;
                         case 5:
                             <span>Split</span>
@@ -79,7 +86,7 @@
                             <span>Failure</span>
                             break;
                     }
-                    
+
                 </td>
                 <td class="text-center">@transformation.D_DT_TRANS.Value.ToShortDateString()</td>
             </tr>

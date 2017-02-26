@@ -1,0 +1,15 @@
+﻿@using bank.reports
+@using bank.poco;
+
+@model TimelineItemViewModel
+@{
+    var relationship = Model.Item.Data as OrganizationFfiecRelationship;
+}
+
+
+<p>
+    @relationship.OffspringOrganization.Name became a new subsidiary organization for @Model.Organization.Name.
+</p>
+<a class="btn btn-secondary" href="@Url.Url(relationship.OffspringOrganization)">
+    View Profile
+</a>

@@ -28,7 +28,7 @@ $(function () {
         credits: {
             enabled: false
         },
-        xAxis: {
+        xAxis: [{
             lineWidth: 0,
             gridLineWidth: 0,
             gridLineColor: '#eeeeee',
@@ -44,7 +44,7 @@ $(function () {
             maxPadding: 0,
             minPadding: 0,
             tickPositions: []
-        },
+        }],
         yAxis: [{
             gridLineWidth: 0,
             gridLineColor: '#eeeeee',
@@ -99,6 +99,7 @@ $(function () {
         //    }
         //},
         plotOptions: {
+
             pie: {
                 dataLabels: {
                     enabled: false
@@ -132,6 +133,7 @@ $(function () {
                 }
             },
             series: {
+                stacking: "normal",
                 enabledMouseTracking: false,
                 animation: {
                     duration: 1750
@@ -240,11 +242,11 @@ function renderCharts() {
     $("[data-chart-type='combo']").each(function (index, element) {
 
         $(this).highcharts('Combo', {
-            plotOptions: {
-                series: {
-                    stacking: "normal"
-                }
-            }
+            //plotOptions: {
+            //    series: {
+            //        stacking: "normal"
+            //    }
+            //}
         });
 
     });
@@ -344,64 +346,68 @@ function renderCharts() {
 
         //$('[data-chart-type="primary"]').highcharts('Combo', {
         $(this).highcharts("Combo", {
-            chart: {
-                marginBottom: 85,
-                spacingBottom: 0
-            },
-            plotOptions: {
-                areaspline: {
-                    lineWidth: 0,
-                }
-            },
-            lang: {
-                thousandsSep: ','
-            },
-            legend: {
-                enabled: true,
-                layout: "horizontal"
-            },
-            tooltip: {
-                shared: true,
-                //split: true,
-                borderWidth: 0,
-                shadow: false,
-                useHTML: true,
-                valueDecimals: 0,
-                headerFormat: "<table class='primary-tooltip table table-sm table-striped'><tr><th colspan='2'>{point.x:%b %e %Y}</th></th>",
-                pointFormat: "<tr><td style='border-left: 10px solid {point.series.color}'>{point.series.name}</td><td style='text-align: right;'>{point.y}</td></tr>",
-                footerFormat: "</table>",
-                formatter: null,
-                positioner: function () {
-                    return { x: 0, y: 0 };
-                },
-            },
-            xAxis: {
-                gridLineWidth: 1,
+            //chart: {
+            //    marginBottom: 85,
+            //    spacingBottom: 0
+            //},
+            //plotOptions: {
+            //    areaspline: {
+            //        lineWidth: 0,
+            //    }
+            //},
+            //lang: {
+            //    thousandsSep: ','
+            //},
+            //legend: {
+            //    enabled: true,
+            //    layout: "horizontal"
+            //},
+            //tooltip: {
+            //    shared: true,
+            //    //split: true,
+            //    borderWidth: 0,
+            //    shadow: false,
+            //    useHTML: true,
+            //    valueDecimals: 0,
+            //    headerFormat: "<table class='primary-tooltip table table-sm table-striped'><tr><th colspan='2'>{point.x:%b %e %Y}</th></th>",
+            //    pointFormat: "<tr><td style='border-left: 10px solid {point.series.color}'>{point.series.name}</td><td style='text-align: right;'>{point.y}</td></tr>",
+            //    footerFormat: "</table>",
+            //    formatter: null,
+            //    positioner: function () {
+            //        return { x: 0, y: 0 };
+            //    },
+            //},
+            xAxis: [{
+                //gridLineWidth: 1, 
                 tickPositions: null,
                 labels: {
                     enabled: true
-                },
-
-            },
-            //yAxis: [{
-            //    gridLineWidth: 0,
-            //    tickPositions: null,
-            //    visible: false
-            //}, {
-            //    visible: false
-            //}],
-            series: [
-                {
-                    fillColor: {
-                        linearGradient: { x1: .2, x2: 0, y1: 0, y2: .75 },
-
-                        stops: [
-                            [0, Highcharts.Color('#2E96EA').setOpacity(.70).get('rgba')],
-                            [1, Highcharts.Color('#30C8CA').setOpacity(.70).get('rgba')]
-                        ]
-                    }
                 }
-            ]
+            }],
+            yAxis: [{
+                //gridLineWidth: 1, 
+                tickPositions: null,
+                //labels: {
+                //    enabled: true,
+                //    align: "left",
+                //    formatter: function () {
+                //        var ret,
+                //            numericSymbols = ['', 'T', 'b', 'M', '', ''],
+                //            i = numericSymbols.length;
+                //        if (this.value >= 1000) {
+                //            while (i-- && ret === undefined) {
+                //                multi = Math.pow(1000, i + 1);
+                //                if (this.value >= multi && numericSymbols[i] !== null) {
+
+                //                    ret = (this.value / multi * .1).toFixed(1);// + numericSymbols[i];
+                //                }
+                //            }
+                //        }
+                //        return (ret ? ret : this.value);
+                //    }
+                //}
+            }],
+
         });
 
     });
@@ -464,6 +470,9 @@ $(function () {
 
 jQuery.fn.exists = function () { return this.length > 0; }
 
+
+
+
 Highcharts.SparkLine = function (elem, b, c) {
 
     var hasRenderToArg = typeof elem === 'string' || elem.nodeName,
@@ -506,25 +515,31 @@ Highcharts.Combo = function (elem, b, c) {
             renderTo: (options.chart && options.chart.renderTo) || this,
         },
         series: [],
-        xAxis: {
-            plotLines: []
-        }
+ 
     };
 
+    var newOptions = Highcharts.merge(defaultOptions, options);
 
+    newOptions.xAxis = Highcharts.merge(defaultOptions.xAxis, options.xAxis);
+    newOptions.yAxis = Highcharts.merge(defaultOptions.yAxis, options.yAxis);
 
-    return DefaultChart(elem, b, c, defaultOptions);
+    return DefaultChart(elem, b, c, newOptions);
 };
 
 
 function DefaultChart(elem, b, c, defaultOptions) {
 
+    
     var hasRenderToArg = typeof elem === 'string' || elem.nodeName,
-    options = arguments[hasRenderToArg ? 1 : 0],
+    options = arguments[hasRenderToArg ? 1 : 0];
 
 
-    options = Highcharts.merge(defaultOptions, options);
+    var newOptions = Highcharts.merge(options, defaultOptions);
+    newOptions.xAxis = Highcharts.merge(defaultOptions.xAxis, options.xAxis);
+    newOptions.yAxis = Highcharts.merge(defaultOptions.yAxis, options.yAxis);
 
+    options = newOptions;
+    
     var seriesData = $(elem).data("series");
     var annotations = $(elem).data("annotations");
 
@@ -536,9 +551,9 @@ function DefaultChart(elem, b, c, defaultOptions) {
 
     options.series = seriesData;
 
-    
+
     if (annotations !== undefined && annotations.length > 0) {
-        
+
         $.each(annotations, function (index, series) {
 
             var annotationSeries = {
@@ -564,7 +579,7 @@ function DefaultChart(elem, b, c, defaultOptions) {
             });
 
             options.series.push(annotationSeries);
-            console.log(annotationSeries);
+            //console.log(annotationSeries);
             //console.log(JSON.stringify(options.series));
 
         });
@@ -598,3 +613,6 @@ function DefaultChart(elem, b, c, defaultOptions) {
 };
 
 //Highcharts.SparkLine = Highcharts.Combo;
+
+
+

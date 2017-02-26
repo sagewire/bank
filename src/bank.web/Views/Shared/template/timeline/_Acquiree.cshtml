@@ -1,0 +1,16 @@
+﻿@using bank.reports
+@using bank.poco;
+
+@model TimelineItemViewModel
+
+@{ 
+    var transform = (OrganizationFfiecTransformation)Model.Item.Data;
+}
+
+<p>
+    @Model.Organization.Name was acquired by @Model.Item.Content @Model.Item.Start.Age()
+</p>
+
+<a class="btn btn-primary" href="@Url.Url(transform.SuccessorOrganization)">
+    View Profile
+</a>

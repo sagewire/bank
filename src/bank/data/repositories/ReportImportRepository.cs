@@ -59,17 +59,20 @@ namespace bank.data.repositories
 
         public IList<ReportImport> GetRecordsToImport(int batchSize)
         {
+            var sql = new StringBuilder();
+            sql.AppendLine("select  top(@BatchSize) *");
+            sql.AppendLine("from   ReportImport ");
+            sql.AppendLine("where Processed is null");
+            //sql.AppendLine("and ReportType = 'ubpr' ");
+            sql.AppendLine("and OrganizationID in (select distinct OrganizationID from UserFavorite where FavoriteType = 100 or Visits > 15)");
+            sql.AppendLine("and Period = '2016-12-31'");
+            sql.AppendLine("and State is null");
+            sql.AppendLine("order by ReportType, Period desc");
+            
             using (var conn = new SqlConnection(Settings.ConnectionString))
             {
                 conn.Open();
-                var reportItems = conn.Query<ReportImport>(" select  top(@BatchSize) * " +
-                                                            "from   ReportImport " +
-                                                            //"where OrganizationID in ('5535','5815','5572','1986','5246','5658','1226','4361','5944','5300','3179','5408','5283','2493','4234','4448','4175','4939','184','4152','5596','4868','5408','5556','5944','1226','5815','5246','5658','5230','4844','5157','5438','1598','4168','3562','2320','5118','740') " +
-                                                            "where Processed is null and ReportType = 'ubpr' and State is null " +
-                                                            //"   and Period >= '2012-01-01' " +
-                                                            "order by Period desc ", // and Period >= '2012-03-31'",
-                                                            new { BatchSize = batchSize },
-                                                commandType: CommandType.Text);
+                var reportItems = conn.Query<ReportImport>(sql.ToString(), new { BatchSize = batchSize }, commandType: CommandType.Text);
 
                 return reportItems.ToList();
 

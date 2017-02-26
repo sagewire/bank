@@ -55,7 +55,9 @@ namespace bank.reports.charts
                 }
             }
         }
-        
+
+        public bool ShowAnnotations { get; private set; }
+
         public static ChartConfig Build(XElement element, Dictionary<string, object> parameters = null)
         {
             var chartTypeString = element.SafeAttributeValue("type");
@@ -109,6 +111,7 @@ namespace bank.reports.charts
             CssClasses = element.SafeAttributeValue("css-classes");
             ChartOverride = element.SafeAttributeValue("chart-override");
             Lookback = element.SafeIntAttributeValue("lookback");
+            ShowAnnotations = element.SafeBoolAttributeValue("show-annotations") ?? false;
         }
 
     }

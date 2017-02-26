@@ -1,0 +1,26 @@
+﻿
+@using bank.reports
+@using bank.poco;
+
+@model HierarchyNodeViewModel
+
+@{ 
+    var column = Model.Element.DataColumns.First();
+    var fact = column.GetCell(Model.Concept);
+}
+
+
+<li>
+    @Model.Concept.Name @Model.Concept.Label 
+    [ @Model.Concept.ValueFormatted(fact) ]
+
+    @if (Model.Concept.Children.Any())
+    {
+        <ul>
+            @foreach (var child in Model.Concept.Children)
+            {
+                @Html.Partial("template/_HierarchyNode", new HierarchyNodeViewModel { Organization = Model.Organization, Concept = child, Element = Model.Element })
+            }
+        </ul>
+    }
+</li>

@@ -1,0 +1,137 @@
+﻿@using bank.reports
+@using bank.poco;
+
+@model TimelineItemViewModel
+@{ 
+    var relationship = Model.Item.Data as OrganizationFfiecRelationship;
+}
+
+<p>
+    @relationship.ParentOrganization.Name became a new parent organization for @Model.Organization.Name.
+</p>
+<a class="btn btn-primary" href="@Url.Url(relationship.ParentOrganization)">
+    View Profile
+</a>
+@*<ul class="list-group">
+    <li class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+            <div class="super">
+                CTRL_IND
+            </div>
+            <div class="text">
+                @relationship.CTRL_IND
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+            <div class="super">
+                EQUITY_IND
+            </div>
+            <div class="text">
+                @relationship.EQUITY_IND
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+            <div class="super">
+                FC_IND
+            </div>
+            <div class="text">
+                @relationship.FC_IND
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+            <div class="super">
+                PCT_EQUITY
+            </div>
+            <div class="text">
+                @relationship.PCT_EQUITY
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+            <div class="super">
+                PCT_EQUITY_BRACKET
+            </div>
+            <div class="text">
+                @relationship.PCT_EQUITY_BRACKET
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+            <div class="super">
+                PCT_OTHER
+            </div>
+            <div class="text">
+                @relationship.PCT_OTHER
+
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+            <div class="super">
+                REASON_ROW_CRTD
+            </div>
+            <div class="text">
+                @relationship.REASON_ROW_CRTD
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+            <div class="super">
+                REASON_TERM_RELN
+
+            </div>
+            <div class="text">
+                @relationship.REASON_TERM_RELN
+
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+            <div class="super">
+                REG_IND
+
+            </div>
+            <div class="text">
+                @relationship.REG_IND
+
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+            <div class="super">
+                REGK_INV
+
+            </div>
+            <div class="text">
+                @relationship.REGK_INV
+
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+            <div class="super">
+                RELN_LVL
+
+            </div>
+            <div class="text">
+                @relationship.RELN_LVL
+
+            </div>
+        </div>
+    </li>
+</ul>*@
+
+

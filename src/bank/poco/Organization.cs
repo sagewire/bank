@@ -66,6 +66,99 @@ namespace bank.poco
             }
         }
 
+        private List<TimelineItem> _timeline = null;
+        public List<TimelineItem> Timeline
+        {
+            get
+            {
+                
+                if (_timeline == null)
+                {
+                    var counter = 1;
+                    var list = new List<TimelineItem>();
+
+                    list.Add(new TimelineItem
+                    {
+                        Id = counter++,
+                        Content = Name,
+                        Start = Established.Value,
+                        Type = "established"
+                    });
+
+                    foreach (var transformation in SucessorTransformations)
+                    {
+                        list.Add(new TimelineItem
+                        {
+                            Id = counter++,
+                            Content = transformation.PredecessorOrganization.Name,
+                            Start = transformation.D_DT_TRANS.Value,
+                            Data = transformation,
+                            Type = "acquirer"
+                        });
+                    }
+
+                    foreach (var transformation in PredecessorTransformations)
+                    {
+                        list.Add(new TimelineItem
+                        {
+                            Id = counter++,
+                            Content = transformation.SuccessorOrganization.Name,
+                            Start = transformation.D_DT_TRANS.Value,
+                            Data = transformation,
+                            Type = "acquiree"
+                        });
+                    }
+
+
+                    foreach (var relationship in ParentRelationships)
+                    {
+                        list.Add(new TimelineItem
+                        {
+                            Id = counter++,
+                            Content = relationship.ParentOrganization.Name,
+                            Start = relationship.DateRelationshipStart.Value,
+                            End = relationship.DateRelationshipEnd,
+                            Data = relationship,
+                            Type = "parent"
+                        });
+                    }
+
+
+                    foreach (var relationship in ChildRelationships.Where(x=>x.OffspringOrganization != null))
+                    {
+                        list.Add(new TimelineItem
+                        {
+                            Id = counter++,
+                            Content = relationship.OffspringOrganization.Name,
+                            Start = relationship.DateRelationshipStart.Value,
+                            End = relationship.DateRelationshipEnd,
+                            Data = relationship,
+                            Type = "subsidiary"
+                        });
+                    }
+
+                    list = list.OrderBy(x => x.Start).ToList();
+
+                    var keys = new List<string>();
+                    var cleanList = new List<TimelineItem>();
+
+                    foreach(var item in list)
+                    {
+                        var key = string.Format("{0}-{1}", item.Content, item.Type);
+                        if (!keys.Contains(key))
+                        {
+                            cleanList.Add(item);
+                            keys.Add(key);
+                        }
+                    }
+
+                    _timeline = cleanList;
+                }
+
+                return _timeline;
+            }
+        }
+
         public string EntityType { get; set; }
         //NAME
         public string ShortName { get; set; }
@@ -321,8 +414,25 @@ namespace bank.poco
                 if (SucessorTransformations == null) return null;
 
                 return SucessorTransformations
-                    .Where(x => x.PredecessorOrganization != null && x.D_DT_TRANS.Value >= FirstReport.Value)
+                    .Where(x => x.PredecessorOrganization != null && x.D_DT_TRANS.Value >= firstReport)
                     .OrderByDescending(x => x.PredecessorOrganization.TotalAssets).ToList();
+            }
+        }
+
+        private DateTime firstReport
+        {
+            get
+            {
+                DateTime firstReport;
+                if (!FirstReport.HasValue)
+                {
+                    firstReport = new DateTime(2002, 12, 31);
+                }
+                else
+                {
+                    firstReport = FirstReport.Value;
+                }
+                return firstReport;
             }
         }
 
@@ -342,7 +452,7 @@ namespace bank.poco
             {
                 if (ChildRelationships == null) return null;
 
-                return ChildRelationships.Where(x => x.OffspringOrganization != null && x.DateRelationshipStart.Value >= FirstReport.Value)
+                return ChildRelationships.Where(x => x.OffspringOrganization != null && x.DateRelationshipStart.Value >= firstReport)
                     .OrderByDescending(x => x.DateRelationshipStart)
                     .Take(999)
                     .ToList();
@@ -357,7 +467,9 @@ namespace bank.poco
             {
                 if (ParentRelationships == null) return null;
 
-                return ParentRelationships.Where(x => x.ParentOrganization != null && x.DateRelationshipStart.Value >= FirstReport.Value)
+
+
+                return ParentRelationships.Where(x => x.ParentOrganization != null && x.DateRelationshipStart.Value >= firstReport)
                     .OrderByDescending(x => x.DateRelationshipStart)
                     .Take(999)
                     .ToList();

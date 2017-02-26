@@ -84,6 +84,16 @@
                             </a>
                         </li>
     }
+    
+    <li class="nav-item reveal">
+        <a class="nav-link" href="@Url.Url(org, DateTime.Now, "timeline", null)">
+            <i class="fa fa-fw fa-dot-circle-o" aria-hidden="true"></i>
+            <span class="hidden-xs-down">Timeline</span>
+            <span class="badge badge-pill badge-danger">
+                @org.Timeline.Count()
+            </span>
+        </a>
+    </li>
 
     @if (org.SucessorTransformations.Any() || org.PredecessorTransformations.Any())
     {

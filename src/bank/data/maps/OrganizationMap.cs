@@ -31,6 +31,9 @@ namespace bank.data.maps
             Map(x => x.Successor).Ignore();
             Map(x => x.FilteredChildRelationships).Ignore();
             Map(x => x.FilteredParentRelationships).Ignore();
+            Map(x => x.Relationships).Ignore();
+            Map(x => x.Transformations).Ignore();
+            Map(x => x.Timeline).Ignore();
 
             //Map(x => x.AvatarImageUrl).Ignore();
 

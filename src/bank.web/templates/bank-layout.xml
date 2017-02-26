@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-  <!--<header partial="BankHeader" />-->
+  <script src="/assets/vertical-timeline/js/main.es5.min.js" />
+  <style src="/assets/vertical-timeline/css/style.min.css" />
   <row>
     <col grid="col-xs-12 col-lg-3">
       <row>
         <col css-classes="org-status">
-          <element partial="OrgStatus" data-source="Organization" lookback="5"/>
+          <element partial="OrgStatus" data-source="Organization" lookback="5">
+            <concept name="RIAD4150" />
+          </element>
         </col>
       </row>
       <row>
@@ -24,7 +27,7 @@
         </col>
       </row>
       <row>
-        <col css-classes="hidden-xs-down">
+        <col css-classes="hidden-sm-down">
           <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="ROAA">
             <series type="areaspline">
               <concept name="UBPRE010" />
@@ -33,7 +36,7 @@
         </col>
       </row>
       <row>
-        <col css-classes="hidden-xs-down">
+        <col css-classes="hidden-sm-down">
           <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="ROAE">
             <series type="areaspline">
               <concept name="UBPRE630" />
@@ -42,7 +45,7 @@
         </col>
       </row>
       <row>
-        <col css-classes="hidden-xs-down">
+        <col css-classes="hidden-sm-down">
           <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="Efficiency Ratio">
             <series type="areaspline">
               <concept name="UBPRE088" />
@@ -51,7 +54,7 @@
         </col>
       </row>
       <row>
-        <col css-classes="hidden-xs-down">
+        <col css-classes="hidden-sm-down">
           <chart type="combo" lookback="20" css-classes="key-ratio" chart-override="key-ratio" partial="KeyRatio" title="Net Interest Margin">
             <series type="areaspline">
               <concept name="UBPRE018" />
@@ -68,7 +71,7 @@
       </row>
       <row>
         <col>
-          <chart type="combo" css-classes="main-chart" lookback="200" title="Balance Sheet Highlights">
+          <chart type="combo" chart-override="primary" css-classes="main-chart" lookback="200" title="Balance Sheet Highlights" show-annotations="true">
             <series type="areaspline" column="0" z-index="10">
               <concept name="UBPR2170"/>
             </series>
@@ -84,7 +87,6 @@
           </chart>
         </col>
       </row>
-
       <row>
         <col>
           <table title="Financial Highlights" lookback="5">
@@ -111,7 +113,7 @@
             <concept name="_SECASET" />
             <concept name="_EQUASET" />
             <concept name="_TCETAST" />
-            
+
 
             <header>Capital Adequacy</header>
             <concept name="UBPRP859" />
@@ -125,6 +127,11 @@
             <concept name="UBPRD488" />
 
           </table>
+        </col>
+      </row>
+      <row>
+        <col container="false">
+          <timeline limit="5" data-source="Organization"/>
         </col>
       </row>
       <row>

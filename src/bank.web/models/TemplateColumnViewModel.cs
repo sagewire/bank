@@ -143,7 +143,7 @@ namespace bank.web.models
         public MvcHtmlString ShowCard(bool isStart)
         {
             //var show = !IsChild && Elements.Where(x => x as EmptyElement == null).Any();
-            var show = !Parent.IsInCard && Elements.Where(x => x as EmptyElement == null).Any();
+            var show = !Parent.IsInCard && Elements.Where(x => x as EmptyElement == null).Any() && Col.UseContainer;
 
             IsInCard = show;
 
@@ -164,6 +164,7 @@ namespace bank.web.models
             var suppress =  custom ||
                         table != null || 
                         empty != null ||
+                        !Col.UseContainer ||
                         (html != null && !string.IsNullOrWhiteSpace(html.Content));
 
             var snippet = isStart ? "<div class='card-block'>" : "</div>";

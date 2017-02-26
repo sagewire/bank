@@ -211,6 +211,7 @@
     <Compile Include="models\ColViewModel.cs" />
     <Compile Include="models\DashboardViewModel.cs" />
     <Compile Include="models\DataMessageViewModel.cs" />
+    <Compile Include="models\HierarchyNodeViewModel.cs" />
     <Compile Include="models\ProfileHeaderViewModel.cs" />
     <Compile Include="models\OrganizationProfileViewModel.cs" />
     <Compile Include="models\ReportViewModel.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="models\TableElementViewModel.cs" />
     <Compile Include="models\TableRowViewModel.cs" />
     <Compile Include="models\TemplateColumnViewModel.cs" />
+    <Compile Include="models\TimelineItemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="models\RowViewModel.cs" />
   </ItemGroup>
@@ -284,6 +286,14 @@
     <Content Include="assets\images\social\linkedin-40.png" />
     <Content Include="assets\images\social\twitter-29.png" />
     <Content Include="assets\images\social\twitter-40.png" />
+    <Content Include="assets\orgchart\dist\css\jquery.orgchart.css" />
+    <Content Include="assets\orgchart\dist\css\jquery.orgchart.min.css">
+      <DependentUpon>jquery.orgchart.css</DependentUpon>
+    </Content>
+    <Content Include="assets\orgchart\dist\js\jquery.orgchart.js" />
+    <Content Include="assets\orgchart\dist\js\jquery.orgchart.min.js">
+      <DependentUpon>jquery.orgchart.js</DependentUpon>
+    </Content>
     <Content Include="assets\scripts\bundle.js" />
     <Content Include="assets\scripts\bundle.min.js">
       <DependentUpon>bundle.js</DependentUpon>
@@ -348,6 +358,22 @@
     <Content Include="assets\scripts\viz.min.js">
       <DependentUpon>viz.js</DependentUpon>
     </Content>
+    <Content Include="assets\vertical-timeline\css\reset.css" />
+    <Content Include="assets\vertical-timeline\css\style.css" />
+    <Content Include="assets\vertical-timeline\css\style.min.css">
+      <DependentUpon>style.css</DependentUpon>
+    </Content>
+    <Content Include="assets\vertical-timeline\img\cd-icon-location.svg" />
+    <Content Include="assets\vertical-timeline\img\cd-icon-movie.svg" />
+    <Content Include="assets\vertical-timeline\img\cd-icon-picture.svg" />
+    <Content Include="assets\vertical-timeline\js\main.es5.js">
+      <DependentUpon>main.js</DependentUpon>
+    </Content>
+    <Content Include="assets\vertical-timeline\js\main.es5.min.js">
+      <DependentUpon>main.es5.js</DependentUpon>
+    </Content>
+    <Content Include="assets\vertical-timeline\js\main.js" />
+    <Content Include="assets\vertical-timeline\js\modernizr.js" />
     <Content Include="assets\visjs\vis-graph3d.min.js" />
     <Content Include="assets\visjs\vis-network.min.css" />
     <Content Include="assets\visjs\vis-network.min.js" />
@@ -359,6 +385,9 @@
     <Content Include="assets\visjs\vis.min.js" />
     <Content Include="browserconfig.xml" />
     <Content Include="Global.asax" />
+    <Content Include="templates\timeline.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="templates\entity-types.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -488,6 +517,8 @@
     <Content Include="assets\css\site\table.less" />
     <Content Include="assets\visjs\vis.js.map" />
     <Content Include="assets\visjs\vis.map" />
+    <Content Include="assets\vertical-timeline\img\.DS_Store" />
+    <Content Include="assets\vertical-timeline\js\.DS_Store" />
     <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
@@ -539,6 +570,14 @@
     <Content Include="Views\Shared\template\_OrgStatus.cshtml" />
     <Content Include="Views\Shared\template\_ConceptList.cshtml" />
     <Content Include="Views\Shared\_AuthNav.cshtml" />
+    <Content Include="Views\Shared\template\_TimelineElement.cshtml" />
+    <Content Include="Views\Shared\template\timeline\_Acquiree.cshtml" />
+    <Content Include="Views\Shared\template\timeline\_Acquirer.cshtml" />
+    <Content Include="Views\Shared\template\timeline\_Established.cshtml" />
+    <Content Include="Views\Shared\template\timeline\_Parent.cshtml" />
+    <Content Include="Views\Shared\template\timeline\_Subsidiary.cshtml" />
+    <Content Include="Views\Shared\template\_HierarchyElement.cshtml" />
+    <Content Include="Views\Shared\template\_HierarchyNode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bank.reports\bank.reports.csproj">

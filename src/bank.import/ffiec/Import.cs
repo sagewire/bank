@@ -22,11 +22,11 @@ namespace bank.import.ffiec
         private static Regex _version = new Regex(@"(?<=ubpr-)v\d{2,3}(?=-Core)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static TaskPool<ReportImport> _taskPool = new TaskPool<ReportImport>();
 
-        public static void Start()
+        public static void Start(int threads)
         {
             Console.WriteLine("starting import");
 
-            InitializeTaskPool();
+            InitializeTaskPool(threads);
 
             var doc = new XbrlDocument();
 
@@ -43,9 +43,9 @@ namespace bank.import.ffiec
 
         }
 
-        static void InitializeTaskPool()
+        static void InitializeTaskPool(int threads)
         {
-            _taskPool.MaxWorkers = 12;
+            _taskPool.MaxWorkers = threads;
             _taskPool.MinimumQueueSize = 50;
 
             _taskPool.RefillQueue += _taskPool_RefillQueue;
@@ -176,7 +176,19 @@ namespace bank.import.ffiec
                     org.ID_RSSD,
                     gov.ffiec.cdr.FacsimileFormat.XBRL);
 
-                return null;
+
+                var text = UTF8Encoding.UTF8.GetString(result);
+                text = text.Replace("http://www.ffiec.gov/xbrl/call/report041/2016-12-31/v132/", "");
+
+                var file = Path.Combine(
+                    Settings.ReportSchemas,
+                    reportImport.ReportTypeAsString.ToLower(),
+                    _version.Match(text).Value,
+                    reportImport.OrganizationId.ToString() + ".xml");
+
+                File.WriteAllText(file, text);
+
+                return file;
             }
             else
             {
@@ -218,12 +230,15 @@ namespace bank.import.ffiec
             Item lastFact;
             try
             {
+
                 doc.Load(file);
                 
                 if (!doc.IsValid)
                 {
                     //throw new Exception(string.Format("Invalid XBRL {0}", file));
                 }
+
+                var factRepo = new FactRepository();
 
                 foreach (Item fact in doc.XbrlFragments[0].Facts)//.Where(x=>x.Name == "RIAD4300"))
                 {
@@ -272,7 +287,7 @@ namespace bank.import.ffiec
                     {
                         Console.WriteLine("{0}\t{1}\t{2}\t{3}", System.Threading.Thread.CurrentThread.ManagedThreadId, fact.Id, fact.Name, fact.Value);
 
-                        Repository<bank.poco.Fact>.New().Save(factObj);
+                        factRepo.Save(factObj, reportImport.ReportType == ReportTypes.UBPR);
                     }
                 }
 
