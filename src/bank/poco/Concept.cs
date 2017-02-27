@@ -17,6 +17,8 @@ namespace bank.poco
     {
         private static Regex _concepts = new Regex(@"[\w~_][\w\d]{7}", RegexOptions.Compiled);
 
+        public string Balance { get; set; }
+
         public Concept(string value)
         {
             if (value == null)
@@ -269,6 +271,7 @@ namespace bank.poco
             Narrative = Narrative ?? def.Narrative;
             Unit = Unit ?? def.Unit;
             Negative = Negative ?? def.Negative;
+            Balance = Balance ?? def.Balance;
         }
 
         public void SetValues(Concept concept)
@@ -279,6 +282,7 @@ namespace bank.poco
             Unit = concept.Unit ?? Unit;
             Negative = concept.Negative ?? Negative;
             Nulls = concept.Nulls?? Nulls;
+            Balance = concept.Balance ?? Balance;
         }
     }
 }

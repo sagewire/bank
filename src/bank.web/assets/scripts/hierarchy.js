@@ -8,16 +8,111 @@ $(function () {
 
 
 
+        console.log(JSON.stringify(getOrgChart.themes.helen));
+
+        //getOrgChart.themes.monica =
+        //    {
+        //        size: [170, 230],
+        //        toolbarHeight: 46,
+        //        textPoints: [
+        //            { x: 10, y: 200, width: 170 }
+        //        ],
+        //        //text: '<text width="[width]" class="get-text get-text-[index]" x="[x]" y="[y]">[text]</text>',
+        //        //image: '<clipPath id="getMonicaClip"><circle cx="85" cy="85" r="85" /></clipPath><image preserveAspectRatio="xMidYMid slice" clip-path="url(#getMonicaClip)" xlink:href="[href]" x="0" y="0" height="170" width="170"/>'
+        //    };
+
+        getOrgChart.themes.bankjitsu = {
+            "size": [
+               500,
+               220
+            ],
+            "toolbarHeight": 46,
+            //"textPoints": [
+            //   {
+            //       "x": 10,
+            //       "y": 200,
+            //       "width": 490
+            //   },
+            //   {
+            //       "x": 200,
+            //       "y": 40,
+            //       "width": 300
+            //   },
+            //   {
+            //       "x": 210,
+            //       "y": 65,
+            //       "width": 290
+            //   },
+            //   {
+            //       "x": 210,
+            //       "y": 90,
+            //       "width": 290
+            //   },
+            //   {
+            //       "x": 200,
+            //       "y": 115,
+            //       "width": 300
+            //   },
+            //   {
+            //       "x": 185,
+            //       "y": 140,
+            //       "width": 315
+            //   }
+            //],
+            "textPointsNoImage": [
+               {
+                   "x": 10,
+                   "y": 200,
+                   "width": 490,
+                   "anchor": "end"
+               },
+               {
+                   "x": 475,
+                   "y": 55,
+                   "width": 490
+               },
+               {
+                   "x": 25,
+                   "y": 125,
+                   "width": 490
+               },
+               {
+                   "x": 10,
+                   "y": 90,
+                   "width": 490
+               },
+               {
+                   "x": 10,
+                   "y": 115,
+                   "width": 490
+               },
+               {
+                   "x": 10,
+                   "y": 140,
+                   "width": 490
+               }
+            ],
+            "box": "<path class=\"get-box\" d=\"M0 0 L500 0 L500 220 L0 220 Z\"/>",
+            "text": "<text width=\"[width]\" text-anchor=\"[anchor]\" class=\"get-text get-text-[index]\" x=\"[x]\" y=\"[y]\">[text]</text>",
+            //"image": "<clipPath id=\"getMonicaClip\"><circle cx=\"105\" cy=\"65\" r=\"85\" /></clipPath><image preserveAspectRatio=\"xMidYMid slice\" clip-path=\"url(#getMonicaClip)\" xlink:href=\"[href]\" x=\"20\" y=\"-20\" height=\"170\" width=\"170\"/>"
+        }
+
+
+
         var json = $(peopleElement).data("data");
+
+        $.each(json, function (index, value) {
+            value.percent = (value.relativeTo * 100).toFixed(2) + "%";
+        });
 
         hierarchy = new getOrgChart(peopleElement, {
             //enableSearch: false,
-            expandToLevel: 5,
+            expandToLevel: 4,
             //enableZoom: false,
-            //theme: "monica",
+            theme: "bankjitsu",
             siblingSeparation: 20,
             orientation: getOrgChart.RO_LEFT,
-            primaryFields: ["label", "value"],
+            primaryFields: ["label", "value", "percent"],
             linkType: "M",
             enableEdit: false,
             enableDetailsView: false,
@@ -28,11 +123,9 @@ $(function () {
             //}
         });
 
+        console.log(hierarchy.move);
     }
 
-    function renderNodeEvent(sender, args) {
-        console.log(args);
-    }
 
     init();
 
@@ -54,7 +147,7 @@ $(function () {
 
         timeout = setTimeout(function () {
             //var currentPosition = $(window).scrollTop();
-            console.log('scroll stop');
+            
 
             //console.log(hierarchy);
             //hierarchy.config.enableZoom = true;
@@ -67,6 +160,8 @@ $(function () {
 
 
 });
+
+
 
 function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
@@ -91,12 +186,16 @@ function interpolateColor(color1, color2, factor) {
     for (var i = 0; i < 3; i++) {
         result[i] = Math.max(0, Math.round(result[i] + factor * (color2[i] - color1[i])));
     }
-    console.log(result);
+
     return result;
 };
 
 var start = hex2rgb("#FFFF00");
 var end = hex2rgb("#FF0000");
+
+var debitStart = hex2rgb("#0000FF");
+var debitEnd = hex2rgb("#00FF00");
+
 var max = null;
 var min = null;
 var factor = null;
@@ -130,17 +229,51 @@ function renderNodeEventHandler(sender, args) {
         salary = args.node.data["value"].replace(/,/g, "");
     }
     var hex = "#fff";
+    var relativeTo = 1;
 
     if (salary !== 0) {
 
-        var relativeTo = args.node.data["relativeTo"] * 40;
+        relativeTo = args.node.data["relativeTo"];// * 200;
+        var balance = args.node.data["balance"];
 
-        var rgb = interpolateColor(start, end, relativeTo);
-        hex = rgb2hex(rgb);
+        var s = start;
+        var e = end;
+        hex = "#FF0000";
+
+        console.log(args.node.data["label"] + " " + balance);
+
+        if (balance === null) {
+            var val = args.node.data["value"].replace(/,/g, "");
+            if (val > 0) {
+                balance = "credit";
+            }
+            else {
+                balance = "debit";
+            }
+        }
+
+        if (balance == "credit") {
+            //console.log('credit');
+            s = debitStart;
+            e = debitEnd;
+            hex = "#00FF00";
+        }
+
+        //var rgb = interpolateColor(s, e, relativeTo);
+        //hex = rgb2hex(rgb);
     }
-    
 
-    
-    args.content[1] = args.content[1].replace("rect", "rect style='fill: " + hex + "; stroke: " + hex + ";'")
-    //args.content[1] = args.content[1].replace("rect", "rect style='fill: rgba(255, 0, 0, .5); stroke:  rgba(255, 0, 0, .2);'")
+    var rgb = hex2rgb(hex);
+
+    relativeTo = Math.min(relativeTo + .2, 1);
+
+    //console.log(args);
+
+    args.node.data
+
+    //args.content[1] = args.content[1].replace("rect", "rect style='fill: " + hex + "; stroke: " + hex + ";'")
+    args.content[1] = args.content[1].replace("path", "path style='fill: rgba(" + rgb + ', ' + relativeTo + "); stroke:  rgba(" + rgb + ", " + relativeTo + ");'")
+    args.content[2] = args.content[2].replace("[anchor]", "start");
+    args.content[3] = args.content[3].replace("[anchor]", "end");
+    args.content[4] = args.content[4].replace("[anchor]", "start");
 }

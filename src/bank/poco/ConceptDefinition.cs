@@ -18,5 +18,6 @@ namespace bank.poco
         public string Formula { get; set; }
         public char? Unit { get; set; }
         public bool? Negative { get; set; }
+        public string Balance { get; set; }
     }
 }

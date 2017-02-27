@@ -38,9 +38,11 @@ namespace bank.web.models
                             id = concept.Name,
                             parentId,
                             //label = concept.Name + " " + concept.ShortLabel,
+                            //label = concept.Name + " " + concept.Balance,
                             label = concept.ShortLabel,
                             value = concept.ValueFormatted(fact),
-                            relativeTo = relativeRatio
+                            relativeTo = relativeRatio,
+                            balance = concept.Balance
                         }
                     );
 
@@ -82,10 +84,11 @@ namespace bank.web.models
                         id = child.Name,
                         parentId = concept.Name,
                         //label = child.Name + " " + child.ShortLabel,
+                        //label = child.Name + " " + child.Balance,
                         label = child.ShortLabel,
                         value = child.ValueFormatted(fact),
-                        relativeTo = relativeRatio//value / relativeFact.NumericValue.Value
-
+                        relativeTo = relativeRatio, //value / relativeFact.NumericValue.Value
+                        balance = child.Balance
                     };
 
                     data.Add(conceptNode);

@@ -72,6 +72,11 @@ namespace bank.reports
             {
                 var facts = GetFacts(FactLookups, periodEnd);
 
+                if (facts == null || !facts.Any())
+                {
+                    return;
+                }
+
                 var childColumns = new List<Column>();
 
                 foreach (var column in DataColumns)
@@ -412,6 +417,7 @@ namespace bank.reports
             var lookback = element.SafeIntAttributeValue("lookback");
             var dataSource = element.SafeAttributeValue("data-source");
             var css = element.SafeAttributeValue("css-classes");
+            var subText = element.SafeAttributeValue("subtext");
 
             TemplateElement item;
 
@@ -446,7 +452,8 @@ namespace bank.reports
             item.Lookback = lookback;
             item.DataSource = dataSource;
             item.CssClasses = css;
-            
+            item.SubText = subText;
+
             return item;
 
         }

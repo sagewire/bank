@@ -21,6 +21,11 @@
         margin-bottom: 10px;
     }
 
+    .get-text-2 {
+        margin-top: 50px;
+        font-size: 64px !important;
+    }
+
     .get-org-chart select {
         margin-top: 11px;
     }
@@ -70,7 +75,7 @@
     }
 
     .get-org-chart .get-text-0 {
-        font-size: 30px;
+        font-size: 34px;
     }
 
     .get-org-chart .get-oc-tb {

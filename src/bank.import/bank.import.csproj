@@ -153,6 +153,7 @@
     <Compile Include="ffiec\ImportOrganizations.cs" />
     <Compile Include="ffiec\ImportRelationships.cs" />
     <Compile Include="ffiec\ImportTransformations.cs" />
+    <Compile Include="ffiec\ParseCallConcepts.cs" />
     <Compile Include="ffiec\Spider.cs" />
     <Compile Include="ffiec\Import.cs" />
     <Compile Include="graph\ImportGraph.cs" />

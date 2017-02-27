@@ -38,7 +38,17 @@ namespace bank.reports
                 if (_allConcepts == null)
                 {
                     _allConcepts = GetConcepts(this.Concepts);
-                    _allConcepts.AddRange(HiddenConcepts);
+
+                    foreach(var item in HiddenConcepts)
+                    {
+                        var existing = _allConcepts.SingleOrDefault(x => x.Name == item.Name);
+
+                        if (existing == null)
+                        {
+                            _allConcepts.Add(item);
+                        }
+                    }
+
 
                 }
                 return _allConcepts;
@@ -102,7 +112,6 @@ namespace bank.reports
 
         public object Data { get; set; }
         public string CssClasses { get; internal set; }
-        
-
+        public string SubText { get; internal set; }
     }
 }

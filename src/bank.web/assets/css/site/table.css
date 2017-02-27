@@ -364,8 +364,11 @@ footer {
   padding-top: .469rem;
   padding-bottom: .469rem;
 }
+small {
+  font-size: 88%;
+}
 .text-muted {
-  color: #bfbfbf !important;
+  color: #808080 !important;
 }
 #modal {
   position: absolute;

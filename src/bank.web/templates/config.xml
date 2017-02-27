@@ -98,7 +98,11 @@
     <concept name="RIADB496" label="Net Gains/Losses on Sales of other Assets (excluding securities)" />
     <concept name="RIADC216" label="Goodwill Impairment Losses" />
     <concept name="RIADC232" label="Amortization Expense &amp; Impairment Losses" />
-
+    <concept name="_RITOTIC" label="Total Operating Revenue" null="0" formula="RIAD4079+RIAD3521+RIAD3196+RIAD4107" />
+    <concept name="_RITOTEX" label="Total Expense" null="0" formula="RIAD4073+RIAD4260+RIAD4302+RIAD4093+RIAD4230" />
+    <concept name="_RITOTOI" label="Total Operating Income" null="0" formula="RIAD4107+RIAD4079" />
+    <concept name="_RITOTOE" label="Total Operating Expenses" null="0" formula="RIAD4073+RIAD4093+RIAD4230" />
+    <concept name="_RINETOI" label="Net Operating Income" null="0" formula="(RIAD4107+RIAD4079)-(RIAD4073+RIAD4093+RIAD4230)"/>
 
     <!--
     

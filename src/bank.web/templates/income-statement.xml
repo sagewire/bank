@@ -10,8 +10,7 @@
   <row>
     <col>
 
-      <hierarchy container="true" title="Net Income Analysis" relative="RCON2170">
-
+      <hierarchy container="true" title="Net Income Analysis" subtext="( % relative to Total Revenue )" relative="_RITOTIC">
         <concept name="RIAD4340">
           <concept name="RIAD4074">
             <concept name="RIAD4107">
@@ -103,6 +102,9 @@
           </concept>
 
         </concept>
+        <concept name="_RITOTIC"></concept>
+
+        <concept name="_RITOTEX"></concept>
 
       </hierarchy>
     </col>
@@ -110,14 +112,14 @@
   
   <!-- end of net income analysis -->
   <row>
-    <col>
+    <!--<col>
       <table lookback="5" title="Income Statement">
 
         <header></header>
-        <!--<concept name="UBPR4010" />
+        <concept name="UBPR4010" />
         <concept name="RIAD4065" />
         <concept name="RIAD4313" />
-        <concept name="UBPRE030" />-->
+        <concept name="UBPRE030" />
         <concept name="UBPRE031" />
         <concept name="UBPRE033" />
         <concept name="UBPR4107" />
@@ -138,6 +140,6 @@
         <concept name="UBPRE043" />
 
       </table>
-    </col>
+    </col>-->
   </row>
 </layout>

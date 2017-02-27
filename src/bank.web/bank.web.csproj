@@ -404,6 +404,12 @@
     <Content Include="templates\bank-status-bar.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="templates\search.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\income-statement-alt.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="templates\timeline.xml">
       <SubType>Designer</SubType>
     </Content>

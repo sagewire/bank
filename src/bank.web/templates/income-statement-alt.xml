@@ -3,6 +3,9 @@
   <script src="/assets/orgchart/getorgchart.min.js" />
   <script src="/assets/scripts/hierarchy.min.js" />
   <style src="/assets/orgchart/getorgchart.min.css" />
+  <header partial="OrgHeader" />
+
+  <include file="bank-status-bar.xml"/>
   <row>
     <col>
       <hierarchy container="true" title="Net Income Analysis" subtext="( % relative to Total Revenue )" relative="_RITOTIC">

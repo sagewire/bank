@@ -47,6 +47,9 @@ namespace bank.app
                 case "ffiec-spider":
                     bank.import.ffiec.Spider.Start();
                     break;
+                case "parse-call-concepts":
+                    bank.import.ffiec.ParseCallConcepts.Start();
+                    break;
                 case "y9":
                     bank.import.fdic.ImportBankHoldingData.Start(threads);
                     break;

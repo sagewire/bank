@@ -18,6 +18,10 @@
                     <div class="card-header">
                         <div class="card-header-text">
                             @element.Title
+                            @if (!string.IsNullOrWhiteSpace(element.SubText))
+                            {
+                                <small class="pl-3 text-muted">@element.SubText</small>
+                            }
                         </div>
                         @Html.Partial("_CardMenu")
                     </div>
