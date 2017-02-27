@@ -17,7 +17,7 @@
       "assets/css/jquery.typeahead.css"
     ]
   },
-  {
+  { 
     "outputFileName": "assets/scripts/charts.min.js",
     "inputFiles": [
       "assets/scripts/charts.js"
@@ -26,17 +26,16 @@
   {
     "outputFileName": "assets/scripts/bundle.js",
     "inputFiles": [
-      "assets/scripts/jquery.typeahead.js",
-      "assets/scripts/scrollreveal.js",
-      "assets/scripts/jquery.stickytableheaders.js",
-      "assets/scripts/tether.js",
-      "assets/scripts/highcharts.js",
-      "assets/scripts/highcharts-more.js",
+      "assets/scripts/jquery.typeahead.min.js",
+      "assets/scripts/scrollreveal.min.js",
+      "assets/scripts/jquery.stickytableheaders.min.js",
+      "assets/scripts/tether.min.js",
+      "assets/scripts/highcharts.min.js",
+      "assets/scripts/highcharts-more.min.js",
       "assets/dist/js/bootstrap.min.js",
-      "assets/scripts/site.js",
-      "assets/scripts/viz.js",
-      "assets/scripts/json.js",
-      "assets/scripts/charts.js"
+      "assets/scripts/site.min.js",
+      "assets/scripts/json.min.js",
+      "assets/scripts/charts.min.js"
     ]
   },
   {
@@ -64,27 +63,45 @@
     ]
   },
   {
-    "outputFileName": "assets/scripts/viz.min.js",
-    "inputFiles": [
-      "assets/scripts/viz.js"
-    ]
-  },
-  {
     "outputFileName": "assets/vertical-timeline/css/style.min.css",
     "inputFiles": [
       "assets/vertical-timeline/css/style.css"
     ]
   },
   {
-    "outputFileName": "assets/orgchart/dist/js/jquery.orgchart.min.js",
+    "outputFileName": "assets/orgchart/getorgchart.min.js",
     "inputFiles": [
-      "assets/orgchart/dist/js/jquery.orgchart.js"
+      "assets/orgchart/getorgchart.js"
     ]
   },
   {
-    "outputFileName": "assets/orgchart/dist/css/jquery.orgchart.min.css",
+    "outputFileName": "assets/orgchart/getorgchart.min.css",
     "inputFiles": [
-      "assets/orgchart/dist/css/jquery.orgchart.css"
+      "assets/orgchart/getorgchart.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/scripts/orgchart.min.js",
+    "inputFiles": [
+      "assets/scripts/orgchart.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/scripts/hierarchy.min.js",
+    "inputFiles": [
+      "assets/scripts/hierarchy.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/scripts/network.min.js",
+    "inputFiles": [
+      "assets/scripts/network.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/scripts/jquery.typeahead.min.js",
+    "inputFiles": [
+      "assets/scripts/jquery.typeahead.js"
     ]
   }
 ]

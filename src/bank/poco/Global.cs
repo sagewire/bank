@@ -14,18 +14,29 @@ namespace bank.poco
         private static IDictionary<string, Concept> _concepts = new Dictionary<string, Concept>();
         private static IDictionary<string, string> _entityTypes = new Dictionary<string, string>();
         private static IDictionary<string, PeerGroupStandard> _peerGroups = new Dictionary<string, PeerGroupStandard>();
+        private static FileSystemWatcher _configWatcher;
 
         static Global()
         {
             InitConcepts();
             InitPeerGroups();
             InitEntityTypes();
+            
         }
 
 
         private static void InitConcepts()
         {
             var configLocation = Path.Combine(Settings.ReportTemplatePath, "config.xml");
+
+            if (_configWatcher == null)
+            {
+                _configWatcher = new FileSystemWatcher(Settings.ReportTemplatePath, "*.xml");
+                _configWatcher.NotifyFilter = NotifyFilters.LastWrite;
+                _configWatcher.Changed += _configWatcher_Changed;
+                _configWatcher.EnableRaisingEvents = true;
+
+            }
 
             var xmlText = File.ReadAllText(configLocation);
 
@@ -44,6 +55,11 @@ namespace bank.poco
                 var negative = conceptElement.SafeBoolAttributeValue("negative");
                 var nulls = conceptElement.SafeIntAttributeValue("null");
 
+                if (string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(formula))
+                {
+                    continue;
+                }
+
                 var concept = new Concept(formula);
                 concept.Name = name;
                 concept.ShortLabel = shortLabel;
@@ -54,9 +70,21 @@ namespace bank.poco
                 concept.Nulls = nulls;
                 concept.Unit = !string.IsNullOrWhiteSpace(unit) ? (char?)unit.ToCharArray()[0] : null;
 
-                _concepts.Add(name, concept);
+                try {
+                    _concepts.Add(name, concept);
+                }
+                catch
+                {
+                    throw new Exception(name + " " + label + " already added");
+                }
 
             }
+        }
+
+        private static void _configWatcher_Changed(object sender, FileSystemEventArgs e)
+        {
+            _concepts.Clear();
+            InitConcepts();
         }
 
         private static void InitEntityTypes()

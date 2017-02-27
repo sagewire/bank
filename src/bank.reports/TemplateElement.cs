@@ -8,6 +8,7 @@ namespace bank.reports
     {
         public virtual string Title { get; set; }
         public List<Concept> Concepts { get; set; } = new List<Concept>();
+        public List<Concept> HiddenConcepts { get; set; } = new List<Concept>();
 
         public IList<Column> DataColumns { get; set; }
 
@@ -34,7 +35,13 @@ namespace bank.reports
         {
             get
             {
-                return _allConcepts = GetConcepts(this.Concepts);
+                if (_allConcepts == null)
+                {
+                    _allConcepts = GetConcepts(this.Concepts);
+                    _allConcepts.AddRange(HiddenConcepts);
+
+                }
+                return _allConcepts;
             }
         }
 

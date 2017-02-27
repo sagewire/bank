@@ -5,6 +5,14 @@
   <script src="/assets/scripts/orgchart.js" />
   <style src="/assets/orgchart/getorgchart.css" />
   <row>
+    <!--<col css-classes="org-status" grid="col-xs-12 col-lg-3">
+      <element partial="OrgStatus" data-source="Organization" lookback="5"/>
+    </col>-->
+    <col grid="col-xs-12 col-lg-9">
+      <element partial="BankNav" data-source="Organization" lookback="5"/>
+    </col>
+  </row>
+  <row>
     <col>
 
       <hierarchy container="true" title="Net Income Analysis" relative="RCON2170">

@@ -118,7 +118,7 @@ body.modal-open .close-modal {
   color: #fff;
 }
 .skirt {
-  height: 22px;
+  height: 38px;
 }
 .signin {
   max-width: 450px;
@@ -140,6 +140,10 @@ body.modal-open .close-modal {
   border-radius: 0;
 }
 #viz {
+  height: 63vh;
+  width: 100%;
+}
+.hierarchy {
   height: 63vh;
   width: 100%;
 }

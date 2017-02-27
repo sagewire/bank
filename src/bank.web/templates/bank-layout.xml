@@ -2,20 +2,11 @@
 <layout>
   <script src="/assets/vertical-timeline/js/main.es5.min.js" />
   <style src="/assets/vertical-timeline/css/style.min.css" />
+  <header partial="OrgHeader" />
   <row>
     <col grid="col-xs-12 col-lg-3">
-      <row>
-        <col css-classes="org-status">
-          <element partial="OrgStatus" data-source="Organization" lookback="5">
-            <concept name="RIAD4150" />
-          </element>
-        </col>
-      </row>
-      <row>
-        <col>
-          <element partial="OrgInfo" data-source="Organization" lookback="5" />
-        </col>
-      </row>
+      
+
       <row>
         <col>
           <element partial="ConceptList" data-source="Organization" lookback="5" title="Vitals">

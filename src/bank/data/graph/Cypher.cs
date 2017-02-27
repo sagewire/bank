@@ -19,7 +19,7 @@ namespace bank.data.graph
                             Config.Builder.WithEncryptionLevel(EncryptionLevel.None).ToConfig()))
             {
 
-                var nodes = new Dictionary<long, poco.graph.INode>();
+                var nodes = new Dictionary<object, poco.graph.INode>();
                 var edges = new Dictionary<string, IEdge>();
 
                 using (var session = driver.Session())
@@ -63,7 +63,7 @@ namespace bank.data.graph
 
                             foreach (var relationship in path.Relationships)
                             {
-                                var edgeObj = new AcquiredEdge
+                                var edgeObj = new Edge
                                 {
                                     SourceId = relationship.StartNodeId,
                                     TargetId = relationship.EndNodeId,

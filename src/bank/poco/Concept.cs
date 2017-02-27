@@ -25,6 +25,8 @@ namespace bank.poco
             }
             value = value.ToUpper();
             Value = value;
+            Name = value.ToUpper();
+
             MatchCollection matches = _concepts.Matches(value);
 
             if (matches.Count > 0)

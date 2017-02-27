@@ -211,6 +211,7 @@
     <Compile Include="models\ColViewModel.cs" />
     <Compile Include="models\DashboardViewModel.cs" />
     <Compile Include="models\DataMessageViewModel.cs" />
+    <Compile Include="models\HierarchyElementViewModel.cs" />
     <Compile Include="models\HierarchyNodeViewModel.cs" />
     <Compile Include="models\ProfileHeaderViewModel.cs" />
     <Compile Include="models\OrganizationProfileViewModel.cs" />
@@ -286,13 +287,11 @@
     <Content Include="assets\images\social\linkedin-40.png" />
     <Content Include="assets\images\social\twitter-29.png" />
     <Content Include="assets\images\social\twitter-40.png" />
-    <Content Include="assets\orgchart\dist\css\jquery.orgchart.css" />
-    <Content Include="assets\orgchart\dist\css\jquery.orgchart.min.css">
-      <DependentUpon>jquery.orgchart.css</DependentUpon>
+    <Content Include="assets\orgchart\getorgchart.min.css">
+      <DependentUpon>getorgchart.css</DependentUpon>
     </Content>
-    <Content Include="assets\orgchart\dist\js\jquery.orgchart.js" />
-    <Content Include="assets\orgchart\dist\js\jquery.orgchart.min.js">
-      <DependentUpon>jquery.orgchart.js</DependentUpon>
+    <Content Include="assets\orgchart\getorgchart.min.js">
+      <DependentUpon>getorgchart.js</DependentUpon>
     </Content>
     <Content Include="assets\scripts\bundle.js" />
     <Content Include="assets\scripts\bundle.min.js">
@@ -301,6 +300,9 @@
     <Content Include="assets\scripts\charts.js" />
     <Content Include="assets\scripts\charts.min.js">
       <DependentUpon>charts.js</DependentUpon>
+    </Content>
+    <Content Include="assets\scripts\hierarchy.min.js">
+      <DependentUpon>hierarchy.js</DependentUpon>
     </Content>
     <Content Include="assets\scripts\highcharts-more.js" />
     <Content Include="assets\scripts\highcharts-more.min.js">
@@ -326,6 +328,9 @@
       <DependentUpon>jquery.typeahead.es5.js</DependentUpon>
     </Content>
     <Content Include="assets\scripts\jquery.typeahead.js" />
+    <Content Include="assets\scripts\jquery.typeahead.min.js">
+      <DependentUpon>jquery.typeahead.js</DependentUpon>
+    </Content>
     <Content Include="assets\scripts\json.es5.js">
       <DependentUpon>json.js</DependentUpon>
     </Content>
@@ -335,6 +340,13 @@
     <Content Include="assets\scripts\json.js" />
     <Content Include="assets\scripts\json.min.js">
       <DependentUpon>json.js</DependentUpon>
+    </Content>
+    <Content Include="assets\scripts\hierarchy.js" />
+    <Content Include="assets\scripts\network.min.js">
+      <DependentUpon>network.js</DependentUpon>
+    </Content>
+    <Content Include="assets\scripts\orgchart.min.js">
+      <DependentUpon>hierarchy.js</DependentUpon>
     </Content>
     <Content Include="assets\scripts\rasterize.js" />
     <Content Include="assets\scripts\scrollreveal.js" />
@@ -354,10 +366,7 @@
     <Content Include="assets\scripts\tether.min.js">
       <DependentUpon>tether.js</DependentUpon>
     </Content>
-    <Content Include="assets\scripts\viz.js" />
-    <Content Include="assets\scripts\viz.min.js">
-      <DependentUpon>viz.js</DependentUpon>
-    </Content>
+    <Content Include="assets\scripts\network.js" />
     <Content Include="assets\vertical-timeline\css\reset.css" />
     <Content Include="assets\vertical-timeline\css\style.css" />
     <Content Include="assets\vertical-timeline\css\style.min.css">
@@ -385,6 +394,16 @@
     <Content Include="assets\visjs\vis.min.js" />
     <Content Include="browserconfig.xml" />
     <Content Include="Global.asax" />
+    <Content Include="assets\orgchart\getorgchart.css" />
+    <Content Include="assets\orgchart\getorgchart.js" />
+    <Content Include="assets\orgchart\graphics.png" />
+    <Content Include="assets\orgchart\readme.txt" />
+    <Content Include="templates\net-income-analysis.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\bank-status-bar.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="templates\timeline.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -489,6 +508,7 @@
   <ItemGroup>
     <Folder Include="assets\images\headers\" />
     <Folder Include="assets\visjs\img\" />
+    <Folder Include="Scripts\" />
     <Folder Include="Views\Report\" />
     <Folder Include="Views\Shared\ImageGen\" />
   </ItemGroup>

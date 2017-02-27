@@ -8,8 +8,8 @@ namespace bank.poco.graph
 {
     public interface IEdge
     {
-        long SourceId { get; set; }
-        long TargetId { get; set; }
+        object SourceId { get; set; }
+        object TargetId { get; set; }
 
         string Key { get; }
         string Label { get; set; }

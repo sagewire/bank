@@ -5,15 +5,20 @@
 
 @{
     var org = (Organization)Model.Data;
+    var vm = new HierarchyElementViewModel
+    {
+        Column = Model.DataColumns.First(),
+        Element = Model
+    };
 }
 
-<ul id="ul-data" style="position: relative">
+@*<ul id="ul-data" style="position: relative">
     @foreach (var concept in Model.Concepts)
     {
         @Html.Partial("template/_HierarchyNode", new HierarchyNodeViewModel { Concept = concept, Organization = org, Element = Model })
     }
-</ul>
+</ul>*@
 
-
-<div id="chart-container"></div>
+<div id="mouse-overlay" class="fullscreen"></div>
+<div id="org-chart" class="hierarchy" data-data="@vm.Flatten().ToJson()"></div>
 

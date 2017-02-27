@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace bank.poco.graph
 {
     public interface INode
     {
-        long NodeId { get; set; }
+        [JsonProperty(PropertyName = "id")]
+        object NodeId { get; set; }
     }
 }

@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-  <row>
-    <col css-classes="org-status" grid="col-xs-12 col-lg-3">
-      <element partial="OrgStatus" data-source="Organization" lookback="5"/>
-    </col>
-    <col grid="col-xs-12 col-lg-9">
-      <element partial="BankNav" data-source="Organization" lookback="5"/>
-    </col>
-  </row>
+  <header partial="OrgHeader" />
+
+  <include file="bank-status-bar.xml"/>
   <row>
     <col>
       <chart type="sankey" css-classes="sankey" lookback="0" title="Loan Composition &amp; Ratios">

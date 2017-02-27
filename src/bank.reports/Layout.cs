@@ -234,13 +234,25 @@ namespace bank.reports
             }
 
             var xml = LoadTemplate();
-            Parse((XElement)xml.FirstNode, SectionFilter);
+            XElement node = xml.Root as XElement;
+            //if (xml.FirstNode as XElement != null)
+            //{
+            //    node = (XElement)xml.FirstNode;
+            //}
+            //else
+            //{
+            //    node = (XElement)xml.NextNode;
+            //}
+
+            Parse((XElement)node, SectionFilter);
         }
 
 
         private void Parse(XElement layout, string sectionName = null)
         {
             sectionName = sectionName?.ToLower();
+
+            ParseIncludes(layout);
 
             var header = layout.Elements("header").FirstOrDefault();
 
@@ -252,6 +264,21 @@ namespace bank.reports
             var rows = layout.Elements("row");
 
             this.Rows = ParseRows(rows);
+        }
+
+        private void ParseIncludes(XElement layout)
+        {
+            var includes = layout.Descendants("include").ToList();
+
+            foreach(var include in includes)
+            {
+                var file = include.SafeAttributeValue("file");
+                var path = Path.Combine(Settings.ReportTemplatePath, file);
+
+                var fragment = XDocument.Load(path);
+                include.ReplaceWith(fragment.Root);
+
+            }
         }
 
         private List<string> ParseScripts(XElement layout)
@@ -435,7 +462,9 @@ namespace bank.reports
         private HierarchyElement ParseHierarchy(XElement element)
         {
             var hierarchy = ParseElementChildren<HierarchyElement>(element);
-            
+            hierarchy.RelativeTo = element.SafeAttributeValue("relative");
+            hierarchy.HiddenConcepts.Add(new Concept(hierarchy.RelativeTo));
+
             return hierarchy;
         }
 

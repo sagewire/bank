@@ -25,12 +25,11 @@
     <concept name="UBPRE660" label="Total Risk Weighted Assets" />
     <concept name="UBPRD486" label="Leverage Ratio" />
     <concept name="UBPRR029" label="Common Equity Tier 1 Capital Ratio" />
-    <concept name="UBPRD487" label="Tier 1 Capital Ratio" />
+    <concept name="UBPRD487" label="Tier 1 Capital Ratio" /> 
     <concept name="UBPRD488" label="Total Capital Ratio" />
     <concept name="RCON2210" label="Demand Deposits" />
     <concept name="RIAD4073" label="Total Interest Expense" />
     <concept name="RIAD4079" label="Non-Interest Income" unit="U" />
-    <concept name="RIAD4230" label="Provision: Loan &amp; Lease Losses" />
     <concept name="RIAD4302" label="Applicable Income Taxes" />
     <concept name="RIAD4300" label="Net Operating Income" />
     <concept name="UBPR3123" negative="true" />
@@ -53,24 +52,62 @@
     <concept name="RIAD4135" label="Personnel Expense" />
     <concept name="RIAD4217" label="Occupancy Expense" />
     <concept name="RIAD4092" label="Other Noninterest Expense" />
-    <concept name="RIAD4150" label="Full-time Employees" />
+    <concept name="RIAD4150" label="Full-time Employees" /> 
     <concept name="_ASTEMPL" label="Assets per Employee" formula="RCON2170/RIAD4150" unit="U"/>
     <concept name="_EXPEMPL" label="Personnel Expense per Employee" formula="RIAD4135/RIAD4150" unit="U"/>
+    <concept name="RIAD4230" label="Provision for Loan &amp; Lease Losses" />
+    <concept name="_RIINTRE" label="Loans Secured by Real Estate" formula="RIAD4435+RIAD4436" />
+    <concept name="RIAD4435" label="Residential Loans Interest" />
+    <concept name="RIAD4436" label="All Other Loans Secured by Real Estate" />
+    <concept name="RIAD4012" label="C&amp;I Interest" />
+    <concept name="_RIINTPE" label="Personal Loans" formula="RIADB485+RIADB486" null="0"/>
+    <concept name="RIADB485" label="Credit Card Interest" />
+    <concept name="RIADB486" label="Other Revolving Interest" />
+    <concept name="RIAD4056" label="Foreign Gov and Official Institution Interest" />
+    <concept name="RIAD4058" label="All Other Loan Interest" />
+    <concept name="_RIALINT" label="Interest &amp; Fee Income on Loans" null="0" formula="RIAD4435+RIAD4436+RIAD4012+RIADB485+RIADB486+RIAD4056+RIAD4058" />
+    <concept name="_RIINTDI" label="Interest on Dividends &amp; Securities" null="0" formula="RIADB488+RIADB489+RIAD4060" />
+    <concept name="_RIINTDP" label="Interest on Deposits" null="0" formula="RIAD4508+RIAD0093+RIADA517+RIADA518" />
+    <concept name="_RINONTR" label="Nontransaction Accounts" null="0" formula="RIAD0093+RIADA517+RIADA518" />
+    <concept name="_RIMISCE" label="Noninterest Income Misc" null="0" formula="RIADC886+RIADC888+RIADC887+RIADC386+RIADC387"/>
+    <concept name="_RISECGN" label="Realized Gains on Securities" null="0" formula="RIAD3521+RIAD3196" />
+    <concept name="RIADB488" label="US Treasuries &amp; Gov Obligations" />
+    <concept name="RIADB489" label="Mortgage-backed Securities" />
+    <concept name="RIAD4060" label="All Other Securities" />
+    <concept name="RIAD4115" label="Interest Income on Balances due from Depository Institutions" />
+    <concept name="RIAD4020" label="Interest Income on Fed Funds &amp; Securities Purchased to Resell" />
+    <concept name="RIAD4518" label="Other Interest Income" />
+    <concept name="RIAD0093" label="Savings Deposits (includes MMDAs)" />
+    <concept name="RIADA517" label="Time Deposits of $100,000 or more" />
+    <concept name="RIADA518" label="Time Deposits of less than $100,000" />
+    <concept name="RIAD4508" label="Transaction Accounts" />
+    <concept name="RIAD4180" label="Expense of Fed Funds &amp; Securities Purchased to Resell" />
+    <concept name="RIAD4185" label="Interest on Trading Liabilities &amp; Other Borrowed Money" />
+    <concept name="RIAD4200" label="Interest on Subordinate Notes and Debentures" />
+    <concept name="RIAD5415" label="Net Gains/Losseson Sales of Other REO" />
+    <concept name="RIADC886" label="Fees and Commissions from Securities Brokerage" />
+    <concept name="RIADC887" label="Fees and Commissions from Annuity Sales" />
+    <concept name="RIADC888" label="Investment Banking, Advisory, and Underwriting Fees &amp; Commissions" />
+    <concept name="RIAD4065" label="Income from Lease Financing Receivables" />
+    <concept name="RIAD4069" label="Interest Income from Trading Assets" />
+    <concept name="RIADC386" label="Underwriting Income from Insurance and Reinsurance Activities" />
+    <concept name="RIADC387" label="Income from Other Insurance Activities" />
+    <concept name="RIADB491" label="Venture Capital Revenue" />
+    <concept name="RIADB492" label="Net Servicing Fees" />
+    <concept name="RIADB493" label="Net Securitization Income" />
+    <concept name="RIADB496" label="Net Gains/Losses on Sales of other Assets (excluding securities)" />
+    <concept name="RIADC216" label="Goodwill Impairment Losses" />
+    <concept name="RIADC232" label="Amortization Expense &amp; Impairment Losses" />
+
 
     <!--
     
-    
-
+      
     <concept name="" label="" />
     <concept name="" label="" />
     <concept name="" label="" />
     <concept name="" label="" />
-    <concept name="" label="" />
-    <concept name="" label="" />
-    <concept name="" label="" />
-    <concept name="" label="" />
-    <concept name="" label="" />
-    <concept name="" label="" />
+    <concept name="" label="" />     
     <concept name="" label="" />
     <concept name="" label="" />
     <concept name="" label="" />

@@ -47,10 +47,10 @@
             {
                 @Html.Partial("_" + Model.Layout.Header.Partial, new ProfileHeaderViewModel { IsProfilePage = Model.IsProfilePage, Organization = Model.Organization, RawReports = Model.RawReports, Profile = Model.Profile })
             }
-            else if (Model.Organization != null)
+            @*else if (Model.Organization != null)
             {
                 @Html.Partial("_OrgHeader", new ProfileHeaderViewModel { IsProfilePage = Model.IsProfilePage, Organization = Model.Organization, RawReports = Model.RawReports, Profile = Model.Profile })
-            }
+            }*@
 
             <div class="skirt header-wrap"></div>
 

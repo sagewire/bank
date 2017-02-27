@@ -1,13 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+  <script src="/assets/orgchart/getorgchart.min.js" />
+  <script src="/assets/scripts/hierarchy.min.js" />
+  <style src="/assets/orgchart/getorgchart.min.css" />
+  <header partial="OrgHeader" />
+  
+  <include file="bank-status-bar.xml"/>
+  <!-- net income analysis -->
   <row>
-    <col css-classes="org-status" grid="col-xs-12 col-lg-3">
-      <element partial="OrgStatus" data-source="Organization" lookback="5"/>
-    </col>
-    <col grid="col-xs-12 col-lg-9">
-      <element partial="BankNav" data-source="Organization" lookback="5"/>
+    <col>
+
+      <hierarchy container="true" title="Net Income Analysis" relative="RCON2170">
+
+        <concept name="RIAD4340">
+          <concept name="RIAD4074">
+            <concept name="RIAD4107">
+              <concept name="_RIALINT">
+                <concept name="_RIINTRE">
+                  <concept name="RIAD4435" />
+                  <concept name="RIAD4436" />
+                </concept>
+                <concept name="RIAD4012" />
+                <concept name="_RIINTPE">
+                  <concept name="RIADB485" />
+                  <concept name="RIADB486" />
+                </concept>
+                <concept name="RIAD4056" />
+                <concept name="RIAD4058" />
+              </concept>
+              <concept name="RIAD4065" />
+              <concept name="RIAD4115" />
+              <concept name="_RIINTDI">
+                <concept name="RIADB488" />
+                <concept name="RIADB489" />
+                <concept name="RIAD4060" />
+              </concept>
+              <concept name="RIAD4069" />
+              <concept name="RIAD4020" />
+              <concept name="RIAD4518" />
+
+            </concept>
+            <concept name="RIAD4073">
+              <concept name="RIAD4508" />
+              <concept name="_RINONTR">
+                <concept name="RIAD0093" />
+                <concept name="RIADA517" />
+                <concept name="RIADA518" />
+              </concept>
+              <concept name="RIAD4180"/>
+              <concept name="RIAD4185"/>
+              <concept name="RIAD4200"/>
+
+
+            </concept>
+          </concept>
+
+          <concept name="RIAD4230" />
+
+
+          <!-- noninterest income -->
+          <concept name="RIAD4079">
+            <concept name="RIAD4070" />
+            <concept name="RIAD4080" />
+            <concept name="RIADA220" />
+            <concept name="_RIMISCE">
+              <concept name="RIADC886" />
+              <concept name="RIADC888" />
+              <concept name="RIADC887" />
+              <concept name="RIADC386" />
+              <concept name="RIADC387" />
+            </concept>
+
+            <concept name="RIADB491" />
+            <concept name="RIADB492" />
+            <concept name="RIADB493" />
+            <concept name="RIAD5415" />
+            <concept name="RIADB496" />
+            <concept name="RIADB497" />
+          </concept>
+
+          <!-- realized gains on securities-->
+          <concept name="_RISECGN">
+            <concept name="RIAD3521" />
+            <concept name="RIAD3196" />
+          </concept>
+
+          <concept name="RIADFT28"></concept>
+          <concept name="RIAD4302"></concept>
+
+          <concept name="RIAD4093">
+            <concept name="RIAD4135">
+              <!--<concept name="_ASTEMPL" />
+              <concept name="_EXPEMPL" />-->
+            </concept>
+            <concept name="RIAD4217">
+              <!--<concept name="RCON2145" />-->
+            </concept>
+
+            <concept name="RIADC216" />
+            <concept name="RIADC232" />
+            <concept name="RIAD4092" />
+          </concept>
+
+        </concept>
+
+      </hierarchy>
     </col>
   </row>
+  
+  <!-- end of net income analysis -->
   <row>
     <col>
       <table lookback="5" title="Income Statement">

@@ -7,7 +7,7 @@ namespace bank.reports
 {
     public class HierarchyElement : TemplateElement
     {
-        
+        public string RelativeTo { get; internal set; }
     }
 
 }

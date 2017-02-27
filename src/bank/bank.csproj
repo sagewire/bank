@@ -194,7 +194,8 @@
     <Compile Include="poco\Fact.cs" />
     <Compile Include="poco\ConceptDefinition.cs" />
     <Compile Include="poco\Global.cs" />
-    <Compile Include="poco\graph\AcquiredEdge.cs" />
+    <Compile Include="poco\graph\Edge.cs" />
+    <Compile Include="poco\graph\ConceptNode.cs" />
     <Compile Include="poco\graph\Data.cs" />
     <Compile Include="poco\graph\INode.cs" />
     <Compile Include="poco\graph\IEdge.cs" />

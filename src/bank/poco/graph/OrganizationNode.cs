@@ -63,7 +63,7 @@ namespace bank.poco.graph
         }
 
         [JsonIgnore]
-        public long NodeId { get; set; }
+        public object NodeId { get; set; }
 
         [JsonProperty(PropertyName = "value")]
         public long TotalAssets { get; set; }

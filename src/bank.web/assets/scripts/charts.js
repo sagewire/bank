@@ -615,4 +615,3 @@ function DefaultChart(elem, b, c, defaultOptions) {
 //Highcharts.SparkLine = Highcharts.Combo;
 
 
-
