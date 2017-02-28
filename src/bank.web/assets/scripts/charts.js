@@ -422,11 +422,13 @@ function drawSankeyChart(element) {
 
     var view = new google.visualization.DataView(data);
 
-    var max = google.visualization.data.max(view.getDistinctValues(2));
+    var max = 0;//google.visualization.data.max(view.getDistinctValues(2));
 
-    var filteredRows = view.getFilteredRows([{ column: 2, minValue: max * 0.008 }]);
+    var filteredRows = view.getFilteredRows([{ column: 2, minValue: 1 }]);
 
     view.setRows(filteredRows);
+    console.log('hi.');
+    console.log(filteredRows);
 
     var colors = ['#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f',
           '#cab2d6', '#ffff99', '#1f78b4', '#33a02c'];
@@ -435,9 +437,9 @@ function drawSankeyChart(element) {
     var options = {
         //width: 600,
         tooltip: {
-            isHtml: true
+            isHtml: true  
         },
-        sankey: {
+        sankey: { 
             iterations: 128,
             node: {
                 interactivity: true,

@@ -40,24 +40,43 @@ namespace bank.reports.charts
 
             seriesData.Data.Add(columns);
 
-            foreach(var configRow in this.SankeyRows)
+            var relativeConcept = Concepts.SingleOrDefault(x => x.Name == RelativeTo);
+            var relativeFact = column.GetCell(relativeConcept);
+
+            foreach (var configRow in this.SankeyRows)
             {
                 var result = new List<object>();
                 result.Add(configRow.Values[0]);
-                result.Add(configRow.Values[1]);
+                //result.Add(configRow.Values[1]);
+
+                var label = configRow.Values[1];
+                decimal value = 0;
+                decimal? relativeValue = null;
 
                 var facts = column.GetFacts(ConceptKeys);
                 
                 var fact = configRow.Concept.PrepareFact(facts);
 
+
                 if (fact != null && fact.NumericValue.HasValue)
                 {
-                    result.Add(fact.NumericValue.Value);
+                    if (relativeFact != null)
+                    {
+                        //label += " " + (fact.NumericValue.Value / relativeFact.NumericValue.Value).ToString();
+                        //result.Add(label);
+                        relativeValue = fact.NumericValue.Value / relativeFact.NumericValue.Value;
+                    }
+                    //result.Add(fact.NumericValue.Value);
+                    value = fact.NumericValue.Value;
                 }
-                else
-                {
-                    result.Add(0);
-                }
+                //else
+                //{
+                //    result.Add(0);
+                //}
+
+                result.Add(label);
+                result.Add(value);
+                result.Add(relativeValue);
 
                 seriesData.Data.Add(result);
 

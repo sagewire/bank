@@ -1,8 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+  <script src="/assets/orgchart/getorgchart.min.js" />
+  <script src="/assets/scripts/hierarchy.min.js" />
+  <style src="/assets/orgchart/getorgchart.min.css" />
   <header partial="OrgHeader" />
 
   <include file="bank-status-bar.xml"/>
+  <row>
+    <col>
+      <hierarchy container="true" title="Deposition Composition Analysis" subtext="" relative="_TOTDEPC" expand-to-level="4">
+
+        <!-- total deposits -->
+        <concept name="_TOTDEPC" formula="RCON2215+RCON2385" label="Total Deposits">
+          <!-- transaction accounts -->
+          <concept name="RCON2215" label="Transaction Accounts">
+            <concept name="RCON2210" label="Demand Deposits"/>
+            <concept name="RCON2215-RCON2210" label="NOW &amp; ATS Accounts"/>
+          </concept>
+          <!-- nontransaction accounts -->
+          <concept name="RCON2385" label="Nontransaction Accounts">
+            <concept name="RCON6810+RCON0352" label="Savings Deposits">
+              <concept name="RCON6810" label="Money Market Accounts" />
+              <concept name="RCON0352" />
+              <!--<concept name="RCON6648" />
+              <concept name="RCONJ473" />
+              <concept name="RCONJ474" />-->
+            </concept>
+            <concept name="RCONA579+RCONA580+RCONA581+RCONA582+RCONA584+RCONA585+RCONA586+RCONA587" label="Time Deposits">
+              <concept name="RCONA579+RCONA580+RCONA581+RCONA582" label="Less than 100k">
+                <concept name="RCONA579" />
+                <concept name="RCONA580" />
+                <concept name="RCONA581" />
+                <concept name="RCONA582" />
+              </concept>
+              <concept name="RCONA584+RCONA585+RCONA586+RCONA587" label="More than 100k">
+                <concept name="RCONA584" />
+                <concept name="RCONA585" />
+                <concept name="RCONA586" />
+                <concept name="RCONA587" />
+              </concept>
+            </concept>
+          </concept>
+        </concept>
+
+      </hierarchy>
+    </col>
+  </row>
+
   <row>
     <col>
       <chart title="Deposit Composition" type="sankey" css-classes="sankey">

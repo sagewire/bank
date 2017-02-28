@@ -20,5 +20,5 @@
 </ul>*@
 
 <div id="mouse-overlay"></div>
-<div id="org-chart" class="hierarchy" data-data="@vm.Flatten().ToJson()"></div>
+<div id="org-chart" data-expand-to-level="@vm.Element.ExpandToLevel" class="hierarchy" data-data="@vm.Flatten().ToJson()"></div>
 

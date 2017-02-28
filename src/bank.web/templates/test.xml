@@ -1,119 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-  <script src="/assets/orgchart/getorgchart.min.js" />
-  <script src="/assets/scripts/hierarchy.min.js" />
-  <style src="/assets/orgchart/getorgchart.min.css" />
+  <header partial="OrgHeader" />
+
+  <include file="bank-status-bar.xml"/>
   <row>
     <col>
-      <hierarchy container="true" title="Net Income Analysis" subtext="( % relative to Total Revenue )" relative="_RITOTIC">
-        <concept name="RIAD4340">
+      <chart type="sankey" css-classes="sankey" lookback="0" title="Loan Composition &amp; Ratios">
+        <column type="string" id="from" label="From" />
+        <column type="string" id="to" label="To" />
+        <column type="number" id="amount" label="Amount" />
+        <row>
+          <value>Total Loans &amp; Leases</value>
+          <value>Secured by Real Estate</value>
+          <value>_TOTLOAN</value>
+        </row>
+        <row>
+          <value>Total Loans &amp; Leases</value>
+          <value>Loans to Depository Institutions</value>
+          <value>RCON1288</value>
+        </row>
+        <row>
+          <value>Total Loans &amp; Leases</value>
+          <value>Agricultural Loans</value>
+          <value>RCON1590</value>
+        </row>
+        <row>
+          <value>Total Loans &amp; Leases</value>
+          <value>Commercial &amp; Industrial Loans</value>
+          <value>RCON1766</value>
+        </row>
+        <row>
+          <value>Total Loans &amp; Leases</value>
+          <value>Loans to Foreign Gov</value>
+          <value>RCON2081</value>
+        </row>
+        <row>
+          <value>Total Loans &amp; Leases</value>
+          <value>Non-securities political obligations</value>
+          <value>RCON2107</value>
+        </row>
+        <row>
+          <value>Total Loans &amp; Leases</value>
+          <value>Nondepository Institutions &amp; Other</value>
+          <value>RCONJ454+RCONJ464</value>
+        </row>
+        <row>
+          <value>Total Loans &amp; Leases</value>
+          <value>Individual Loans</value>
+          <value>RCONB538+RCONB539+RCONK137+RCONK207</value>
+        </row>
+        <!--<row>
+          <value>Secured by Real Estate</value>
+          <value>Construction &amp; Land Loans</value>
+          <value>RCONF158+RCONF159</value>
+        </row>
+        <row>
+          <value>Construction &amp; Land Loans</value>
+          <value>1-4 family residential</value>
+          <value>RCONF158</value>
+        </row>
+        <row>
+          <value>Construction &amp; Land Loans</value>
+          <value>Other construction loans</value>
+          <value>RCONF159</value>
+        </row>
+        <row>
+          <value>Secured by Real Estate</value>
+          <value>Secured by Farm Land</value>
+          <value>RCON1420</value>
+        </row>
+        <row>
+          <value>Secured by Real Estate</value>
+          <value>Secured by 1-4 family</value>
+          <value>RCON1797+RCON5367+RCON5368</value>
+        </row>
+        <row>
+          <value>Secured by 1-4 family</value>
+          <value>Revolving</value>
+          <value>RCON1797</value>
+        </row>
+        <row>
+          <value>Secured by 1-4 family</value>
+          <value>Closed-end</value>
+          <value isFormula="true">RCON5367+RCON5368</value>
+        </row>
+        <row>
+          <value>Closed-end</value>
+          <value>First liens</value>
+          <value>RCON5367</value>
+        </row>
+        <row>
+          <value>Closed-end</value>
+          <value>Junior liens</value>
+          <value>RCON5368</value>
+        </row>
+        <row>
+          <value>Secured by Real Estate</value>
+          <value>Secured by multi family</value>
+          <value>RCON1460</value>
+        </row>
+        <row>
+          <value>Secured by Real Estate</value>
+          <value>Nonfarm Residential</value>
+          <value>RCONF160+RCONF161</value>
+        </row>
+        <row>
+          <value>Nonfarm Residential</value>
+          <value>Owner-occupied</value>
+          <value>RCONF160</value>
+        </row>
+        <row>
+          <value>Nonfarm Residential</value>
+          <value>Other nonfarm</value>
+          <value>RCONF161</value>
+        </row>
 
+        <row>
+          <value>Nondepository Institutions</value>
+          <value>Nondepository</value>
+          <value>RCONJ454</value>
+        </row>
+        <row>
+          <value>Nondepository Institutions</value>
+          <value>Other loans</value>
+          <value>RCONJ464</value>
+        </row>
 
-          <concept name="_RINETOI">
-            <concept name="_RITOTOI">
-              <!-- Total Interest Income-->
-              <concept name="RIAD4107">
-                <concept name="_RIALINT">
-                  <concept name="_RIINTRE">
-                    <concept name="RIAD4435" />
-                    <concept name="RIAD4436" />
-                  </concept>
-                  <concept name="RIAD4012" />
-                  <concept name="_RIINTPE">
-                    <concept name="RIADB485" />
-                    <concept name="RIADB486" />
-                  </concept>
-                  <concept name="RIAD4056" />
-                  <concept name="RIAD4058" />
-                </concept>
-                <concept name="RIAD4065" />
-                <concept name="RIAD4115" />
-                <concept name="_RIINTDI">
-                  <concept name="RIADB488" />
-                  <concept name="RIADB489" />
-                  <concept name="RIAD4060" />
-                </concept>
-                <concept name="RIAD4069" />
-                <concept name="RIAD4020" />
-                <concept name="RIAD4518" />
+        <row>
+          <value>Individual Loans</value>
+          <value>Credit Cards</value>
+          <value>RCONB538</value>
+        </row>
+        <row>
+          <value>Individual Loans</value>
+          <value>Other Revolving</value>
+          <value>RCONB539</value>
+        </row>
+        <row>
+          <value>Individual Loans</value>
+          <value>Automobile</value>
+          <value>RCONK137</value>
+        </row>
+        <row>
+          <value>Individual Loans</value>
+          <value>Other Consumer Loans</value>
+          <value>RCONK207</value>
+        </row>-->
 
-              </concept>
-
-
-              <!-- noninterest income -->
-              <concept name="RIAD4079">
-                <concept name="RIAD4070" />
-                <concept name="RIAD4080" />
-                <concept name="RIADA220" />
-                <concept name="_RIMISCE">
-                  <concept name="RIADC886" />
-                  <concept name="RIADC888" />
-                  <concept name="RIADC887" />
-                  <concept name="RIADC386" />
-                  <concept name="RIADC387" />
-                </concept>
-
-                <concept name="RIADB491" />
-                <concept name="RIADB492" />
-                <concept name="RIADB493" />
-                <concept name="RIAD5415" />
-                <concept name="RIADB496" />
-                <concept name="RIADB497" />
-              </concept>
-            </concept>
-            <concept name="_RITOTOE">
-              <!-- Total Interest Expense -->
-              <concept name="RIAD4073">
-                <concept name="RIAD4508" />
-                <concept name="_RINONTR">
-                  <concept name="RIAD0093" />
-                  <concept name="RIADA517" />
-                  <concept name="RIADA518" />
-                </concept>
-                <concept name="RIAD4180"/>
-                <concept name="RIAD4185"/>
-                <concept name="RIAD4200"/>
-              </concept>
-
-              <!-- Total Noninterest Expense -->
-              <concept name="RIAD4093">
-                <concept name="RIAD4135">
-                  <!--<concept name="_ASTEMPL" />
-              <concept name="_EXPEMPL" />-->
-                </concept>
-                <concept name="RIAD4217">
-                  <!--<concept name="RCON2145" />-->
-                </concept>
-
-                <concept name="RIADC216" />
-                <concept name="RIADC232" />
-                <concept name="RIAD4092" />
-              </concept>
-
-              <concept name="RIAD4230" />
-            </concept>
-
-          </concept>
-
-
-          <!-- realized gains on securities-->
-          <concept name="_RISECGN">
-            <!--<concept name="RIAD3521" />
-            <concept name="RIAD3196" />-->
-          </concept>
-
-          <concept name="RIADFT28"></concept>
-          <concept name="RIAD4302"></concept>
-
-
-        </concept>
-        <!--<concept name="_RITOTIC"></concept>
-        <concept name="_RITOTEX"></concept>
-        <concept name="RIAD4074"></concept>-->
-
-
-      </hierarchy>
+      </chart>
     </col>
   </row>
-
 </layout>

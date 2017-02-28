@@ -156,7 +156,7 @@ namespace bank.poco
         }
 
         public string FormatHint { get; set; }
-        public int? Nulls { get; internal set; }
+        public int? Nulls { get; internal set; } = 0;
         public List<Concept> Children { get; set; }
 
         public Fact PrepareFact(Fact fact)
@@ -283,6 +283,7 @@ namespace bank.poco
             Negative = concept.Negative ?? Negative;
             Nulls = concept.Nulls?? Nulls;
             Balance = concept.Balance ?? Balance;
+
         }
     }
 }

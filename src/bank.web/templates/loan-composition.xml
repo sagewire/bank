@@ -5,14 +5,50 @@
   <include file="bank-status-bar.xml"/>
   <row>
     <col>
-      <chart type="sankey" css-classes="sankey" lookback="0" title="Loan Composition &amp; Ratios">
+      <chart type="sankey" css-classes="sankey" lookback="0" title="Loan Composition &amp; Ratios" relative="_TOTLOAN">
         <column type="string" id="from" label="From" />
         <column type="string" id="to" label="To" />
         <column type="number" id="amount" label="Amount" />
+        <column type="number" id="relative" label="Relative" />
         <row>
           <value>Total Loans &amp; Leases</value>
           <value>Secured by Real Estate</value>
           <value>RCONF158+RCONF159+RCON1420+RCON1797+RCON5367+RCON5368+RCON1460+RCONF160+RCONF161</value>
+        </row>
+        <row>
+          <value>Total Loans &amp; Leases</value>
+          <value>Loans to Depository Institutions</value>
+          <value>RCON1288</value>
+        </row>
+        <row>
+          <value>Total Loans &amp; Leases</value>
+          <value>Agricultural Loans</value>
+          <value>RCON1590</value>
+        </row>
+        <row>
+          <value>Total Loans &amp; Leases</value>
+          <value>Commercial &amp; Industrial Loans</value>
+          <value>RCON1766</value>
+        </row>
+        <row>
+          <value>Total Loans &amp; Leases</value>
+          <value>Loans to Foreign Gov</value>
+          <value>RCON2081</value>
+        </row>
+        <row>
+          <value>Total Loans &amp; Leases</value>
+          <value>Non-securities political obligations</value>
+          <value>RCON2107</value>
+        </row>
+        <row>
+          <value>Total Loans &amp; Leases</value>
+          <value>Nondepository Institutions &amp; Other</value>
+          <value>RCONJ454+RCONJ464</value>
+        </row>
+        <row>
+          <value>Total Loans &amp; Leases</value>
+          <value>Individual Loans</value>
+          <value>_INDIVLO</value>
         </row>
         <row>
           <value>Secured by Real Estate</value>
@@ -79,36 +115,7 @@
           <value>Other nonfarm</value>
           <value>RCONF161</value>
         </row>
-        <row>
-          <value>Total Loans &amp; Leases</value>
-          <value>Loans to Depository Institutions</value>
-          <value>RCON1288</value>
-        </row>
-        <row>
-          <value>Total Loans &amp; Leases</value>
-          <value>Agricultural Loans</value>
-          <value>RCON1590</value>
-        </row>
-        <row>
-          <value>Total Loans &amp; Leases</value>
-          <value>Commercial &amp; Industrial Loans</value>
-          <value>RCON1766</value>
-        </row>
-        <row>
-          <value>Total Loans &amp; Leases</value>
-          <value>Loans to Foreign Gov</value>
-          <value>RCON2081</value>
-        </row>
-        <row>
-          <value>Total Loans &amp; Leases</value>
-          <value>Non-securities political obligations</value>
-          <value>RCON2107</value>
-        </row>
-        <row>
-          <value>Total Loans &amp; Leases</value>
-          <value>Nondepository Institutions &amp; Other</value>
-          <value>RCONJ454+RCONJ464</value>
-        </row>
+
         <row>
           <value>Nondepository Institutions</value>
           <value>Nondepository</value>
@@ -119,11 +126,7 @@
           <value>Other loans</value>
           <value>RCONJ464</value>
         </row>
-        <row>
-          <value>Total Loans &amp; Leases</value>
-          <value>Individual Loans</value>
-          <value>RCONB538+RCONB539+RCONK137+RCONK207</value>
-        </row>
+
         <row>
           <value>Individual Loans</value>
           <value>Credit Cards</value>
@@ -148,16 +151,17 @@
       </chart>
     </col>
   </row>
-  <row>
+  <!--<row>
     <col>
       <table lookback="5">
         <header>Loan Composition &amp; Ratios</header>
-        <concept name="UBPR1410" />
-        <concept name="UBPRE116" />
+        <concept name="_TOTLOAN" />
+        <concept name="RCON5369" />
+        <concept name="RCONB528" />
         <concept name="UBPRD665" />
         <concept name="UBPR1590" />
         <concept name="UBPRE117" />
       </table>
     </col>
-  </row>
+  </row>-->
 </layout>

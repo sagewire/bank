@@ -398,6 +398,7 @@
     <Content Include="assets\orgchart\getorgchart.js" />
     <Content Include="assets\orgchart\graphics.png" />
     <Content Include="assets\orgchart\readme.txt" />
+    <Content Include="templates\deposit-composition-alt.xml" />
     <Content Include="templates\net-income-analysis.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -514,7 +515,6 @@
   <ItemGroup>
     <Folder Include="assets\images\headers\" />
     <Folder Include="assets\visjs\img\" />
-    <Folder Include="Scripts\" />
     <Folder Include="Views\Report\" />
     <Folder Include="Views\Shared\ImageGen\" />
   </ItemGroup>

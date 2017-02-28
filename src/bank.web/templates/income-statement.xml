@@ -10,7 +10,7 @@
   <row>
     <col>
 
-      <hierarchy container="true" title="Net Income Analysis" subtext="( % relative to Total Revenue )" relative="_RITOTIC">
+      <hierarchy container="true" title="Net Income Analysis" expand-to-level="3" subtext="( % relative to Total Revenue )" relative="_RITOTIC">
         <concept name="RIAD4340">
           <concept name="RIAD4074">
             <concept name="RIAD4107">

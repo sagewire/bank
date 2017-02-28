@@ -470,6 +470,7 @@ namespace bank.reports
         {
             var hierarchy = ParseElementChildren<HierarchyElement>(element);
             hierarchy.RelativeTo = element.SafeAttributeValue("relative");
+            hierarchy.ExpandToLevel = element.SafeIntAttributeValue("expand-to-level") ?? 4;
             hierarchy.HiddenConcepts.Add(new Concept(hierarchy.RelativeTo));
 
             return hierarchy;
@@ -508,7 +509,8 @@ namespace bank.reports
                 var name = conceptElem.SafeAttributeValue("name").ParameterReplace(Parameters).ToUpper();
                 var concept = new Concept(name);
                 concept.FormatHint = conceptElem.SafeAttributeValue("format");
-
+                concept.Label = conceptElem.SafeAttributeValue("label");
+                    
                 concept.Children = ParseConcepts(conceptElem);
 
                 result.Add(concept);

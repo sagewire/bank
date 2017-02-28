@@ -5,60 +5,14 @@ $(function () {
 
     function init() {
         var peopleElement = document.getElementById("org-chart");
-
-
-
-        console.log(JSON.stringify(getOrgChart.themes.helen));
-
-        //getOrgChart.themes.monica =
-        //    {
-        //        size: [170, 230],
-        //        toolbarHeight: 46,
-        //        textPoints: [
-        //            { x: 10, y: 200, width: 170 }
-        //        ],
-        //        //text: '<text width="[width]" class="get-text get-text-[index]" x="[x]" y="[y]">[text]</text>',
-        //        //image: '<clipPath id="getMonicaClip"><circle cx="85" cy="85" r="85" /></clipPath><image preserveAspectRatio="xMidYMid slice" clip-path="url(#getMonicaClip)" xlink:href="[href]" x="0" y="0" height="170" width="170"/>'
-        //    };
-
+        
         getOrgChart.themes.bankjitsu = {
             "size": [
                500,
                220
             ],
             "toolbarHeight": 46,
-            //"textPoints": [
-            //   {
-            //       "x": 10,
-            //       "y": 200,
-            //       "width": 490
-            //   },
-            //   {
-            //       "x": 200,
-            //       "y": 40,
-            //       "width": 300
-            //   },
-            //   {
-            //       "x": 210,
-            //       "y": 65,
-            //       "width": 290
-            //   },
-            //   {
-            //       "x": 210,
-            //       "y": 90,
-            //       "width": 290
-            //   },
-            //   {
-            //       "x": 200,
-            //       "y": 115,
-            //       "width": 300
-            //   },
-            //   {
-            //       "x": 185,
-            //       "y": 140,
-            //       "width": 315
-            //   }
-            //],
+
             "textPointsNoImage": [
                {
                    "x": 10,
@@ -100,6 +54,7 @@ $(function () {
 
 
         var json = $(peopleElement).data("data");
+        var expandToLevel = $(peopleElement).data("expand-to-level");
 
         $.each(json, function (index, value) {
             value.percent = (value.relativeTo * 100).toFixed(2) + "%";
@@ -107,10 +62,11 @@ $(function () {
 
         hierarchy = new getOrgChart(peopleElement, {
             //enableSearch: false,
-            expandToLevel: 4,
+            expandToLevel: expandToLevel,
             //enableZoom: false,
             theme: "bankjitsu",
-            siblingSeparation: 20,
+            siblingSeparation: 15,
+            
             orientation: getOrgChart.RO_LEFT,
             primaryFields: ["label", "value", "percent"],
             linkType: "M",
@@ -118,9 +74,7 @@ $(function () {
             enableDetailsView: false,
             dataSource: json,
             renderNodeEvent: renderNodeEventHandler,
-            //customize: {
-            //    "RIAD4079": { color: "green", height: "50px" }
-            //}
+
         });
 
         console.log(hierarchy.move);

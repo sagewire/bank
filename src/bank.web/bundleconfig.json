@@ -26,16 +26,16 @@
   {
     "outputFileName": "assets/scripts/bundle.js",
     "inputFiles": [
-      "assets/scripts/jquery.typeahead.min.js",
-      "assets/scripts/scrollreveal.min.js",
-      "assets/scripts/jquery.stickytableheaders.min.js",
-      "assets/scripts/tether.min.js",
-      "assets/scripts/highcharts.min.js",
-      "assets/scripts/highcharts-more.min.js",
-      "assets/dist/js/bootstrap.min.js",
-      "assets/scripts/site.min.js",
-      "assets/scripts/json.min.js",
-      "assets/scripts/charts.min.js"
+      "assets/scripts/jquery.typeahead.js",
+      "assets/scripts/scrollreveal.js",
+      "assets/scripts/jquery.stickytableheaders.js",
+      "assets/scripts/tether.js",
+      "assets/scripts/highcharts.js",
+      "assets/scripts/highcharts-more.js",
+      "assets/dist/js/bootstrap.js",
+      "assets/scripts/site.js",
+      "assets/scripts/json.js",
+      "assets/scripts/charts.js"
     ]
   },
   {

@@ -21,6 +21,8 @@ namespace bank.reports.charts
         public List<Annotations> AnnotationSeries { get; set; } = new List<Annotations>();
 
         private Guid _chartId = Guid.NewGuid();
+        public string RelativeTo { get; set; }
+
         public Guid ChartId
         {
             get
@@ -61,6 +63,7 @@ namespace bank.reports.charts
         public static ChartConfig Build(XElement element, Dictionary<string, object> parameters = null)
         {
             var chartTypeString = element.SafeAttributeValue("type");
+            var relativeTo = element.SafeAttributeValue("relative");
             var chartType = (ChartTypes)Enum.Parse(typeof(ChartTypes), chartTypeString, true);
 
             ChartConfig chartConfig;
@@ -76,6 +79,7 @@ namespace bank.reports.charts
                 default:
                     throw new Exception("Chart type not supported");
             }
+            chartConfig.RelativeTo = relativeTo;
             chartConfig.Parameters = parameters;
             chartConfig.Parse(element);
 

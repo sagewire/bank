@@ -25,7 +25,7 @@ namespace bank.utilities
         //    return results;
         //}
 
-        public object Evaluate(string text, IDictionary<string, Fact> facts, decimal? nulls = null)
+        public object Evaluate(string text, IDictionary<string, Fact> facts, decimal? nulls = 0)
         {
 
             if (text.Length > 8)
@@ -36,7 +36,8 @@ namespace bank.utilities
                 }
                 else
                 {
-                    return EvaluateFormula(text, facts, nulls);
+                    var result = EvaluateFormula(text, facts, nulls);
+                    return result;
                 }
             }
             else if (facts.ContainsKey(text))
@@ -65,7 +66,7 @@ namespace bank.utilities
             return null;
         }
 
-        public object EvaluateFormula(string text, IDictionary<string, Fact> facts, decimal? nulls = null)
+        public object EvaluateFormula(string text, IDictionary<string, Fact> facts, decimal? nulls = 0)
         {
             var candidate = text;
             var discardResult = false;

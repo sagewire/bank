@@ -103,6 +103,9 @@
     <concept name="_RITOTOI" label="Total Operating Income" null="0" formula="RIAD4107+RIAD4079" />
     <concept name="_RITOTOE" label="Total Operating Expenses" null="0" formula="RIAD4073+RIAD4093+RIAD4230" />
     <concept name="_RINETOI" label="Net Operating Income" null="0" formula="(RIAD4107+RIAD4079)-(RIAD4073+RIAD4093+RIAD4230)"/>
+    <concept name="_TOTLOAN" label="Total Loans &amp; Leases" null="0" formula="RCON5369+RCONB528" />
+    <concept name="_INDIVLO" label="Individual Loans" formula="RCONB538+RCONB539+RCONK137+RCONK207"/>
+    <concept name="_TOTDEPC" formula="RCON2215+RCON2385" label="Total Deposits" />
 
     <!--
     

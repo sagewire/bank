@@ -7,6 +7,7 @@ namespace bank.reports
 {
     public class HierarchyElement : TemplateElement
     {
+        public int ExpandToLevel { get; internal set; }
         public string RelativeTo { get; internal set; }
     }
 
